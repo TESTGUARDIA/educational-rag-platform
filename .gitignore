@@ -205,3 +205,15 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# --- Educational AI Project Specifics ---
+
+# Ignorer les données lourdes (PDFs, JSONs traités)
+data/
+
+# Ignorer la base de données vectorielle locale (ChromaDB)
+chroma_db/
+chroma_data/
+
+# Ignorer les fichiers de configuration IDE perso
+.vscode/
