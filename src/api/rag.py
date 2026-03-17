@@ -3,7 +3,7 @@ import tempfile
 
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
 
@@ -26,18 +26,18 @@ def ingest_pdf(file_bytes: bytes, filename: str) -> int:
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     chunks = splitter.split_documents(documents)
 
-    embeddings = OpenAIEmbeddings()
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
     Chroma.from_documents(chunks, embeddings, persist_directory=CHROMA_PATH)
 
     return len(chunks)
 
 
 def ask_question(question: str) -> dict:
-    embeddings = OpenAIEmbeddings()
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
     vectorstore = Chroma(persist_directory=CHROMA_PATH, embedding_function=embeddings)
 
     retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
-    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0)
     chain = RetrievalQA.from_chain_type(
         llm=llm,
         retriever=retriever,
