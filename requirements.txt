@@ -3,10 +3,9 @@ uvicorn[standard]
 streamlit
 langchain
 langchain-community
-langchain-openai
+langchain-google-genai
 chromadb
 pypdf
 python-dotenv
-tiktoken
 httpx
 watchdog
