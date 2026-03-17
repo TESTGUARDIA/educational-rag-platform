@@ -42,10 +42,11 @@ Two-service Docker Compose setup:
 
 The frontend depends on the API service. Both containers mount `./src` as a volume for hot-reload during development. The API also mounts `./data` for document/vector storage persistence.
 
-**Planned RAG pipeline** (dependencies in `requirements.txt`, not yet wired up):
-- Document ingestion: `pypdf` → `langchain` text splitter
-- Embeddings + vector store: `chromadb` (persisted in `./data/chroma_db/`)
-- LLM: `langchain-openai` (requires `OPENAI_API_KEY` in `.env`)
+**RAG pipeline** (`src/api/rag.py`):
+- `ingest_pdf()` — loads PDF bytes via PyPDF, splits with `RecursiveCharacterTextSplitter` (1000 chars / 200 overlap), embeds with `OpenAIEmbeddings`, persists to ChromaDB at `CHROMA_PATH` (default `./data/chroma_db/`)
+- `ask_question()` — retrieves top-4 chunks from ChromaDB, runs `RetrievalQA` chain with `gpt-4o-mini`, returns answer + source metadata
+
+API endpoints: `POST /upload` (PDF ingest) and `POST /ask` (question answering).
 
 ## Environment
 
