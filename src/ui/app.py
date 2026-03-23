@@ -6,62 +6,90 @@ st.set_page_config(page_title="Educational AI", layout="wide")
 
 api_url = os.getenv("API_URL", "http://localhost:8000")
 
-st.title("🎓 Educational AI Platform")
+st.title("Educational AI Platform")
 st.markdown("---")
 
-# Sidebar — system status
+# --- Role selection ---
+role = st.sidebar.selectbox("I am a...", ["Select a role", "Teacher", "Student"])
+
 with st.sidebar:
-    st.header("Statut Système")
-    if st.button("Tester Connexion API"):
+    st.markdown("---")
+    st.header("System Status")
+    if st.button("Test API Connection"):
         try:
             response = requests.get(f"{api_url}/health")
             if response.status_code == 200:
-                st.success("Backend Connecté ✅")
+                st.success("Backend Connected")
             else:
-                st.error("Backend Erreur ❌")
+                st.error("Backend Error")
         except Exception:
-            st.error("Backend Inaccessible ⚠️")
+            st.error("Backend Unreachable")
 
-# --- Document upload ---
-st.header("📄 Importer un document")
-uploaded_file = st.file_uploader("Choisissez un fichier PDF", type=["pdf"])
+# =============================================================================
+# TEACHER VIEW
+# =============================================================================
+if role == "Teacher":
+    st.header("Teacher — Generate Q&A from a document")
 
-if uploaded_file is not None:
-    if st.button("Indexer le document"):
-        with st.spinner("Indexation en cours..."):
-            try:
-                response = requests.post(
-                    f"{api_url}/upload",
-                    files={"file": (uploaded_file.name, uploaded_file.getvalue(), "application/pdf")},
-                )
-                if response.status_code == 200:
-                    data = response.json()
-                    st.success(f"{data['message']} ({data['chunks']} chunks indexés)")
-                else:
-                    st.error(f"Erreur: {response.json().get('detail', 'Inconnue')}")
-            except Exception as e:
-                st.error(f"Impossible de contacter l'API: {e}")
+    uploaded_file = st.file_uploader("Upload a PDF course document", type=["pdf"])
 
-st.markdown("---")
+    if uploaded_file is not None:
+        if st.button("Generate 5 Questions & Answers"):
+            with st.spinner("Generating Q&A pairs... this may take a moment"):
+                try:
+                    response = requests.post(
+                        f"{api_url}/generate-qa",
+                        files={"file": (uploaded_file.name, uploaded_file.getvalue(), "application/pdf")},
+                    )
+                    if response.status_code == 200:
+                        data = response.json()
+                        st.success(f"Generated {len(data['pairs'])} Q&A pairs for '{data['filename']}'")
+                        st.session_state["last_generated"] = data
+                    else:
+                        try:
+                            detail = response.json().get('detail', 'Unknown error')
+                        except Exception:
+                            detail = response.text or f"HTTP {response.status_code}"
+                        st.error(f"Error: {detail}")
+                except Exception as e:
+                    st.error(f"Could not reach API: {e}")
 
-# --- Question answering ---
-st.header("💬 Poser une question")
-question = st.text_input("Votre question")
+    # Show last generated Q&A
+    if "last_generated" in st.session_state:
+        st.markdown("---")
+        st.subheader("Generated Q&A pairs")
+        for i, pair in enumerate(st.session_state["last_generated"]["pairs"], 1):
+            with st.expander(f"Question {i}"):
+                st.markdown(f"**Q:** {pair['question']}")
+                st.markdown(f"**A:** {pair['answer']}")
 
-if st.button("Envoyer") and question:
-    with st.spinner("Recherche en cours..."):
-        try:
-            response = requests.post(f"{api_url}/ask", json={"question": question})
-            if response.status_code == 200:
-                data = response.json()
-                st.subheader("Réponse")
-                st.write(data["answer"])
+    # Show all past Q&A sets
+    st.markdown("---")
+    st.subheader("All Q&A sets")
+    try:
+        sets = requests.get(f"{api_url}/qa-sets").json()
+        if sets:
+            for qa_set in sets:
+                with st.expander(f"{qa_set['filename']} — {qa_set['created_at']}"):
+                    pairs = requests.get(f"{api_url}/qa-sets/{qa_set['id']}").json()["pairs"]
+                    for i, pair in enumerate(pairs, 1):
+                        st.markdown(f"**Q{i}:** {pair['question']}")
+                        st.markdown(f"**A{i}:** {pair['answer']}")
+                        st.markdown("---")
+        else:
+            st.info("No Q&A sets yet. Upload a document to generate some.")
+    except Exception as e:
+        st.error(f"Could not load Q&A sets: {e}")
 
-                if data.get("sources"):
-                    with st.expander("Sources"):
-                        for src in data["sources"]:
-                            st.write(f"- **{src['source']}** — page {src['page']}")
-            else:
-                st.error(f"Erreur: {response.json().get('detail', 'Inconnue')}")
-        except Exception as e:
-            st.error(f"Impossible de contacter l'API: {e}")
+# =============================================================================
+# STUDENT VIEW (placeholder for next phase)
+# =============================================================================
+elif role == "Student":
+    st.header("Student — Answer Questions")
+    st.info("Student interface coming soon. Q&A grading and AI detection will be available here.")
+
+# =============================================================================
+# NO ROLE SELECTED
+# =============================================================================
+else:
+    st.info("Please select your role from the sidebar to continue.")
