@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TestGuard AI — Plateforme d'évaluation</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F5F2EC;
+    --surface: #FFFFFF;
+    --surface2: #EEEBE3;
+    --border: #D8D2C4;
+    --text: #1A1714;
+    --text-muted: #7A7469;
+    --accent: #2D5A3D;
+    --accent-light: #E8F0EA;
+    --accent2: #C4622D;
+    --accent2-light: #FAF0EA;
+    --student: #2B4A7A;
+    --student-light: #E8EEF7;
+    --warning: #B8860B;
+    --warning-light: #FFF8E7;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(26,23,20,0.08);
+    --shadow-md: 0 4px 24px rgba(26,23,20,0.12);
+  }
+
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── LOGIN SCREEN ─── */
+  #login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    position: relative;
+  }
+
+  #login-screen::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 10%, rgba(45,90,61,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 10% 80%, rgba(43,74,122,0.10) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .login-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    padding: 56px 48px;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .login-logo {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+
+  .login-logo .wordmark {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--text);
+  }
+
+  .login-logo .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .login-headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .login-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 36px;
+  }
+
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .profile-btn {
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 16px;
+    cursor: pointer;
+    background: var(--surface);
+    text-align: center;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .profile-btn:hover { border-color: var(--accent); background: var(--accent-light); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .profile-btn.student:hover { border-color: var(--student); background: var(--student-light); }
+  .profile-btn.active.teacher { border-color: var(--accent); background: var(--accent-light); }
+  .profile-btn.active.student { border-color: var(--student); background: var(--student-light); }
+
+  .profile-icon { font-size: 36px; margin-bottom: 10px; }
+
+  .profile-btn .profile-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .profile-btn .profile-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .form-group { margin-bottom: 16px; }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    background: var(--bg);
+    color: var(--text);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-group input:focus { border-color: var(--accent); }
+
+  .btn-login {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--accent);
+    color: #fff;
+    letter-spacing: 0.02em;
+    margin-top: 8px;
+  }
+
+  .btn-login:hover { background: #1e3d29; transform: translateY(-1px); }
+  .btn-login.student-mode { background: var(--student); }
+  .btn-login.student-mode:hover { background: #1c3155; }
+
+  /* ─── APP SHELL ─── */
+  #app { display: none; min-height: 100vh; }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-left { display: flex; align-items: center; gap: 20px; }
+
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--text);
+  }
+
+  .role-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  .role-badge.teacher { background: var(--accent-light); color: var(--accent); }
+  .role-badge.student { background: var(--student-light); color: var(--student); }
+
+  .header-right { display: flex; align-items: center; gap: 16px; }
+
+  .user-info { text-align: right; }
+  .user-name { font-size: 14px; font-weight: 600; color: var(--text); }
+  .user-role { font-size: 12px; color: var(--text-muted); }
+
+  .avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .avatar.teacher { background: var(--accent); }
+  .avatar.student { background: var(--student); }
+
+  .btn-logout {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-logout:hover { border-color: var(--text-muted); color: var(--text); }
+
+  /* ─── NAVIGATION ─── */
+  .layout { display: flex; min-height: calc(100vh - 60px); }
+
+  nav {
+    width: 220px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 24px 12px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 60px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+  }
+
+  .nav-section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0 12px;
+    margin-bottom: 8px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: all 0.15s;
+    margin-bottom: 2px;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-item:hover { background: var(--surface2); color: var(--text); }
+  .nav-item.active.teacher-nav { background: var(--accent-light); color: var(--accent); }
+  .nav-item.active.student-nav { background: var(--student-light); color: var(--student); }
+  .nav-item .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+
+  /* ─── CONTENT ─── */
+  main {
+    flex: 1;
+    padding: 32px;
+    overflow-y: auto;
+  }
+
+  .page { display: none; animation: fadeIn 0.25s ease; }
+  .page.active { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .page-header { margin-bottom: 28px; }
+
+  .page-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .page-subtitle { font-size: 14px; color: var(--text-muted); }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .card-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+
+  /* ─── UPLOAD ZONE ─── */
+  .upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 48px 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--bg);
+  }
+
+  .upload-zone:hover { border-color: var(--accent); background: var(--accent-light); }
+  .upload-zone.dragover { border-color: var(--accent); background: var(--accent-light); transform: scale(1.01); }
+
+  .upload-icon { font-size: 40px; margin-bottom: 12px; }
+
+  .upload-text { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+
+  .upload-hint { font-size: 13px; color: var(--text-muted); }
+
+  .upload-input { display: none; }
+
+  /* ─── BUTTONS ─── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: none;
+  }
+
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #1e3d29; }
+  .btn-primary.student { background: var(--student); }
+  .btn-primary.student:hover { background: #1c3155; }
+
+  .btn-secondary { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
+  .btn-secondary:hover { border-color: var(--text-muted); background: var(--surface2); }
+
+  .btn-warning { background: var(--warning-light); color: var(--warning); border: 1px solid #e8c84a; }
+  .btn-warning:hover { background: #fff3c0; }
+
+  .btn-accent2 { background: var(--accent2-light); color: var(--accent2); border: 1px solid #e8a070; }
+  .btn-accent2:hover { background: #fde8d8; }
+
+  .btn-sm { padding: 6px 12px; font-size: 12px; }
+
+  /* ─── TABLE ─── */
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  thead { background: var(--surface2); }
+
+  th {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 14px 16px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: var(--bg); }
+
+  /* ─── BADGES ─── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .badge-green { background: var(--accent-light); color: var(--accent); }
+  .badge-blue { background: var(--student-light); color: var(--student); }
+  .badge-orange { background: var(--accent2-light); color: var(--accent2); }
+  .badge-yellow { background: var(--warning-light); color: var(--warning); }
+  .badge-gray { background: var(--surface2); color: var(--text-muted); }
+
+  /* ─── STATS ROW ─── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .stat-label { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; font-family: 'DM Mono', monospace; }
+
+  .stat-value { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--text); }
+
+  .stat-delta { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+  /* ─── PROGRESS BAR ─── */
+  .progress-bar-wrap { background: var(--surface2); border-radius: 8px; height: 8px; overflow: hidden; }
+
+  .progress-bar { height: 100%; border-radius: 8px; transition: width 0.6s ease; }
+
+  .progress-bar.green { background: var(--accent); }
+  .progress-bar.blue { background: var(--student); }
+  .progress-bar.orange { background: var(--accent2); }
+
+  /* ─── COURSE LIST ─── */
+  .course-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin-bottom: 10px;
+    transition: box-shadow 0.15s;
+  }
+
+  .course-item:hover { box-shadow: var(--shadow); }
+
+  .course-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .course-icon.green { background: var(--accent-light); }
+  .course-icon.blue { background: var(--student-light); }
+  .course-icon.orange { background: var(--accent2-light); }
+
+  .course-info { flex: 1; min-width: 0; }
+
+  .course-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+
+  .course-meta { font-size: 12px; color: var(--text-muted); }
+
+  .course-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,23,20,0.5);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+  }
+
+  .modal-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
+
+  .modal {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 32px;
+    width: 100%;
+    max-width: 520px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    position: relative;
+  }
+
+  .modal-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .modal-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: var(--surface2);
+    border: none;
+    border-radius: 6px;
+    width: 28px; height: 28px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted);
+  }
+
+  .modal-close:hover { background: var(--border); color: var(--text); }
+
+  .modal-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; }
+
+  /* ─── TEXTAREA ─── */
+  textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 14px;
+    background: var(--bg);
+    color: var(--text);
+    resize: vertical;
+    min-height: 120px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  textarea:focus { border-color: var(--accent); }
+
+  /* ─── FORM ─── */
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  select {
+    width: 100%;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* ─── NOTIFICATION ─── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--text);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    z-index: 999;
+    box-shadow: var(--shadow-md);
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ─── EVAL CARD (student) ─── */
+  .eval-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+  }
+
+  .eval-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .eval-body { padding: 16px 20px; }
+
+  .eval-status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+  }
+
+  /* ─── RESULT DETAIL ─── */
+  .grade-circle {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    background: var(--accent-light);
+    border: 3px solid var(--accent);
+    flex-shrink: 0;
+  }
+
+  .grade-num { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--accent); line-height: 1; }
+  .grade-denom { font-size: 11px; color: var(--accent); }
+
+  /* ─── EMPTY STATE ─── */
+  .empty-state {
+    text-align: center;
+    padding: 56px 32px;
+    color: var(--text-muted);
+  }
+
+  .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.4; }
+  .empty-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .empty-desc { font-size: 14px; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { display: none; }
+    main { padding: 20px; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════
+     LOGIN SCREEN
+════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <span class="wordmark">TestGuardAI</span>
+      <span class="tag">v2.0</span>
+    </div>
+    <h1 class="login-headline">Bienvenue</h1>
+    <p class="login-sub">Sélectionnez votre profil pour accéder à la plateforme.</p>
+
+    <div class="profile-grid">
+      <button class="profile-btn teacher" onclick="selectProfile('teacher', this)">
+        <div class="profile-icon">🎓</div>
+        <span class="profile-label">Professeur</span>
+        <span class="profile-desc">Gérez vos cours et évaluations</span>
+      </button>
+      <button class="profile-btn student" onclick="selectProfile('student', this)">
+        <div class="profile-icon">📚</div>
+        <span class="profile-label">Étudiant</span>
+        <span class="profile-desc">Consultez vos évaluations</span>
+      </button>
+    </div>
+
+    <div class="form-group">
+      <label>Identifiant</label>
+      <input type="text" id="login-user" placeholder="prenom.nom@etablissement.fr" value="marie.dupont">
+    </div>
+    <div class="form-group">
+      <label>Mot de passe</label>
+      <input type="password" id="login-pass" placeholder="••••••••" value="••••••••">
+    </div>
+    <button class="btn-login" id="login-btn" onclick="doLogin()">Se connecter</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     APP
+════════════════════════════════ -->
+<div id="app">
+  <header>
+    <div class="header-left">
+      <div class="logo">TestGuardAi</div>
+      <span class="role-badge" id="header-role-badge"></span>
+    </div>
+    <div class="header-right">
+      <div class="user-info">
+        <div class="user-name" id="header-user-name"></div>
+        <div class="user-role" id="header-user-role"></div>
+      </div>
+      <div class="avatar" id="header-avatar"></div>
+      <button class="btn-logout" onclick="logout()">Déconnexion</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- NAV TEACHER -->
+    <nav id="nav-teacher" style="display:none;">
+      <div class="nav-section-label" style="margin-bottom:16px;">Enseignement</div>
+      <button class="nav-item teacher-nav active" onclick="showPage('t-upload', this)">
+        <span class="nav-icon">⬆️</span> Déposer un cours
+      </button>
+      <button class="nav-item teacher-nav" onclick="showPage('t-submissions', this)">
+        <span class="nav-icon">📋</span> Copies rendues
+      </button>
+      <button class="nav-item teacher-nav" onclick="showPage('t-results', this)">
+        <span class="nav-icon">📊</span> Résultats finaux
+      </button>
+    </nav>
+
+    <!-- NAV STUDENT -->
+    <nav id="nav-student" style="display:none;">
+      <div class="nav-section-label" style="margin-bottom:16px;">Mon espace</div>
+      <button class="nav-item student-nav active" onclick="showPage('s-evals', this)">
+        <span class="nav-icon">📝</span> Mes évaluations
+      </button>
+      <button class="nav-item student-nav" onclick="showPage('s-results', this)">
+        <span class="nav-icon">🏆</span> Mes résultats
+      </button>
+      <button class="nav-item student-nav" onclick="showPage('s-courses', this)">
+        <span class="nav-icon">📖</span> Mes cours
+      </button>
+    </nav>
+
+    <main>
+
+      <!-- ══ TEACHER: UPLOAD ══ -->
+      <div class="page active" id="page-t-upload">
+        <div class="page-header">
+          <h1 class="page-title">Déposer un cours</h1>
+          <p class="page-subtitle">Importez vos supports pour générer automatiquement une évaluation.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Nouveau cours</div>
+          <div class="card-sub">Formats acceptés : PDF, Word, PowerPoint — 50 Mo max</div>
+
+          <div class="upload-zone" id="upload-zone"
+               onclick="document.getElementById('file-input').click()"
+               ondragover="event.preventDefault(); this.classList.add('dragover')"
+               ondragleave="this.classList.remove('dragover')"
+               ondrop="handleDrop(event)">
+            <div class="upload-icon">📄</div>
+            <div class="upload-text">Glissez vos fichiers ici ou cliquez pour parcourir</div>
+            <div class="upload-hint">PDF, DOCX, PPTX · Max 50 Mo par fichier</div>
+            <input type="file" id="file-input" class="upload-input" multiple accept=".pdf,.docx,.pptx,.doc,.ppt" onchange="handleFileSelect(this)">
+          </div>
+
+          <div id="file-list" style="margin-top:16px;"></div>
+
+          <div class="form-row" style="margin-top:20px;">
+            <div class="form-group" style="margin:0;">
+              <label>Matière</label>
+              <select>
+                <option>Mathématiques</option>
+                <option>Sciences</option>
+                <option>Histoire-Géographie</option>
+                <option>Français</option>
+                <option>Physique-Chimie</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label>Classe cible</label>
+              <select>
+                <option>Terminale A</option>
+                <option>Terminale B</option>
+                <option>Première A</option>
+                <option>Première B</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top:20px; display:flex; gap:12px;">
+            <button class="btn btn-primary" onclick="simulateGenerate()">✨ Générer une évaluation</button>
+            <button class="btn btn-secondary">💾 Sauvegarder le cours</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Cours déposés récemment</div>
+          <div class="card-sub" style="margin-bottom:0;">3 cours disponibles</div>
+          <div style="margin-top:16px;">
+            <div class="course-item">
+              <div class="course-icon green">📐</div>
+              <div class="course-info">
+                <div class="course-name">Intégrales et primitives — Chapitre 4</div>
+                <div class="course-meta">Mathématiques · Terminale A · déposé le 24 mars 2026</div>
+              </div>
+              <div class="course-actions">
+                <span class="badge badge-green">Éval. générée</span>
+              </div>
+            </div>
+            <div class="course-item">
+              <div class="course-icon blue">🧬</div>
+              <div class="course-info">
+                <div class="course-name">La mitose et la méiose</div>
+                <div class="course-meta">Sciences · Terminale B · déposé le 20 mars 2026</div>
+              </div>
+              <div class="course-actions">
+                <span class="badge badge-green">Éval. générée</span>
+              </div>
+            </div>
+            <div class="course-item">
+              <div class="course-icon orange">🗺️</div>
+              <div class="course-info">
+                <div class="course-name">La mondialisation — Introduction</div>
+                <div class="course-meta">Histoire-Géo · Première A · déposé le 15 mars 2026</div>
+              </div>
+              <div class="course-actions">
+                <span class="badge badge-yellow">En cours…</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ TEACHER: SUBMISSIONS ══ -->
+      <div class="page" id="page-t-submissions">
+        <div class="page-header">
+          <h1 class="page-title">Copies rendues</h1>
+          <p class="page-subtitle">Consultez, notez et analysez les réponses de vos élèves.</p>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">Copies reçues</div>
+            <div class="stat-value">24</div>
+            <div class="stat-delta">sur 28 élèves</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Notées</div>
+            <div class="stat-value">17</div>
+            <div class="stat-delta">71% du total</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">IA détectée</div>
+            <div class="stat-value">5</div>
+            <div class="stat-delta">copies suspectes</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Moy. de classe</div>
+            <div class="stat-value">13.4</div>
+            <div class="stat-delta">/ 20 pts</div>
+          </div>
+        </div>
+
+        <div class="card" style="padding:0; overflow:hidden;">
+          <div style="padding:16px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between;">
+            <div class="card-title" style="margin:0;">Évaluation : Intégrales — Terminale A</div>
+            <select style="width:auto; font-size:13px; padding:6px 12px;">
+              <option>Toutes les évaluations</option>
+              <option selected>Intégrales — Chap. 4</option>
+              <option>La mitose</option>
+            </select>
+          </div>
+          <div class="table-wrap" style="border:none; border-radius:0;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Élève</th>
+                  <th>Rendu le</th>
+                  <th>Statut</th>
+                  <th>Note</th>
+                  <th>IA Score</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="submissions-table">
+                <!-- filled by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ TEACHER: RESULTS ══ -->
+      <div class="page" id="page-t-results">
+        <div class="page-header">
+          <h1 class="page-title">Résultats finaux</h1>
+          <p class="page-subtitle">Vue consolidée des performances de vos classes.</p>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">Élèves suivis</div>
+            <div class="stat-value">56</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Moyenne générale</div>
+            <div class="stat-value">13.8</div>
+            <div class="stat-delta">/ 20</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Taux de réussite</div>
+            <div class="stat-value">78%</div>
+            <div class="stat-delta">note ≥ 10</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Évaluations complètes</div>
+            <div class="stat-value">3</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Classement par matière</div>
+          <div style="margin-top:20px; display:flex; flex-direction:column; gap:16px;">
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                <span style="font-size:14px; font-weight:500;">Mathématiques</span>
+                <span style="font-size:14px; font-weight:600; font-family:'DM Mono',monospace;">14.2 / 20</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar green" style="width:71%"></div></div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                <span style="font-size:14px; font-weight:500;">Sciences</span>
+                <span style="font-size:14px; font-weight:600; font-family:'DM Mono',monospace;">12.8 / 20</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar blue" style="width:64%"></div></div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                <span style="font-size:14px; font-weight:500;">Histoire-Géographie</span>
+                <span style="font-size:14px; font-weight:600; font-family:'DM Mono',monospace;">13.5 / 20</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar orange" style="width:67.5%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding:0; overflow:hidden;">
+          <div style="padding:16px 20px; border-bottom:1px solid var(--border);">
+            <div class="card-title" style="margin:0;">Récapitulatif par élève</div>
+          </div>
+          <div class="table-wrap" style="border:none; border-radius:0;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Élève</th>
+                  <th>Classe</th>
+                  <th>Maths</th>
+                  <th>Sciences</th>
+                  <th>Hist-Géo</th>
+                  <th>Moyenne</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Chloé Martin</strong></td>
+                  <td>Terminale A</td>
+                  <td>16</td><td>15</td><td>14</td>
+                  <td><strong>15.0</strong></td>
+                  <td><span class="badge badge-green">Excellent</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Hugo Bernard</strong></td>
+                  <td>Terminale A</td>
+                  <td>12</td><td>11</td><td>13</td>
+                  <td><strong>12.0</strong></td>
+                  <td><span class="badge badge-blue">Bien</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Emma Lefebvre</strong></td>
+                  <td>Terminale B</td>
+                  <td>9</td><td>10</td><td>8</td>
+                  <td><strong>9.0</strong></td>
+                  <td><span class="badge badge-orange">À soutenir</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Lucas Moreau</strong></td>
+                  <td>Terminale B</td>
+                  <td>18</td><td>17</td><td>16</td>
+                  <td><strong>17.0</strong></td>
+                  <td><span class="badge badge-green">Excellent</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Jade Dumont</strong></td>
+                  <td>Première A</td>
+                  <td>14</td><td>13</td><td>15</td>
+                  <td><strong>14.0</strong></td>
+                  <td><span class="badge badge-blue">Bien</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ STUDENT: EVALS ══ -->
+      <div class="page" id="page-s-evals">
+        <div class="page-header">
+          <h1 class="page-title">Mes évaluations</h1>
+          <p class="page-subtitle">Répondez aux évaluations générées par vos professeurs.</p>
+        </div>
+
+        <!-- Pending -->
+        <div style="margin-bottom:8px; font-size:13px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; font-family:'DM Mono',monospace;">À rendre</div>
+
+        <div class="eval-card">
+          <div class="eval-header">
+            <div style="font-size:24px;">📐</div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:600;">Intégrales — Chapitre 4</div>
+              <div style="font-size:13px; color:var(--text-muted);">Mathématiques · Prof. Dupont</div>
+            </div>
+            <span class="badge badge-orange">⏳ En attente</span>
+          </div>
+          <div class="eval-body">
+            <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Date limite : <strong style="color:var(--accent2);">31 mars 2026</strong> · 8 questions</div>
+            <button class="btn btn-primary student" onclick="openEvalModal()">✏️ Commencer l'évaluation</button>
+          </div>
+        </div>
+
+        <div class="eval-card">
+          <div class="eval-header">
+            <div style="font-size:24px;">🧬</div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:600;">La mitose et la méiose</div>
+              <div style="font-size:13px; color:var(--text-muted);">Sciences · Prof. Lambert</div>
+            </div>
+            <span class="badge badge-orange">⏳ En attente</span>
+          </div>
+          <div class="eval-body">
+            <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Date limite : <strong style="color:var(--accent2);">5 avril 2026</strong> · 10 questions</div>
+            <button class="btn btn-primary student" onclick="openEvalModal()">✏️ Commencer l'évaluation</button>
+          </div>
+        </div>
+
+        <!-- Done -->
+        <div style="margin-top:24px; margin-bottom:8px; font-size:13px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; font-family:'DM Mono',monospace;">Rendus</div>
+
+        <div class="eval-card">
+          <div class="eval-header">
+            <div style="font-size:24px;">🗺️</div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:600;">La mondialisation — Introduction</div>
+              <div style="font-size:13px; color:var(--text-muted);">Histoire-Géo · Prof. Renard</div>
+            </div>
+            <span class="badge badge-green">✓ Rendu</span>
+          </div>
+          <div class="eval-body">
+            <div style="font-size:13px; color:var(--text-muted);">Rendu le 22 mars 2026 · En attente de correction</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ STUDENT: RESULTS ══ -->
+      <div class="page" id="page-s-results">
+        <div class="page-header">
+          <h1 class="page-title">Mes résultats</h1>
+          <p class="page-subtitle">Retrouvez vos notes et retours de professeurs.</p>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">Moyenne générale</div>
+            <div class="stat-value">13.4</div>
+            <div class="stat-delta">/ 20</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Évals complètes</div>
+            <div class="stat-value">3</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Meilleure note</div>
+            <div class="stat-value">16</div>
+            <div class="stat-delta">Mathématiques</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Détail par évaluation</div>
+          <div style="margin-top:16px; display:flex; flex-direction:column; gap:12px;">
+
+            <div style="display:flex; align-items:center; gap:16px; padding:16px; border:1px solid var(--border); border-radius:var(--radius);">
+              <div class="grade-circle">
+                <div class="grade-num">16</div>
+                <div class="grade-denom">/ 20</div>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:600; margin-bottom:2px;">Fonctions dérivées — Chapitre 3</div>
+                <div style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Mathématiques · Prof. Dupont · 10 mars 2026</div>
+                <div style="font-size:13px; color:var(--text-muted); font-style:italic;">"Très bon travail, maîtrise des concepts bien visible."</div>
+              </div>
+              <span class="badge badge-green">Excellent</span>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:16px; padding:16px; border:1px solid var(--border); border-radius:var(--radius);">
+              <div class="grade-circle" style="background:var(--student-light); border-color:var(--student);">
+                <div class="grade-num" style="color:var(--student);">13</div>
+                <div class="grade-denom" style="color:var(--student);">/ 20</div>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:600; margin-bottom:2px;">La photosynthèse</div>
+                <div style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Sciences · Prof. Lambert · 5 mars 2026</div>
+                <div style="font-size:13px; color:var(--text-muted); font-style:italic;">"Bonne compréhension globale, quelques imprécisions à corriger."</div>
+              </div>
+              <span class="badge badge-blue">Bien</span>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:16px; padding:16px; border:1px solid var(--border); border-radius:var(--radius); opacity:0.7;">
+              <div class="grade-circle" style="background:var(--surface2); border-color:var(--border);">
+                <div class="grade-num" style="color:var(--text-muted);">—</div>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:600; margin-bottom:2px;">La mondialisation — Introduction</div>
+                <div style="font-size:12px; color:var(--text-muted);">Histoire-Géo · Prof. Renard · rendu le 22 mars</div>
+              </div>
+              <span class="badge badge-gray">En correction</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ STUDENT: COURSES ══ -->
+      <div class="page" id="page-s-courses">
+        <div class="page-header">
+          <h1 class="page-title">Mes cours</h1>
+          <p class="page-subtitle">Accédez aux supports déposés par vos professeurs.</p>
+        </div>
+
+        <div class="course-item">
+          <div class="course-icon green">📐</div>
+          <div class="course-info">
+            <div class="course-name">Intégrales et primitives — Chapitre 4</div>
+            <div class="course-meta">Mathématiques · Prof. Dupont · PDF · 2.4 Mo</div>
+          </div>
+          <div class="course-actions">
+            <button class="btn btn-secondary btn-sm">⬇ Télécharger</button>
+          </div>
+        </div>
+
+        <div class="course-item">
+          <div class="course-icon blue">🧬</div>
+          <div class="course-info">
+            <div class="course-name">La mitose et la méiose</div>
+            <div class="course-meta">Sciences · Prof. Lambert · PPTX · 5.1 Mo</div>
+          </div>
+          <div class="course-actions">
+            <button class="btn btn-secondary btn-sm">⬇ Télécharger</button>
+          </div>
+        </div>
+
+        <div class="course-item">
+          <div class="course-icon orange">🗺️</div>
+          <div class="course-info">
+            <div class="course-name">La mondialisation — Introduction</div>
+            <div class="course-meta">Histoire-Géo · Prof. Renard · PDF · 1.8 Mo</div>
+          </div>
+          <div class="course-actions">
+            <button class="btn btn-secondary btn-sm">⬇ Télécharger</button>
+          </div>
+        </div>
+
+        <div class="empty-state" style="opacity:0.5; padding:32px;">
+          <div style="font-size:13px;">Nouveaux cours à venir…</div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ═══ MODAL: NOTE ═══ -->
+<div class="modal-overlay" id="modal-grade">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-grade')">✕</button>
+    <div class="modal-title">Noter le devoir</div>
+    <div class="modal-sub" id="modal-grade-name">Lucas Moreau — Intégrales Chap. 4</div>
+
+    <div style="background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:16px; margin-bottom:20px; font-size:13px; color:var(--text-muted); max-height:140px; overflow-y:auto; line-height:1.7;">
+      <strong style="color:var(--text); display:block; margin-bottom:6px;">Réponse de l'élève :</strong>
+      L'intégrale d'une fonction f sur [a,b] représente l'aire algébrique sous la courbe. Pour calculer ∫x² dx, on utilise la formule x³/3 + C. La primitive de sin(x) est −cos(x) + C, celle de e^x est e^x + C…
+    </div>
+
+    <div class="form-row">
+      <div class="form-group" style="margin:0;">
+        <label>Note (/ 20)</label>
+        <input type="number" min="0" max="20" step="0.5" value="15" id="grade-input" style="font-family:'DM Mono',monospace; font-size:18px; font-weight:600;">
+      </div>
+      <div class="form-group" style="margin:0;">
+        <label>Appréciation rapide</label>
+        <select>
+          <option>Excellent travail</option>
+          <option>Bien</option>
+          <option>Assez bien</option>
+          <option>Insuffisant</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group" style="margin-top:16px;">
+      <label>Commentaire</label>
+      <textarea placeholder="Laissez un retour personnalisé à l'élève…"></textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('modal-grade')">Annuler</button>
+      <button class="btn btn-primary" onclick="submitGrade()">✔ Valider la note</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL: EVAL (student) ═══ -->
+<div class="modal-overlay" id="modal-eval">
+  <div class="modal" style="max-width:600px;">
+    <button class="modal-close" onclick="closeModal('modal-eval')">✕</button>
+    <div class="modal-title">Intégrales — Chapitre 4</div>
+    <div class="modal-sub">Mathématiques · Prof. Dupont · Question 1 / 3</div>
+
+    <div style="background:var(--accent-light); border:1px solid var(--accent); border-radius:8px; padding:16px; margin-bottom:16px;">
+      <div style="font-size:14px; font-weight:600; margin-bottom:8px; color:var(--accent);">Question 1</div>
+      <div style="font-size:14px; line-height:1.7;">Calculez l'intégrale de f(x) = 3x² − 2x + 1 sur l'intervalle [0, 2]. Justifiez chaque étape de votre calcul.</div>
+    </div>
+
+    <div class="form-group" style="margin:0;">
+      <label>Votre réponse</label>
+      <textarea placeholder="Rédigez votre réponse ici…" style="min-height:160px;"></textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('modal-eval')">Fermer</button>
+      <button class="btn btn-primary student">Question suivante →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── State ──
+  let currentRole = 'teacher';
+  let selectedProfile = 'teacher';
+
+  // ── DATA ──
+  const submissions = [
+    { name: 'Lucas Moreau',   date: '28 mars',  status: 'notée',     note: '17/20', ia: '2%',  iaBadge: 'badge-green' },
+    { name: 'Chloé Martin',   date: '27 mars',  status: 'notée',     note: '16/20', ia: '5%',  iaBadge: 'badge-green' },
+    { name: 'Hugo Bernard',   date: '28 mars',  status: 'à noter',   note: '—',     ia: '—',   iaBadge: 'badge-gray'  },
+    { name: 'Emma Lefebvre',  date: '29 mars',  status: 'à noter',   note: '—',     ia: '72%', iaBadge: 'badge-orange'},
+    { name: 'Jade Dumont',    date: '26 mars',  status: 'notée',     note: '14/20', ia: '8%',  iaBadge: 'badge-green' },
+    { name: 'Tom Girard',     date: '29 mars',  status: 'à noter',   note: '—',     ia: '—',   iaBadge: 'badge-gray'  },
+    { name: 'Léa Rousseau',   date: '27 mars',  status: 'à noter',   note: '—',     ia: '61%', iaBadge: 'badge-orange'},
+  ];
+
+  function renderSubmissions() {
+    const tbody = document.getElementById('submissions-table');
+    tbody.innerHTML = submissions.map((s, i) => `
+      <tr>
+        <td><strong>${s.name}</strong></td>
+        <td style="font-family:'DM Mono',monospace; font-size:13px;">${s.date}</td>
+        <td>${s.status === 'notée'
+          ? '<span class="badge badge-green">✓ Notée</span>'
+          : '<span class="badge badge-yellow">⏳ À noter</span>'}</td>
+        <td style="font-family:'DM Mono',monospace; font-weight:600;">${s.note}</td>
+        <td>${s.ia !== '—'
+          ? `<span class="badge ${s.iaBadge}">${s.ia}</span>`
+          : '<span style="color:var(--text-muted);">—</span>'}</td>
+        <td>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            ${s.status === 'à noter' ? `<button class="btn btn-secondary btn-sm" onclick="openGradeModal('${s.name}')">📝 Noter</button>` : ''}
+            <button class="btn btn-warning btn-sm" onclick="showToast('Analyse IA lancée…')">🤖 Détecter l'IA</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  // ── Login ──
+  function selectProfile(role, btn) {
+    selectedProfile = role;
+    document.querySelectorAll('.profile-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const loginBtn = document.getElementById('login-btn');
+    loginBtn.classList.toggle('student-mode', role === 'student');
+  }
+
+  function doLogin() {
+    currentRole = selectedProfile;
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    setupApp();
+    renderSubmissions();
+  }
+
+  function setupApp() {
+    const isTeacher = currentRole === 'teacher';
+    document.getElementById('nav-teacher').style.display = isTeacher ? 'block' : 'none';
+    document.getElementById('nav-student').style.display = isTeacher ? 'none' : 'block';
+
+    document.getElementById('header-role-badge').textContent = isTeacher ? 'Professeur' : 'Étudiant';
+    document.getElementById('header-role-badge').className = `role-badge ${isTeacher ? 'teacher' : 'student'}`;
+    document.getElementById('header-user-name').textContent = isTeacher ? 'Marie Dupont' : 'Lucas Moreau';
+    document.getElementById('header-user-role').textContent = isTeacher ? 'Mathématiques' : 'Terminale A';
+    const av = document.getElementById('header-avatar');
+    av.textContent = isTeacher ? 'MD' : 'LM';
+    av.className = `avatar ${isTeacher ? 'teacher' : 'student'}`;
+
+    // Show correct first page
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(isTeacher ? 'page-t-upload' : 'page-s-evals').classList.add('active');
+  }
+
+  function logout() {
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.querySelectorAll('.profile-btn').forEach(b => b.classList.remove('active'));
+    selectedProfile = 'teacher';
+    document.getElementById('login-btn').classList.remove('student-mode');
+  }
+
+  // ── Navigation ──
+  function showPage(pageId, navBtn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(`page-${pageId}`).classList.add('active');
+    const navClass = currentRole === 'teacher' ? 'teacher-nav' : 'student-nav';
+    document.querySelectorAll(`.nav-item.${navClass}`).forEach(b => b.classList.remove('active'));
+    navBtn.classList.add('active');
+  }
+
+  // ── Upload ──
+  function handleFileSelect(input) {
+    showFiles(Array.from(input.files));
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    document.getElementById('upload-zone').classList.remove('dragover');
+    showFiles(Array.from(e.dataTransfer.files));
+  }
+
+  function showFiles(files) {
+    const list = document.getElementById('file-list');
+    list.innerHTML = files.map(f => `
+      <div style="display:flex; align-items:center; gap:10px; padding:10px 12px; background:var(--accent-light); border:1px solid var(--accent); border-radius:8px; margin-bottom:8px;">
+        <span>📄</span>
+        <span style="flex:1; font-size:13px; font-weight:500;">${f.name}</span>
+        <span style="font-family:'DM Mono',monospace; font-size:12px; color:var(--text-muted);">${(f.size/1024/1024).toFixed(1)} Mo</span>
+        <span class="badge badge-green">Prêt</span>
+      </div>
+    `).join('');
+  }
+
+  function simulateGenerate() {
+    showToast('✨ Génération de l\'évaluation en cours…');
+    setTimeout(() => showToast('✅ Évaluation générée avec succès !'), 2000);
+  }
+
+  // ── Modals ──
+  function openGradeModal(name) {
+    document.getElementById('modal-grade-name').textContent = `${name} — Intégrales Chap. 4`;
+    document.getElementById('modal-grade').classList.add('open');
+  }
+
+  function openEvalModal() {
+    document.getElementById('modal-eval').classList.add('open');
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+  }
+
+  function submitGrade() {
+    const note = document.getElementById('grade-input').value;
+    closeModal('modal-grade');
+    showToast(`✔ Note ${note}/20 enregistrée`);
+  }
+
+  // ── Toast ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // Close modals on backdrop click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) overlay.classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>
