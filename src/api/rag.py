@@ -1,16 +1,19 @@
 import os
+import json
 import tempfile
 
+from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
-from langchain_community.vectorstores import Chroma
-from langchain.chains import RetrievalQA
+from langchain_core.messages import HumanMessage
+
+load_dotenv()
 
 CHROMA_PATH = os.getenv("CHROMA_PATH", "./data/chroma_db")
 
 
-def ingest_pdf(file_bytes: bytes, filename: str) -> int:
+def ingest_and_generate_questions(file_bytes: bytes, filename: str) -> list[dict]:
     with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
         tmp.write(file_bytes)
         tmp_path = tmp.name
@@ -18,40 +21,36 @@ def ingest_pdf(file_bytes: bytes, filename: str) -> int:
     try:
         loader = PyPDFLoader(tmp_path)
         documents = loader.load()
-        for doc in documents:
-            doc.metadata["source"] = filename
     finally:
         os.unlink(tmp_path)
 
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     chunks = splitter.split_documents(documents)
 
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
-    Chroma.from_documents(chunks, embeddings, persist_directory=CHROMA_PATH)
+    full_text = "\n\n".join(chunk.page_content for chunk in chunks[:10])
 
-    return len(chunks)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.7)
 
+    prompt = f"""Tu es un expert pédagogique. À partir du texte suivant extrait du document "{filename}", génère 10 couples question-réponse pertinents.
 
-def ask_question(question: str) -> dict:
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
-    vectorstore = Chroma(persist_directory=CHROMA_PATH, embedding_function=embeddings)
+Retourne uniquement un tableau JSON valide, sans markdown ni explication, sous ce format exact :
+[
+  {{"question": "...", "reponse": "..."}},
+  ...
+]
 
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
-    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0)
-    chain = RetrievalQA.from_chain_type(
-        llm=llm,
-        retriever=retriever,
-        return_source_documents=True,
-    )
+Texte :
+{full_text}
+"""
 
-    result = chain.invoke({"query": question})
+    response = llm.invoke([HumanMessage(content=prompt)])
+    content = response.content.strip()
 
-    sources = [
-        {
-            "source": doc.metadata.get("source", "unknown"),
-            "page": doc.metadata.get("page", "?"),
-        }
-        for doc in result["source_documents"]
-    ]
+    # Enlever les blocs markdown si présents (```json ... ```)
+    if content.startswith("```"):
+        content = content.split("```")[1]
+        if content.startswith("json"):
+            content = content[4:]
+        content = content.strip()
 
-    return {"answer": result["result"], "sources": sources}
+    return json.loads(content)

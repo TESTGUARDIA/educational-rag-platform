@@ -1,13 +1,10 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException
-from pydantic import BaseModel
+from typing import List
 
-from src.api.rag import ingest_pdf, ask_question
+from fastapi import FastAPI, UploadFile, File, HTTPException
+
+from src.api.rag import ingest_and_generate_questions
 
 app = FastAPI(title="Educational AI Platform", version="1.0")
-
-
-class QuestionRequest(BaseModel):
-    question: str
 
 
 @app.get("/")
@@ -20,21 +17,16 @@ def health_check():
     return {"status": "healthy"}
 
 
-@app.post("/upload")
-async def upload_document(file: UploadFile = File(...)):
-    if not file.filename.endswith(".pdf"):
-        raise HTTPException(status_code=400, detail="Only PDF files are supported.")
+@app.post("/generate")
+async def generate(files: List[UploadFile] = File(...)):
+    for file in files:
+        if not file.filename.endswith(".pdf"):
+            raise HTTPException(status_code=400, detail=f"{file.filename} : seuls les fichiers PDF sont supportés.")
 
-    file_bytes = await file.read()
-    chunks = ingest_pdf(file_bytes, file.filename)
+    results = []
+    for file in files:
+        file_bytes = await file.read()
+        questions = ingest_and_generate_questions(file_bytes, file.filename)
+        results.append({"filename": file.filename, "questions": questions})
 
-    return {"message": f"'{file.filename}' ingested successfully.", "chunks": chunks}
-
-
-@app.post("/ask")
-def ask(request: QuestionRequest):
-    if not request.question.strip():
-        raise HTTPException(status_code=400, detail="Question cannot be empty.")
-
-    result = ask_question(request.question)
-    return result
+    return {"results": results}
