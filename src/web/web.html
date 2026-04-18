@@ -9,31 +9,47 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #F5F2EC;
+    /* Palette TestGuardAI */
+    --bg: #F1F5F9;           /* Gris Givré */
     --surface: #FFFFFF;
-    --surface2: #EEEBE3;
-    --border: #D8D2C4;
-    --text: #1A1714;
-    --text-muted: #7A7469;
-    --accent: #2D5A3D;
-    --accent-light: #E8F0EA;
-    --accent2: #C4622D;
-    --accent2-light: #FAF0EA;
-    --student: #2B4A7A;
-    --student-light: #E8EEF7;
-    --warning: #B8860B;
-    --warning-light: #FFF8E7;
-    --radius: 12px;
-    --shadow: 0 2px 12px rgba(26,23,20,0.08);
-    --shadow-md: 0 4px 24px rgba(26,23,20,0.12);
+    --surface2: #E2E8F0;
+    --border: #CBD5E1;
+    --text: #0F172A;         /* Bleu Minuit */
+    --text-muted: #64748B;
+    
+    --accent: #3B82F6;       /* Bleu Indigo (Confiance) */
+    --accent-light: #EFF6FF;
+    
+    --accent-ia: #8B5CF6;    /* Violet Électrique (IA) */
+    --accent-ia-light: #F5F3FF;
+    
+    --student: #6366F1;      /* Indigo */
+    --student-light: #EEF2FF;
+    
+    --success: #10B981;
+    --warning: #F59E0B;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1);
   }
 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
   body {
-    font-family: 'Instrument Sans', sans-serif;
+    font-family: 'Inter', sans-serif; /* Plus moderne/UI */
     background: var(--bg);
     color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
+  }
+
+  .wordmark, .page-title, .login-headline, .modal-title {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 800; /* Très gras pour le côté pro */
+    letter-spacing: -0.02em;
+  }
+
+  /* Pour les codes ou scores, on garde une mono type code */
+  .badge, th, .stat-label, .grade-num {
+    font-family: 'JetBrains Mono', monospace !important;
   }
 
   /* ─── LOGIN SCREEN ─── */
