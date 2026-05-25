@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TestGuardAI — Intégrité académique</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F7F6F3;--sf:#FFFFFF;--sf2:#F0EEE8;--bd:#E0DDD5;
+  --tx:#1C1E26;--mu:#6B7280;
+  --gr:#4F6EF7;--grl:#EEF2FF;
+  --or:#F59E0B;--orl:#FFF7ED;
+  --bl:#4F6EF7;--bll:#EEF2FF;
+  --yw:#B45309;--ywl:#FFF7ED;
+  --tg-accent:#00D9A3;--tg-accentl:#ECFDF5;
+  --tg-dark:#0F1117;--tg-danger:#EF4444;--tg-dangerl:#FEF2F2;
+  --r:10px;--sh:0 1px 8px rgba(15,17,23,.07);--shm:0 4px 20px rgba(15,17,23,.12)
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
+#ls{min-height:100vh;display:flex;align-items:center;justify-content:center}
+#ls::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 10%,rgba(79,110,247,.10),transparent 60%),radial-gradient(ellipse 50% 60% at 10% 80%,rgba(0,217,163,.07),transparent 60%);pointer-events:none}
+.lc{background:var(--sf);border:1px solid var(--bd);border-radius:16px;box-shadow:0 8px 40px rgba(79,110,247,.10);padding:48px 40px;width:100%;max-width:450px;position:relative;z-index:1}
+.ll{display:flex;align-items:baseline;gap:8px;margin-bottom:34px}
+.ll .wm{font-size:25px}
+.ll .tg{font-family:'DM Mono',monospace;font-size:11px;color:var(--mu);letter-spacing:.08em}
+.lh{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:5px;letter-spacing:-.01em}
+.ls2{font-size:13px;color:var(--mu);margin-bottom:30px}
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:26px}
+.pb{border:2px solid var(--bd);border-radius:var(--r);padding:21px 13px;cursor:pointer;background:var(--sf);text-align:center;transition:all .2s}
+.pb.pt:hover,.pb.pat{border-color:var(--gr);background:var(--grl);transform:translateY(-1px);box-shadow:var(--sh)}
+.pb.ps:hover,.pb.pas{border-color:var(--bl);background:var(--bll);transform:translateY(-2px);box-shadow:var(--sh)}
+.pi{font-size:32px;margin-bottom:8px}
+.pl{font-size:14px;font-weight:600;display:block;margin-bottom:2px}
+.pd{font-size:12px;color:var(--mu)}
+.fg{margin-bottom:13px}
+.fg label{display:block;font-size:12px;font-weight:500;color:var(--mu);margin-bottom:5px;letter-spacing:.04em;text-transform:uppercase}
+input[type=text],input[type=email],input[type=password],input[type=number],input[type=tel],select,textarea{width:100%;padding:9px 13px;border:1px solid var(--bd);border-radius:8px;font-family:inherit;font-size:13px;background:var(--bg);color:var(--tx);outline:none;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--gr);box-shadow:0 0 0 3px rgba(79,110,247,.1)}
+select{cursor:pointer}
+textarea{resize:vertical;min-height:100px}
+.bln{width:100%;padding:12px;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;background:#4F6EF7;color:#fff;margin-top:5px;transition:all .2s}
+.bln:hover{background:#3a56e0;transform:translateY(-1px)}
+.bln.sm{background:var(--tg-accent);color:#065f46}.bln.sm:hover{background:#00c49a}
+#app{display:none;min-height:100vh}
+header{background:var(--tg-dark);border-bottom:1px solid #1e2230;padding:0 26px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.hl{display:flex;align-items:center;gap:14px}
+.logo{font-family:'Inter',sans-serif;font-size:16px;font-weight:700;letter-spacing:-.02em;color:#F1F1F3}
+.rb{font-family:'DM Mono',monospace;font-size:11px;padding:3px 9px;border-radius:20px;letter-spacing:.06em;font-weight:500}
+.rb.t{background:#1e2a5e;color:#818cf8}.rb.s{background:#1a3a5c;color:#60a5fa}
+.hr2{display:flex;align-items:center;gap:12px}
+.ui{text-align:right}
+.un{font-size:13px;font-weight:600;color:#F1F1F3}.ur{font-size:12px;color:#9ca3af}
+.av{width:33px;height:33px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;overflow:hidden;flex-shrink:0}
+.av img{width:100%;height:100%;object-fit:cover}
+.av.t{background:#4F6EF7}.av.s{background:#4F6EF7}
+.bo{background:none;border:1px solid #2a2d3a;border-radius:7px;padding:5px 11px;font-family:inherit;font-size:12px;color:#9ca3af;cursor:pointer;transition:all .15s}
+.bo:hover{border-color:#4F6EF7;color:#F1F1F3}
+.lay{display:flex;min-height:calc(100vh - 56px)}
+nav{width:210px;background:#FAFAF8;border-right:1px solid var(--bd);padding:18px 9px;flex-shrink:0;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto}
+.ns{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);padding:0 9px;margin-bottom:6px;opacity:.7}
+.ni{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;color:var(--mu);transition:all .15s;margin-bottom:2px;border:none;background:none;width:100%;text-align:left}
+.ni:hover{background:var(--sf2);color:var(--tx)}
+.ni.at{background:var(--grl);color:var(--gr);font-weight:600}.ni.as{background:var(--grl);color:var(--gr);font-weight:600}
+.nico{font-size:14px;width:18px;text-align:center}
+main{flex:1;padding:26px;overflow-y:auto}
+.pg2{display:none;animation:fi .22s ease}.pg2.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.ph{margin-bottom:22px}
+.pt{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:3px;letter-spacing:-.01em;color:var(--tx)}
+.ps{font-size:13px;color:var(--mu);font-weight:400}
+.card{background:var(--sf);border:0.5px solid var(--bd);border-radius:var(--r);padding:20px;margin-bottom:13px;box-shadow:0 1px 6px rgba(15,17,23,.06)}
+.ct{font-size:14px;font-weight:600;margin-bottom:3px;color:var(--tx);letter-spacing:-.01em}
+.cs{font-size:12px;color:var(--mu);margin-bottom:13px}
+.upz{border:2px dashed var(--bd);border-radius:var(--r);padding:36px 24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg)}
+.upz:hover,.upz.dv{border-color:var(--gr);background:rgba(79,110,247,.05)}
+.upz.dv{transform:scale(1.01)}
+.upi2{font-size:34px;margin-bottom:9px}
+.upt{font-size:14px;font-weight:500;margin-bottom:4px}
+.uph{font-size:12px;color:var(--mu)}
+.upin{display:none}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;border:none}
+.bp{background:var(--gr);color:#fff;border-radius:8px}.bp:hover{background:#3a56e0}
+.bp.s{background:var(--gr)}.bp.s:hover{background:#3a56e0}
+.bs{background:var(--sf);border:1px solid var(--bd);color:var(--tx)}.bs:hover{border-color:var(--mu);background:var(--sf2)}
+.bw{background:var(--tg-dark);color:var(--tg-accent);border:1px solid #2a2d3a}.bw:hover{background:#1a1d26}
+.bo2{background:var(--orl);color:var(--or);border:1px solid #e8a070}.bo2:hover{background:#fde8d8}
+.bd2{background:var(--tg-dangerl);color:var(--tg-danger);border:1px solid #FECACA}.bd2:hover{background:#FECACA}
+.bsm{padding:5px 10px;font-size:11px}
+.tw{overflow-x:auto;border-radius:var(--r);border:1px solid var(--bd)}
+table{width:100%;border-collapse:collapse}
+thead{background:#F7F6F3}
+th{padding:10px 13px;text-align:left;font-size:10px;font-weight:600;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;font-family:'DM Mono',monospace;border-bottom:0.5px solid var(--bd)}
+td{padding:12px 13px;font-size:13px;border-bottom:0.5px solid var(--bd);background:var(--sf)}
+tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:var(--bg)}
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;font-family:'DM Mono',monospace}
+.bg{background:var(--tg-accentl);color:#059669}.bb{background:var(--grl);color:var(--gr)}
+.bor{background:#FFF7ED;color:#B45309}.by{background:#FFFBEB;color:#92400E}
+.bgr{background:var(--sf2);color:var(--mu)}
+.sr{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:13px;margin-bottom:18px}
+.sc{background:var(--sf);border:0.5px solid var(--bd);border-radius:var(--r);padding:17px 20px;box-shadow:0 1px 6px rgba(15,17,23,.06)}
+.sl{font-size:11px;color:var(--mu);font-weight:500;margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em;font-family:'DM Mono',monospace}
+.sv{font-family:'DM Serif Display',serif;font-size:25px;color:var(--tx);letter-spacing:-.01em}
+.sd{font-size:11px;color:var(--mu);margin-top:2px}
+.pbw{background:var(--sf2);border-radius:8px;height:7px;overflow:hidden}
+.pb{height:100%;border-radius:8px;transition:width .6s ease}
+.pb.g{background:#4F6EF7}.pb.b{background:#00D9A3}.pb.o{background:#F59E0B}
+.ci{display:flex;align-items:center;gap:13px;padding:13px;border-radius:var(--r);border:1px solid var(--bd);background:var(--sf);margin-bottom:9px;transition:box-shadow .15s}
+.ci:hover{box-shadow:var(--sh)}
+.cico{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.cico.g{background:var(--grl)}.cico.b{background:var(--bll)}.cico.o{background:var(--orl)}
+.cinf{flex:1;min-width:0}.cn{font-size:13px;font-weight:600;margin-bottom:1px}.cm{font-size:12px;color:var(--mu)}
+.mo{display:none;position:fixed;inset:0;background:rgba(26,23,20,.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
+.mo.open{display:flex;animation:fi .18s ease}
+.modal{background:var(--sf);border-radius:15px;padding:26px;width:100%;max-width:500px;box-shadow:0 20px 60px rgba(0,0,0,.2);position:relative;max-height:92vh;overflow-y:auto}
+.modal.w{max-width:610px}
+.mt2{font-family:'DM Serif Display',serif;font-size:18px;margin-bottom:5px}
+.ms2{font-size:12px;color:var(--mu);margin-bottom:18px}
+.mc{position:absolute;top:13px;right:13px;background:var(--sf2);border:none;border-radius:6px;width:25px;height:25px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--mu)}
+.mc:hover{background:var(--bd);color:var(--tx)}
+.ma{display:flex;gap:9px;justify-content:flex-end;margin-top:18px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--tx);color:#fff;padding:10px 16px;border-radius:9px;font-size:13px;z-index:999;box-shadow:var(--shm);transform:translateY(65px);opacity:0;transition:all .28s ease}
+.toast.show{transform:none;opacity:1}
+.ec{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;margin-bottom:10px;box-shadow:var(--sh)}
+.eh{padding:13px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd)}
+.eb{padding:13px 16px}
+.gc{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;background:var(--grl);border:2.5px solid var(--gr);flex-shrink:0}
+.gn{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--gr);line-height:1}
+.gd{font-size:10px;color:var(--gr)}
+.tog{position:relative;display:inline-block;width:39px;height:22px;flex-shrink:0}
+.tog input{opacity:0;width:0;height:0}
+.tsl{position:absolute;cursor:pointer;inset:0;background:var(--bd);border-radius:22px;transition:.2s}
+.tsl::before{content:'';position:absolute;height:16px;width:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.2s}
+.tog input:checked+.tsl{background:var(--gr);box-shadow:0 0 0 2px rgba(79,110,247,.15)}
+.tog input:checked+.tsl::before{transform:translateX(17px)}
+.avw{position:relative;width:88px;height:88px;margin:0 auto 13px;cursor:pointer}
+.avb{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:28px;color:#fff;overflow:hidden}
+.avb img{width:100%;height:100%;object-fit:cover}
+.avb.tg{background:#4F6EF7}.avb.sg{background:#4F6EF7}
+.avo{position:absolute;inset:0;background:rgba(0,0,0,.45);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;font-size:19px}
+.avw:hover .avo{opacity:1}
+.atab-row{display:flex;gap:3px;background:var(--sf2);border-radius:10px;padding:4px;width:fit-content;margin-bottom:22px;flex-wrap:wrap;border:0.5px solid var(--bd)}
+.atab{padding:7px 16px;border:none;border-radius:6px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:var(--mu);transition:all .15s}
+.atab.active{background:var(--sf);color:var(--gr);box-shadow:var(--sh);border:0.5px solid var(--bd)}
+.apanel{display:none}.apanel.active{display:block;animation:fi .2s ease}
+.csw{width:25px;height:25px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .15s;flex-shrink:0}
+.csw.sel{border-color:var(--tx)!important;transform:scale(1.15)}
+.csws{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px}
+.egr{display:grid;grid-template-columns:repeat(9,1fr);gap:5px;margin-top:6px}
+.eop{width:32px;height:32px;border-radius:7px;border:2px solid transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;background:var(--bg);transition:all .15s}
+.eop:hover{background:var(--sf2)}.eop.sel{border-color:var(--gr);background:var(--grl)}
+.csco{background:#0F1117;border:1px solid #2a2d3a;border-radius:8px;padding:10px 13px;font-family:'DM Mono',monospace;font-size:11px;max-height:108px;overflow-y:auto;color:#00D9A3;white-space:pre;line-height:1.6}
+.mprev{padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);display:flex;align-items:center;gap:9px;margin-top:3px}
+@media(max-width:768px){nav{display:none}main{padding:14px}.sr{grid-template-columns:1fr 1fr}.fr{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="ls">
+  <div class="lc">
+    <div class="ll" style="align-items:center">
+  <svg width="28" height="32" viewBox="0 0 34 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17 2L4 7.5V19.5C4 27 17 36 17 36C17 36 30 27 30 19.5V7.5L17 2Z" fill="#4F6EF7" opacity="0.15" stroke="#4F6EF7" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M11.5 19L15.5 23L22.5 15" stroke="#4F6EF7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span class="wm" style="font-family:Inter,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em;color:#1C1E26">TestGuard<span style="color:#4F6EF7">AI</span></span>
+  <span class="tg" style="font-size:10px;margin-left:2px">v2.1</span>
+</div>
+    <h1 class="lh">Bienvenue</h1>
+    <p class="ls2">Sélectionnez votre profil pour accéder à la plateforme.</p>
+    <div class="pg">
+      <button class="pb pt" onclick="selP('teacher',this)"><div class="pi">🎓</div><span class="pl">Professeur</span><span class="pd">Gérez cours et évaluations</span></button>
+      <button class="pb ps" onclick="selP('student',this)"><div class="pi">📚</div><span class="pl">Étudiant</span><span class="pd">Consultez vos évaluations</span></button>
+    </div>
+    <div class="fg"><label>Email</label><input type="text" id="linput" value="marie.dupont@testguard.ai"></div>
+    <div class="fg"><label>Mot de passe</label><input type="password" id="pinput" value="password"></div>
+    <button class="bln" id="lbtn" onclick="doLogin()">Se connecter</button>
+    <div id="lerr" style="color:#EF4444;font-size:12px;margin-top:8px;min-height:16px;text-align:center"></div>
+    <div style="margin-top:12px;font-size:11px;color:var(--mu);text-align:center">Demo · mot de passe : <code>password</code></div>
+  </div>
+</div>
+
+<div id="app">
+  <header>
+    <div class="hl"><div style="display:flex;align-items:center;gap:9px">
+  <svg width="24" height="27" viewBox="0 0 34 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17 2L4 7.5V19.5C4 27 17 36 17 36C17 36 30 27 30 19.5V7.5L17 2Z" fill="#4F6EF7" opacity="0.25" stroke="#4F6EF7" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M11.5 19L15.5 23L22.5 15" stroke="#00D9A3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <div class="logo" style="color:#F1F1F3">TestGuard<span style="color:#4F6EF7">AI</span></div>
+</div><span class="rb" id="hbadge"></span></div>
+    <div class="hr2">
+      <div class="ui"><div class="un" id="hname"></div><div class="ur" id="hrole"></div></div>
+      <div class="av" id="hav"></div>
+      <button class="bo" onclick="logout()">Déconnexion</button>
+    </div>
+  </header>
+  <div class="lay">
+    <nav id="nav-t" style="display:none">
+      <div class="ns" style="margin-bottom:13px">Enseignement</div>
+      <button class="ni at" onclick="go('t-upload',this)"><span class="nico">⬆️</span>Déposer un cours</button>
+      <button class="ni" onclick="go('t-sub',this)"><span class="nico">📋</span>Copies rendues</button>
+      <button class="ni" onclick="go('t-res',this)"><span class="nico">📊</span>Résultats finaux</button>
+      <div class="ns" style="margin-top:18px;margin-bottom:5px">Paramètres</div>
+      <button class="ni" onclick="go('t-account',this)"><span class="nico">⚙️</span>Mon compte</button>
+    </nav>
+    <nav id="nav-s" style="display:none">
+      <div class="ns" style="margin-bottom:13px">Mon espace</div>
+      <button class="ni as" onclick="go('s-evals',this)"><span class="nico">📝</span>Mes évaluations</button>
+      <button class="ni" onclick="go('s-results',this)"><span class="nico">🏆</span>Mes résultats</button>
+      <button class="ni" onclick="go('s-courses',this)"><span class="nico">📖</span>Mes cours</button>
+      <div class="ns" style="margin-top:18px;margin-bottom:5px">Paramètres</div>
+      <button class="ni" onclick="go('s-account',this)"><span class="nico">⚙️</span>Mon compte</button>
+    </nav>
+    <main>
+
+      <!-- PROF: UPLOAD -->
+      <div class="pg2 active" id="page-t-upload">
+        <div class="ph"><h1 class="pt">Déposer un cours</h1><p class="ps">Importez vos supports pour générer automatiquement une évaluation.</p></div>
+        <div class="card">
+          <div class="ct">Nouveau cours</div><div class="cs">PDF, Word, PowerPoint — 50 Mo max</div>
+          <div class="upz" onclick="document.getElementById('fi').click()" ondragover="event.preventDefault();this.classList.add('dv')" ondragleave="this.classList.remove('dv')" ondrop="dropF(event)">
+            <div class="upi2">📄</div><div class="upt">Glissez vos fichiers ou cliquez</div><div class="uph">PDF, DOCX, PPTX · Max 50 Mo</div>
+            <input type="file" id="fi" class="upin" multiple accept=".pdf,.docx,.pptx" onchange="showFiles(this)">
+          </div>
+          <div id="flist" style="margin-top:13px"></div>
+          <div class="fr" style="margin-top:16px">
+            <div class="fg" style="margin:0"><label>Matière</label><select><option>Mathématiques</option><option>Sciences</option><option>Histoire-Géographie</option></select></div>
+            <div class="fg" style="margin:0"><label>Classe cible</label><select><option>Terminale A</option><option>Terminale B</option><option>Première A</option></select></div>
+          </div>
+          <div style="margin-top:16px;display:flex;gap:9px"><button class="btn bp" onclick="genEval()">✨ Générer une évaluation</button><button class="btn bs">💾 Sauvegarder</button></div>
+        </div>
+        <div class="card">
+          <div class="ct">Cours récents</div><div class="cs" style="margin-bottom:0">3 cours disponibles</div>
+          <div style="margin-top:13px">
+            <div class="ci"><div class="cico g">📐</div><div class="cinf"><div class="cn">Intégrales et primitives — Chap. 4</div><div class="cm">Mathématiques · Terminale A · 24 mars 2026</div></div><span class="badge bg">Éval. générée</span></div>
+            <div class="ci"><div class="cico b">🧬</div><div class="cinf"><div class="cn">La mitose et la méiose</div><div class="cm">Sciences · Terminale B · 20 mars 2026</div></div><span class="badge bg">Éval. générée</span></div>
+            <div class="ci"><div class="cico o">🗺️</div><div class="cinf"><div class="cn">La mondialisation — Introduction</div><div class="cm">Histoire-Géo · Première A · 15 mars 2026</div></div><span class="badge by">En cours…</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROF: COPIES -->
+      <div class="pg2" id="page-t-sub">
+        <div class="ph"><h1 class="pt">Copies rendues</h1><p class="ps">Consultez, notez et analysez les réponses de vos élèves.</p></div>
+        <div class="sr">
+          <div class="sc"><div class="sl">Copies reçues</div><div class="sv">24</div><div class="sd">sur 28 élèves</div></div>
+          <div class="sc"><div class="sl">Notées</div><div class="sv">17</div><div class="sd">71% du total</div></div>
+          <div class="sc"><div class="sl">IA détectée</div><div class="sv">5</div><div class="sd">copies suspectes</div></div>
+          <div class="sc"><div class="sl">Moy. de classe</div><div class="sv">13.4</div><div class="sd">/ 20 pts</div></div>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden">
+          <div style="padding:13px 17px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between"><div class="ct" style="margin:0">Intégrales — Terminale A</div><select style="width:auto;padding:5px 9px;font-size:12px"><option>Intégrales — Chap. 4</option><option>La mitose</option></select></div>
+          <div class="tw" style="border:none;border-radius:0"><table><thead><tr><th>Élève</th><th>Rendu le</th><th>Statut</th><th>Note</th><th>IA Score</th><th>Actions</th></tr></thead><tbody id="subtable"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- PROF: RÉSULTATS -->
+      <div class="pg2" id="page-t-res">
+        <div class="ph"><h1 class="pt">Résultats finaux</h1><p class="ps">Vue consolidée des performances de vos classes.</p></div>
+        <div class="sr">
+          <div class="sc"><div class="sl">Élèves suivis</div><div class="sv">56</div></div>
+          <div class="sc"><div class="sl">Moyenne générale</div><div class="sv">13.8</div><div class="sd">/ 20</div></div>
+          <div class="sc"><div class="sl">Taux de réussite</div><div class="sv">78%</div><div class="sd">note ≥ 10</div></div>
+          <div class="sc"><div class="sl">Évals complètes</div><div class="sv">3</div></div>
+        </div>
+        <div class="card"><div class="ct">Par matière</div>
+          <div style="margin-top:16px;display:flex;flex-direction:column;gap:13px">
+            <div><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:13px;font-weight:500">Mathématiques</span><span style="font-size:13px;font-weight:600;font-family:'DM Mono',monospace">14.2 / 20</span></div><div class="pbw"><div class="pb g" style="width:71%"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:13px;font-weight:500">Sciences</span><span style="font-size:13px;font-weight:600;font-family:'DM Mono',monospace">12.8 / 20</span></div><div class="pbw"><div class="pb b" style="width:64%"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:13px;font-weight:500">Histoire-Géographie</span><span style="font-size:13px;font-weight:600;font-family:'DM Mono',monospace">13.5 / 20</span></div><div class="pbw"><div class="pb o" style="width:67.5%"></div></div></div>
+          </div>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden"><div style="padding:13px 17px;border-bottom:1px solid var(--bd)"><div class="ct" style="margin:0">Récapitulatif par élève</div></div>
+          <div class="tw" style="border:none;border-radius:0"><table><thead><tr><th>Élève</th><th>Classe</th><th>Maths</th><th>Sciences</th><th>Hist-Géo</th><th>Moy.</th><th>Statut</th></tr></thead><tbody>
+            <tr><td><strong>Chloé Martin</strong></td><td>Terminale A</td><td>16</td><td>15</td><td>14</td><td><strong>15.0</strong></td><td><span class="badge bg">Excellent</span></td></tr>
+            <tr><td><strong>Hugo Bernard</strong></td><td>Terminale A</td><td>12</td><td>11</td><td>13</td><td><strong>12.0</strong></td><td><span class="badge bb">Bien</span></td></tr>
+            <tr><td><strong>Emma Lefebvre</strong></td><td>Terminale B</td><td>9</td><td>10</td><td>8</td><td><strong>9.0</strong></td><td><span class="badge bor">À soutenir</span></td></tr>
+            <tr><td><strong>Lucas Moreau</strong></td><td>Terminale B</td><td>18</td><td>17</td><td>16</td><td><strong>17.0</strong></td><td><span class="badge bg">Excellent</span></td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <!-- PROF: COMPTE -->
+      <div class="pg2" id="page-t-account">
+        <div class="ph"><h1 class="pt">Mon compte</h1><p class="ps">Gérez votre profil, matières, classes et élèves.</p></div>
+        <div class="atab-row" id="ttabs">
+          <button class="atab active" onclick="stab('t','profil',this)">👤 Profil</button>
+          <button class="atab" onclick="stab('t','mat',this)">📚 Matières & Classes</button>
+          <button class="atab" onclick="stab('t','eleves',this)">👥 Élèves</button>
+          <button class="atab" onclick="stab('t','secu',this)">🔒 Sécurité</button>
+        </div>
+
+        <div class="apanel active" id="tp-profil">
+          <div style="display:grid;grid-template-columns:185px 1fr;gap:18px;align-items:start">
+            <div class="card" style="text-align:center;padding:22px 16px">
+              <div class="avw" onclick="document.getElementById('avt').click()">
+                <div class="avb tg" id="avbt">MD</div><div class="avo">📷</div>
+              </div>
+              <input type="file" id="avt" class="upin" accept="image/*" onchange="changeAv(this,'t')">
+              <div style="font-size:13px;font-weight:600;margin-bottom:3px" id="tDN">Marie Dupont</div>
+              <div style="font-size:11px;color:var(--mu);margin-bottom:13px">Professeur · Mathématiques</div>
+              <button class="btn bs bsm" style="width:100%" onclick="document.getElementById('avt').click()">📷 Changer la photo</button>
+              <div style="margin-top:6px;font-size:11px;color:var(--mu)">JPG, PNG · Max 5 Mo</div>
+            </div>
+            <div class="card">
+              <div class="ct" style="margin-bottom:16px">Informations personnelles</div>
+              <div class="fr"><div class="fg" style="margin:0"><label>Prénom</label><input type="text" id="tPre" value="Marie"></div><div class="fg" style="margin:0"><label>Nom</label><input type="text" id="tNo" value="Dupont"></div></div>
+              <div class="fg" style="margin-top:13px"><label>E-mail</label><input type="email" value="marie.dupont@lycee-victor-hugo.fr"></div>
+              <div class="fr" style="margin-top:13px"><div class="fg" style="margin:0"><label>Établissement</label><input type="text" value="Lycée Victor Hugo"></div><div class="fg" style="margin:0"><label>Téléphone</label><input type="tel" placeholder="+33 6 00 00 00 00"></div></div>
+              <div class="fg" style="margin-top:13px"><label>Biographie</label><textarea style="min-height:70px">Professeure de mathématiques depuis 12 ans.</textarea></div>
+              <div style="margin-top:16px;display:flex;gap:9px"><button class="btn bp" onclick="savTP()">💾 Sauvegarder</button><button class="btn bs" onclick="toast('Modifications annulées')">Annuler</button></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="apanel" id="tp-mat">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px"><div class="ct" style="margin:0">Matières enseignées</div><button class="btn bp bsm" onclick="openM('m-add-mat')">+ Ajouter</button></div>
+              <div id="matList"></div>
+            </div>
+            <div class="card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px"><div class="ct" style="margin:0">Classes assignées</div><button class="btn bp bsm" onclick="openM('m-add-cls')">+ Ajouter</button></div>
+              <div id="clsList"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ct" style="margin-bottom:16px">Paramètres d'évaluation par défaut</div>
+            <div class="fr"><div class="fg" style="margin:0"><label>Barème</label><select><option>Sur 20 points</option><option>Sur 100 points</option><option>Lettre A–F</option></select></div><div class="fg" style="margin:0"><label>Délai de rendu</label><select><option>7 jours</option><option>14 jours</option><option>21 jours</option><option>1 mois</option></select></div></div>
+            <div style="margin-top:14px"><button class="btn bp" onclick="toast('✅ Paramètres sauvegardés')">💾 Sauvegarder</button></div>
+          </div>
+        </div>
+
+        <div class="apanel" id="tp-eleves">
+          <div class="card" style="padding:0;overflow:hidden">
+            <div style="padding:13px 17px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px">
+              <div><div class="ct" style="margin:0">Liste des élèves</div><div style="font-size:11px;color:var(--mu);margin-top:2px" id="eleveCount"></div></div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+                <input type="text" id="srchE" placeholder="🔍 Rechercher…" oninput="renderEleves()" style="padding:5px 10px;width:165px;font-size:12px">
+                <select id="filtC" onchange="renderEleves()" style="width:auto;padding:5px 9px;font-size:12px"><option value="">Toutes les classes</option><option>Terminale A</option><option>Terminale B</option><option>Première A</option></select>
+                <button class="btn bp bsm" onclick="openM('m-add-eleve')">+ Ajouter</button>
+                <button class="btn bs bsm" onclick="openM('m-csv')">⬆ Importer CSV</button>
+                <button class="btn bs bsm" onclick="exportCSV()">⬇ Exporter</button>
+              </div>
+            </div>
+            <div class="tw" style="border:none;border-radius:0;max-height:440px;overflow-y:auto">
+              <table><thead><tr><th>Nom</th><th>E-mail</th><th>Classe</th><th>Évals</th><th>Moy.</th><th>Actions</th></tr></thead><tbody id="eleveTable"></tbody></table>
+            </div>
+          </div>
+        </div>
+
+        <div class="apanel" id="tp-secu">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="card">
+              <div class="ct" style="margin-bottom:16px">Changer le mot de passe</div>
+              <div class="fg"><label>Actuel</label><input type="password" placeholder="••••••••"></div>
+              <div class="fg"><label>Nouveau</label><input type="password" placeholder="••••••••"></div>
+              <div class="fg"><label>Confirmer</label><input type="password" placeholder="••••••••"></div>
+              <button class="btn bp" onclick="toast('✅ Mot de passe mis à jour')">🔒 Mettre à jour</button>
+            </div>
+            <div class="card">
+              <div class="ct" style="margin-bottom:16px">Notifications</div>
+              <div style="display:flex;flex-direction:column;gap:13px">
+                <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:500">Nouveau devoir rendu</div><div style="font-size:11px;color:var(--mu)">Alerte à chaque soumission</div></div><label class="tog"><input type="checkbox" checked onchange="toast('Préférence mise à jour')"><span class="tsl"></span></label></div>
+                <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:500">Résumé hebdomadaire</div><div style="font-size:11px;color:var(--mu)">Récap chaque lundi</div></div><label class="tog"><input type="checkbox" checked onchange="toast('Préférence mise à jour')"><span class="tsl"></span></label></div>
+                <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:500">Alerte détection IA</div><div style="font-size:11px;color:var(--mu)">Si score IA > 50%</div></div><label class="tog"><input type="checkbox" onchange="toast('Préférence mise à jour')"><span class="tsl"></span></label></div>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="border-color:#FECACA;background:#FFFAFA"><div class="ct" style="color:var(--or);margin-bottom:9px">⚠️ Zone de danger</div><div style="font-size:12px;color:var(--mu);margin-bottom:13px">Ces actions sont irréversibles.</div><div style="display:flex;gap:9px"><button class="btn bo2" onclick="toast('Export en préparation…')">📤 Exporter mes données</button><button class="btn bd2" onclick="toast('Contactez l\'administrateur')">🗑 Supprimer le compte</button></div></div>
+        </div>
+      </div>
+
+      <!-- ÉLÈVE: ÉVALS -->
+      <div class="pg2" id="page-s-evals">
+        <div class="ph"><h1 class="pt">Mes évaluations</h1><p class="ps">Répondez aux évaluations générées par vos professeurs.</p></div>
+        <div style="margin-bottom:6px;font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.07em;font-family:'DM Mono',monospace">À rendre</div>
+        <div class="ec"><div class="eh"><div style="font-size:21px">📐</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Intégrales — Chapitre 4</div><div style="font-size:12px;color:var(--mu)">Mathématiques · Prof. Dupont</div></div><span class="badge bor">⏳ En attente</span></div><div class="eb"><div style="font-size:12px;color:var(--mu);margin-bottom:9px">Date limite : <strong style="color:var(--or)">31 mars 2026</strong> · 8 questions</div><button class="btn bp s" onclick="openM('m-eval')">✏️ Commencer</button></div></div>
+        <div class="ec"><div class="eh"><div style="font-size:21px">🧬</div><div style="flex:1"><div style="font-size:13px;font-weight:600">La mitose et la méiose</div><div style="font-size:12px;color:var(--mu)">Sciences · Prof. Lambert</div></div><span class="badge bor">⏳ En attente</span></div><div class="eb"><div style="font-size:12px;color:var(--mu);margin-bottom:9px">Date limite : <strong style="color:var(--or)">5 avril 2026</strong> · 10 questions</div><button class="btn bp s" onclick="openM('m-eval')">✏️ Commencer</button></div></div>
+        <div style="margin-top:18px;margin-bottom:6px;font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.07em;font-family:'DM Mono',monospace">Rendus</div>
+        <div class="ec"><div class="eh"><div style="font-size:21px">🗺️</div><div style="flex:1"><div style="font-size:13px;font-weight:600">La mondialisation — Introduction</div><div style="font-size:12px;color:var(--mu)">Histoire-Géo · Prof. Renard</div></div><span class="badge bg">✓ Rendu</span></div><div class="eb"><div style="font-size:12px;color:var(--mu)">Rendu le 22 mars 2026 · En attente de correction</div></div></div>
+      </div>
+
+      <!-- ÉLÈVE: RÉSULTATS -->
+      <div class="pg2" id="page-s-results">
+        <div class="ph"><h1 class="pt">Mes résultats</h1><p class="ps">Retrouvez vos notes et retours de professeurs.</p></div>
+        <div class="sr">
+          <div class="sc"><div class="sl">Moyenne générale</div><div class="sv">13.4</div><div class="sd">/ 20</div></div>
+          <div class="sc"><div class="sl">Évals complètes</div><div class="sv">3</div></div>
+          <div class="sc"><div class="sl">Meilleure note</div><div class="sv">16</div><div class="sd">Mathématiques</div></div>
+        </div>
+        <div class="card"><div class="ct">Détail par évaluation</div>
+          <div style="margin-top:13px;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:center;gap:13px;padding:13px;border:1px solid var(--bd);border-radius:var(--r)"><div class="gc"><div class="gn">16</div><div class="gd">/ 20</div></div><div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">Fonctions dérivées — Chap. 3</div><div style="font-size:12px;color:var(--mu);margin-bottom:5px">Mathématiques · 10 mars 2026</div><div style="font-size:12px;color:var(--mu);font-style:italic">"Très bon travail, maîtrise des concepts bien visible."</div></div><span class="badge bg">Excellent</span></div>
+            <div style="display:flex;align-items:center;gap:13px;padding:13px;border:1px solid var(--bd);border-radius:var(--r)"><div class="gc" style="background:var(--bll);border-color:var(--bl)"><div class="gn" style="color:var(--bl)">13</div><div class="gd" style="color:var(--bl)">/ 20</div></div><div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">La photosynthèse</div><div style="font-size:12px;color:var(--mu);margin-bottom:5px">Sciences · 5 mars 2026</div><div style="font-size:12px;color:var(--mu);font-style:italic">"Bonne compréhension globale, quelques imprécisions."</div></div><span class="badge bb">Bien</span></div>
+            <div style="display:flex;align-items:center;gap:13px;padding:13px;border:1px solid var(--bd);border-radius:var(--r);opacity:.65"><div class="gc" style="background:var(--sf2);border-color:var(--bd)"><div class="gn" style="color:var(--mu)">—</div></div><div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">La mondialisation</div><div style="font-size:12px;color:var(--mu)">Histoire-Géo · rendu 22 mars 2026</div></div><span class="badge bgr">En correction</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ÉLÈVE: COURS -->
+      <div class="pg2" id="page-s-courses">
+        <div class="ph"><h1 class="pt">Mes cours</h1><p class="ps">Accédez aux supports déposés par vos professeurs.</p></div>
+        <div class="ci"><div class="cico g">📐</div><div class="cinf"><div class="cn">Intégrales et primitives — Chap. 4</div><div class="cm">Mathématiques · Prof. Dupont · PDF · 2.4 Mo</div></div><button class="btn bs bsm">⬇ Télécharger</button></div>
+        <div class="ci"><div class="cico b">🧬</div><div class="cinf"><div class="cn">La mitose et la méiose</div><div class="cm">Sciences · Prof. Lambert · PPTX · 5.1 Mo</div></div><button class="btn bs bsm">⬇ Télécharger</button></div>
+        <div class="ci"><div class="cico o">🗺️</div><div class="cinf"><div class="cn">La mondialisation — Introduction</div><div class="cm">Histoire-Géo · Prof. Renard · PDF · 1.8 Mo</div></div><button class="btn bs bsm">⬇ Télécharger</button></div>
+      </div>
+
+      <!-- ÉLÈVE: COMPTE -->
+      <div class="pg2" id="page-s-account">
+        <div class="ph"><h1 class="pt">Mon compte</h1><p class="ps">Gérez vos informations personnelles et vos préférences.</p></div>
+        <div class="atab-row" id="stabs">
+          <button class="atab active" onclick="stab('s','profil',this)">👤 Profil</button>
+          <button class="atab" onclick="stab('s','scol',this)">🎓 Scolarité</button>
+          <button class="atab" onclick="stab('s','secu',this)">🔒 Sécurité</button>
+        </div>
+
+        <div class="apanel active" id="sp-profil">
+          <div style="display:grid;grid-template-columns:185px 1fr;gap:18px;align-items:start">
+            <div class="card" style="text-align:center;padding:22px 16px">
+              <div class="avw" onclick="document.getElementById('avs').click()">
+                <div class="avb sg" id="avbs">LM</div><div class="avo">📷</div>
+              </div>
+              <input type="file" id="avs" class="upin" accept="image/*" onchange="changeAv(this,'s')">
+              <div style="font-size:13px;font-weight:600;margin-bottom:3px" id="sDN">Lucas Moreau</div>
+              <div style="font-size:11px;color:var(--mu);margin-bottom:13px">Étudiant · Terminale A</div>
+              <button class="btn bs bsm" style="width:100%" onclick="document.getElementById('avs').click()">📷 Changer la photo</button>
+              <div style="margin-top:6px;font-size:11px;color:var(--mu)">JPG, PNG · Max 5 Mo</div>
+            </div>
+            <div class="card">
+              <div class="ct" style="margin-bottom:16px">Informations personnelles</div>
+              <div class="fr"><div class="fg" style="margin:0"><label>Prénom</label><input type="text" id="sPre" value="Lucas"></div><div class="fg" style="margin:0"><label>Nom</label><input type="text" id="sNo" value="Moreau"></div></div>
+              <div class="fg" style="margin-top:13px"><label>E-mail</label><input type="email" value="lucas.moreau@lycee.fr"></div>
+              <div class="fr" style="margin-top:13px"><div class="fg" style="margin:0"><label>Date de naissance</label><input type="text" value="12/05/2007" placeholder="JJ/MM/AAAA"></div><div class="fg" style="margin:0"><label>Téléphone</label><input type="tel" placeholder="+33 6 00 00 00 00"></div></div>
+              <div style="margin-top:16px;display:flex;gap:9px"><button class="btn bp s" onclick="savSP()">💾 Sauvegarder</button><button class="btn bs" onclick="toast('Modifications annulées')">Annuler</button></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="apanel" id="sp-scol">
+          <div class="card">
+            <div class="ct" style="margin-bottom:16px">Informations scolaires</div>
+            <div class="fr"><div class="fg" style="margin:0"><label>Établissement</label><input value="Lycée Victor Hugo" readonly style="background:var(--sf2);color:var(--mu);cursor:not-allowed"></div><div class="fg" style="margin:0"><label>Classe</label><input value="Terminale A" readonly style="background:var(--sf2);color:var(--mu);cursor:not-allowed"></div></div>
+            <div class="fr" style="margin-top:13px"><div class="fg" style="margin:0"><label>N° étudiant</label><input value="2026-TER-A-017" readonly style="background:var(--sf2);font-family:'DM Mono',monospace;font-size:12px;color:var(--mu);cursor:not-allowed"></div><div class="fg" style="margin:0"><label>Année scolaire</label><input value="2025 – 2026" readonly style="background:var(--sf2);color:var(--mu);cursor:not-allowed"></div></div>
+            <div style="margin-top:13px;padding:11px 13px;background:#EEF2FF;border:1px solid #c7d2fe;border-radius:8px;font-size:12px;color:#4338ca">ℹ️ Ces informations sont gérées par votre établissement. Contactez votre professeur référent pour toute modification.</div>
+          </div>
+          <div class="card">
+            <div class="ct" style="margin-bottom:14px">Mes professeurs</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg)"><div style="width:32px;height:32px;border-radius:50%;background:#4F6EF7;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">MD</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Marie Dupont</div><div style="font-size:11px;color:var(--mu)">Mathématiques</div></div><span class="badge bg">Référent</span></div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg)"><div style="width:32px;height:32px;border-radius:50%;background:#00D9A3;color:#065f46;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">PL</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Pierre Lambert</div><div style="font-size:11px;color:var(--mu)">Sciences</div></div></div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg)"><div style="width:32px;height:32px;border-radius:50%;background:#F59E0B;color:#78350f;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">CR</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Claire Renard</div><div style="font-size:11px;color:var(--mu)">Histoire-Géographie</div></div></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ct" style="margin-bottom:14px">Préférences</div>
+            <div style="display:flex;flex-direction:column;gap:13px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:500">Rappels d'échéance</div><div style="font-size:11px;color:var(--mu)">Notification avant la date limite</div></div><label class="tog"><input type="checkbox" checked onchange="toast('Préférence mise à jour')"><span class="tsl"></span></label></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:500">Afficher mes moyennes</div><div style="font-size:11px;color:var(--mu)">Visible sur le tableau de bord</div></div><label class="tog"><input type="checkbox" checked onchange="toast('Préférence mise à jour')"><span class="tsl"></span></label></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:500">E-mail à chaque nouvelle note</div><div style="font-size:11px;color:var(--mu)">Reçu dès qu'une copie est corrigée</div></div><label class="tog"><input type="checkbox" onchange="toast('Préférence mise à jour')"><span class="tsl"></span></label></div>
+            </div>
+            <div style="margin-top:14px"><button class="btn bp s" onclick="toast('✅ Préférences sauvegardées')">💾 Sauvegarder</button></div>
+          </div>
+        </div>
+
+        <div class="apanel" id="sp-secu">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="card">
+              <div class="ct" style="margin-bottom:16px">Changer le mot de passe</div>
+              <div class="fg"><label>Actuel</label><input type="password" placeholder="••••••••"></div>
+              <div class="fg"><label>Nouveau</label><input type="password" placeholder="••••••••"></div>
+              <div class="fg"><label>Confirmer</label><input type="password" placeholder="••••••••"></div>
+              <button class="btn bp s" onclick="toast('✅ Mot de passe mis à jour')">🔒 Mettre à jour</button>
+            </div>
+            <div class="card">
+              <div class="ct" style="margin-bottom:14px">Sessions actives</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="padding:10px 12px;border:1.5px solid #4F6EF7;border-radius:8px;background:#EEF2FF"><div style="font-size:12px;font-weight:600;color:#4F6EF7">Session actuelle</div><div style="font-size:11px;color:var(--mu);margin-top:2px">Chrome · Windows · Paris · il y a 2 min</div></div>
+                <div style="padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg)"><div style="font-size:12px;font-weight:600">Safari · iPhone</div><div style="font-size:11px;color:var(--mu);margin-top:2px">Paris · il y a 3 h</div></div>
+              </div>
+              <button class="btn bd2 bsm" style="margin-top:11px" onclick="toast('Autres sessions déconnectées')">🚫 Déconnecter les autres</button>
+            </div>
+          </div>
+          <div class="card" style="border-color:#FECACA;background:#FFFAFA"><div class="ct" style="color:var(--or);margin-bottom:9px">⚠️ Zone de danger</div><div style="font-size:12px;color:var(--mu);margin-bottom:12px">Ces actions sont irréversibles.</div><div style="display:flex;gap:9px"><button class="btn bo2" onclick="toast('Export en préparation…')">📤 Exporter mes données</button><button class="btn bd2" onclick="toast('Contactez votre établissement')">🗑 Supprimer le compte</button></div></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="mo" id="m-grade"><div class="modal">
+  <button class="mc" onclick="closeM('m-grade')">✕</button>
+  <div class="mt2">Noter le devoir</div><div class="ms2" id="mgname">Lucas Moreau — Intégrales Chap. 4</div>
+  <div style="background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:16px;font-size:12px;color:var(--mu);max-height:100px;overflow-y:auto;line-height:1.7"><strong style="color:var(--tx);display:block;margin-bottom:4px">Réponse :</strong>L'intégrale de f sur [a,b] représente l'aire algébrique. Pour ∫x² dx, on obtient x³/3 + C…</div>
+  <div class="fr"><div class="fg" style="margin:0"><label>Note (/ 20)</label><input type="number" min="0" max="20" step="0.5" value="15" id="gval" style="font-family:'DM Mono',monospace;font-size:16px;font-weight:600"></div><div class="fg" style="margin:0"><label>Appréciation</label><select><option>Excellent travail</option><option>Bien</option><option>Assez bien</option><option>Insuffisant</option></select></div></div>
+  <div class="fg" style="margin-top:13px"><label>Commentaire</label><textarea placeholder="Laissez un retour personnalisé…"></textarea></div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-grade')">Annuler</button><button class="btn bp" onclick="subGrade()">✔ Valider la note</button></div>
+</div></div>
+
+<div class="mo" id="m-eval"><div class="modal w">
+  <button class="mc" onclick="closeM('m-eval')">✕</button>
+  <div class="mt2">Évaluation</div><div class="ms2"></div>
+  <div id="evalBody"></div>
+  <div class="ma">
+    <button class="btn bs" onclick="closeM('m-eval')">Fermer</button>
+    <button class="btn bp s" onclick="submitExam()">✔ Rendre ma copie</button>
+  </div>
+  <div id="evalErr" style="color:#EF4444;font-size:12px;margin-top:8px;text-align:center"></div>
+</div></div>
+
+<div class="mo" id="m-copie"><div class="modal w">
+  <button class="mc" onclick="closeM('m-copie')">✕</button>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+    <div class="mt2" id="copie-title" style="margin-bottom:0"></div>
+    <div id="copie-ia"></div>
+  </div>
+  <div class="ms2" id="copie-meta"></div>
+  <div id="copie-body" style="max-height:55vh;overflow-y:auto;margin-bottom:16px"></div>
+  <div class="ma">
+    <button class="btn bs" onclick="closeM('m-copie')">Fermer</button>
+    <button class="btn bp" onclick="openCopieGrade()">📝 Noter cette copie</button>
+  </div>
+</div></div>
+
+<div class="mo" id="m-add-mat"><div class="modal">
+  <button class="mc" onclick="closeM('m-add-mat')">✕</button>
+  <div class="mt2">Ajouter une matière</div><div class="ms2">Configurez le nom, l'icône et la couleur.</div>
+  <div class="fg"><label>Nom de la matière</label><input type="text" id="matN" placeholder="ex. Philosophie" oninput="pMat()"></div>
+  <div class="fr"><div class="fg" style="margin:0"><label>Coefficient</label><input type="number" id="matC" value="4" min="1" max="20" oninput="pMat()"></div><div class="fg" style="margin:0"><label>Type</label><select id="matT" onchange="pMat()"><option value="principal">Principal</option><option value="secondaire">Secondaire</option><option value="option">Option</option></select></div></div>
+  <div class="fg" style="margin-top:13px"><label>Emoji</label><div class="egr" id="egr"></div></div>
+  <div class="fg"><label>Couleur</label>
+    <div class="csws" id="csws">
+      <div class="csw sel" style="background:#2D5A3D" data-c="#2D5A3D" onclick="pickC(this)"></div>
+      <div class="csw" style="background:#2B4A7A" data-c="#2B4A7A" onclick="pickC(this)"></div>
+      <div class="csw" style="background:#C4622D" data-c="#C4622D" onclick="pickC(this)"></div>
+      <div class="csw" style="background:#7C3AED" data-c="#7C3AED" onclick="pickC(this)"></div>
+      <div class="csw" style="background:#DC2626" data-c="#DC2626" onclick="pickC(this)"></div>
+      <div class="csw" style="background:#0891B2" data-c="#0891B2" onclick="pickC(this)"></div>
+      <div class="csw" style="background:#D97706" data-c="#D97706" onclick="pickC(this)"></div>
+      <div class="csw" style="background:#059669" data-c="#059669" onclick="pickC(this)"></div>
+    </div>
+  </div>
+  <div class="mprev" id="mprev">
+    <div id="mpico" style="width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;background:#2D5A3D22">📐</div>
+    <div><div style="font-size:13px;font-weight:600" id="mpnom">Nom de la matière</div><div style="font-size:11px;color:var(--mu)" id="mpdet">Coef. 4 · Principal</div></div>
+  </div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-add-mat')">Annuler</button><button class="btn bp" onclick="savMat()">✔ Ajouter</button></div>
+</div></div>
+
+<div class="mo" id="m-edit-mat"><div class="modal">
+  <button class="mc" onclick="closeM('m-edit-mat')">✕</button>
+  <div class="mt2">Modifier la matière</div><div class="ms2" id="emSub"></div>
+  <div class="fg"><label>Nom</label><input type="text" id="emN"></div>
+  <div class="fr"><div class="fg" style="margin:0"><label>Coefficient</label><input type="number" id="emC" min="1" max="20"></div><div class="fg" style="margin:0"><label>Type</label><select id="emT"><option value="principal">Principal</option><option value="secondaire">Secondaire</option><option value="option">Option</option></select></div></div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-edit-mat')">Annuler</button><button class="btn bp" onclick="updMat()">💾 Sauvegarder</button></div>
+</div></div>
+
+<div class="mo" id="m-add-cls"><div class="modal">
+  <button class="mc" onclick="closeM('m-add-cls')">✕</button>
+  <div class="mt2">Ajouter une classe</div><div class="ms2">Configurez le nom, le niveau et la matière.</div>
+  <div class="fr"><div class="fg" style="margin:0"><label>Nom de la classe</label><input type="text" id="clN" placeholder="ex. Terminale C"></div><div class="fg" style="margin:0"><label>Niveau</label><select id="clNv"><option>Terminale</option><option>Première</option><option>Seconde</option><option>BTS 1</option><option>BTS 2</option></select></div></div>
+  <div class="fr" style="margin-top:13px"><div class="fg" style="margin:0"><label>Matière principale</label><select id="clMt"><option>Mathématiques</option><option>Sciences</option><option>Histoire-Géographie</option></select></div><div class="fg" style="margin:0"><label>Effectif estimé</label><input type="number" id="clEf" value="28" min="1" max="60"></div></div>
+  <div class="fg" style="margin-top:13px"><label>Salle (optionnel)</label><input type="text" id="clSl" placeholder="ex. B204"></div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-add-cls')">Annuler</button><button class="btn bp" onclick="savCls()">✔ Ajouter</button></div>
+</div></div>
+
+<div class="mo" id="m-edit-cls"><div class="modal">
+  <button class="mc" onclick="closeM('m-edit-cls')">✕</button>
+  <div class="mt2">Modifier la classe</div><div class="ms2" id="ecSub"></div>
+  <div class="fr"><div class="fg" style="margin:0"><label>Nom</label><input type="text" id="ecN"></div><div class="fg" style="margin:0"><label>Effectif</label><input type="number" id="ecE" min="1" max="60"></div></div>
+  <div class="fg" style="margin-top:13px"><label>Salle</label><input type="text" id="ecS"></div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-edit-cls')">Annuler</button><button class="btn bp" onclick="updCls()">💾 Sauvegarder</button></div>
+</div></div>
+
+<div class="mo" id="m-add-eleve"><div class="modal">
+  <button class="mc" onclick="closeM('m-add-eleve')">✕</button>
+  <div class="mt2">Ajouter un élève</div><div class="ms2">L'élève recevra un e-mail d'invitation.</div>
+  <div class="fr"><div class="fg" style="margin:0"><label>Prénom</label><input type="text" id="eP" placeholder="ex. Thomas"></div><div class="fg" style="margin:0"><label>Nom</label><input type="text" id="eN" placeholder="ex. Leclerc"></div></div>
+  <div class="fg" style="margin-top:13px"><label>E-mail</label><input type="email" id="eE" placeholder="thomas.leclerc@lycee.fr"></div>
+  <div class="fg" style="margin-top:13px"><label>Classe</label><select id="eC"><option>Terminale A</option><option>Terminale B</option><option>Première A</option></select></div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-add-eleve')">Annuler</button><button class="btn bp" onclick="addE()">✔ Ajouter</button></div>
+</div></div>
+
+<div class="mo" id="m-csv"><div class="modal w">
+  <button class="mc" onclick="closeM('m-csv')">✕</button>
+  <div class="mt2">Importer des élèves via CSV</div><div class="ms2">Ajoutez plusieurs élèves en important un fichier .csv.</div>
+  <div style="background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><div style="font-size:13px;font-weight:600">Format : prenom, nom, email, classe</div><button class="btn bs bsm" onclick="dlTpl()">⬇ Modèle CSV</button></div>
+    <div class="csco">prenom,nom,email,classe
+Thomas,Leclerc,thomas.leclerc@lycee.fr,Terminale A
+Sophie,Blanc,sophie.blanc@lycee.fr,Terminale B
+Maxime,Roy,maxime.roy@lycee.fr,Première A</div>
+  </div>
+  <div id="csvDrop" class="upz" style="padding:22px" onclick="document.getElementById('csvF').click()" ondragover="event.preventDefault();this.classList.add('dv')" ondragleave="this.classList.remove('dv')" ondrop="dropCSV(event)">
+    <div class="upi2">📊</div><div class="upt">Glissez votre fichier CSV</div><div class="uph">ou cliquez · UTF-8</div>
+    <input type="file" id="csvF" class="upin" accept=".csv,text/csv" onchange="parseCSV(this)">
+  </div>
+  <div id="csvPrev" style="display:none;margin-top:13px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px"><div style="font-size:13px;font-weight:600" id="csvTitle"></div><button class="btn bs bsm" onclick="clrCSV()">✕ Effacer</button></div>
+    <div class="tw" style="max-height:180px;overflow-y:auto"><table><thead><tr><th>#</th><th>Prénom</th><th>Nom</th><th>E-mail</th><th>Classe</th><th>Statut</th></tr></thead><tbody id="csvTb"></tbody></table></div>
+    <div class="fg" style="margin-top:13px"><label>Classe par défaut (si non précisée)</label><select id="csvDC"><option>Terminale A</option><option>Terminale B</option><option>Première A</option></select></div>
+  </div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-csv')">Annuler</button><button class="btn bp" id="csvBtn" onclick="impCSV()" style="display:none">⬆ Importer <span id="csvCnt"></span> élève(s)</button></div>
+</div></div>
+
+<div class="toast" id="toastEl"></div>
+
+<script>
+/* ── API ─────────────────────────────────────────────────────────────── */
+var API='http://localhost:8000', apiToken=null, apiMe=null;
+async function apiFetch(method,path,body){
+  var opts={method:method,headers:{'Content-Type':'application/json'}};
+  if(apiToken)opts.headers['Authorization']='Bearer '+apiToken;
+  if(body)opts.body=JSON.stringify(body);
+  var r=await fetch(API+path,opts);
+  if(!r.ok)throw await r.json();
+  return r.json();
+}
+/* ── STATE ───────────────────────────────────────────────────────────── */
+var role='teacher',selR='teacher',eMat=-1,eCls=-1,curEmo='📐',curClr='#2D5A3D',csvR=[];
+var EMOJIS=['📐','📏','🔬','🧬','🗺️','📜','📖','✍️','🎨','🎵','🏛️','⚗️','💡','🌍','🧮','🔭','🌱','🧪'];
+var TL={principal:'Principal',secondaire:'Secondaire',option:'Option'};
+var TB={principal:'bg',secondaire:'bb',option:'by'};
+var mats=[{n:'Mathématiques',e:'📐',c:6,t:'principal',cl:'#2D5A3D'},{n:'Informatique & IA',e:'💡',c:3,t:'secondaire',cl:'#2B4A7A'}];
+var clss=[{n:'Terminale A',nv:'Terminale',m:'Mathématiques',ef:28,s:'B101'},{n:'Terminale B',nv:'Terminale',m:'Mathématiques',ef:26,s:'B102'},{n:'Première A',nv:'Première',m:'Informatique & IA',ef:30,s:'C204'}];
+var eleves=[
+  {p:'Lucas',n:'Moreau',e:'lucas.moreau@lycee.fr',c:'Terminale A',ev:3,my:'17.0'},
+  {p:'Chloé',n:'Martin',e:'chloe.martin@lycee.fr',c:'Terminale A',ev:3,my:'16.0'},
+  {p:'Hugo',n:'Bernard',e:'hugo.bernard@lycee.fr',c:'Terminale A',ev:2,my:'12.0'},
+  {p:'Emma',n:'Lefebvre',e:'emma.lefebvre@lycee.fr',c:'Terminale B',ev:2,my:'9.0'},
+  {p:'Jade',n:'Dumont',e:'jade.dumont@lycee.fr',c:'Terminale B',ev:3,my:'14.0'},
+  {p:'Tom',n:'Girard',e:'tom.girard@lycee.fr',c:'Terminale B',ev:1,my:'—'},
+  {p:'Léa',n:'Rousseau',e:'lea.rousseau@lycee.fr',c:'Première A',ev:2,my:'11.5'},
+  {p:'Nathan',n:'Simon',e:'nathan.simon@lycee.fr',c:'Première A',ev:2,my:'13.0'},
+  {p:'Inès',n:'Laurent',e:'ines.laurent@lycee.fr',c:'Première A',ev:1,my:'15.0'},
+  {p:'Maxime',n:'Thomas',e:'maxime.thomas@lycee.fr',c:'Terminale A',ev:3,my:'10.5'}
+];
+var subs=[
+  {nm:'Lucas Moreau',dt:'28 mars',st:'notée',no:'17/20',ia:'2%',ib:'bg'},
+  {nm:'Chloé Martin',dt:'27 mars',st:'notée',no:'16/20',ia:'5%',ib:'bg'},
+  {nm:'Hugo Bernard',dt:'28 mars',st:'à noter',no:'—',ia:'—',ib:'bgr'},
+  {nm:'Emma Lefebvre',dt:'29 mars',st:'à noter',no:'—',ia:'72%',ib:'bor'},
+  {nm:'Jade Dumont',dt:'26 mars',st:'notée',no:'14/20',ia:'8%',ib:'bg'},
+  {nm:'Tom Girard',dt:'29 mars',st:'à noter',no:'—',ia:'—',ib:'bgr'},
+  {nm:'Léa Rousseau',dt:'27 mars',st:'à noter',no:'—',ia:'61%',ib:'bor'}
+];
+
+function selP(r,btn){
+  selR=r;
+  document.querySelectorAll('.pb').forEach(b=>b.classList.remove('pat','pas'));
+  btn.classList.add(r==='teacher'?'pat':'pas');
+  document.getElementById('lbtn').classList.toggle('sm',r==='student');
+  var emails={teacher:'marie.dupont@testguard.ai',student:'lucas.moreau@testguard.ai'};
+  document.getElementById('linput').value=emails[r];
+}
+async function doLogin(){
+  var btn=document.getElementById('lbtn'),err=document.getElementById('lerr');
+  err.textContent='';btn.textContent='Connexion…';btn.disabled=true;
+  try{
+    var form=new URLSearchParams({username:document.getElementById('linput').value,password:document.getElementById('pinput').value});
+    var r=await fetch(API+'/auth/login',{method:'POST',body:form});
+    if(!r.ok){var e=await r.json();throw e;}
+    var data=await r.json();
+    apiToken=data.access_token;apiMe={nom:data.nom,role:data.role,id:data.id};
+    role=data.role;
+    document.getElementById('ls').style.display='none';document.getElementById('app').style.display='block';
+    var T=role==='teacher';
+    document.getElementById('nav-t').style.display=T?'block':'none';
+    document.getElementById('nav-s').style.display=T?'none':'block';
+    document.getElementById('hbadge').textContent=T?'Professeur':'Étudiant';
+    document.getElementById('hbadge').className='rb '+(T?'t':'s');
+    document.getElementById('hname').textContent=apiMe.nom;
+    document.getElementById('hrole').textContent=T?'Enseignant':'Étudiant';
+    var initials=apiMe.nom.split(' ').map(function(w){return w[0]}).join('').slice(0,2);
+    var av=document.getElementById('hav');av.innerHTML=initials;av.className='av '+(T?'t':'s');
+    document.querySelectorAll('.pg2').forEach(p=>p.classList.remove('active'));
+    document.getElementById(T?'page-t-upload':'page-s-evals').classList.add('active');
+    if(T){renderSubs();renderMats();renderCls();renderEleves();}
+    else{loadStudentEvals();loadStudentResults();}
+    buildEmojis();
+  }catch(e){err.textContent=e.detail||'Identifiants incorrects.';}
+  finally{btn.textContent='Se connecter';btn.disabled=false;}
+}
+function logout(){apiToken=null;apiMe=null;document.getElementById('app').style.display='none';document.getElementById('ls').style.display='flex';document.querySelectorAll('.pb').forEach(b=>b.classList.remove('pat','pas'));selR='teacher';document.getElementById('lbtn').classList.remove('sm');document.getElementById('lerr').textContent=''}
+function go(id,btn){
+  document.querySelectorAll('.pg2').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll(role==='teacher'?'#nav-t .ni':'#nav-s .ni').forEach(b=>b.classList.remove('at','as'));
+  btn.classList.add(role==='teacher'?'at':'as');
+  if(id==='t-sub')renderSubs();
+  if(id==='s-evals')loadStudentEvals();
+  if(id==='s-results')loadStudentResults();
+}
+function stab(px,tab,btn){
+  var pid=px==='t'?'tp-':'sp-';
+  document.querySelectorAll('[id^="'+pid+'"]').forEach(p=>{if(p.classList.contains('apanel'))p.classList.remove('active')});
+  document.getElementById(pid+tab).classList.add('active');
+  document.querySelectorAll('#'+px+'tabs .atab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function openM(id){document.getElementById(id).classList.add('open')}
+function closeM(id){document.getElementById(id).classList.remove('open')}
+document.addEventListener('click',function(e){if(e.target.classList.contains('mo'))e.target.classList.remove('open')});
+
+function changeAv(input,w){
+  var f=input.files[0];if(!f)return;
+  if(f.size>5*1024*1024){toast('⚠️ Fichier trop lourd (max 5 Mo)');return}
+  var r=new FileReader();
+  r.onload=function(e){
+    var src=e.target.result;
+    document.getElementById('avb'+w).innerHTML='<img src="'+src+'">';
+    if((w==='t'&&role==='teacher')||(w==='s'&&role==='student')){
+      var av=document.getElementById('hav');
+      av.innerHTML='<img src="'+src+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';
+    }
+    toast('✅ Photo de profil mise à jour');
+  };r.readAsDataURL(f);
+}
+
+function showFiles(input){
+  document.getElementById('flist').innerHTML=Array.from(input.files).map(function(f){
+    return '<div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:var(--grl);border:1px solid var(--gr);border-radius:8px;margin-bottom:6px"><span>📄</span><span style="flex:1;font-size:12px;font-weight:500">'+f.name+'</span><span style="font-family:DM Mono,monospace;font-size:11px;color:var(--mu)">'+(f.size/1024/1024).toFixed(1)+' Mo</span><span class="badge bg">Prêt</span></div>';
+  }).join('');
+}
+function dropF(e){e.preventDefault();e.currentTarget.classList.remove('dv');showFiles({files:e.dataTransfer.files})}
+function genEval(){toast('✨ Génération en cours…');setTimeout(function(){toast('✅ Évaluation générée !')},2000)}
+
+/* ── TEACHER: COPIES (API) ───────────────────────────────────────────── */
+var currentSub=null;
+async function renderSubs(){
+  var tb=document.getElementById('subtable');
+  tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Chargement…</td></tr>';
+  try{
+    var subs=await apiFetch('GET','/soumissions');
+    if(!subs.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Aucune copie.</td></tr>';return;}
+    tb.innerHTML=subs.map(function(s){
+      var ia=s.ia&&s.ia.score_ia_global!=null?Math.round(s.ia.score_ia_global*100):null;
+      var ibCls=ia==null?'bgr':ia>60?'bor':ia>30?'by':'bg';
+      var noted=s.statut_global==='noté';
+      return '<tr>'
+        +'<td><strong>'+s.etudiant_nom+'</strong></td>'
+        +'<td style="font-family:DM Mono,monospace;font-size:12px">'+(s.date_depot?s.date_depot.slice(0,10):'—')+'</td>'
+        +'<td>'+(noted?'<span class="badge bg">✓ Notée</span>':'<span class="badge by">⏳ À noter</span>')+'</td>'
+        +'<td style="font-family:DM Mono,monospace;font-weight:600">'+(s.note_finale_humaine!=null?s.note_finale_humaine+'/20':'—')+'</td>'
+        +'<td>'+(ia!=null?'<span class="badge '+ibCls+'">'+ia+'%</span>':'<span style="color:var(--mu)">—</span>')+'</td>'
+        +'<td><div style="display:flex;gap:5px;flex-wrap:wrap">'
+        +'<button class="btn bs bsm" onclick="openCopie('+JSON.stringify(s).replace(/"/g,"'")+')" title="Consulter la copie">👁 Voir</button>'
+        +(s.st==='à noter'||!noted?'<button class="btn bs bsm" onclick="openGrade('+s.id+',\''+s.etudiant_nom+'\')">📝 Noter</button>':'')
+        +'<button class="btn bw bsm" onclick="runIA('+s.id+',this)">🤖 IA</button>'
+        +'</div></td>'
+        +'</tr>';
+    }).join('');
+    /* update stats */
+    var stats=await apiFetch('GET','/stats');
+    document.querySelectorAll('.sc .sv').forEach(function(el,i){
+      var vals=[stats.total,stats.total-stats.pending,stats.detected,stats.moyenne||'—'];
+      if(vals[i]!==undefined)el.textContent=vals[i];
+    });
+  }catch(e){tb.innerHTML='<tr><td colspan="6" style="color:#EF4444;padding:16px">Erreur de chargement.</td></tr>';}
+}
+async function runIA(sid,btn){
+  var orig=btn.innerHTML;btn.innerHTML='⏳';btn.disabled=true;
+  try{
+    var res=await apiFetch('POST','/soumissions/'+sid+'/analyser-ia');
+    toast('🤖 Score IA : '+Math.round(res.score_ia_global*100)+'%');
+    renderSubs();
+  }catch(e){toast('❌ Erreur IA');btn.innerHTML=orig;btn.disabled=false;}
+}
+
+/* ── MODAL CONSULTER COPIE ───────────────────────────────────────────── */
+async function openCopie(s){
+  currentSub=s;
+  var ia=s.ia&&s.ia.score_ia_global!=null?Math.round(s.ia.score_ia_global*100):null;
+  var ibCls=ia==null?'bgr':ia>60?'bor':ia>30?'by':'bg';
+  document.getElementById('copie-title').textContent=s.etudiant_nom;
+  document.getElementById('copie-meta').textContent=(s.date_depot?'Rendu le '+s.date_depot.slice(0,10):'')
+    +(s.note_finale_humaine!=null?' · Note : '+s.note_finale_humaine+'/20':'');
+  var iaBadge=ia!=null?'<span class="badge '+ibCls+'">🤖 IA '+ia+'%</span>':'';
+  document.getElementById('copie-ia').innerHTML=iaBadge;
+  var body=document.getElementById('copie-body');
+  body.innerHTML='<div style="color:var(--mu);font-size:12px">Chargement des réponses…</div>';
+  openM('m-copie');
+  try{
+    var reponses=await apiFetch('GET','/soumissions/'+s.id+'/reponses');
+    if(!reponses.length){body.innerHTML='<div style="color:var(--mu);font-size:13px;padding:8px">Aucune réponse enregistrée.</div>';return;}
+    body.innerHTML=reponses.map(function(r,i){
+      return '<div style="border:1px solid var(--bd);border-radius:8px;padding:13px;margin-bottom:10px;background:var(--bg)">'
+        +'<div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;font-family:DM Mono,monospace;margin-bottom:5px">Q'+r.numero_ordre+' — '+r.enonce+' <span style="opacity:.6">('+r.points_attribues+' pts)</span></div>'
+        +'<div style="font-size:13px;line-height:1.7;color:var(--tx)">'+(r.texte_etudiant||'<em style="color:var(--mu)">Pas de réponse</em>')+'</div>'
+        +'</div>';
+    }).join('');
+  }catch(e){body.innerHTML='<div style="color:#EF4444;font-size:13px">Erreur lors du chargement.</div>';}
+}
+function openCopieGrade(){closeM('m-copie');if(currentSub)openGrade(currentSub.id,currentSub.etudiant_nom);}
+
+/* ── NOTER ───────────────────────────────────────────────────────────── */
+var gradeSid=null;
+function openGrade(sid,nom){
+  gradeSid=sid;
+  document.getElementById('mgname').textContent=nom+' — Devoir';
+  document.getElementById('gval').value='';
+  openM('m-grade');
+}
+async function subGrade(){
+  var note=parseFloat(document.getElementById('gval').value);
+  if(isNaN(note)||note<0||note>20){toast('⚠️ Note invalide (0–20)');return;}
+  try{
+    await apiFetch('POST','/soumissions/'+gradeSid+'/noter',{note:note});
+    closeM('m-grade');toast('✔ Note '+note+'/20 enregistrée');renderSubs();
+  }catch(e){toast('❌ Erreur lors de la notation');}
+}
+
+/* ── STUDENT: ÉVALS (API) ────────────────────────────────────────────── */
+var examDevoirId=null,examQuestions=[];
+async function loadStudentEvals(){
+  var el=document.getElementById('page-s-evals');
+  try{
+    var devoirs=await apiFetch('GET','/devoirs');
+    var soumissions=await apiFetch('GET','/soumissions');
+    var doneIds=new Set(soumissions.map(function(s){return s.devoir_id;}));
+    var pending=devoirs.filter(function(d){return !doneIds.has(d.id);});
+    var done=devoirs.filter(function(d){return doneIds.has(d.id);});
+    var html='<div class="ph"><h1 class="pt">Mes évaluations</h1><p class="ps">Répondez aux évaluations générées par vos professeurs.</p></div>';
+    html+='<div style="margin-bottom:6px;font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.07em;font-family:\'DM Mono\',monospace">À rendre</div>';
+    if(pending.length){
+      html+=pending.map(function(d){
+        var dl=d.date_limite?'<strong style="color:var(--or)">'+d.date_limite.slice(0,10)+'</strong>':'—';
+        var nq=d.questions?d.questions.length:0;
+        return '<div class="ec"><div class="eh"><div style="font-size:21px">📐</div><div style="flex:1"><div style="font-size:13px;font-weight:600">'+d.titre+'</div><div style="font-size:12px;color:var(--mu)">'+( d.description||'')+'</div></div><span class="badge bor">⏳ En attente</span></div>'
+          +'<div class="eb"><div style="font-size:12px;color:var(--mu);margin-bottom:9px">Date limite : '+dl+' · '+nq+' question'+(nq>1?'s':'')+'</div>'
+          +'<button class="btn bp s" onclick="startExam('+d.id+')">✏️ Commencer</button></div></div>';
+      }).join('');
+    }else{html+='<div style="font-size:13px;color:var(--mu);padding:10px 0">Aucune évaluation en attente.</div>';}
+    html+='<div style="margin-top:18px;margin-bottom:6px;font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.07em;font-family:\'DM Mono\',monospace">Rendus</div>';
+    if(done.length){
+      html+=done.map(function(d){
+        var sub=soumissions.find(function(s){return s.devoir_id===d.id;});
+        return '<div class="ec"><div class="eh"><div style="font-size:21px">✅</div><div style="flex:1"><div style="font-size:13px;font-weight:600">'+d.titre+'</div><div style="font-size:12px;color:var(--mu)">'+( d.description||'')+'</div></div><span class="badge bg">✓ Rendu</span></div>'
+          +'<div class="eb"><div style="font-size:12px;color:var(--mu)">Rendu le '+(sub&&sub.date_depot?sub.date_depot.slice(0,10):'—')+' · '+(sub&&sub.note_finale_humaine!=null?'<strong>'+sub.note_finale_humaine+'/20</strong>':'En attente de correction')+'</div></div></div>';
+      }).join('');
+    }else{html+='<div style="font-size:13px;color:var(--mu);padding:10px 0">Aucun devoir rendu.</div>';}
+    el.innerHTML=html;
+  }catch(e){console.error(e);}
+}
+async function startExam(devoirId){
+  examDevoirId=devoirId;examQuestions=[];
+  document.getElementById('evalBody').innerHTML='<div style="text-align:center;padding:20px;color:var(--mu)">Chargement…</div>';
+  document.getElementById('evalErr').textContent='';
+  openM('m-eval');
+  try{
+    var devoirs=await apiFetch('GET','/devoirs');
+    var d=devoirs.find(function(x){return x.id===devoirId;});
+    document.querySelector('#m-eval .mt2').textContent=d?d.titre:'Évaluation';
+    document.querySelector('#m-eval .ms2').textContent=d&&d.description?d.description:'';
+    var qs=await apiFetch('GET','/devoirs/'+devoirId+'/questions');
+    examQuestions=qs;
+    document.getElementById('evalBody').innerHTML=qs.map(function(q,i){
+      return '<div style="background:#EEF2FF;border:1px solid #c7d2fe;border-radius:8px;padding:13px;margin-bottom:13px">'
+        +'<div style="font-size:12px;font-weight:600;margin-bottom:5px;color:#4F6EF7">Question '+(i+1)+' <span style="font-weight:400;opacity:.7">('+q.points_attribues+' pts)</span></div>'
+        +'<div style="font-size:13px;line-height:1.7;margin-bottom:9px">'+q.enonce+'</div>'
+        +'<textarea id="rep-'+q.id+'" placeholder="Rédigez votre réponse…" style="min-height:80px"></textarea></div>';
+    }).join('');
+  }catch(e){document.getElementById('evalBody').innerHTML='<div style="color:#EF4444">Erreur de chargement.</div>';}
+}
+async function submitExam(){
+  var reponses=examQuestions.map(function(q){return{question_id:q.id,texte:(document.getElementById('rep-'+q.id)||{}).value||''};});
+  document.getElementById('evalErr').textContent='';
+  try{
+    var res=await apiFetch('POST','/soumissions',{devoir_id:examDevoirId,reponses:reponses});
+    toast('✅ Copie rendue ! Score IA : '+Math.round(res.ia_score*100)+'%');
+    closeM('m-eval');loadStudentEvals();loadStudentResults();
+  }catch(e){document.getElementById('evalErr').textContent=e.detail||'Erreur lors de la soumission.';}
+}
+
+/* ── STUDENT: RÉSULTATS (API) ────────────────────────────────────────── */
+async function loadStudentResults(){
+  var el=document.getElementById('page-s-results');
+  try{
+    var subs=await apiFetch('GET','/soumissions');
+    var devoirs=await apiFetch('GET','/devoirs');
+    var dMap={};devoirs.forEach(function(d){dMap[d.id]=d.titre;});
+    var noted=subs.filter(function(s){return s.note_finale_humaine!=null;});
+    var avg=noted.length?Math.round(noted.reduce(function(a,s){return a+s.note_finale_humaine;},0)/noted.length*10)/10:'—';
+    var best=noted.length?Math.max.apply(null,noted.map(function(s){return s.note_finale_humaine;})):'—';
+    var html='<div class="ph"><h1 class="pt">Mes résultats</h1><p class="ps">Retrouvez vos notes et retours.</p></div>'
+      +'<div class="sr">'
+      +'<div class="sc"><div class="sl">Moyenne générale</div><div class="sv">'+avg+'</div><div class="sd">/ 20</div></div>'
+      +'<div class="sc"><div class="sl">Évals complètes</div><div class="sv">'+subs.length+'</div></div>'
+      +'<div class="sc"><div class="sl">Meilleure note</div><div class="sv">'+best+'</div></div>'
+      +'</div>'
+      +'<div class="card"><div class="ct">Détail par évaluation</div><div style="margin-top:13px;display:flex;flex-direction:column;gap:10px">'
+      +subs.map(function(s){
+        var titre=dMap[s.devoir_id]||'Devoir #'+s.devoir_id;
+        var note=s.note_finale_humaine;
+        var gcStyle=note!=null?(note>=14?'':'background:var(--bll);border-color:var(--bl)'):'background:var(--sf2);border-color:var(--bd)';
+        var gnStyle=note!=null?(note>=14?'':'color:var(--bl)'):'color:var(--mu)';
+        var badge=note!=null?(note>=14?'<span class="badge bg">Excellent</span>':'<span class="badge bb">Bien</span>'):'<span class="badge bgr">En correction</span>';
+        var corr=s.correction;
+        return '<div style="display:flex;align-items:center;gap:13px;padding:13px;border:1px solid var(--bd);border-radius:var(--r)">'
+          +'<div class="gc" style="'+gcStyle+'"><div class="gn" style="'+gnStyle+'">'+(note!=null?note:'—')+'</div><div class="gd" style="'+gnStyle+'">'+(note!=null?'/ 20':'')+'</div></div>'
+          +'<div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">'+titre+'</div>'
+          +'<div style="font-size:12px;color:var(--mu);margin-bottom:3px">Rendu le '+(s.date_depot?s.date_depot.slice(0,10):'—')+'</div>'
+          +(corr&&corr.commentaires_ia?'<div style="font-size:12px;color:var(--mu);font-style:italic">"'+corr.commentaires_ia+'"</div>':'')
+          +'</div>'+badge+'</div>';
+      }).join('')
+      +'</div></div>';
+    el.innerHTML=html;
+  }catch(e){console.error(e);}
+}
+
+function savTP(){
+  var p=document.getElementById('tPre').value.trim(),n=document.getElementById('tNo').value.trim();
+  document.getElementById('tDN').textContent=p+' '+n;
+  if(role==='teacher'){document.getElementById('hname').textContent=p+' '+n;var av=document.getElementById('hav');if(!av.querySelector('img'))av.textContent=(p[0]||'')+(n[0]||'')}
+  toast('✅ Profil mis à jour');
+}
+function savSP(){
+  var p=document.getElementById('sPre').value.trim(),n=document.getElementById('sNo').value.trim();
+  document.getElementById('sDN').textContent=p+' '+n;
+  if(role==='student'){document.getElementById('hname').textContent=p+' '+n;var av=document.getElementById('hav');if(!av.querySelector('img'))av.textContent=(p[0]||'')+(n[0]||'')}
+  toast('✅ Profil mis à jour');
+}
+
+function buildEmojis(){
+  document.getElementById('egr').innerHTML=EMOJIS.map(function(e){return '<div class="eop'+(e===curEmo?' sel':'')+'" onclick="pickE(this,\''+e+'\')">'+e+'</div>'}).join('');
+}
+function pickE(el,e){document.querySelectorAll('.eop').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');curEmo=e;pMat()}
+function pickC(el){document.querySelectorAll('.csw').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');curClr=el.dataset.c;pMat()}
+function pMat(){
+  var n=document.getElementById('matN').value||'Nom de la matière';
+  var c=document.getElementById('matC').value||'4';
+  var t=document.getElementById('matT').value;
+  document.getElementById('mpico').style.background=curClr+'22';
+  document.getElementById('mpico').textContent=curEmo;
+  document.getElementById('mpnom').textContent=n;
+  document.getElementById('mpdet').textContent='Coef. '+c+' · '+TL[t];
+}
+function renderMats(){
+  document.getElementById('matList').innerHTML=mats.length?mats.map(function(m,i){
+    return '<div style="display:flex;align-items:center;gap:9px;padding:10px;border:1px solid var(--bd);border-radius:8px;margin-bottom:6px;background:var(--bg)"><div style="width:32px;height:32px;border-radius:8px;background:'+m.cl+'22;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">'+m.e+'</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">'+m.n+'</div><div style="font-size:11px;color:var(--mu)">Coef. '+m.c+'</div></div><span class="badge '+TB[m.t]+'">'+TL[m.t]+'</span><button class="btn bs bsm" onclick="editMat('+i+')">✏️</button><button class="btn bs bsm" style="color:var(--or)" onclick="delMat('+i+')">🗑</button></div>';
+  }).join(''):'<div style="font-size:12px;color:var(--mu);padding:13px;text-align:center">Aucune matière</div>';
+}
+function savMat(){
+  var n=document.getElementById('matN').value.trim();if(!n){toast('⚠️ Entrez un nom');return}
+  mats.push({n:n,e:curEmo,c:parseInt(document.getElementById('matC').value)||4,t:document.getElementById('matT').value,cl:curClr});
+  renderMats();closeM('m-add-mat');document.getElementById('matN').value='';toast('✅ '+n+' ajoutée');
+}
+function editMat(i){
+  eMat=i;var m=mats[i];
+  document.getElementById('emSub').textContent=m.e+' '+m.n;
+  document.getElementById('emN').value=m.n;document.getElementById('emC').value=m.c;document.getElementById('emT').value=m.t;
+  openM('m-edit-mat');
+}
+function updMat(){
+  var m=mats[eMat];m.n=document.getElementById('emN').value.trim()||m.n;m.c=parseInt(document.getElementById('emC').value)||m.c;m.t=document.getElementById('emT').value;
+  renderMats();closeM('m-edit-mat');toast('✅ Matière mise à jour');
+}
+function delMat(i){var n=mats[i].n;mats.splice(i,1);renderMats();toast('🗑 '+n+' supprimée')}
+
+function renderCls(){
+  document.getElementById('clsList').innerHTML=clss.length?clss.map(function(c,i){
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;margin-bottom:6px;background:var(--bg)"><div><div style="font-size:13px;font-weight:600">'+c.n+'</div><div style="font-size:11px;color:var(--mu)">'+c.ef+' élèves · '+c.m+(c.s?' · '+c.s:'')+'</div></div><div style="display:flex;gap:5px"><button class="btn bs bsm" onclick="editCls('+i+')">✏️</button><button class="btn bs bsm" style="color:var(--or)" onclick="delCls('+i+')">🗑</button></div></div>';
+  }).join(''):'<div style="font-size:12px;color:var(--mu);padding:13px;text-align:center">Aucune classe</div>';
+}
+function savCls(){
+  var n=document.getElementById('clN').value.trim();if(!n){toast('⚠️ Entrez un nom');return}
+  clss.push({n:n,nv:document.getElementById('clNv').value,m:document.getElementById('clMt').value,ef:parseInt(document.getElementById('clEf').value)||28,s:document.getElementById('clSl').value.trim()});
+  renderCls();closeM('m-add-cls');document.getElementById('clN').value='';document.getElementById('clSl').value='';toast('✅ '+n+' ajoutée');
+}
+function editCls(i){
+  eCls=i;var c=clss[i];
+  document.getElementById('ecSub').textContent=c.n+' · '+c.m;
+  document.getElementById('ecN').value=c.n;document.getElementById('ecE').value=c.ef;document.getElementById('ecS').value=c.s||'';
+  openM('m-edit-cls');
+}
+function updCls(){
+  var c=clss[eCls];c.n=document.getElementById('ecN').value.trim()||c.n;c.ef=parseInt(document.getElementById('ecE').value)||c.ef;c.s=document.getElementById('ecS').value.trim();
+  renderCls();closeM('m-edit-cls');toast('✅ Classe mise à jour');
+}
+function delCls(i){var n=clss[i].n;clss.splice(i,1);renderCls();toast('🗑 '+n+' supprimée')}
+
+function renderEleves(){
+  var q=(document.getElementById('srchE')&&document.getElementById('srchE').value||'').toLowerCase();
+  var cf=document.getElementById('filtC')&&document.getElementById('filtC').value||'';
+  var f=eleves.filter(function(e){return(!q||((e.p+' '+e.n+' '+e.e).toLowerCase().includes(q)))&&(!cf||e.c===cf)});
+  var cnt=document.getElementById('eleveCount');if(cnt)cnt.textContent=f.length+' élève'+(f.length>1?'s':'')+' · '+clss.length+' classe'+(clss.length>1?'s':'');
+  var tb=document.getElementById('eleveTable');if(!tb)return;
+  tb.innerHTML=f.length?f.map(function(e){
+    var idx=eleves.indexOf(e);
+    return '<tr><td><strong>'+e.p+' '+e.n+'</strong></td><td style="font-size:12px;color:var(--mu);font-family:DM Mono,monospace">'+e.e+'</td><td><span class="badge bgr">'+e.c+'</span></td><td style="text-align:center;font-family:DM Mono,monospace">'+e.ev+'</td><td style="font-family:DM Mono,monospace;font-weight:600">'+(e.my!=='—'?e.my+'/20':'—')+'</td><td><div style="display:flex;gap:5px"><button class="btn bs bsm" onclick="toast(\'Profil de '+e.p+' ouvert\')">👁</button><button class="btn bd2 bsm" onclick="delE('+idx+')">🗑</button></div></td></tr>';
+  }).join(''):'<tr><td colspan="6" style="text-align:center;padding:26px;color:var(--mu)">Aucun élève trouvé</td></tr>';
+}
+function addE(){
+  var p=document.getElementById('eP').value.trim(),n=document.getElementById('eN').value.trim();
+  var em=document.getElementById('eE').value.trim(),c=document.getElementById('eC').value;
+  if(!p||!n||!em){toast('⚠️ Remplissez tous les champs');return}
+  eleves.push({p:p,n:n,e:em,c:c,ev:0,my:'—'});renderEleves();closeM('m-add-eleve');
+  document.getElementById('eP').value='';document.getElementById('eN').value='';document.getElementById('eE').value='';
+  toast('✅ '+p+' '+n+' ajouté(e)');
+}
+function delE(i){var e=eleves[i];eleves.splice(i,1);renderEleves();toast('🗑 '+e.p+' '+e.n+' supprimé(e)')}
+
+function dropCSV(ev){ev.preventDefault();document.getElementById('csvDrop').classList.remove('dv');parseCSV({files:ev.dataTransfer.files})}
+function parseCSV(input){
+  var f=input.files[0];if(!f)return;
+  if(!f.name.toLowerCase().endsWith('.csv')){toast('⚠️ Fichier .csv uniquement');return}
+  var r=new FileReader();
+  r.onload=function(ev){
+    var lines=ev.target.result.trim().split('\n');
+    var hdr=lines[0].toLowerCase().replace(/\r/g,'').split(',').map(function(h){return h.trim()});
+    var iP=hdr.indexOf('prenom'),iN=hdr.indexOf('nom'),iE=hdr.indexOf('email'),iC=hdr.indexOf('classe');
+    if(iP<0||iN<0||iE<0){toast('⚠️ Colonnes requises : prenom, nom, email');return}
+    csvR=[];
+    var rows=lines.slice(1).filter(function(l){return l.trim()});
+    document.getElementById('csvTb').innerHTML=rows.map(function(line,i){
+      var c=line.replace(/\r/g,'').split(',').map(function(x){return x.trim()});
+      var p=c[iP]||'',n=c[iN]||'',em=c[iE]||'',cl=iC>=0?c[iC]||'':'';
+      var ok=p&&n&&em&&em.includes('@');
+      if(ok)csvR.push({p:p,n:n,e:em,c:cl});
+      return '<tr><td style="font-family:DM Mono,monospace;font-size:11px;color:var(--mu)">'+(i+1)+'</td><td>'+p+'</td><td>'+n+'</td><td style="font-family:DM Mono,monospace;font-size:11px">'+em+'</td><td>'+(cl||'<span style="color:var(--mu)">—</span>')+'</td><td>'+(ok?'<span class="badge bg">✓ OK</span>':'<span class="badge bor">⚠ Incomplet</span>')+'</td></tr>';
+    }).join('');
+    document.getElementById('csvPrev').style.display='block';
+    document.getElementById('csvTitle').textContent=f.name+' · '+rows.length+' ligne'+(rows.length>1?'s':'')+' · '+csvR.length+' valides';
+    document.getElementById('csvBtn').style.display=csvR.length?'inline-flex':'none';
+    document.getElementById('csvCnt').textContent=csvR.length;
+  };r.readAsText(f,'UTF-8');
+}
+function impCSV(){
+  var def=document.getElementById('csvDC').value,added=0;
+  csvR.forEach(function(r){if(!eleves.find(function(e){return e.e===r.e})){eleves.push({p:r.p,n:r.n,e:r.e,c:r.c||def,ev:0,my:'—'});added++}});
+  renderEleves();closeM('m-csv');clrCSV();toast('✅ '+added+' élève'+(added>1?'s':'')+' importé'+(added>1?'s':''));
+}
+function clrCSV(){document.getElementById('csvPrev').style.display='none';document.getElementById('csvBtn').style.display='none';document.getElementById('csvTb').innerHTML='';document.getElementById('csvF').value='';csvR=[]}
+function dlTpl(){
+  var c='prenom,nom,email,classe\nThomas,Leclerc,thomas.leclerc@lycee.fr,Terminale A\nSophie,Blanc,sophie.blanc@lycee.fr,Terminale B\n';
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:'text/csv'}));a.download='modele_eleves.csv';a.click();toast('⬇ Modèle CSV téléchargé');
+}
+function exportCSV(){
+  var rows=['prenom,nom,email,classe,evals,moyenne'].concat(eleves.map(function(e){return e.p+','+e.n+','+e.e+','+e.c+','+e.ev+','+e.my}));
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'}));a.download='eleves_export.csv';a.click();toast('⬇ Export CSV téléchargé');
+}
+
+var toastT;
+function toast(msg){var el=document.getElementById('toastEl');el.textContent=msg;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove('show')},3000)}
+</script>
+</body>
+</html>
