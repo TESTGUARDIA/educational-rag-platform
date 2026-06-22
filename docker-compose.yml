@@ -1,6 +1,33 @@
 version: '3.9'
 
 services:
+  ollama:
+    image: ollama/ollama
+    container_name: edu_ollama
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_KEEP_ALIVE=-1
+    volumes:
+      - ollama_data:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  ollama-init:
+    image: ollama/ollama
+    container_name: edu_ollama_init
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    entrypoint: ["ollama", "pull", "${OLLAMA_MODEL}"]
+    restart: "no"
+
   api:
     build:
       context: .
@@ -13,6 +40,11 @@ services:
       - ./data:/app/data
     env_file:
       - .env
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    depends_on:
+      ollama:
+        condition: service_healthy
 
   frontend:
     build:
@@ -27,3 +59,14 @@ services:
       - API_URL=http://api:8000
     depends_on:
       - api
+
+  web:
+    image: nginx:alpine
+    container_name: edu_web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src/web:/usr/share/nginx/html:ro
+
+volumes:
+  ollama_data:
