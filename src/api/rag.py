@@ -1,8 +1,10 @@
 import os
+import re
 import json
 import logging
 import tempfile
 import time
+import unicodedata
 
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
@@ -80,6 +82,36 @@ def _escape_stray_backslashes(raw: str) -> str:
     return "".join(out)
 
 
+def _clean_pdf_text(text: str) -> str:
+    """Supprime les artefacts courants d'extraction PDF (caractères de remplacement, boîtes, etc.)."""
+    text = text.replace('�', '')
+    text = text.replace('□', '')   # □ WHITE SQUARE
+    text = text.replace('■', '')   # ■ BLACK SQUARE
+    text = unicodedata.normalize('NFKC', text)
+    return text
+
+
+_TEXT_CMD_RE = re.compile(r'\\text\{(\\[a-zA-Z]+)\}')
+_BARE_CMD_RE = re.compile(r'(?<![\\a-zA-Z])(cdot|hbar|times|nabla|partial|infty|forall|exists|langle|rangle)(?![a-zA-Z])')
+
+
+def _fix_model_questions(questions: list[dict]) -> list[dict]:
+    """Corrige les erreurs LaTeX fréquentes générées par le modèle."""
+    for q in questions:
+        for field in ('reponse', 'raisonnement', 'source'):
+            val = q.get(field) or ''
+            if not val:
+                continue
+            # \text{\rangle} → \rangle  (KaTeX refuse les commandes LaTeX dans \text{})
+            val = _TEXT_CMD_RE.sub(r'\1', val)
+            # `cdot` → `\cdot`, `hbar` → `\hbar`, etc.
+            val = _BARE_CMD_RE.sub(r'\\\1', val)
+            # Nettoie les caractères de remplacement résiduels
+            val = val.replace('□', '').replace('�', '')
+            q[field] = val
+    return questions
+
+
 def _build_prompt(filename: str, n_questions: int, text: str) -> str:
     return f"""Tu es un expert pédagogique. À partir du texte suivant extrait du document "{filename}", génère exactement {n_questions} couples question-réponse pertinents pour un examen.
 
@@ -94,7 +126,8 @@ Règles strictes :
 - Si tu ne trouves aucune phrase du texte à citer mot pour mot comme source, n'inclus pas cette question.
 - Le champ "raisonnement" : pour une question de calcul ou de démonstration mathématique, déroule ici les étapes intermédiaires. Pour une question non mathématique, laisse une chaîne vide "".
 - Le champ "reponse" ne doit contenir QUE la conclusion finale (le résultat, la définition, l'explication), jamais les étapes intermédiaires : celles-ci vont uniquement dans "raisonnement".
-- Toute formule ou expression mathématique (dans "raisonnement" ou "reponse") doit être écrite en LaTeX, encadrée par $...$ (en ligne) ou $$...$$ (bloc), jamais en texte brut (pas de "x^2" ou "1/2", écris plutôt $x^2$ ou $\\frac{{1}}{{2}}$). Échappe bien chaque backslash LaTeX en JSON (\\\\frac, pas \\frac).
+- Toute formule ou expression mathématique (dans "raisonnement", "reponse" ET "source") doit être encadrée par $...$ (en ligne) ou $$...$$ (bloc), jamais en texte brut (pas de "x^2" ou "1/2", écris plutôt $x^2$ ou $\\frac{{1}}{{2}}$). Échappe bien chaque backslash LaTeX en JSON (\\\\frac, pas \\frac).
+- Règles LaTeX strictes : toujours écrire le backslash devant les commandes ($\\cdot$ jamais $cdot$, $\\hbar$ jamais $hbar$, $\\nabla$ jamais $nabla$, etc.). Ne jamais mettre une commande LaTeX à l'intérieur de \\text{{}} — par exemple $\\langle x \\rangle$ est correct, $\\text{{\\langle}} x \\text{{\\rangle}}$ est interdit.
 
 Les questions doivent tester la compréhension du contenu, pas la mémorisation brute.
 Les réponses doivent être complètes et précises.
@@ -117,6 +150,9 @@ def ingest_and_generate_questions(file_bytes: bytes, filename: str) -> list[dict
 
     # Sections couvrant tout le document : pas de retrieval par similarité ici,
     # il n'y a pas de question à comparer, le but est la couverture complète.
+    for doc in documents:
+        doc.page_content = _clean_pdf_text(doc.page_content)
+
     splitter = RecursiveCharacterTextSplitter(chunk_size=SECTION_CHAR_SIZE, chunk_overlap=0)
     sections = splitter.split_documents(documents)
 
@@ -158,7 +194,7 @@ def ingest_and_generate_questions(file_bytes: bytes, filename: str) -> list[dict
             data.get("questions", list(data.values())[0] if data else [])
             if isinstance(data, dict) else data
         )
-        all_questions.extend(section_questions)
+        all_questions.extend(_fix_model_questions(section_questions))
 
     logger.error("[GEN] Liste finale de questions pour %s : %r", filename, all_questions)
 

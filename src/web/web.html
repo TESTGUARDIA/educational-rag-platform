@@ -1383,16 +1383,35 @@
     }
   }
 
+  function cleanText(text) {
+    if (!text) return '';
+    text = text.replace(/[□■�]/g, '').trim();
+    // Extrait \rangle/\langle hors des \text{} où KaTeX refuse de les rendre
+    text = text.replace(/\\text\{([^}]*?)\\(rangle|langle)([^}]*)\}/g,
+      (_, before, cmd, after) => {
+        const b = before.trim() ? '\\text{' + before + '}' : '';
+        const a = after.trim()  ? '\\text{' + after  + '}' : '';
+        return b + '\\' + cmd + a;
+      });
+    text = text.replace(/(?<![\\a-zA-Z])(cdot|hbar|times|nabla|partial|infty|langle|rangle)(?![a-zA-Z])/g, '\\$1');
+    return text;
+  }
+
   function showGeneratedQuestions(results) {
     const container = document.getElementById('file-list');
-    const html = results.flatMap(r => r.questions).map((q, i) => `
+    const html = results.flatMap(r => r.questions).map((q, i) => {
+      const question   = cleanText(q.question);
+      const reponse    = cleanText(q.reponse);
+      const raisonnement = cleanText(q.raisonnement);
+      const source     = cleanText(q.source);
+      return `
       <div style="padding:12px 16px; border:1px solid var(--border); border-radius:8px; margin-bottom:8px; background:var(--surface);">
-        <div style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:4px;">Q${i + 1}. ${q.question}</div>
-        ${q.raisonnement ? `<div style="font-size:12px; color:var(--text-muted); margin-bottom:4px; white-space:pre-wrap;">${q.raisonnement}</div>` : ''}
-        <div style="font-size:13px; color:var(--text-muted);">→ ${q.reponse}</div>
-        ${q.source ? `<div style="font-size:11px; color:var(--text-muted); margin-top:4px; font-style:italic; opacity:0.75;">Source : ${q.source}</div>` : ''}
-      </div>
-    `).join('');
+        <div style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:4px;">Q${i + 1}. ${question}</div>
+        ${raisonnement ? `<div style="font-size:12px; color:var(--text-muted); margin-bottom:4px; white-space:pre-wrap; border-left:3px solid var(--border); padding-left:8px;">${raisonnement}</div>` : ''}
+        <div style="font-size:13px; color:var(--text-muted);">→ ${reponse}</div>
+        ${source ? `<details style="margin-top:6px;"><summary style="font-size:11px; color:var(--text-muted); cursor:pointer; opacity:0.7;">Source</summary><div style="font-size:11px; color:var(--text-muted); margin-top:4px; font-style:italic; padding:4px 8px; background:var(--bg); border-radius:4px;">${source}</div></details>` : ''}
+      </div>`;
+    }).join('');
     container.innerHTML = `<div style="margin-bottom:8px; font-size:13px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em;">Questions générées</div>${html}`;
     renderMath(container);
   }
