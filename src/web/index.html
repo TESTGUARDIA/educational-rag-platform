@@ -612,8 +612,66 @@ Maxime,Roy,maxime.roy@lycee.fr,Première A</div>
 
 <script>
 /* ── API ─────────────────────────────────────────────────────────────── */
-var API='http://localhost:8000', apiToken=null, apiMe=null;
+var API='http://localhost:8000', apiToken=null, apiMe=null, DEMO=false;
+
+var DEMO_DEVOIRS=[
+  {id:1,titre:'Intégrales — Chapitre 4',description:'Mathématiques · Prof. Dupont',date_limite:'2026-03-31T00:00:00',questions:[1,2,3,4,5]},
+  {id:2,titre:'La mitose et la méiose',description:'Sciences · Prof. Lambert',date_limite:'2026-04-05T00:00:00',questions:[6,7,8,9,10]}
+];
+var DEMO_QUESTIONS={
+  1:[
+    {id:1,numero_ordre:1,enonce:'Définissez une primitive d\'une fonction f sur un intervalle I.',points_attribues:3},
+    {id:2,numero_ordre:2,enonce:'Calculez l\'intégrale de x² sur [0, 1].',points_attribues:4},
+    {id:3,numero_ordre:3,enonce:'Quelle est la relation entre intégrale et aire algébrique ?',points_attribues:3},
+    {id:4,numero_ordre:4,enonce:'Appliquez la formule de Chasles à ∫₀³ f(x)dx avec un point intermédiaire en 1.',points_attribues:5},
+    {id:5,numero_ordre:5,enonce:'Donnez un exemple de fonction non intégrable sur [0,1].',points_attribues:5}
+  ],
+  2:[
+    {id:6,numero_ordre:1,enonce:'Distinguez la mitose de la méiose en termes de résultats cellulaires.',points_attribues:4},
+    {id:7,numero_ordre:2,enonce:'Décrivez les phases de la mitose.',points_attribues:4},
+    {id:8,numero_ordre:3,enonce:'Quel est le rôle biologique de la méiose ?',points_attribues:4},
+    {id:9,numero_ordre:4,enonce:'Expliquez le phénomène de crossing-over.',points_attribues:4},
+    {id:10,numero_ordre:5,enonce:'Comparez le nombre de chromosomes avant et après chaque division.',points_attribues:4}
+  ]
+};
+var DEMO_SUBS_TEACHER=[
+  {id:1,devoir_id:1,etudiant_nom:'Lucas Moreau',date_depot:'2026-03-28T10:00:00',statut_global:'noté',note_finale_humaine:17,ia:{score_ia_global:0.02}},
+  {id:2,devoir_id:1,etudiant_nom:'Chloé Martin',date_depot:'2026-03-27T14:30:00',statut_global:'noté',note_finale_humaine:16,ia:{score_ia_global:0.05}},
+  {id:3,devoir_id:1,etudiant_nom:'Hugo Bernard',date_depot:'2026-03-28T16:00:00',statut_global:'en_attente',note_finale_humaine:null,ia:null},
+  {id:4,devoir_id:1,etudiant_nom:'Emma Lefebvre',date_depot:'2026-03-29T09:00:00',statut_global:'en_attente',note_finale_humaine:null,ia:{score_ia_global:0.72}},
+  {id:5,devoir_id:1,etudiant_nom:'Jade Dumont',date_depot:'2026-03-26T11:00:00',statut_global:'noté',note_finale_humaine:14,ia:{score_ia_global:0.08}},
+  {id:6,devoir_id:1,etudiant_nom:'Tom Girard',date_depot:'2026-03-29T20:00:00',statut_global:'en_attente',note_finale_humaine:null,ia:null},
+  {id:7,devoir_id:1,etudiant_nom:'Léa Rousseau',date_depot:'2026-03-27T18:00:00',statut_global:'en_attente',note_finale_humaine:null,ia:{score_ia_global:0.61}}
+];
+var DEMO_SUBS_STUDENT=[
+  {id:1,devoir_id:1,etudiant_nom:'Lucas Moreau',date_depot:'2026-03-28T10:00:00',note_finale_humaine:17,correction:{commentaires_ia:'Excellent travail, maîtrise des concepts bien visible.'}}
+];
+var DEMO_REPONSES={
+  1:[
+    {numero_ordre:1,enonce:'Définissez une primitive d\'une fonction f sur un intervalle I.',texte_etudiant:'Une primitive F de f sur I est une fonction dérivable telle que F\'(x) = f(x) pour tout x de I.',points_attribues:3},
+    {numero_ordre:2,enonce:'Calculez l\'intégrale de x² sur [0, 1].',texte_etudiant:'∫₀¹ x² dx = [x³/3]₀¹ = 1/3.',points_attribues:4},
+    {numero_ordre:3,enonce:'Quelle est la relation entre intégrale et aire algébrique ?',texte_etudiant:'L\'intégrale représente l\'aire algébrique entre la courbe et l\'axe des abscisses.',points_attribues:3},
+    {numero_ordre:4,enonce:'Appliquez la formule de Chasles.',texte_etudiant:'∫₀³ f(x)dx = ∫₀¹ f(x)dx + ∫₁³ f(x)dx par la relation de Chasles.',points_attribues:5},
+    {numero_ordre:5,enonce:'Donnez un exemple de fonction non intégrable sur [0,1].',texte_etudiant:'La fonction de Dirichlet n\'est pas Riemann-intégrable.',points_attribues:2}
+  ]
+};
+function demoFetch(method,path,body){
+  if(path==='/soumissions'&&method==='GET')return apiMe&&apiMe.role==='teacher'?DEMO_SUBS_TEACHER:DEMO_SUBS_STUDENT;
+  if(path==='/stats'&&method==='GET')return {total:DEMO_SUBS_TEACHER.length,pending:DEMO_SUBS_TEACHER.filter(function(s){return !s.note_finale_humaine;}).length,detected:DEMO_SUBS_TEACHER.filter(function(s){return s.ia&&s.ia.score_ia_global>0.5;}).length,moyenne:13.4};
+  if(path==='/devoirs'&&method==='GET')return DEMO_DEVOIRS;
+  var mQs=path.match(/^\/devoirs\/(\d+)\/questions$/);
+  if(mQs&&method==='GET')return DEMO_QUESTIONS[parseInt(mQs[1])]||[];
+  var mIA=path.match(/^\/soumissions\/(\d+)\/analyser-ia$/);
+  if(mIA&&method==='POST'){var sub=DEMO_SUBS_TEACHER.find(function(s){return s.id===parseInt(mIA[1]);});var sc=parseFloat((Math.floor(Math.random()*40)/100).toFixed(2));if(sub)sub.ia={score_ia_global:sc};return {score_ia_global:sc};}
+  var mRep=path.match(/^\/soumissions\/(\d+)\/reponses$/);
+  if(mRep&&method==='GET')return DEMO_REPONSES[parseInt(mRep[1])]||[{numero_ordre:1,enonce:'Question demo',texte_etudiant:'Réponse de l\'étudiant.',points_attribues:5}];
+  var mNote=path.match(/^\/soumissions\/(\d+)\/noter$/);
+  if(mNote&&method==='POST'){var sub2=DEMO_SUBS_TEACHER.find(function(s){return s.id===parseInt(mNote[1]);});if(sub2&&body){sub2.note_finale_humaine=body.note;sub2.statut_global='noté';}return {ok:true};}
+  if(path==='/soumissions'&&method==='POST')return {ia_score:0.05};
+  throw {detail:'Endpoint demo non disponible'};
+}
 async function apiFetch(method,path,body){
+  if(DEMO)return demoFetch(method,path,body);
   var opts={method:method,headers:{'Content-Type':'application/json'}};
   if(apiToken)opts.headers['Authorization']='Bearer '+apiToken;
   if(body)opts.body=JSON.stringify(body);
@@ -662,12 +720,18 @@ async function doLogin(){
   var btn=document.getElementById('lbtn'),err=document.getElementById('lerr');
   err.textContent='';btn.textContent='Connexion…';btn.disabled=true;
   try{
-    var form=new URLSearchParams({username:document.getElementById('linput').value,password:document.getElementById('pinput').value});
-    var r=await fetch(API+'/auth/login',{method:'POST',body:form});
-    if(!r.ok){var e=await r.json();throw e;}
-    var data=await r.json();
-    apiToken=data.access_token;apiMe={nom:data.nom,role:data.role,id:data.id};
-    role=data.role;
+    var email=document.getElementById('linput').value,pass=document.getElementById('pinput').value;
+    var DEMO_USERS={'marie.dupont@testguard.ai':{nom:'Marie Dupont',role:'teacher',id:1},'lucas.moreau@testguard.ai':{nom:'Lucas Moreau',role:'student',id:2}};
+    if(DEMO_USERS[email]&&pass==='password'){DEMO=true;apiToken='demo';apiMe=DEMO_USERS[email];}
+    else{
+      DEMO=false;
+      var form=new URLSearchParams({username:email,password:pass});
+      var r=await fetch(API+'/auth/login',{method:'POST',body:form});
+      if(!r.ok){var e=await r.json();throw e;}
+      var data=await r.json();
+      apiToken=data.access_token;apiMe={nom:data.nom,role:data.role,id:data.id};
+    }
+    role=apiMe.role;
     document.getElementById('ls').style.display='none';document.getElementById('app').style.display='block';
     var T=role==='teacher';
     document.getElementById('nav-t').style.display=T?'block':'none';
