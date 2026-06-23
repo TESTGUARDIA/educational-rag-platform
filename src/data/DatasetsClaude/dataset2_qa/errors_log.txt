@@ -1,0 +1,1171 @@
+{"seq": 147, "domain": "Computer Science", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted"}
+{"seq": 2, "domain": "Physics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 2, "domain": "Physics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 2, "domain": "Physics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 2, "domain": "Physics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 2, "domain": "Physics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 3, "domain": "Physics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 3, "domain": "Physics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 3, "domain": "Physics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 3, "domain": "Physics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 3, "domain": "Physics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 1, "domain": "Physics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 1, "domain": "Physics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 1, "domain": "Physics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 1, "domain": "Physics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 1, "domain": "Physics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 5, "domain": "Biology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 5, "domain": "Biology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 5, "domain": "Biology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 5, "domain": "Biology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 5, "domain": "Biology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 9, "domain": "Mathematics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 9, "domain": "Mathematics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 9, "domain": "Mathematics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 9, "domain": "Mathematics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 9, "domain": "Mathematics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 18, "domain": "History", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 18, "domain": "History", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 18, "domain": "History", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 18, "domain": "History", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 18, "domain": "History", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 19, "domain": "Philosophy", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 19, "domain": "Philosophy", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 19, "domain": "Philosophy", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 19, "domain": "Philosophy", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 19, "domain": "Philosophy", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 20, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 20, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 20, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 20, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 20, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 26, "domain": "Economics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 26, "domain": "Economics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 26, "domain": "Economics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 26, "domain": "Economics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 26, "domain": "Economics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 27, "domain": "Economics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 27, "domain": "Economics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 27, "domain": "Economics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 27, "domain": "Economics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 27, "domain": "Economics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 36, "domain": "Psychology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 36, "domain": "Psychology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 36, "domain": "Psychology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 36, "domain": "Psychology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 36, "domain": "Psychology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 38, "domain": "Sociology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 38, "domain": "Sociology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 38, "domain": "Sociology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 38, "domain": "Sociology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 38, "domain": "Sociology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 43, "domain": "Physics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 43, "domain": "Physics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 43, "domain": "Physics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 43, "domain": "Physics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 43, "domain": "Physics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 42, "domain": "General Culture", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 42, "domain": "General Culture", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 42, "domain": "General Culture", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 42, "domain": "General Culture", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 42, "domain": "General Culture", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 44, "domain": "Physics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 44, "domain": "Physics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 44, "domain": "Physics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 44, "domain": "Physics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 44, "domain": "Physics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 45, "domain": "Physics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 45, "domain": "Physics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 45, "domain": "Physics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 45, "domain": "Physics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 45, "domain": "Physics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 46, "domain": "Biology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 46, "domain": "Biology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 46, "domain": "Biology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 46, "domain": "Biology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 46, "domain": "Biology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 47, "domain": "Biology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 47, "domain": "Biology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 47, "domain": "Biology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 47, "domain": "Biology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 47, "domain": "Biology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 48, "domain": "Biology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 48, "domain": "Biology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 48, "domain": "Biology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 48, "domain": "Biology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 48, "domain": "Biology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 49, "domain": "Mathematics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 49, "domain": "Mathematics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 49, "domain": "Mathematics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 49, "domain": "Mathematics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 49, "domain": "Mathematics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 50, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 50, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 50, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 50, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 50, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 51, "domain": "Mathematics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 51, "domain": "Mathematics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 51, "domain": "Mathematics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 51, "domain": "Mathematics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 51, "domain": "Mathematics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 52, "domain": "Chemistry", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 52, "domain": "Chemistry", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 52, "domain": "Chemistry", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 52, "domain": "Chemistry", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 52, "domain": "Chemistry", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 53, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 53, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 53, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 53, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 53, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 54, "domain": "Chemistry", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 54, "domain": "Chemistry", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 54, "domain": "Chemistry", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 54, "domain": "Chemistry", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 54, "domain": "Chemistry", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 55, "domain": "Literature", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 55, "domain": "Literature", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 55, "domain": "Literature", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 55, "domain": "Literature", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 55, "domain": "Literature", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 56, "domain": "Literature", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 56, "domain": "Literature", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 56, "domain": "Literature", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 56, "domain": "Literature", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 56, "domain": "Literature", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 57, "domain": "Literature", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 57, "domain": "Literature", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 57, "domain": "Literature", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 57, "domain": "Literature", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 57, "domain": "Literature", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 92, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 92, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 92, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 92, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 92, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 93, "domain": "Mathematics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 93, "domain": "Mathematics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 93, "domain": "Mathematics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 93, "domain": "Mathematics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 93, "domain": "Mathematics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 95, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 95, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 95, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 95, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 95, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 96, "domain": "Chemistry", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 96, "domain": "Chemistry", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 96, "domain": "Chemistry", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 96, "domain": "Chemistry", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 96, "domain": "Chemistry", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 98, "domain": "Literature", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 98, "domain": "Literature", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 98, "domain": "Literature", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 98, "domain": "Literature", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 98, "domain": "Literature", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 99, "domain": "Literature", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 99, "domain": "Literature", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 99, "domain": "Literature", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 99, "domain": "Literature", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 99, "domain": "Literature", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 100, "domain": "History", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 100, "domain": "History", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 100, "domain": "History", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 100, "domain": "History", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 100, "domain": "History", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 101, "domain": "History", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 101, "domain": "History", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 101, "domain": "History", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 101, "domain": "History", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 101, "domain": "History", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 102, "domain": "History", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 102, "domain": "History", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 102, "domain": "History", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 102, "domain": "History", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 102, "domain": "History", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 103, "domain": "Philosophy", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 103, "domain": "Philosophy", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 103, "domain": "Philosophy", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 103, "domain": "Philosophy", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 103, "domain": "Philosophy", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 104, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 104, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 104, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 104, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 104, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 105, "domain": "Philosophy", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 105, "domain": "Philosophy", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 105, "domain": "Philosophy", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 105, "domain": "Philosophy", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 105, "domain": "Philosophy", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 106, "domain": "Geography", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 106, "domain": "Geography", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 106, "domain": "Geography", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 106, "domain": "Geography", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 106, "domain": "Geography", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 107, "domain": "Geography", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 107, "domain": "Geography", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 107, "domain": "Geography", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 107, "domain": "Geography", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 107, "domain": "Geography", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 108, "domain": "Geography", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 108, "domain": "Geography", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 108, "domain": "Geography", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 108, "domain": "Geography", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 108, "domain": "Geography", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 109, "domain": "Economics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 109, "domain": "Economics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 109, "domain": "Economics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 109, "domain": "Economics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 109, "domain": "Economics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 111, "domain": "Economics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 111, "domain": "Economics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 111, "domain": "Economics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 111, "domain": "Economics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 111, "domain": "Economics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 110, "domain": "Economics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 110, "domain": "Economics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 110, "domain": "Economics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 110, "domain": "Economics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 110, "domain": "Economics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 112, "domain": "Computer Science", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 112, "domain": "Computer Science", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 112, "domain": "Computer Science", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 112, "domain": "Computer Science", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 112, "domain": "Computer Science", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 113, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 113, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 113, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 113, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 113, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 114, "domain": "Computer Science", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 114, "domain": "Computer Science", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 114, "domain": "Computer Science", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 114, "domain": "Computer Science", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 114, "domain": "Computer Science", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 115, "domain": "Law", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 115, "domain": "Law", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 115, "domain": "Law", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 115, "domain": "Law", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 115, "domain": "Law", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 116, "domain": "Law", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 116, "domain": "Law", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 116, "domain": "Law", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 116, "domain": "Law", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 116, "domain": "Law", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 117, "domain": "Law", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 117, "domain": "Law", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 117, "domain": "Law", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 117, "domain": "Law", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 117, "domain": "Law", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 118, "domain": "Psychology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 118, "domain": "Psychology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 118, "domain": "Psychology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 118, "domain": "Psychology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 118, "domain": "Psychology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 119, "domain": "Psychology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 119, "domain": "Psychology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 119, "domain": "Psychology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 119, "domain": "Psychology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 119, "domain": "Psychology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 120, "domain": "Psychology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 120, "domain": "Psychology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 120, "domain": "Psychology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 120, "domain": "Psychology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 120, "domain": "Psychology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 121, "domain": "Sociology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 121, "domain": "Sociology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 121, "domain": "Sociology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 121, "domain": "Sociology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 121, "domain": "Sociology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 122, "domain": "Sociology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 122, "domain": "Sociology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 122, "domain": "Sociology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 122, "domain": "Sociology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 122, "domain": "Sociology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 123, "domain": "Sociology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 123, "domain": "Sociology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 123, "domain": "Sociology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 123, "domain": "Sociology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 123, "domain": "Sociology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 124, "domain": "General Culture", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 124, "domain": "General Culture", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 124, "domain": "General Culture", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 124, "domain": "General Culture", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 124, "domain": "General Culture", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 125, "domain": "General Culture", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 125, "domain": "General Culture", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 125, "domain": "General Culture", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 125, "domain": "General Culture", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 125, "domain": "General Culture", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 126, "domain": "General Culture", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 126, "domain": "General Culture", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 126, "domain": "General Culture", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 126, "domain": "General Culture", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 126, "domain": "General Culture", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 127, "domain": "Physics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 127, "domain": "Physics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 127, "domain": "Physics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 127, "domain": "Physics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 127, "domain": "Physics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 128, "domain": "Physics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 128, "domain": "Physics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 128, "domain": "Physics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 128, "domain": "Physics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 128, "domain": "Physics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 129, "domain": "Physics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 129, "domain": "Physics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 129, "domain": "Physics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 129, "domain": "Physics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 129, "domain": "Physics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 130, "domain": "Biology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 130, "domain": "Biology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 130, "domain": "Biology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 130, "domain": "Biology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 130, "domain": "Biology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 131, "domain": "Biology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 131, "domain": "Biology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 131, "domain": "Biology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 131, "domain": "Biology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 131, "domain": "Biology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 132, "domain": "Biology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 132, "domain": "Biology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 132, "domain": "Biology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 132, "domain": "Biology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 132, "domain": "Biology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 133, "domain": "Mathematics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 133, "domain": "Mathematics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 133, "domain": "Mathematics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 133, "domain": "Mathematics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 133, "domain": "Mathematics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 134, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 134, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 134, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 134, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 134, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 135, "domain": "Mathematics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 135, "domain": "Mathematics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 135, "domain": "Mathematics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 135, "domain": "Mathematics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 135, "domain": "Mathematics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 136, "domain": "Chemistry", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 136, "domain": "Chemistry", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 136, "domain": "Chemistry", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 136, "domain": "Chemistry", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 136, "domain": "Chemistry", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 137, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 137, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 137, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 137, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 137, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 138, "domain": "Chemistry", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 138, "domain": "Chemistry", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 138, "domain": "Chemistry", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 138, "domain": "Chemistry", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 138, "domain": "Chemistry", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 139, "domain": "Literature", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 139, "domain": "Literature", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 139, "domain": "Literature", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 139, "domain": "Literature", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 139, "domain": "Literature", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 140, "domain": "Literature", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 140, "domain": "Literature", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 140, "domain": "Literature", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 140, "domain": "Literature", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 140, "domain": "Literature", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 141, "domain": "Literature", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 141, "domain": "Literature", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 141, "domain": "Literature", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 141, "domain": "Literature", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 141, "domain": "Literature", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 142, "domain": "History", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 142, "domain": "History", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 142, "domain": "History", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 142, "domain": "History", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 142, "domain": "History", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 143, "domain": "History", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 143, "domain": "History", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 143, "domain": "History", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 143, "domain": "History", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 143, "domain": "History", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 144, "domain": "History", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 144, "domain": "History", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 144, "domain": "History", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 144, "domain": "History", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 144, "domain": "History", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 145, "domain": "Philosophy", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 145, "domain": "Philosophy", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 145, "domain": "Philosophy", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 145, "domain": "Philosophy", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 145, "domain": "Philosophy", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 146, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 146, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 146, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 146, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 146, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 147, "domain": "Philosophy", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 147, "domain": "Philosophy", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 147, "domain": "Philosophy", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 147, "domain": "Philosophy", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 147, "domain": "Philosophy", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 148, "domain": "Geography", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 148, "domain": "Geography", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 148, "domain": "Geography", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 148, "domain": "Geography", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 148, "domain": "Geography", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 149, "domain": "Geography", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 149, "domain": "Geography", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 149, "domain": "Geography", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 149, "domain": "Geography", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 149, "domain": "Geography", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 150, "domain": "Geography", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 150, "domain": "Geography", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 150, "domain": "Geography", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 150, "domain": "Geography", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 150, "domain": "Geography", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 151, "domain": "Economics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 151, "domain": "Economics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 151, "domain": "Economics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 151, "domain": "Economics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 151, "domain": "Economics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 152, "domain": "Economics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 152, "domain": "Economics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 152, "domain": "Economics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 152, "domain": "Economics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 152, "domain": "Economics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 153, "domain": "Economics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 153, "domain": "Economics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 153, "domain": "Economics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 153, "domain": "Economics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 153, "domain": "Economics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 154, "domain": "Computer Science", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 154, "domain": "Computer Science", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 154, "domain": "Computer Science", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 154, "domain": "Computer Science", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 154, "domain": "Computer Science", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 155, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 155, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 155, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 155, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 155, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 156, "domain": "Computer Science", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 156, "domain": "Computer Science", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 156, "domain": "Computer Science", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 156, "domain": "Computer Science", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 156, "domain": "Computer Science", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 157, "domain": "Law", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 157, "domain": "Law", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 157, "domain": "Law", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 157, "domain": "Law", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 157, "domain": "Law", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 158, "domain": "Law", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 158, "domain": "Law", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 158, "domain": "Law", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 158, "domain": "Law", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 158, "domain": "Law", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 159, "domain": "Law", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 159, "domain": "Law", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 159, "domain": "Law", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 159, "domain": "Law", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 159, "domain": "Law", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 160, "domain": "Psychology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 160, "domain": "Psychology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 160, "domain": "Psychology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 160, "domain": "Psychology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 160, "domain": "Psychology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 161, "domain": "Psychology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 161, "domain": "Psychology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 161, "domain": "Psychology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 161, "domain": "Psychology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 161, "domain": "Psychology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 162, "domain": "Psychology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 162, "domain": "Psychology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 162, "domain": "Psychology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 162, "domain": "Psychology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 162, "domain": "Psychology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 163, "domain": "Sociology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 163, "domain": "Sociology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 163, "domain": "Sociology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 163, "domain": "Sociology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 163, "domain": "Sociology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 164, "domain": "Sociology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 164, "domain": "Sociology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 164, "domain": "Sociology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 164, "domain": "Sociology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 164, "domain": "Sociology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 165, "domain": "Sociology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 165, "domain": "Sociology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 165, "domain": "Sociology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 165, "domain": "Sociology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 165, "domain": "Sociology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 166, "domain": "General Culture", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 166, "domain": "General Culture", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 166, "domain": "General Culture", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 166, "domain": "General Culture", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 166, "domain": "General Culture", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 167, "domain": "General Culture", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 167, "domain": "General Culture", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 167, "domain": "General Culture", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 167, "domain": "General Culture", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 167, "domain": "General Culture", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 168, "domain": "General Culture", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 168, "domain": "General Culture", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 168, "domain": "General Culture", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 168, "domain": "General Culture", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 168, "domain": "General Culture", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 169, "domain": "Physics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 169, "domain": "Physics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 169, "domain": "Physics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 169, "domain": "Physics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 169, "domain": "Physics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 170, "domain": "Physics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 170, "domain": "Physics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 170, "domain": "Physics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 170, "domain": "Physics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 170, "domain": "Physics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 171, "domain": "Physics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 171, "domain": "Physics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 171, "domain": "Physics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 171, "domain": "Physics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 171, "domain": "Physics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 172, "domain": "Biology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 172, "domain": "Biology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 172, "domain": "Biology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 172, "domain": "Biology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 172, "domain": "Biology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 173, "domain": "Biology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 173, "domain": "Biology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 173, "domain": "Biology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 173, "domain": "Biology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 173, "domain": "Biology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 174, "domain": "Biology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 174, "domain": "Biology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 174, "domain": "Biology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 174, "domain": "Biology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 174, "domain": "Biology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 175, "domain": "Mathematics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 175, "domain": "Mathematics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 175, "domain": "Mathematics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 175, "domain": "Mathematics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 175, "domain": "Mathematics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 176, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 176, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 176, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 176, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 176, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 177, "domain": "Mathematics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 177, "domain": "Mathematics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 177, "domain": "Mathematics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 177, "domain": "Mathematics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 177, "domain": "Mathematics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 178, "domain": "Chemistry", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 178, "domain": "Chemistry", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 178, "domain": "Chemistry", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 178, "domain": "Chemistry", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 178, "domain": "Chemistry", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 179, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 179, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 179, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 179, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 179, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 180, "domain": "Chemistry", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 180, "domain": "Chemistry", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 180, "domain": "Chemistry", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 180, "domain": "Chemistry", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 180, "domain": "Chemistry", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 181, "domain": "Literature", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 181, "domain": "Literature", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 181, "domain": "Literature", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 181, "domain": "Literature", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 181, "domain": "Literature", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 182, "domain": "Literature", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 182, "domain": "Literature", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 182, "domain": "Literature", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 182, "domain": "Literature", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 182, "domain": "Literature", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 184, "domain": "History", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 184, "domain": "History", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 184, "domain": "History", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 184, "domain": "History", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 184, "domain": "History", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 183, "domain": "Literature", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 183, "domain": "Literature", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 183, "domain": "Literature", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 183, "domain": "Literature", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 183, "domain": "Literature", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 185, "domain": "History", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 185, "domain": "History", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 185, "domain": "History", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 185, "domain": "History", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 185, "domain": "History", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 186, "domain": "History", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 186, "domain": "History", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 186, "domain": "History", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 186, "domain": "History", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 186, "domain": "History", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 187, "domain": "Philosophy", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 187, "domain": "Philosophy", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 187, "domain": "Philosophy", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 187, "domain": "Philosophy", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 187, "domain": "Philosophy", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 188, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 188, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 188, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 188, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 188, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 189, "domain": "Philosophy", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 189, "domain": "Philosophy", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 189, "domain": "Philosophy", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 189, "domain": "Philosophy", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 189, "domain": "Philosophy", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 190, "domain": "Geography", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 190, "domain": "Geography", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 190, "domain": "Geography", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 190, "domain": "Geography", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 190, "domain": "Geography", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 191, "domain": "Geography", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 191, "domain": "Geography", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 191, "domain": "Geography", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 191, "domain": "Geography", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 191, "domain": "Geography", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 192, "domain": "Geography", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 192, "domain": "Geography", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 192, "domain": "Geography", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 192, "domain": "Geography", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 192, "domain": "Geography", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 193, "domain": "Economics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 193, "domain": "Economics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 193, "domain": "Economics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 193, "domain": "Economics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 193, "domain": "Economics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 194, "domain": "Economics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 194, "domain": "Economics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 194, "domain": "Economics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 194, "domain": "Economics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 194, "domain": "Economics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 195, "domain": "Economics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 195, "domain": "Economics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 195, "domain": "Economics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 195, "domain": "Economics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 195, "domain": "Economics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 196, "domain": "Computer Science", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 196, "domain": "Computer Science", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 196, "domain": "Computer Science", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 196, "domain": "Computer Science", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 196, "domain": "Computer Science", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 197, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 197, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 197, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 197, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 197, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 198, "domain": "Computer Science", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 198, "domain": "Computer Science", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 198, "domain": "Computer Science", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 198, "domain": "Computer Science", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 198, "domain": "Computer Science", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 199, "domain": "Law", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 199, "domain": "Law", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 199, "domain": "Law", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 199, "domain": "Law", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 199, "domain": "Law", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 200, "domain": "Law", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 200, "domain": "Law", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 200, "domain": "Law", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 200, "domain": "Law", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 200, "domain": "Law", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 201, "domain": "Law", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 201, "domain": "Law", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 201, "domain": "Law", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 201, "domain": "Law", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 201, "domain": "Law", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 202, "domain": "Psychology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 202, "domain": "Psychology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 202, "domain": "Psychology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 202, "domain": "Psychology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 202, "domain": "Psychology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 203, "domain": "Psychology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 203, "domain": "Psychology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 203, "domain": "Psychology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 203, "domain": "Psychology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 203, "domain": "Psychology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 204, "domain": "Psychology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 204, "domain": "Psychology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 204, "domain": "Psychology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 204, "domain": "Psychology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 204, "domain": "Psychology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 205, "domain": "Sociology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 205, "domain": "Sociology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 205, "domain": "Sociology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 205, "domain": "Sociology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 205, "domain": "Sociology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 206, "domain": "Sociology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 206, "domain": "Sociology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 206, "domain": "Sociology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 206, "domain": "Sociology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 206, "domain": "Sociology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 207, "domain": "Sociology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 207, "domain": "Sociology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 207, "domain": "Sociology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 207, "domain": "Sociology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 207, "domain": "Sociology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 208, "domain": "General Culture", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 208, "domain": "General Culture", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 208, "domain": "General Culture", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 208, "domain": "General Culture", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 208, "domain": "General Culture", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 209, "domain": "General Culture", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 209, "domain": "General Culture", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 209, "domain": "General Culture", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 209, "domain": "General Culture", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 209, "domain": "General Culture", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 210, "domain": "General Culture", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 210, "domain": "General Culture", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 210, "domain": "General Culture", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 210, "domain": "General Culture", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 210, "domain": "General Culture", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 211, "domain": "Physics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 211, "domain": "Physics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 211, "domain": "Physics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 211, "domain": "Physics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 211, "domain": "Physics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 212, "domain": "Physics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 212, "domain": "Physics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 212, "domain": "Physics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 212, "domain": "Physics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 212, "domain": "Physics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 213, "domain": "Physics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 213, "domain": "Physics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 213, "domain": "Physics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 213, "domain": "Physics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 213, "domain": "Physics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 214, "domain": "Biology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 214, "domain": "Biology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 214, "domain": "Biology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 214, "domain": "Biology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 214, "domain": "Biology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 215, "domain": "Biology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 215, "domain": "Biology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 215, "domain": "Biology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 215, "domain": "Biology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 215, "domain": "Biology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 216, "domain": "Biology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 216, "domain": "Biology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 216, "domain": "Biology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 216, "domain": "Biology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 216, "domain": "Biology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 217, "domain": "Mathematics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 217, "domain": "Mathematics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 217, "domain": "Mathematics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 217, "domain": "Mathematics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 217, "domain": "Mathematics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 218, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 218, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 218, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 218, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 218, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 219, "domain": "Mathematics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 219, "domain": "Mathematics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 219, "domain": "Mathematics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 219, "domain": "Mathematics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 219, "domain": "Mathematics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 220, "domain": "Chemistry", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 220, "domain": "Chemistry", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 220, "domain": "Chemistry", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 220, "domain": "Chemistry", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 220, "domain": "Chemistry", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 221, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 221, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 221, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 221, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 221, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 222, "domain": "Chemistry", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 222, "domain": "Chemistry", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 222, "domain": "Chemistry", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 222, "domain": "Chemistry", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 222, "domain": "Chemistry", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 223, "domain": "Literature", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 223, "domain": "Literature", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 223, "domain": "Literature", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 223, "domain": "Literature", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 223, "domain": "Literature", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 224, "domain": "Literature", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 224, "domain": "Literature", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 224, "domain": "Literature", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 224, "domain": "Literature", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 224, "domain": "Literature", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 225, "domain": "Literature", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 225, "domain": "Literature", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 225, "domain": "Literature", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 225, "domain": "Literature", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 225, "domain": "Literature", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 226, "domain": "History", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 226, "domain": "History", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 226, "domain": "History", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 226, "domain": "History", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 226, "domain": "History", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 227, "domain": "History", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 227, "domain": "History", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 227, "domain": "History", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 227, "domain": "History", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 227, "domain": "History", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 228, "domain": "History", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 228, "domain": "History", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 228, "domain": "History", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 228, "domain": "History", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 228, "domain": "History", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 229, "domain": "Philosophy", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 229, "domain": "Philosophy", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 229, "domain": "Philosophy", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 229, "domain": "Philosophy", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 229, "domain": "Philosophy", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 230, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 230, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 230, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 230, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 230, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 231, "domain": "Philosophy", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 231, "domain": "Philosophy", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 231, "domain": "Philosophy", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 231, "domain": "Philosophy", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 231, "domain": "Philosophy", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 232, "domain": "Geography", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 232, "domain": "Geography", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 232, "domain": "Geography", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 232, "domain": "Geography", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 232, "domain": "Geography", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 233, "domain": "Geography", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 233, "domain": "Geography", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 233, "domain": "Geography", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 233, "domain": "Geography", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 233, "domain": "Geography", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 234, "domain": "Geography", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 234, "domain": "Geography", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 234, "domain": "Geography", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 234, "domain": "Geography", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 234, "domain": "Geography", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 235, "domain": "Economics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 235, "domain": "Economics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 235, "domain": "Economics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 235, "domain": "Economics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 235, "domain": "Economics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 236, "domain": "Economics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 236, "domain": "Economics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 236, "domain": "Economics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 236, "domain": "Economics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 236, "domain": "Economics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 237, "domain": "Economics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 237, "domain": "Economics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 237, "domain": "Economics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 237, "domain": "Economics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 237, "domain": "Economics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 238, "domain": "Computer Science", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 238, "domain": "Computer Science", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 238, "domain": "Computer Science", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 238, "domain": "Computer Science", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 238, "domain": "Computer Science", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 239, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 239, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 239, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 239, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 239, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 240, "domain": "Computer Science", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 240, "domain": "Computer Science", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 240, "domain": "Computer Science", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 240, "domain": "Computer Science", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 240, "domain": "Computer Science", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 241, "domain": "Law", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 241, "domain": "Law", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 241, "domain": "Law", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 241, "domain": "Law", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 241, "domain": "Law", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 242, "domain": "Law", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 242, "domain": "Law", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 242, "domain": "Law", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 242, "domain": "Law", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 242, "domain": "Law", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 243, "domain": "Law", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 243, "domain": "Law", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 243, "domain": "Law", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 243, "domain": "Law", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 243, "domain": "Law", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 244, "domain": "Psychology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 244, "domain": "Psychology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 244, "domain": "Psychology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 244, "domain": "Psychology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 244, "domain": "Psychology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 245, "domain": "Psychology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 245, "domain": "Psychology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 245, "domain": "Psychology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 245, "domain": "Psychology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 245, "domain": "Psychology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 246, "domain": "Psychology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 246, "domain": "Psychology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 246, "domain": "Psychology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 246, "domain": "Psychology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 246, "domain": "Psychology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 247, "domain": "Sociology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 247, "domain": "Sociology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 247, "domain": "Sociology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 247, "domain": "Sociology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 247, "domain": "Sociology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 248, "domain": "Sociology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 248, "domain": "Sociology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 248, "domain": "Sociology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 248, "domain": "Sociology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 248, "domain": "Sociology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 249, "domain": "Sociology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 249, "domain": "Sociology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 249, "domain": "Sociology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 249, "domain": "Sociology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 249, "domain": "Sociology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 250, "domain": "General Culture", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 250, "domain": "General Culture", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 250, "domain": "General Culture", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 250, "domain": "General Culture", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 250, "domain": "General Culture", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 251, "domain": "General Culture", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 251, "domain": "General Culture", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 251, "domain": "General Culture", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 251, "domain": "General Culture", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 251, "domain": "General Culture", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 252, "domain": "General Culture", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 252, "domain": "General Culture", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 252, "domain": "General Culture", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 252, "domain": "General Culture", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 252, "domain": "General Culture", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 253, "domain": "Physics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 253, "domain": "Physics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 253, "domain": "Physics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 253, "domain": "Physics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 253, "domain": "Physics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 254, "domain": "Physics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 254, "domain": "Physics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 254, "domain": "Physics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 254, "domain": "Physics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 254, "domain": "Physics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 255, "domain": "Physics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 255, "domain": "Physics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 255, "domain": "Physics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 255, "domain": "Physics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 255, "domain": "Physics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 256, "domain": "Biology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 256, "domain": "Biology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 256, "domain": "Biology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 256, "domain": "Biology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 256, "domain": "Biology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 257, "domain": "Biology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 257, "domain": "Biology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 257, "domain": "Biology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 257, "domain": "Biology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 257, "domain": "Biology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 258, "domain": "Biology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 258, "domain": "Biology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 258, "domain": "Biology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 258, "domain": "Biology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 258, "domain": "Biology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 259, "domain": "Mathematics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 259, "domain": "Mathematics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 259, "domain": "Mathematics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 259, "domain": "Mathematics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 259, "domain": "Mathematics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 260, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 260, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 260, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 260, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 260, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 261, "domain": "Mathematics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 261, "domain": "Mathematics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 261, "domain": "Mathematics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 261, "domain": "Mathematics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 261, "domain": "Mathematics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 262, "domain": "Chemistry", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 262, "domain": "Chemistry", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 262, "domain": "Chemistry", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 262, "domain": "Chemistry", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 262, "domain": "Chemistry", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 263, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 263, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 263, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 263, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 263, "domain": "Chemistry", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 264, "domain": "Chemistry", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 264, "domain": "Chemistry", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 264, "domain": "Chemistry", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 264, "domain": "Chemistry", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 264, "domain": "Chemistry", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 265, "domain": "Literature", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 265, "domain": "Literature", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 265, "domain": "Literature", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 265, "domain": "Literature", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 265, "domain": "Literature", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 266, "domain": "Literature", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 266, "domain": "Literature", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 266, "domain": "Literature", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 266, "domain": "Literature", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 266, "domain": "Literature", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 267, "domain": "Literature", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 267, "domain": "Literature", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 267, "domain": "Literature", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 267, "domain": "Literature", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 267, "domain": "Literature", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 268, "domain": "History", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 268, "domain": "History", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 268, "domain": "History", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 268, "domain": "History", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 268, "domain": "History", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 270, "domain": "History", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 270, "domain": "History", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 270, "domain": "History", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 270, "domain": "History", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 270, "domain": "History", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 269, "domain": "History", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 269, "domain": "History", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 269, "domain": "History", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 269, "domain": "History", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 269, "domain": "History", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 271, "domain": "Philosophy", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 271, "domain": "Philosophy", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 271, "domain": "Philosophy", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 271, "domain": "Philosophy", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 271, "domain": "Philosophy", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 272, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 272, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 272, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 272, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 272, "domain": "Philosophy", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 273, "domain": "Philosophy", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 273, "domain": "Philosophy", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 273, "domain": "Philosophy", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 273, "domain": "Philosophy", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 273, "domain": "Philosophy", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 274, "domain": "Geography", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 274, "domain": "Geography", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 274, "domain": "Geography", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 274, "domain": "Geography", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 274, "domain": "Geography", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 275, "domain": "Geography", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 275, "domain": "Geography", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 275, "domain": "Geography", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 275, "domain": "Geography", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 275, "domain": "Geography", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 276, "domain": "Geography", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 276, "domain": "Geography", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 276, "domain": "Geography", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 276, "domain": "Geography", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 276, "domain": "Geography", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 277, "domain": "Economics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 277, "domain": "Economics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 277, "domain": "Economics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 277, "domain": "Economics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 277, "domain": "Economics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 278, "domain": "Economics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 278, "domain": "Economics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 278, "domain": "Economics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 278, "domain": "Economics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 278, "domain": "Economics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 280, "domain": "Computer Science", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 280, "domain": "Computer Science", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 280, "domain": "Computer Science", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 280, "domain": "Computer Science", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 280, "domain": "Computer Science", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 279, "domain": "Economics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 279, "domain": "Economics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 279, "domain": "Economics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 279, "domain": "Economics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 279, "domain": "Economics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 281, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 281, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 281, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 281, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 281, "domain": "Computer Science", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 282, "domain": "Computer Science", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 282, "domain": "Computer Science", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 282, "domain": "Computer Science", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 282, "domain": "Computer Science", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 282, "domain": "Computer Science", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 283, "domain": "Law", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 283, "domain": "Law", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 283, "domain": "Law", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 283, "domain": "Law", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 283, "domain": "Law", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 284, "domain": "Law", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 284, "domain": "Law", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 284, "domain": "Law", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 284, "domain": "Law", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 284, "domain": "Law", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 285, "domain": "Law", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 285, "domain": "Law", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 285, "domain": "Law", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 285, "domain": "Law", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 285, "domain": "Law", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 286, "domain": "Psychology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 286, "domain": "Psychology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 286, "domain": "Psychology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 286, "domain": "Psychology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 286, "domain": "Psychology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 287, "domain": "Psychology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 287, "domain": "Psychology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 287, "domain": "Psychology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 287, "domain": "Psychology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 287, "domain": "Psychology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 288, "domain": "Psychology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 288, "domain": "Psychology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 288, "domain": "Psychology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 288, "domain": "Psychology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 288, "domain": "Psychology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 289, "domain": "Sociology", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 289, "domain": "Sociology", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 289, "domain": "Sociology", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 289, "domain": "Sociology", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 289, "domain": "Sociology", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 290, "domain": "Sociology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 290, "domain": "Sociology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 290, "domain": "Sociology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 290, "domain": "Sociology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 290, "domain": "Sociology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 291, "domain": "Sociology", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 291, "domain": "Sociology", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 291, "domain": "Sociology", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 291, "domain": "Sociology", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 291, "domain": "Sociology", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 292, "domain": "General Culture", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 292, "domain": "General Culture", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 292, "domain": "General Culture", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 292, "domain": "General Culture", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 292, "domain": "General Culture", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 293, "domain": "General Culture", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 293, "domain": "General Culture", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 293, "domain": "General Culture", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 293, "domain": "General Culture", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 293, "domain": "General Culture", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 294, "domain": "General Culture", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 294, "domain": "General Culture", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 294, "domain": "General Culture", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 294, "domain": "General Culture", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 294, "domain": "General Culture", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 295, "domain": "Physics", "difficulty": "beginner", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 295, "domain": "Physics", "difficulty": "beginner", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 295, "domain": "Physics", "difficulty": "beginner", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 295, "domain": "Physics", "difficulty": "beginner", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 295, "domain": "Physics", "difficulty": "beginner", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 296, "domain": "Physics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 296, "domain": "Physics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 296, "domain": "Physics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 296, "domain": "Physics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 296, "domain": "Physics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 297, "domain": "Physics", "difficulty": "advanced", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 297, "domain": "Physics", "difficulty": "advanced", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 297, "domain": "Physics", "difficulty": "advanced", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 297, "domain": "Physics", "difficulty": "advanced", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 297, "domain": "Physics", "difficulty": "advanced", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 299, "domain": "Biology", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 299, "domain": "Biology", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 299, "domain": "Biology", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 299, "domain": "Biology", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 299, "domain": "Biology", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}
+{"seq": 302, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "explanation", "error": "All 7 retries exhausted for batch"}
+{"seq": 302, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "definition", "error": "All 7 retries exhausted for batch"}
+{"seq": 302, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "comparison", "error": "All 7 retries exhausted for batch"}
+{"seq": 302, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "application", "error": "All 7 retries exhausted for batch"}
+{"seq": 302, "domain": "Mathematics", "difficulty": "intermediate", "question_type": "analysis", "error": "All 7 retries exhausted for batch"}

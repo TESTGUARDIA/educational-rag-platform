@@ -210,6 +210,11 @@ __marimo__/
 
 # Ignorer les données lourdes (PDFs, JSONs traités)
 data/
+!src/data/
+# Exclure les fichiers trop lourds pour GitHub (> 100 MB)
+*.jsonl
+*.parquet
+*.csv
 
 # Ignorer la base de données vectorielle locale (ChromaDB)
 chroma_db/

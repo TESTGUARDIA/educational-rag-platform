@@ -1,0 +1,50 @@
+{
+  "total_entries": 94896,
+  "human_count": 47448,
+  "ai_count": 47448,
+  "domain_distribution": {
+    "social_sciences": 44711,
+    "general_knowledge": 27793,
+    "literature": 12617,
+    "economics": 4260,
+    "medicine": 1334,
+    "computer_science": 941,
+    "biology": 928,
+    "science": 924,
+    "philosophy": 825,
+    "history": 563
+  },
+  "model_distribution": {
+    "NaN": 47448,
+    "chatgpt-3.5": 7290,
+    "mistral-chat": 5319,
+    "mpt-chat": 5290,
+    "cohere-command": 5210,
+    "llama-chat": 5204,
+    "mistral": 4415,
+    "mpt": 4208,
+    "gpt2": 3927,
+    "gpt4": 2649,
+    "gpt3": 2612,
+    "human": 1324
+  },
+  "source_distribution": {
+    "hc3": 46585,
+    "raid": 42803,
+    "arxiv": 2793,
+    "gutenberg": 2715
+  },
+  "length_distribution": {
+    "medium": 43485,
+    "short": 33721,
+    "long": 17690
+  },
+  "avg_word_count": 187.2,
+  "file_size_jsonl_kb": 117489.0,
+  "file_size_parquet_kb": 62675.0,
+  "quality_filters": [
+    "unique_word_ratio >= 0.25",
+    "max_sentence_repeat <= 3",
+    "single_token_dominance < 0.40"
+  ]
+}

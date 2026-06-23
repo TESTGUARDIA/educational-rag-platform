@@ -1,0 +1,41 @@
+{
+  "total_entries": 100002,
+  "label_distribution": {
+    "ai_reformulated": 33334,
+    "human": 33334,
+    "ai_full": 33334
+  },
+  "source_distribution": {
+    "mage": 48884,
+    "raid": 33334,
+    "hc3": 15745,
+    "arxiv": 1029,
+    "gutenberg": 1010
+  },
+  "domain_distribution": {
+    "general_knowledge": 69586,
+    "social_sciences": 17889,
+    "literature": 9275,
+    "economics": 1313,
+    "medicine": 383,
+    "biology": 363,
+    "computer_science": 333,
+    "science": 333,
+    "philosophy": 310,
+    "history": 217
+  },
+  "length_distribution": {
+    "medium": 42812,
+    "short": 40891,
+    "long": 16299
+  },
+  "avg_word_count": 179.5,
+  "file_size_jsonl_kb": 126748.5,
+  "file_size_parquet_kb": 63323.4,
+  "quality_filters": [
+    "unique_word_ratio >= 0.25",
+    "max_sentence_repeat <= 3",
+    "single_token_dominance < 0.40",
+    "ai_reformulated jaccard similarity: 0.10 <= sim <= 0.80"
+  ]
+}

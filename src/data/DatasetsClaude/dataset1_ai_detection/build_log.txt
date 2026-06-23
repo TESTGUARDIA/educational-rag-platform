@@ -1,0 +1,104 @@
+[20:30:29] Loading HC3...
+[20:30:30] HC3 failed: Dataset scripts are no longer supported, but found HC3.py
+[20:30:30] Loading RAID (all non-adversarial entries)...
+[20:30:30] RAID failed: Dataset 'raided/raid' doesn't exist on the Hub or cannot be accessed.
+[20:30:30] Loading M4GT-Bench (human texts)...
+[20:30:30] M4GT failed: Dataset 'NicolaiSivesind/ChatGPT-Real-or-Fake' doesn't exist on the Hub or cannot be accessed.
+[20:30:30] Fetching arXiv abstracts...
+[20:30:35]   arXiv 'thermodynamics' → 200 entries
+[20:30:39]   arXiv 'quantum mechanics' → 198 entries
+[20:30:44]   arXiv 'optics' → 198 entries
+[20:30:49]   arXiv 'nuclear physics' → 189 entries
+[20:30:54]   arXiv 'fluid dynamics' → 197 entries
+[20:30:58]   arXiv 'evolution genetics' → 194 entries
+[20:31:03]   arXiv 'neuroscience' → 199 entries
+[20:31:07]   arXiv 'immunology' → 199 entries
+[20:31:11]   arXiv 'ecology microbiology' → 199 entries
+[20:31:16]   arXiv 'cell biology' → 200 entries
+[20:31:22]   arXiv 'machine learning' → 200 entries
+[20:31:27]   arXiv 'natural language processing' → 200 entries
+[20:31:31]   arXiv 'computer vision' → 200 entries
+[20:31:37]   arXiv 'algorithms' → 200 entries
+[20:31:41]   arXiv 'cryptography' → 194 entries
+[20:31:41] arXiv total → 2967 human entries
+[20:31:41] Fetching Project Gutenberg passages...
+[20:31:51]   Gutenberg 'Pride and Prejudice' → 150 passages
+[20:31:55]   Gutenberg 'Frankenstein' → 150 passages
+[20:32:03]   Gutenberg 'A Tale of Two Cities' → 150 passages
+[20:32:10]   Gutenberg 'Sherlock Holmes' → 150 passages
+[20:32:16]   Gutenberg 'Alice in Wonderland' → 150 passages
+[20:32:27]   Gutenberg 'Moby Dick' → 150 passages
+[20:32:34]   Gutenberg 'Dracula' → 150 passages
+[20:32:41]   Gutenberg 'Metamorphosis' → 150 passages
+[20:32:48]   Gutenberg 'The Picture of Dorian Gray' → 150 passages
+[20:32:57]   Gutenberg 'The Yellow Wallpaper' → 76 passages
+[20:33:03]   Gutenberg 'War and Peace' → 150 passages
+[20:33:10]   Gutenberg 'David Copperfield' → 150 passages
+[20:33:15]   Gutenberg 'Great Expectations' → 150 passages
+[20:33:19]   Gutenberg 'Decline and Fall of the Roman Empire' → 150 passages
+[20:33:24]   Gutenberg 'The Republic - Plato' → 150 passages
+[20:33:30]   Gutenberg 'Critique of Pure Reason' → 150 passages
+[20:33:44]   Gutenberg 'A Modest Proposal' → 150 passages
+[20:33:54]   Gutenberg 'The Art of War' → 144 passages
+[20:34:04]   Gutenberg 'The Prince - Machiavelli' → 150 passages
+[20:34:13]   Gutenberg 'Leviathan - Hobbes' → 150 passages
+[20:34:13] Gutenberg total → 2920 human entries
+[20:34:13] Assembling final dataset...
+[20:34:13] Available: 5887 human | 0 AI → using 0 each = 0 total
+[20:34:13] Writing 0 entries...
+[20:34:13] Converting to Parquet...
+[20:36:03] Loading HC3...
+[20:36:04] HC3 repo files: ['.gitattributes', 'HC3.py', 'README.md', 'all.jsonl', 'finance.jsonl', 'medicine.jsonl', 'open_qa.jsonl', 'reddit_eli5.jsonl', 'wiki_csai.jsonl']
+[20:36:14] HC3 → 98802 human | 53156 AI
+[20:36:14] Loading RAID (all non-adversarial entries)...
+[20:42:48] RAID (liamdugan/raid) → 465289 AI entries
+[20:42:48] Loading M4GT-Bench (human texts)...
+[20:42:48] M4GT 'NicolaiSivesind/ChatGPT-Real-or-Fake' failed: Dataset 'NicolaiSivesind/ChatGPT-Real-or-Fake' doesn't exist on the Hub or cannot be accessed.
+[20:42:48] M4GT 'Hello-SimpleAI/chatgpt-detector-data' failed: Dataset 'Hello-SimpleAI/chatgpt-detector-data' doesn't exist on the Hub or cannot be accessed.
+[20:42:48] M4GT 'M4GT-Bench/m4gt-bench' failed: Dataset 'M4GT-Bench/m4gt-bench' doesn't exist on the Hub or cannot be accessed.
+[20:42:48] M4GT 'm4gt-bench/m4gt-bench' failed: Dataset 'm4gt-bench/m4gt-bench' doesn't exist on the Hub or cannot be accessed.
+[20:42:48] M4GT 'guo-yanqi/M4' failed: Dataset 'guo-yanqi/M4' doesn't exist on the Hub or cannot be accessed.
+[20:42:48] M4GT: all candidates failed, skipping
+[20:42:48] Fetching arXiv abstracts...
+[20:42:52]   arXiv 'thermodynamics' → 200 entries
+[20:42:55]   arXiv 'quantum mechanics' → 198 entries
+[20:42:58]   arXiv 'optics' → 198 entries
+[20:43:01]   arXiv 'nuclear physics' → 189 entries
+[20:43:05]   arXiv 'fluid dynamics' → 197 entries
+[20:43:08]   arXiv 'evolution genetics' → 194 entries
+[20:43:11]   arXiv 'neuroscience' → 199 entries
+[20:43:14]   arXiv 'immunology' → 199 entries
+[20:43:18]   arXiv 'ecology microbiology' → 199 entries
+[20:43:21]   arXiv 'cell biology' → 200 entries
+[20:43:24]   arXiv 'machine learning' → 200 entries
+[20:43:27]   arXiv 'natural language processing' → 200 entries
+[20:43:31]   arXiv 'computer vision' → 200 entries
+[20:43:34]   arXiv 'algorithms' → 200 entries
+[20:43:37]   arXiv 'cryptography' → 194 entries
+[20:43:37] arXiv total → 2967 human entries
+[20:43:37] Fetching Project Gutenberg passages...
+[20:43:44]   Gutenberg 'Pride and Prejudice' → 150 passages
+[20:43:51]   Gutenberg 'Frankenstein' → 150 passages
+[20:43:58]   Gutenberg 'A Tale of Two Cities' → 150 passages
+[20:44:05]   Gutenberg 'Sherlock Holmes' → 150 passages
+[20:44:10]   Gutenberg 'Alice in Wonderland' → 150 passages
+[20:44:18]   Gutenberg 'Moby Dick' → 150 passages
+[20:44:24]   Gutenberg 'Dracula' → 150 passages
+[20:44:29]   Gutenberg 'Metamorphosis' → 150 passages
+[20:44:34]   Gutenberg 'The Picture of Dorian Gray' → 150 passages
+[20:44:39]   Gutenberg 'The Yellow Wallpaper' → 76 passages
+[20:44:44]   Gutenberg 'War and Peace' → 150 passages
+[20:44:49]   Gutenberg 'David Copperfield' → 150 passages
+[20:44:53]   Gutenberg 'Great Expectations' → 150 passages
+[20:44:57]   Gutenberg 'Decline and Fall of the Roman Empire' → 150 passages
+[20:45:03]   Gutenberg 'The Republic - Plato' → 150 passages
+[20:45:10]   Gutenberg 'Critique of Pure Reason' → 150 passages
+[20:45:14]   Gutenberg 'A Modest Proposal' → 150 passages
+[20:45:23]   Gutenberg 'The Art of War' → 144 passages
+[20:45:31]   Gutenberg 'The Prince - Machiavelli' → 150 passages
+[20:45:39]   Gutenberg 'Leviathan - Hobbes' → 150 passages
+[20:45:39] Gutenberg total → 2920 human entries
+[20:45:39] Assembling final dataset...
+[20:45:39] Available: 104689 human | 518445 AI → using 104689 each = 209378 total
+[20:45:39] Writing 209378 entries...
+[20:45:41] Converting to Parquet...
