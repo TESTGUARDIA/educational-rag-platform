@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TestGuard AI — Plateforme d'évaluation</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -330,6 +333,7 @@
   .page.active { display: block; }
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
   .page-header { margin-bottom: 28px; }
 
@@ -802,6 +806,13 @@
           </div>
 
           <div id="file-list" style="margin-top:16px;"></div>
+          <div id="loading-banner" style="display:none; margin-top:16px; padding:16px; background:var(--accent-light); border:1px solid var(--accent); border-radius:8px; display:none; align-items:center; gap:12px;">
+            <div style="width:20px;height:20px;border:3px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;flex-shrink:0;"></div>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:var(--accent);">Génération en cours…</div>
+              <div id="loading-timer" style="font-size:12px;color:var(--text-muted);">Le modèle local analyse le document. Temps écoulé : <span id="elapsed">0</span>s</div>
+            </div>
+          </div>
 
           <div class="form-row" style="margin-top:20px;">
             <div class="form-group" style="margin:0;">
@@ -826,8 +837,8 @@
           </div>
 
           <div style="margin-top:20px; display:flex; gap:12px;">
-            <button class="btn btn-primary" onclick="simulateGenerate()">✨ Générer une évaluation</button>
-            <button class="btn btn-secondary">💾 Sauvegarder le cours</button>
+            <button id="btn-generate" class="btn btn-primary" onclick="simulateGenerate()">✨ Générer une évaluation</button>
+            <button id="btn-save" class="btn btn-secondary" onclick="saveCourse()">💾 Sauvegarder le cours</button>
           </div>
         </div>
 
@@ -1048,44 +1059,9 @@
           <h1 class="page-title">Mes évaluations</h1>
           <p class="page-subtitle">Répondez aux évaluations générées par vos professeurs.</p>
         </div>
-
-        <!-- Pending -->
-        <div style="margin-bottom:8px; font-size:13px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; font-family:'DM Mono',monospace;">À rendre</div>
-
-        <div class="eval-card">
-          <div class="eval-header">
-            <div style="font-size:24px;">📐</div>
-            <div style="flex:1;">
-              <div style="font-size:15px; font-weight:600;">Intégrales — Chapitre 4</div>
-              <div style="font-size:13px; color:var(--text-muted);">Mathématiques · Prof. Dupont</div>
-            </div>
-            <span class="badge badge-orange">⏳ En attente</span>
-          </div>
-          <div class="eval-body">
-            <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Date limite : <strong style="color:var(--accent2);">31 mars 2026</strong> · 8 questions</div>
-            <button class="btn btn-primary student" onclick="openEvalModal()">✏️ Commencer l'évaluation</button>
-          </div>
-        </div>
-
-        <div class="eval-card">
-          <div class="eval-header">
-            <div style="font-size:24px;">🧬</div>
-            <div style="flex:1;">
-              <div style="font-size:15px; font-weight:600;">La mitose et la méiose</div>
-              <div style="font-size:13px; color:var(--text-muted);">Sciences · Prof. Lambert</div>
-            </div>
-            <span class="badge badge-orange">⏳ En attente</span>
-          </div>
-          <div class="eval-body">
-            <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Date limite : <strong style="color:var(--accent2);">5 avril 2026</strong> · 10 questions</div>
-            <button class="btn btn-primary student" onclick="openEvalModal()">✏️ Commencer l'évaluation</button>
-          </div>
-        </div>
-
-        <!-- Done -->
-        <div style="margin-top:24px; margin-bottom:8px; font-size:13px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; font-family:'DM Mono',monospace;">Rendus</div>
-
-        <div class="eval-card">
+        <div id="evals-list"><div class="empty-state"><div class="empty-icon">📝</div><div class="empty-title">Chargement…</div></div></div>
+        <div style="display:none;">
+          <div class="eval-card">
           <div class="eval-header">
             <div style="font-size:24px;">🗺️</div>
             <div style="flex:1;">
@@ -1175,40 +1151,8 @@
           <h1 class="page-title">Mes cours</h1>
           <p class="page-subtitle">Accédez aux supports déposés par vos professeurs.</p>
         </div>
-
-        <div class="course-item">
-          <div class="course-icon green">📐</div>
-          <div class="course-info">
-            <div class="course-name">Intégrales et primitives — Chapitre 4</div>
-            <div class="course-meta">Mathématiques · Prof. Dupont · PDF · 2.4 Mo</div>
-          </div>
-          <div class="course-actions">
-            <button class="btn btn-secondary btn-sm">⬇ Télécharger</button>
-          </div>
-        </div>
-
-        <div class="course-item">
-          <div class="course-icon blue">🧬</div>
-          <div class="course-info">
-            <div class="course-name">La mitose et la méiose</div>
-            <div class="course-meta">Sciences · Prof. Lambert · PPTX · 5.1 Mo</div>
-          </div>
-          <div class="course-actions">
-            <button class="btn btn-secondary btn-sm">⬇ Télécharger</button>
-          </div>
-        </div>
-
-        <div class="course-item">
-          <div class="course-icon orange">🗺️</div>
-          <div class="course-info">
-            <div class="course-name">La mondialisation — Introduction</div>
-            <div class="course-meta">Histoire-Géo · Prof. Renard · PDF · 1.8 Mo</div>
-          </div>
-          <div class="course-actions">
-            <button class="btn btn-secondary btn-sm">⬇ Télécharger</button>
-          </div>
-        </div>
-
+        <div id="courses-list"><div class="empty-state"><div class="empty-icon">📖</div><div class="empty-title">Chargement…</div></div></div>
+        <div style="display:none;">
         <div class="empty-state" style="opacity:0.5; padding:32px;">
           <div style="font-size:13px;">Nouveaux cours à venir…</div>
         </div>
@@ -1356,6 +1300,7 @@
     // Show correct first page
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(isTeacher ? 'page-t-upload' : 'page-s-evals').classList.add('active');
+    if (!isTeacher) { loadStudentEvals(); loadStudentCourses(); }
   }
 
   function logout() {
@@ -1398,9 +1343,214 @@
     `).join('');
   }
 
-  function simulateGenerate() {
-    showToast('✨ Génération de l\'évaluation en cours…');
-    setTimeout(() => showToast('✅ Évaluation générée avec succès !'), 2000);
+  const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? `${window.location.protocol}//${window.location.hostname}:8000`
+    : '';
+
+  function renderMath(el) {
+    if (window.renderMathInElement) {
+      window.renderMathInElement(el, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+        ],
+        throwOnError: false,
+      });
+    }
+  }
+
+  async function simulateGenerate() {
+    const input = document.getElementById('file-input');
+    const btn = document.getElementById('btn-generate');
+    const banner = document.getElementById('loading-banner');
+    const elapsed = document.getElementById('elapsed');
+
+    if (!input.files.length) {
+      showToast('⚠️ Sélectionnez au moins un fichier PDF.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = '⏳ En cours…';
+    banner.style.display = 'flex';
+    let seconds = 0;
+    const timer = setInterval(() => { elapsed.textContent = ++seconds; }, 1000);
+
+    const formData = new FormData();
+    for (const file of input.files) formData.append('files', file);
+
+    try {
+      const res = await fetch(`${API_BASE}/generate`, { method: 'POST', body: formData });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.detail || `Erreur ${res.status}`);
+      }
+      const data = await res.json();
+      const total = data.results.reduce((sum, r) => sum + r.questions.length, 0);
+      showToast(`✅ ${total} questions générées en ${seconds}s !`);
+      showGeneratedQuestions(data.results);
+    } catch (e) {
+      showToast(`❌ Erreur : ${e.message}`);
+    } finally {
+      clearInterval(timer);
+      banner.style.display = 'none';
+      btn.disabled = false;
+      btn.textContent = '✨ Générer une évaluation';
+    }
+  }
+
+  function cleanText(text) {
+    if (!text) return '';
+    text = text.replace(/[□■�]/g, '').trim();
+    // Extrait \rangle/\langle hors des \text{} où KaTeX refuse de les rendre
+    text = text.replace(/\\text\{([^}]*?)\\(rangle|langle)([^}]*)\}/g,
+      (_, before, cmd, after) => {
+        const b = before.trim() ? '\\text{' + before + '}' : '';
+        const a = after.trim()  ? '\\text{' + after  + '}' : '';
+        return b + '\\' + cmd + a;
+      });
+    text = text.replace(/(?<![\\a-zA-Z])(cdot|hbar|times|nabla|partial|infty|langle|rangle)(?![a-zA-Z])/g, '\\$1');
+    return text;
+  }
+
+  function showGeneratedQuestions(results) {
+    const container = document.getElementById('file-list');
+    const html = results.flatMap(r => r.questions).map((q, i) => {
+      const question   = cleanText(q.question);
+      const reponse    = cleanText(q.reponse);
+      const raisonnement = cleanText(q.raisonnement);
+      const source     = cleanText(q.source);
+      return `
+      <div style="padding:12px 16px; border:1px solid var(--border); border-radius:8px; margin-bottom:8px; background:var(--surface);">
+        <div style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:4px;">Q${i + 1}. ${question}</div>
+        ${raisonnement ? `<div style="font-size:12px; color:var(--text-muted); margin-bottom:4px; white-space:pre-wrap; border-left:3px solid var(--border); padding-left:8px;">${raisonnement}</div>` : ''}
+        <div style="font-size:13px; color:var(--text-muted);">→ ${reponse}</div>
+        ${source ? `<details style="margin-top:6px;"><summary style="font-size:11px; color:var(--text-muted); cursor:pointer; opacity:0.7;">Source</summary><div style="font-size:11px; color:var(--text-muted); margin-top:4px; font-style:italic; padding:4px 8px; background:var(--bg); border-radius:4px;">${source}</div></details>` : ''}
+      </div>`;
+    }).join('');
+    container.innerHTML = `<div style="margin-bottom:8px; font-size:13px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em;">Questions générées</div>${html}`;
+    renderMath(container);
+  }
+
+  // ── Sauvegarde cours ──
+  async function saveCourse() {
+    const input = document.getElementById('file-input');
+    const btn = document.getElementById('btn-save');
+    if (!input.files.length) { showToast('⚠️ Sélectionnez un fichier PDF.'); return; }
+    btn.disabled = true; btn.textContent = '⏳ Sauvegarde…';
+    const formData = new FormData();
+    for (const file of input.files) formData.append('files', file);
+    try {
+      const res = await fetch(`${API_BASE}/upload`, { method: 'POST', body: formData });
+      if (!res.ok) throw new Error((await res.json()).detail);
+      showToast('✅ Cours sauvegardé — disponible pour les étudiants !');
+    } catch(e) {
+      showToast(`❌ ${e.message}`);
+    } finally {
+      btn.disabled = false; btn.textContent = '💾 Sauvegarder le cours';
+    }
+  }
+
+  // ── Chargement côté étudiant ──
+  async function loadStudentEvals() {
+    const container = document.getElementById('evals-list');
+    try {
+      const res = await fetch(`${API_BASE}/documents`);
+      const { documents } = await res.json();
+      const withQuestions = documents.filter(d => d.question_count > 0);
+      if (!withQuestions.length) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">📝</div><div class="empty-title">Aucune évaluation disponible</div><div class="empty-desc">Votre professeur n\'a pas encore généré d\'évaluation.</div></div>';
+        return;
+      }
+      const icons = ['📐','🧬','🗺️','📖','🔬','📊'];
+      container.innerHTML = withQuestions.map((doc, i) => `
+        <div class="eval-card">
+          <div class="eval-header">
+            <div style="font-size:24px;">${icons[i % icons.length]}</div>
+            <div style="flex:1;">
+              <div style="font-size:15px; font-weight:600;">${doc.filename.replace('.pdf','')}</div>
+              <div style="font-size:13px; color:var(--text-muted);">${doc.question_count} questions</div>
+            </div>
+            <span class="badge badge-orange">⏳ À faire</span>
+          </div>
+          <div class="eval-body">
+            <button class="btn btn-primary student" onclick="startEval('${doc.id}', '${doc.filename.replace('.pdf','').replace(/'/g,"\\'")}')">✏️ Commencer l'évaluation</button>
+          </div>
+        </div>
+      `).join('');
+    } catch(e) {
+      container.innerHTML = '<div class="empty-state"><div class="empty-icon">⚠️</div><div class="empty-title">Impossible de charger les évaluations</div></div>';
+    }
+  }
+
+  async function loadStudentCourses() {
+    const container = document.getElementById('courses-list');
+    try {
+      const res = await fetch(`${API_BASE}/documents`);
+      const { documents } = await res.json();
+      if (!documents.length) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">📖</div><div class="empty-title">Aucun cours disponible</div></div>';
+        return;
+      }
+      const icons = ['📐','🧬','🗺️','📖','🔬','📊'];
+      const colors = ['green','blue','orange','green','blue','orange'];
+      container.innerHTML = documents.map((doc, i) => `
+        <div class="course-item">
+          <div class="course-icon ${colors[i % colors.length]}">${icons[i % icons.length]}</div>
+          <div class="course-info">
+            <div class="course-name">${doc.filename.replace('.pdf','')}</div>
+            <div class="course-meta">PDF · Déposé le ${new Date(doc.created_at).toLocaleDateString('fr-FR')}</div>
+          </div>
+          <div class="course-actions">
+            <a href="${API_BASE}/documents/${doc.id}/file" target="_blank" class="btn btn-secondary btn-sm">⬇ Télécharger</a>
+          </div>
+        </div>
+      `).join('');
+    } catch(e) {
+      container.innerHTML = '<div class="empty-state"><div class="empty-icon">⚠️</div><div class="empty-title">Impossible de charger les cours</div></div>';
+    }
+  }
+
+  // ── Examen étudiant ──
+  let currentEvalQuestions = [];
+  let currentQuestionIndex = 0;
+
+  async function startEval(docId, docName) {
+    try {
+      const res = await fetch(`${API_BASE}/documents/${docId}/questions`);
+      if (!res.ok) throw new Error('Questions introuvables');
+      const { questions } = await res.json();
+      currentEvalQuestions = questions;
+      currentQuestionIndex = 0;
+      showQuestion(docName);
+      document.getElementById('modal-eval').classList.add('open');
+    } catch(e) {
+      showToast(`❌ ${e.message}`);
+    }
+  }
+
+  function showQuestion(docName) {
+    const q = currentEvalQuestions[currentQuestionIndex];
+    const total = currentEvalQuestions.length;
+    document.querySelector('#modal-eval .modal-title').textContent = docName || 'Évaluation';
+    document.querySelector('#modal-eval .modal-sub').textContent = `Question ${currentQuestionIndex + 1} / ${total}`;
+    document.querySelector('#modal-eval .modal-title').nextElementSibling.nextElementSibling.querySelector('div').textContent = 'Question ' + (currentQuestionIndex + 1);
+    document.querySelector('#modal-eval [style*="accent-light"] div:last-child').textContent = q.question;
+    document.querySelector('#modal-eval textarea').value = '';
+    const nextBtn = document.querySelector('#modal-eval .modal-actions .btn-primary');
+    nextBtn.textContent = currentQuestionIndex < total - 1 ? 'Question suivante →' : '✔ Terminer';
+    nextBtn.onclick = () => nextQuestion(docName);
+    renderMath(document.getElementById('modal-eval'));
+  }
+
+  function nextQuestion(docName) {
+    if (currentQuestionIndex < currentEvalQuestions.length - 1) {
+      currentQuestionIndex++;
+      showQuestion(docName);
+    } else {
+      closeModal('modal-eval');
+      showToast('✅ Évaluation terminée !');
+    }
   }
 
   // ── Modals ──

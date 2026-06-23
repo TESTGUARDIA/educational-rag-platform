@@ -13,17 +13,13 @@ services:
       - ./data:/app/data
     env_file:
       - .env
-
-  frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.frontend
-    container_name: edu_frontend
-    ports:
-      - "8501:8501"
-    volumes:
-      - ./src:/app/src
     environment:
-      - API_URL=http://api:8000
-    depends_on:
-      - api
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+
+  web:
+    image: nginx:alpine
+    container_name: edu_web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src/web:/usr/share/nginx/html:ro
