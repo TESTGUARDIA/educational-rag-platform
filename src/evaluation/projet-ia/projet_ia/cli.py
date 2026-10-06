@@ -94,16 +94,26 @@ def _construire_parseur() -> argparse.ArgumentParser:
     p.add_argument("--sans-entrainement-final", action="store_true",
                    help="S'arrêter après la recherche des meilleurs génomes")
 
+    def ajouter_fpr(p):
+        p.add_argument("--fpr-cible", type=float, default=config.FPR_CIBLE_DETECTION,
+                       help="Part maximale de textes humains classés IA, qui fixe le seuil "
+                            "(défaut : %(default)s)")
+
+    ajouter_fpr(p)
+
     p = ds.add_parser("entrainer", help="Entraînement final + fusion + évaluation test + rapport",
                       description="Utilise les génomes de models/<langue>/ (sinon des génomes par défaut).")
     ajouter_langue(p)
     p.add_argument("--cache", help="Dossier du cache (défaut : data/cache/<langue>)")
     p.add_argument("--epochs", type=int, default=30)
+    ajouter_fpr(p)
 
     p = ds.add_parser("predire", help="Prédire IA / humain pour un paragraphe")
     p.add_argument("texte", help="Un paragraphe (de préférence 3 phrases ou plus)")
     ajouter_langue(p, defaut="auto", extra="auto")
     p.add_argument("--modele", help="Forcer un fichier .pkl (désactive le choix par langue)")
+    p.add_argument("--seuil", type=float,
+                   help="Forcer le seuil de décision (défaut : celui appris à l'entraînement)")
 
     return parser
 
@@ -163,17 +173,17 @@ def _commande_detection(args) -> None:
                        patience=args.patience, max_generations=args.generations)
                    for c in args.composants}
         if not args.sans_entrainement_final:
-            entrainer_final(genomes, cache)
+            entrainer_final(genomes, cache, fpr_cible=args.fpr_cible)
 
     elif args.action == "entrainer":
         from .detection.entrainement import entrainer_final
-        entrainer_final(None, cache, epochs_max=args.epochs)
+        entrainer_final(None, cache, epochs_max=args.epochs, fpr_cible=args.fpr_cible)
 
     elif args.action == "predire":
         from .detection.prediction import predire_depuis_fichier
-        r = predire_depuis_fichier(args.texte, args.langue, args.modele)
+        r = predire_depuis_fichier(args.texte, args.langue, args.modele, seuil=args.seuil)
         print(f"Prédiction : {r['prediction']}  (probabilité IA {r['probabilite_ia']:.2%}, "
-              f"langue : {r['langue']})")
+              f"seuil {r['seuil']:.2%}, langue : {r['langue']})")
         print("  Analyses : " + " | ".join(f"{k} {v:.0%}" for k, v in r["composants"].items()))
         for ph in r["phrases"]:
             print(f"   {ph['probabilite_ia']:>5.0%}  {ph['texte'][:90]}")

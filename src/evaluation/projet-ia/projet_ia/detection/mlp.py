@@ -171,17 +171,39 @@ def predire_proba(entraine: dict, X) -> np.ndarray:
     return entraine["modele"].predict_proba(entraine["scaler"].transform(X))[:, 1]
 
 
+def seuil_pour_fpr(y, proba, fpr_cible: float) -> float:
+    """
+    Seuil de décision le plus bas tel qu'au plus `fpr_cible` des textes HUMAINS
+    soient classés « IA » (taux de faux positifs) : c'est le seuil qui détecte le
+    plus de textes IA sans dépasser ce taux d'accusations à tort.
+
+    Avec k = fpr_cible × n_humains faux positifs tolérés, le seuil est placé juste
+    au-dessus du (k+1)-ième score humain le plus élevé.
+    """
+    y, proba = np.asarray(y), np.asarray(proba, dtype=float)
+    humains = np.sort(proba[y == 0])[::-1]                  # du plus « IA » au moins « IA »
+    if len(humains) == 0:
+        raise ValueError("Aucun texte humain : impossible de mesurer les faux positifs.")
+    k = int(np.floor(fpr_cible * len(humains)))             # faux positifs tolérés
+    if k >= len(humains):
+        return 0.0
+    return float(min(np.nextafter(humains[k], np.inf), 1.0))
+
+
 def calculer_metriques(y, proba, seuil: float = 0.5) -> dict:
-    """Accuracy, précision, rappel, F1, AUC et matrice de confusion (classe positive = IA)."""
+    """Accuracy, précision, rappel, F1, AUC, taux de faux positifs et matrice de
+    confusion (classe positive = IA)."""
     y = np.asarray(y)
     pred = (np.asarray(proba) >= seuil).astype(int)
     tn, fp, fn, tp = confusion_matrix(y, pred, labels=[0, 1]).ravel()
     return {
         "n": int(len(y)),
+        "seuil": round(float(seuil), 6),
         "accuracy": round(float(accuracy_score(y, pred)), 4),
         "precision": round(float(precision_score(y, pred, zero_division=0)), 4),
         "rappel": round(float(recall_score(y, pred, zero_division=0)), 4),
         "f1": round(float(f1_score(y, pred, zero_division=0)), 4),
+        "taux_faux_positifs": round(float(fp / (fp + tn)), 4) if fp + tn else None,
         "auc": round(float(roc_auc_score(y, proba)), 4) if len(set(y.tolist())) == 2 else None,
         "confusion": {"vrais_negatifs": int(tn), "faux_positifs": int(fp),
                       "faux_negatifs": int(fn), "vrais_positifs": int(tp)},

@@ -54,6 +54,10 @@ MAX_TOKENS_DETECTION = 128        # troncature PAR PHRASE (les phrases sont cour
 POOLING_DETECTION    = "mean"     # "mean" (moyenne des tokens) ou "cls"
 MAX_PHRASES = 30                  # phrases analysées au maximum par paragraphe
 PHRASES_PAR_TEXTE_TRAIN = 3       # phrases conservées par paragraphe pour entraîner le modèle-phrase
+# Part maximale de textes humains classés « IA » (faux positifs) tolérée pour fixer le
+# seuil de décision sur la validation. Accuser un élève à tort coûte plus cher que
+# laisser passer un texte IA : on borne les faux positifs au lieu de couper à 0.5.
+FPR_CIBLE_DETECTION = 0.01
 
 
 def verifier_langue(langue: str) -> str:

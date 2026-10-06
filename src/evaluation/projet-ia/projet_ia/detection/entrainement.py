@@ -8,9 +8,10 @@ Déroulé :
   1. chaque composant (paragraphe, phrase, interphrases) est entraîné sur `train`
      (arrêt anticipé sur `val`) ;
   2. on calcule leurs log-odds sur `val` et on y apprend les poids de fusion par
-     descente de gradient ;
+     descente de gradient, puis le SEUIL de décision : le plus bas qui garde au plus
+     `fpr_cible` des textes humains de `val` classés « IA » (faux positifs) ;
   3. le split `test`, jamais utilisé jusque-là, sert une seule fois à mesurer chaque
-     composant ET la fusion.
+     composant ET la fusion (au seuil choisi, et à 0.5 pour comparaison).
 Les poids de fusion sont appris sur des prédictions de `val` que les composants
 n'ont pas vues à l'entraînement (sinon la fusion ferait confiance au composant
 qui a mémorisé son train).
@@ -29,7 +30,7 @@ from .composants import COMPOSANTS, charger_donnees, genome_par_defaut
 from .fusion import (agreger_phrases, assembler_entrees, entrainer_fusion, logit,
                      predire_fusion)
 from .mlp import (GenomeMLP, assembler_features, calculer_metriques, entrainer_mlp,
-                  metriques_par_groupe, predire_proba)
+                  metriques_par_groupe, predire_proba, seuil_pour_fpr)
 
 
 def _features(d: dict, genome: GenomeMLP):
@@ -75,16 +76,19 @@ def entrainer_final(genomes: dict | None = None, dossier_cache=None,
                     chemin_modele=None, chemin_rapport=None,
                     epochs_max: int = 30, patience: int = 3, seed: int = 42,
                     max_phrases_train: int | None = 1_000_000,
+                    fpr_cible: float = config.FPR_CIBLE_DETECTION,
                     entraineur=entrainer_mlp) -> dict:
     """
-    Entraîne les trois composants, apprend la fusion, évalue sur `test`, sauvegarde le
-    modèle (.pkl) et le rapport (.json).
+    Entraîne les trois composants, apprend la fusion et le seuil, évalue sur `test`,
+    sauvegarde le modèle (.pkl) et le rapport (.json).
 
     Args:
         genomes           : dict composant -> GenomeMLP (sinon fichiers de models/<langue>/
                             produits par l'algorithme génétique, sinon génomes par défaut)
         dossier_cache     : cache de la langue visée (obligatoire en pratique)
         max_phrases_train : nombre maximum de phrases pour entraîner le modèle-phrase (mémoire)
+        fpr_cible         : part maximale de textes humains de `val` classés « IA »,
+                            qui fixe le seuil de décision (ex. 0.01 = 1 %)
     Returns:
         le rapport (dict)
     """
@@ -116,6 +120,9 @@ def entrainer_final(genomes: dict | None = None, dossier_cache=None,
     sortie_val = _sorties_split(modeles, genomes, dossier_cache, "val")
     print("\nApprentissage des poids de fusion (descente de gradient)...")
     fusion = entrainer_fusion(assembler_entrees(sortie_val["z"]), sortie_val["y"])
+    p_val = predire_fusion(fusion, assembler_entrees(sortie_val["z"]))
+    seuil = seuil_pour_fpr(sortie_val["y"], p_val, fpr_cible)
+    print(f"Seuil de décision : {seuil:.4f} (au plus {fpr_cible:.1%} de faux positifs sur val)")
 
     # ── 3. Évaluation sur le jeu de test : une seule fois, à la toute fin ──
     sortie_test = _sorties_split(modeles, genomes, dossier_cache, "test")
@@ -134,16 +141,18 @@ def entrainer_final(genomes: dict | None = None, dossier_cache=None,
         "composants": details,
         "fusion": {"poids_ia": fusion["poids_ia"], "poids_humain": fusion["poids_humain"],
                    "biais": fusion["biais"], "historique_cout": fusion["historique_cout"],
-                   "validation": calculer_metriques(
-                       sortie_val["y"], predire_fusion(fusion, assembler_entrees(sortie_val["z"])))},
-        "test": calculer_metriques(y_test, p_fusion),
+                   "validation": calculer_metriques(sortie_val["y"], p_val, seuil)},
+        "seuil": {"valeur": seuil, "fpr_cible": fpr_cible,
+                  "methode": "plus bas seuil gardant au plus fpr_cible de faux positifs sur val"},
+        "test": calculer_metriques(y_test, p_fusion, seuil),
+        "test_seuil_0_5": calculer_metriques(y_test, p_fusion, 0.5),
         "test_niveau_phrase": calculer_metriques(sortie_test["y_phrases"],
                                                  sigmoid(sortie_test["z_phrases"])),
-        "test_par_domaine": metriques_par_groupe(meta_test, y_test, p_fusion, "domaine"),
-        "test_par_longueur": metriques_par_groupe(meta_test, y_test, p_fusion, "longueur"),
+        "test_par_domaine": metriques_par_groupe(meta_test, y_test, p_fusion, "domaine", seuil),
+        "test_par_longueur": metriques_par_groupe(meta_test, y_test, p_fusion, "longueur", seuil),
         "test_detection_par_generateur": metriques_par_groupe(
-            meta_test, y_test, p_fusion, "generateur"),
-        "remarque": ("Les poids de fusion et l'arrêt anticipé utilisent le split val ; "
+            meta_test, y_test, p_fusion, "generateur", seuil),
+        "remarque": ("Les poids de fusion, le seuil et l'arrêt anticipé utilisent le split val ; "
                      "le split test n'est lu qu'une fois, ici."),
     }
 
@@ -152,7 +161,8 @@ def entrainer_final(genomes: dict | None = None, dossier_cache=None,
         pickle.dump({"version": 2, "composants": {
                         c: {"modele": modeles[c]["modele"], "scaler": modeles[c]["scaler"],
                             "genome": genomes[c].to_dict()} for c in COMPOSANTS},
-                     "fusion": fusion, "cache": info}, f)
+                     "fusion": fusion, "seuil": seuil, "fpr_cible": fpr_cible,
+                     "cache": info}, f)
     creer_dossier_parent(chemin_rapport)
     with open(chemin_rapport, "w", encoding="utf-8") as f:
         json.dump(rapport, f, indent=2, ensure_ascii=False)
@@ -173,6 +183,12 @@ def afficher_rapport(rapport: dict) -> None:
         print(f"    {c:<14} seul : {d['test']['accuracy']:.4f}   (architecture {d['architecture']})")
     print(f"    {'FUSION':<14}      : {t['accuracy']:.4f} | précision {t['precision']:.4f} | "
           f"rappel {t['rappel']:.4f} | F1 {t['f1']:.4f} | AUC {t['auc']}")
+    if "seuil" in rapport:
+        s, t05 = rapport["seuil"], rapport["test_seuil_0_5"]
+        print(f"  Seuil {s['valeur']:.4f} (cible : au plus {s['fpr_cible']:.1%} de faux positifs) : "
+              f"faux positifs sur test {t['taux_faux_positifs']:.2%}, IA détectées {t['rappel']:.2%}")
+        print(f"  (au seuil 0.5 : faux positifs {t05['taux_faux_positifs']:.2%}, "
+              f"IA détectées {t05['rappel']:.2%})")
     print(f"  Niveau phrase (labels hérités du paragraphe) : accuracy "
           f"{rapport['test_niveau_phrase']['accuracy']:.4f}")
 

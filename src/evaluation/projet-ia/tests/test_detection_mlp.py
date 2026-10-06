@@ -11,7 +11,7 @@ from projet_ia.detection import (COMPOSANTS, GenomeMLP, algorithme_genetique, co
                                  entrainer_final, predire_textes)
 from projet_ia.detection.composants import BLOCS, genome_par_defaut
 from projet_ia.detection.evolution import MemoireAntibiais, calculer_fitness, croiser, muter
-from projet_ia.detection.mlp import calculer_metriques, entrainer_mlp
+from projet_ia.detection.mlp import calculer_metriques, entrainer_mlp, seuil_pour_fpr
 
 
 @pytest.mark.parametrize("composant", COMPOSANTS)
@@ -70,6 +70,23 @@ def test_entrainement_mlp_courbe_et_arret_anticipe():
 def test_metriques():
     m = calculer_metriques([1, 1, 0, 0], [0.9, 0.4, 0.2, 0.6])
     assert m["accuracy"] == 0.5 and m["confusion"]["vrais_positifs"] == 1
+    assert m["taux_faux_positifs"] == 0.5 and m["seuil"] == 0.5
+
+
+def test_seuil_borne_les_faux_positifs():
+    rng = np.random.default_rng(0)
+    y = np.r_[np.zeros(1000, dtype=int), np.ones(1000, dtype=int)]
+    proba = np.r_[rng.beta(2, 5, 1000), rng.beta(5, 2, 1000)]   # classes qui se chevauchent
+    for cible in (0.0, 0.01, 0.05, 0.2):
+        s = seuil_pour_fpr(y, proba, cible)
+        fpr = np.mean(proba[y == 0] >= s)
+        assert fpr <= cible
+        assert np.mean(proba[y == 0] >= np.nextafter(s, 0)) > cible or s == 0.0  # le plus bas possible
+    # plus on tolère de faux positifs, plus le seuil baisse et plus on détecte d'IA
+    assert seuil_pour_fpr(y, proba, 0.01) > seuil_pour_fpr(y, proba, 0.2)
+    assert seuil_pour_fpr([0, 0, 1], [0.1, 0.2, 0.9], 1.0) == 0.0
+    with pytest.raises(ValueError):
+        seuil_pour_fpr([1, 1], [0.3, 0.8], 0.01)
 
 
 def test_pipeline_complet_sans_toucher_au_test_pendant_la_recherche(
@@ -105,6 +122,10 @@ def test_pipeline_complet_sans_toucher_au_test_pendant_la_recherche(
     assert all("test" in d and d["historique"] for d in rapport["composants"].values())
     fu = rapport["fusion"]
     assert set(fu["poids_ia"]) == set(fu["poids_humain"]) and "biais" in fu
+    seuil = rapport["seuil"]["valeur"]
+    assert rapport["seuil"]["fpr_cible"] == config.FPR_CIBLE_DETECTION
+    assert fu["validation"]["taux_faux_positifs"] <= config.FPR_CIBLE_DETECTION
+    assert rapport["test"]["seuil"] == round(seuil, 6) and rapport["test_seuil_0_5"]["seuil"] == 0.5
     assert rapport["test_niveau_phrase"]["n"] == 100 * 5     # toutes les phrases du test
     for cle in ("test_par_domaine", "test_par_longueur", "test_detection_par_generateur"):
         assert rapport[cle]
@@ -115,6 +136,10 @@ def test_pipeline_complet_sans_toucher_au_test_pendant_la_recherche(
     res = predire_textes([ia, humain, "Une phrase."], chemin_modele=tmp_path / "m" / "modele.pkl",
                          encodeur=faux_encodeur)
     assert res[0]["prediction"] == "IA" and res[1]["prediction"] == "humain"
+    assert res[0]["seuil"] == round(seuil, 4)                # seuil appris, sauvegardé dans le .pkl
+    force = predire_textes([humain], chemin_modele=tmp_path / "m" / "modele.pkl",
+                           encodeur=faux_encodeur, seuil=0.0)
+    assert force[0]["prediction"] == "IA" and force[0]["seuil"] == 0.0
     assert len(res[0]["phrases"]) == 5 and set(res[0]["composants"]) == {
         "paragraphe", "interphrases", "phrases_moy"}
     assert "avertissement" not in res[0] and "avertissement" in res[2]

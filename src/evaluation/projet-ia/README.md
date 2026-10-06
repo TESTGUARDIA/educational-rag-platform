@@ -151,6 +151,13 @@ validation et de test de chaque analyse seule ET de la fusion, poids de fusion, 
 accuracy par domaine / longueur, taux de détection par modèle générateur). Pour refaire seulement
 l'entraînement final avec les génomes déjà trouvés : `python -m projet_ia detection entrainer`.
 
+**Seuil de décision.** Accuser un élève à tort coûte plus cher que laisser passer un texte IA : le
+seuil n'est donc pas 0.5, mais le plus bas seuil qui classe « IA » au plus **1 %** des textes humains
+de `val` (`config.FPR_CIBLE_DETECTION`, ou `--fpr-cible 0.005` à l'entraînement). Il est enregistré
+dans `modele_detection.pkl` et utilisé par défaut par `predire` (`--seuil` pour le forcer). Le rapport
+donne, sur `test`, le taux de faux positifs réellement obtenu et la part d'IA détectées à ce seuil
+(`test`), à comparer avec le seuil 0.5 (`test_seuil_0_5`).
+
 ```python
 from projet_ia.detection import (charger_dataset, construire_cache, algorithme_genetique,
                                  entrainer_final, predire_depuis_fichier, COMPOSANTS)

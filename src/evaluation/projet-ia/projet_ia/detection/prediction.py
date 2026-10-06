@@ -46,9 +46,11 @@ def _choisir_modele(langue: str) -> tuple[Path, str | None]:
         f"python -m projet_ia detection genetique --langue {langue}")
 
 
-def _predire_avec_modele(textes: list[str], data: dict, encodeur, seuil: float) -> list[dict]:
-    """Applique un modèle chargé à une liste de textes."""
+def _predire_avec_modele(textes: list[str], data: dict, encodeur, seuil: float | None) -> list[dict]:
+    """Applique un modèle chargé à une liste de textes (seuil None : celui du modèle)."""
     info = data["cache"]
+    if seuil is None:
+        seuil = data.get("seuil", 0.5)      # modèles entraînés avant le réglage du seuil : 0.5
     genomes = {c: GenomeMLP.from_dict(d["genome"]) for c, d in data["composants"].items()}
     encodeur = encodeur or encodeur_depuis_info(info)
 
@@ -86,6 +88,7 @@ def _predire_avec_modele(textes: list[str], data: dict, encodeur, seuil: float) 
         r = {
             "prediction": "IA" if label else "humain", "label": label,
             "probabilite_ia": round(float(p), 4),
+            "seuil": round(float(seuil), 4),
             "confiance": round(float(p if label else 1 - p), 4),
             "langue": info["langue"], "n_phrases": n,
             "composants": {c: round(float(sigmoid(z[c][i])), 4)
@@ -102,7 +105,7 @@ def _predire_avec_modele(textes: list[str], data: dict, encodeur, seuil: float) 
 
 
 def predire_textes(textes, langue: str = "auto", chemin_modele=None, encodeur=None,
-                   seuil: float = 0.5) -> list[dict]:
+                   seuil: float | None = None) -> list[dict]:
     """
     Prédit pour une liste de paragraphes.
 
@@ -110,9 +113,12 @@ def predire_textes(textes, langue: str = "auto", chemin_modele=None, encodeur=No
         langue        : "auto" (détection pour chaque texte), "en", "fr" ou "multi"
         chemin_modele : forcer un fichier modèle précis (désactive le choix par langue)
         encodeur      : fonction textes -> embeddings (par défaut : celui du modèle)
+        seuil         : probabilité IA à partir de laquelle on répond « IA ». Par défaut,
+                        celui appris à l'entraînement (faux positifs bornés, voir
+                        config.FPR_CIBLE_DETECTION).
     Returns:
         liste de dict (dans l'ordre des textes) : prediction ("IA"/"humain"), label,
-        probabilite_ia, confiance, langue, n_phrases, composants (probabilité de
+        probabilite_ia, seuil, confiance, langue, n_phrases, composants (probabilité de
         chaque analyse), phrases (probabilité de chaque phrase), et éventuellement
         `avertissement`.
     """
@@ -143,6 +149,6 @@ def predire_textes(textes, langue: str = "auto", chemin_modele=None, encodeur=No
 
 
 def predire_depuis_fichier(texte: str, langue: str = "auto", chemin_modele=None,
-                           encodeur=None) -> dict:
+                           encodeur=None, seuil: float | None = None) -> dict:
     """Prédit pour un seul texte (voir predire_textes)."""
-    return predire_textes([texte], langue, chemin_modele, encodeur)[0]
+    return predire_textes([texte], langue, chemin_modele, encodeur, seuil)[0]
