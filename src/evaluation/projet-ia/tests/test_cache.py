@@ -1,6 +1,6 @@
 import pytest
 
-from conftest import DIM_FAUX, faux_encodeur
+from conftest import DIM_FAUX, faux_encodeur, faux_ppl
 from projet_ia.detection.cache import charger_phrases, charger_split, construire_cache
 from projet_ia.detection.style import (N_FEATURES_COHERENCE, N_FEATURES_PHRASE,
                                        N_FEATURES_STYLE)
@@ -16,7 +16,7 @@ class Compteur:
 
 
 def test_cache_et_relecture(tmp_path, dataset_synthetique):
-    construire_cache(dataset_synthetique, tmp_path, taille_chunk=150, encodeur=faux_encodeur)
+    construire_cache(dataset_synthetique, tmp_path, taille_chunk=150, encodeur=faux_encodeur, calculateur_ppl=faux_ppl)
     train = charger_split(tmp_path, "train")
     assert train["emb"].shape == (400, DIM_FAUX) and train["emb"].dtype.name == "float16"
     assert train["style"].shape == (400, N_FEATURES_STYLE)
@@ -27,12 +27,12 @@ def test_cache_et_relecture(tmp_path, dataset_synthetique):
 
 def test_une_seule_passe_dans_l_encodeur_par_bloc(tmp_path, dataset_synthetique):
     compteur = Compteur()
-    construire_cache(dataset_synthetique, tmp_path, taille_chunk=200, encodeur=compteur)
+    construire_cache(dataset_synthetique, tmp_path, taille_chunk=200, encodeur=compteur, calculateur_ppl=faux_ppl)
     assert compteur.appels == 4               # 4 blocs (train 2, val 1, test 1) = 4 passes, pas plus
 
 
 def test_niveau_phrase(tmp_path, dataset_synthetique):
-    construire_cache(dataset_synthetique, tmp_path, taille_chunk=150, encodeur=faux_encodeur)
+    construire_cache(dataset_synthetique, tmp_path, taille_chunk=150, encodeur=faux_encodeur, calculateur_ppl=faux_ppl)
 
     train = charger_phrases(tmp_path, "train")             # 3 phrases gardées par paragraphe
     assert train["emb"].shape == (400 * 3, DIM_FAUX)
@@ -48,25 +48,25 @@ def test_niveau_phrase(tmp_path, dataset_synthetique):
 
 
 def test_reprise_apres_interruption(tmp_path, dataset_synthetique):
-    construire_cache(dataset_synthetique, tmp_path, taille_chunk=100, encodeur=faux_encodeur)
+    construire_cache(dataset_synthetique, tmp_path, taille_chunk=100, encodeur=faux_encodeur, calculateur_ppl=faux_ppl)
     (tmp_path / "train_00002.npz").unlink()                  # simule un bloc manquant
     with pytest.raises(ValueError, match="incomplet"):
         charger_split(tmp_path, "train")
 
     compteur = Compteur()
-    construire_cache(dataset_synthetique, tmp_path, taille_chunk=100, encodeur=compteur)
+    construire_cache(dataset_synthetique, tmp_path, taille_chunk=100, encodeur=compteur, calculateur_ppl=faux_ppl)
     assert compteur.appels == 1                              # seul le bloc manquant est recalculé
     assert charger_split(tmp_path, "train")["emb"].shape[0] == 400
 
 
 def test_parametres_differents_refuses(tmp_path, dataset_synthetique):
-    construire_cache(dataset_synthetique, tmp_path, encodeur=faux_encodeur)
+    construire_cache(dataset_synthetique, tmp_path, encodeur=faux_encodeur, calculateur_ppl=faux_ppl)
     with pytest.raises(ValueError, match="autres paramètres"):
-        construire_cache(dataset_synthetique, tmp_path, max_tokens=64, encodeur=faux_encodeur)
+        construire_cache(dataset_synthetique, tmp_path, max_tokens=64, encodeur=faux_encodeur, calculateur_ppl=faux_ppl)
 
 
 def test_limite_par_split(tmp_path, dataset_synthetique):
     construire_cache(dataset_synthetique, tmp_path, max_par_split={"train": 100},
-                     encodeur=faux_encodeur)
+                     encodeur=faux_encodeur, calculateur_ppl=faux_ppl)
     assert 80 <= len(charger_split(tmp_path, "train")["y"]) <= 120
     assert len(charger_split(tmp_path, "val")["y"]) == 100

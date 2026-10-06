@@ -70,3 +70,21 @@ def get_encodeur(nom: str, appareil: str | None = None):
     modele = AutoModel.from_pretrained(nom).to(appareil)
     modele.eval()
     return tokenizer, modele, appareil
+
+
+@lru_cache(maxsize=None)
+def get_modele_causal(nom: str, appareil: str | None = None):
+    """
+    Charge (une seule fois) un modèle de langue causal (GPT-2, BLOOM…) pour les
+    features de perplexité, placé sur GPU s'il y en a un. Il n'est jamais entraîné.
+    Retourne (tokenizer, modele, appareil_torch).
+    """
+    import torch
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    appareil = torch.device(appareil or ("cuda" if torch.cuda.is_available() else "cpu"))
+    print(f"Chargement du modèle de langue {nom} sur {appareil}...")
+    tokenizer = AutoTokenizer.from_pretrained(nom)
+    modele = AutoModelForCausalLM.from_pretrained(nom).to(appareil)
+    modele.eval()
+    return tokenizer, modele, appareil

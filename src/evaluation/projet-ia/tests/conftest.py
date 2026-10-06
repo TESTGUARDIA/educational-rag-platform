@@ -1,7 +1,13 @@
-"""Fixtures partagées : faux encodeur et dataset synthétique (aucun modèle à télécharger)."""
+"""Fixtures partagées : faux encodeur, fausse perplexité et dataset synthétique (aucun
+modèle à télécharger)."""
 
+import re
 import zlib
 
+try:
+    import torch  # noqa: F401  (avant pandas : voir projet_ia/detection/__init__.py)
+except ImportError:
+    pass
 import numpy as np
 import pandas as pd
 import pytest
@@ -17,6 +23,20 @@ def faux_encodeur(textes) -> np.ndarray:
         if "robot" in t:
             v[:5] += 2.0
         sortie[i] = v
+    return sortie
+
+
+def faux_ppl(textes) -> list[dict]:
+    """Perplexité factice déterministe : un « token » par mot, plus prévisible (log-prob plus
+    haute) si le texte parle de 'robot'. Même format que perplexite.calculer_tokens."""
+    sortie = []
+    for t in textes:
+        debuts = np.array([m.start() for m in re.finditer(r"\S+", t)], dtype=np.int32)
+        rng = np.random.default_rng(zlib.crc32(t.encode("utf-8")))
+        centre = -2.0 if "robot" in t else -4.0
+        sortie.append({"debut": debuts, "logprob": rng.normal(centre, 1.0, len(debuts)),
+                       "top1": rng.random(len(debuts)) < 0.4,
+                       "entropie": rng.gamma(2.0, 1.5, len(debuts))})
     return sortie
 
 

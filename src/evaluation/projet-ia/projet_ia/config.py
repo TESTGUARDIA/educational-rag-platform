@@ -40,17 +40,22 @@ CHEMIN_META_DATASET   = DOSSIER_DATA / "meta_dataset.csv"
 CHEMIN_POIDS_CALIBRES = DOSSIER_MODELS / "poids_calibres.json"
 
 # ── Détection IA : langues ────────────────────────────────────────────────────
-# Chaque langue a son encodeur, son modèle spaCy (outils d'analyse grammaticale) et
+# Chaque langue a son encodeur, son modèle de langue causal pour la perplexité (jamais
+# entraîné : instrument de mesure), son modèle spaCy (outils d'analyse grammaticale) et
 # ses propres fichiers (cache et modèles dans un sous-dossier au nom de la langue).
 #   "en"    : anglais       "fr" : français
 #   "multi" : un seul modèle entraîné sur des textes mixtes (encodeur multilingue)
 LANGUES = {
-    "en":    {"nom": "anglais",      "encodeur": "roberta-base",     "spacy": "en_core_web_sm"},
-    "fr":    {"nom": "français",     "encodeur": "camembert-base",   "spacy": "fr_core_news_sm"},
-    "multi": {"nom": "multilingue",  "encodeur": "xlm-roberta-base", "spacy": None},
+    "en":    {"nom": "anglais",      "encodeur": "roberta-base",     "perplexite": "gpt2",
+              "spacy": "en_core_web_sm"},
+    "fr":    {"nom": "français",     "encodeur": "camembert-base",
+              "perplexite": "bigscience/bloom-560m", "spacy": "fr_core_news_sm"},
+    "multi": {"nom": "multilingue",  "encodeur": "xlm-roberta-base",
+              "perplexite": "bigscience/bloom-560m", "spacy": None},
 }
 LANGUE_PAR_DEFAUT = "en"          # le dataset d'entraînement actuel est en anglais
 MAX_TOKENS_DETECTION = 128        # troncature PAR PHRASE (les phrases sont courtes)
+MAX_TOKENS_PERPLEXITE = 256       # troncature du PARAGRAPHE pour la perplexité
 POOLING_DETECTION    = "mean"     # "mean" (moyenne des tokens) ou "cls"
 MAX_PHRASES = 30                  # phrases analysées au maximum par paragraphe
 PHRASES_PAR_TEXTE_TRAIN = 3       # phrases conservées par paragraphe pour entraîner le modèle-phrase
@@ -95,7 +100,7 @@ COLONNES_DATASET = {
     "split":      ("split",),
     "domaine":    ("domain", "domaine"),
     "source":     ("source",),
-    "generateur": ("model", "generator", "generateur"),
+    "generateur": ("model", "ai_model", "generator", "generateur"),
     "longueur":   ("length_category", "length", "longueur"),
     "langue":     ("lang", "language", "langue"),
 }

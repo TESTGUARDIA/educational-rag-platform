@@ -17,6 +17,13 @@ descente de gradient.
     predire_depuis_fichier("Un paragraphe à analyser. Avec plusieurs phrases.")   # langue auto
 """
 
+# Sous Windows, certaines versions de PyTorch ne peuvent plus charger leurs DLL (WinError
+# 1114) si pandas / pyarrow ont été importés avant : on charge donc torch en premier.
+try:
+    import torch  # noqa: F401
+except ImportError:
+    pass
+
 from .cache import construire_cache
 from .donnees import charger_dataset
 from .composants import COMPOSANTS

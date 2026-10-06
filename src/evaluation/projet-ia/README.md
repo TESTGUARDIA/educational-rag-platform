@@ -105,13 +105,23 @@ mêmes résultats à toute l'équipe.
 ### 3. Détection IA / humain (français ou anglais)
 
 **Principe.** Chaque paragraphe est découpé en phrases ; chaque phrase est encodée **une seule
-fois** par un Transformer. Trois analyses, chacune avec son propre MLP, en sont déduites :
+fois** par un Transformer, et le paragraphe passe une fois dans un **modèle de langue causal**
+(`gpt2` en anglais, `bigscience/bloom-560m` en français) pour mesurer sa **perplexité** : à quel
+point chaque token était prévisible. Un LLM choisit des tokens probables, donc son texte est peu
+surprenant, et régulièrement d'une phrase à l'autre. Ce modèle de langue n'est **jamais entraîné** :
+c'est un instrument de mesure (`detection/perplexite.py`). Trois analyses, chacune avec son propre
+MLP, en sont déduites :
 
 | Analyse | Ce qu'elle regarde |
 |---|---|
-| `paragraphe` | embedding moyen des phrases + style global + cohérence |
-| `phrase` | chaque phrase isolément (les phrases héritent du label du paragraphe) |
-| `interphrases` | comparaison des phrases entre elles : régularité de la longueur, de la ponctuation, du vocabulaire, similarité sémantique entre phrases successives |
+| `paragraphe` | embedding moyen des phrases + style global + cohérence + perplexité |
+| `phrase` | chaque phrase isolément, perplexité comprise (les phrases héritent du label du paragraphe) |
+| `interphrases` | comparaison des phrases entre elles : régularité de la longueur, de la ponctuation, du vocabulaire, de la perplexité, similarité sémantique entre phrases successives |
+
+Features de perplexité : log-probabilité moyenne des tokens, son écart-type, part des tokens qui
+étaient le choix n°1 du modèle, entropie moyenne, rapport surprise / entropie (corrige les textes
+prévisibles par nature) et écart de perplexité entre phrases. L'algorithme génétique peut activer
+ou non ce bloc (`use_ppl`) pour chaque analyse.
 
 Leurs sorties sont fusionnées : `score = biais + Σ poids_ia·z⁺ + Σ poids_humain·z⁻`, où `z` est le
 log-odds de chaque analyse (pour les phrases : moyenne, maximum et minimum). Les poids « IA » et

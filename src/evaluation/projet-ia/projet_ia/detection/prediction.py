@@ -3,7 +3,8 @@ detection/prediction.py
 =======================
 Prédiction « IA ou humain » pour un paragraphe (français ou anglais).
 
-Le texte est découpé en phrases, chaque phrase est encodée, puis trois analyses sont
+Le texte est découpé en phrases, chaque phrase est encodée, le texte passe dans le
+modèle de langue (perplexité), puis trois analyses sont
 menées (paragraphe entier, phrase par phrase, comparaison entre phrases) et fusionnées
 avec les poids appris à l'entraînement. Le résultat détaille aussi chaque phrase.
 
@@ -17,10 +18,11 @@ import numpy as np
 
 from .. import config
 from ..calibration.regression import sigmoid
-from .cache import decouper_pour_cache, encodeur_depuis_info
+from .cache import calculateur_ppl_depuis_info, decouper_pour_cache, encodeur_depuis_info
 from .fusion import agreger_phrases, assembler_entrees, logit, predire_fusion
 from .langue import detecter_langue
 from .mlp import GenomeMLP, assembler_features, predire_proba
+from .perplexite import N_FEATURES_PPL, N_FEATURES_PPL_PHRASE, features_perplexite
 from .style import (INDICES_INTERPHRASES, calculer_style, coherence_depuis_embeddings,
                     features_phrase)
 
@@ -46,7 +48,8 @@ def _choisir_modele(langue: str) -> tuple[Path, str | None]:
         f"python -m projet_ia detection genetique --langue {langue}")
 
 
-def _predire_avec_modele(textes: list[str], data: dict, encodeur, seuil: float | None) -> list[dict]:
+def _predire_avec_modele(textes: list[str], data: dict, encodeur, calculateur_ppl,
+                         seuil: float | None) -> list[dict]:
     """Applique un modèle chargé à une liste de textes (seuil None : celui du modèle)."""
     info = data["cache"]
     if seuil is None:
@@ -56,27 +59,39 @@ def _predire_avec_modele(textes: list[str], data: dict, encodeur, seuil: float |
 
     phrases = [decouper_pour_cache(t, info["max_phrases"]) for t in textes]
     emb = np.asarray(encodeur([p for ph in phrases for p in ph]), dtype=np.float32)
+    # Perplexité : seulement si un composant s'en sert (les anciens modèles n'en ont pas)
+    avec_ppl = any(g.use_ppl for g in genomes.values())
+    if avec_ppl:
+        tokens = (calculateur_ppl or calculateur_ppl_depuis_info(info))(textes)
 
-    emb_moy, coh, ph_style, idx = [], [], [], []
+    emb_moy, coh, ph_style, ppl, ph_ppl, idx = [], [], [], [], [], []
     debut = 0
     for i, ph in enumerate(phrases):
         e = emb[debut:debut + len(ph)]
         emb_moy.append(e.mean(axis=0))
         coh.append(coherence_depuis_embeddings(e))
         ph_style.extend(features_phrase(p, j, len(ph)) for j, p in enumerate(ph))
+        if avec_ppl:
+            ppl_texte, ppl_phrases = features_perplexite(textes[i], ph, tokens[i])
+        else:
+            ppl_texte = np.zeros(N_FEATURES_PPL, dtype=np.float32)
+            ppl_phrases = np.zeros((len(ph), N_FEATURES_PPL_PHRASE), dtype=np.float32)
+        ppl.append(ppl_texte)
+        ph_ppl.extend(ppl_phrases)
         idx.extend([i] * len(ph))
         debut += len(ph)
     emb_moy, coh, ph_style = np.array(emb_moy), np.array(coh), np.array(ph_style)
+    ppl, ph_ppl = np.array(ppl), np.array(ph_ppl)
     style = calculer_style(textes)
 
     comp = data["composants"]
     z_phrases = logit(predire_proba(
-        comp["phrase"], assembler_features(emb, ph_style, None, genomes["phrase"])))
+        comp["phrase"], assembler_features(emb, ph_style, None, genomes["phrase"], ph_ppl)))
     z = {
         "paragraphe": logit(predire_proba(comp["paragraphe"], assembler_features(
-            emb_moy, style, coh, genomes["paragraphe"]))),
+            emb_moy, style, coh, genomes["paragraphe"], ppl))),
         "interphrases": logit(predire_proba(comp["interphrases"], assembler_features(
-            None, style[:, list(INDICES_INTERPHRASES)], coh, genomes["interphrases"]))),
+            None, style[:, list(INDICES_INTERPHRASES)], coh, genomes["interphrases"], ppl))),
         **agreger_phrases(z_phrases, idx, len(textes)),
     }
     proba = predire_fusion(data["fusion"], assembler_entrees(z))
@@ -105,7 +120,7 @@ def _predire_avec_modele(textes: list[str], data: dict, encodeur, seuil: float |
 
 
 def predire_textes(textes, langue: str = "auto", chemin_modele=None, encodeur=None,
-                   seuil: float | None = None) -> list[dict]:
+                   seuil: float | None = None, calculateur_ppl=None) -> list[dict]:
     """
     Prédit pour une liste de paragraphes.
 
@@ -113,6 +128,8 @@ def predire_textes(textes, langue: str = "auto", chemin_modele=None, encodeur=No
         langue        : "auto" (détection pour chaque texte), "en", "fr" ou "multi"
         chemin_modele : forcer un fichier modèle précis (désactive le choix par langue)
         encodeur      : fonction textes -> embeddings (par défaut : celui du modèle)
+        calculateur_ppl : fonction textes -> stats par token pour la perplexité
+                        (par défaut : le modèle de langue du modèle)
         seuil         : probabilité IA à partir de laquelle on répond « IA ». Par défaut,
                         celui appris à l'entraînement (faux positifs bornés, voir
                         config.FPR_CIBLE_DETECTION).
@@ -124,7 +141,8 @@ def predire_textes(textes, langue: str = "auto", chemin_modele=None, encodeur=No
     """
     textes = list(textes)
     if chemin_modele is not None:
-        return _predire_avec_modele(textes, charger_modele(chemin_modele), encodeur, seuil)
+        return _predire_avec_modele(textes, charger_modele(chemin_modele), encodeur,
+                                    calculateur_ppl, seuil)
 
     if langue == "auto":
         langues = [detecter_langue(t) for t in textes]
@@ -140,7 +158,7 @@ def predire_textes(textes, langue: str = "auto", chemin_modele=None, encodeur=No
                    f"Langue non détectée : modèle '{voulue}' utilisé par défaut."
         pos = [i for i, x in enumerate(langues) if x == l]
         sorties = _predire_avec_modele([textes[i] for i in pos], charger_modele(chemin),
-                                       encodeur, seuil)
+                                       encodeur, calculateur_ppl, seuil)
         for i, r in zip(pos, sorties):
             if note:
                 r["avertissement"] = (r.get("avertissement", "") + " " + note).strip()
@@ -149,6 +167,7 @@ def predire_textes(textes, langue: str = "auto", chemin_modele=None, encodeur=No
 
 
 def predire_depuis_fichier(texte: str, langue: str = "auto", chemin_modele=None,
-                           encodeur=None, seuil: float | None = None) -> dict:
+                           encodeur=None, seuil: float | None = None,
+                           calculateur_ppl=None) -> dict:
     """Prédit pour un seul texte (voir predire_textes)."""
-    return predire_textes([texte], langue, chemin_modele, encodeur, seuil)[0]
+    return predire_textes([texte], langue, chemin_modele, encodeur, seuil, calculateur_ppl)[0]

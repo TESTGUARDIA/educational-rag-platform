@@ -34,7 +34,7 @@ from .mlp import (GenomeMLP, assembler_features, calculer_metriques, entrainer_m
 
 
 def _features(d: dict, genome: GenomeMLP):
-    return assembler_features(d["emb"], d["style"], d["coh"], genome)
+    return assembler_features(d["emb"], d["style"], d["coh"], genome, d["ppl"])
 
 
 def charger_genomes(langue: str, genomes: dict | None = None) -> dict:

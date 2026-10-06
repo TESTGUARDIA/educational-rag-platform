@@ -55,6 +55,8 @@ def muter(genome: GenomeMLP, taux: float = 0.2, blocs: tuple = BLOCS_TOUS) -> Ge
         g.use_style = not g.use_style
     if random.random() < taux:
         g.use_coherence = not g.use_coherence
+    if random.random() < taux:
+        g.use_ppl = not g.use_ppl
     g.accuracy = g.temps_entrainement = g.fitness = None
     return g.valider(blocs)
 
@@ -63,7 +65,7 @@ def croiser(a: GenomeMLP, b: GenomeMLP, blocs: tuple = BLOCS_TOUS) -> GenomeMLP:
     """Croisement uniforme : chaque gène vient de l'un ou l'autre parent."""
     enfant = GenomeMLP()
     for champ in ("n_couches", "largeur", "forme", "activation", "alpha", "lr",
-                  "batch_size", "use_embedding", "use_style", "use_coherence"):
+                  "batch_size", "use_embedding", "use_style", "use_coherence", "use_ppl"):
         setattr(enfant, champ, getattr(random.choice([a, b]), champ))
     return enfant.valider(blocs)
 
@@ -180,13 +182,13 @@ def algorithme_genetique(
         cache_features = {}                                   # (emb, style, coh) -> matrices
 
         for g in population:
-            cle = (g.use_embedding, g.use_style, g.use_coherence)
+            cle = (g.use_embedding, g.use_style, g.use_coherence, g.use_ppl)
             if cle not in cache_features:
                 cache_features[cle] = (
                     assembler_features(_sel(train["emb"], idx), _sel(train["style"], idx),
-                                       _sel(train["coh"], idx), g),
+                                       _sel(train["coh"], idx), g, _sel(train["ppl"], idx)),
                     assembler_features(_sel(val["emb"], idx_val), _sel(val["style"], idx_val),
-                                       _sel(val["coh"], idx_val), g),
+                                       _sel(val["coh"], idx_val), g, _sel(val["ppl"], idx_val)),
                 )
             X_t, X_v = cache_features[cle]
             res = entraineur(g, X_t, y_t, X_v, y_val, epochs_max=epochs_individu,
@@ -198,7 +200,8 @@ def algorithme_genetique(
         courant = population[0]
         print(f"[{composant}] Génération {generation:>3} | fitness {courant.fitness:.4f} | "
               f"acc val {courant.accuracy:.4f} | {courant.couches()} {courant.activation} | "
-              f"emb={courant.use_embedding} style={courant.use_style} coh={courant.use_coherence}")
+              f"emb={courant.use_embedding} style={courant.use_style} coh={courant.use_coherence} "
+              f"ppl={courant.use_ppl}")
 
         historique.append({"generation": generation, "fitness": round(courant.fitness, 5),
                            "accuracy_val": round(courant.accuracy, 5),

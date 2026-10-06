@@ -5,7 +5,7 @@ Classifieur MLP et ses variations.
 
 Un `GenomeMLP` décrit une variante : architecture (nombre de couches, largeur,
 forme constante ou pyramidale), activation, régularisation, optimisation, et
-groupes de features utilisés (embedding, style, cohérence). L'algorithme
+groupes de features utilisés (embedding, style, cohérence, perplexité). L'algorithme
 génétique (evolution.py) cherche le meilleur génome.
 
 L'entraînement se fait époque par époque : on suit la perte et l'accuracy de
@@ -28,7 +28,7 @@ from sklearn.preprocessing import StandardScaler
 ACTIVATIONS = ("relu", "tanh", "logistic")
 FORMES = ("constante", "pyramide")
 BATCH_SIZES = (128, 256, 512, 1024, 2048)
-BLOCS_TOUS = ("emb", "style", "coh")
+BLOCS_TOUS = ("emb", "style", "coh", "ppl")
 
 
 @dataclass
@@ -46,6 +46,7 @@ class GenomeMLP:
     use_embedding: bool = True
     use_style: bool = True
     use_coherence: bool = False   # features de cohérence entre phrases
+    use_ppl: bool = False         # features de perplexité (modèle de langue causal)
     # ── résultats (remplis par l'évaluation) ──
     accuracy: Optional[float] = None
     temps_entrainement: Optional[float] = None
@@ -59,7 +60,7 @@ class GenomeMLP:
     def valider(self, blocs: tuple = BLOCS_TOUS) -> "GenomeMLP":
         """
         Ramène le génome dans ses bornes. `blocs` liste les groupes de features
-        disponibles ("emb", "style", "coh") ; les autres sont désactivés, et au moins
+        disponibles ("emb", "style", "coh", "ppl") ; les autres sont désactivés, et au moins
         un groupe reste actif.
         """
         self.n_couches = int(min(4, max(1, self.n_couches)))
@@ -75,10 +76,11 @@ class GenomeMLP:
         self.use_embedding = self.use_embedding and "emb" in blocs
         self.use_style = self.use_style and "style" in blocs
         self.use_coherence = self.use_coherence and "coh" in blocs
-        if not (self.use_embedding or self.use_style or self.use_coherence):
+        self.use_ppl = self.use_ppl and "ppl" in blocs
+        if not (self.use_embedding or self.use_style or self.use_coherence or self.use_ppl):
             premier = blocs[0]
             setattr(self, {"emb": "use_embedding", "style": "use_style",
-                           "coh": "use_coherence"}[premier], True)
+                           "coh": "use_coherence", "ppl": "use_ppl"}[premier], True)
         return self
 
     @classmethod
@@ -94,6 +96,7 @@ class GenomeMLP:
             use_embedding=random.random() < 0.85,
             use_style=random.random() < 0.85,
             use_coherence=random.random() < 0.6,
+            use_ppl=random.random() < 0.85,
         )
         return g.valider(blocs)
 
@@ -106,7 +109,7 @@ class GenomeMLP:
         return cls(**{k: v for k, v in d.items() if k in champs})
 
 
-def assembler_features(emb, style, coh, genome: GenomeMLP) -> np.ndarray:
+def assembler_features(emb, style, coh, genome: GenomeMLP, ppl=None) -> np.ndarray:
     """Concatène les groupes de features choisis par le génome (float32)."""
     blocs = []
     if genome.use_embedding:
@@ -117,6 +120,10 @@ def assembler_features(emb, style, coh, genome: GenomeMLP) -> np.ndarray:
         if coh is None:
             raise ValueError("Ce génome utilise la cohérence, mais elle n'est pas fournie.")
         blocs.append(np.asarray(coh, dtype=np.float32))
+    if genome.use_ppl:
+        if ppl is None:
+            raise ValueError("Ce génome utilise la perplexité, mais elle n'est pas fournie.")
+        blocs.append(np.asarray(ppl, dtype=np.float32))
     if not blocs:
         raise ValueError("Le génome n'utilise aucune feature.")
     return np.hstack(blocs)

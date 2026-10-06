@@ -5,7 +5,7 @@ import shutil
 import numpy as np
 import pytest
 
-from conftest import faux_encodeur
+from conftest import faux_encodeur, faux_ppl
 from projet_ia import config
 from projet_ia.detection import (COMPOSANTS, GenomeMLP, algorithme_genetique, construire_cache,
                                  entrainer_final, predire_textes)
@@ -22,10 +22,11 @@ def test_genome_toujours_dans_ses_bornes(composant):
         g = muter(croiser(GenomeMLP.aleatoire(blocs), GenomeMLP.aleatoire(blocs), blocs), 1.0, blocs)
         assert 1 <= g.n_couches <= 4 and 32 <= g.largeur <= 1024
         assert 1e-7 <= g.alpha <= 1e-1 and 1e-4 <= g.lr <= 1e-2
-        assert g.use_embedding or g.use_style or g.use_coherence
+        assert g.use_embedding or g.use_style or g.use_coherence or g.use_ppl
         assert (not g.use_embedding) or "emb" in blocs      # jamais un bloc indisponible
         assert (not g.use_coherence) or "coh" in blocs
         assert (not g.use_style) or "style" in blocs
+        assert (not g.use_ppl) or "ppl" in blocs
         assert len(g.couches()) == g.n_couches
 
 
@@ -92,7 +93,7 @@ def test_seuil_borne_les_faux_positifs():
 def test_pipeline_complet_sans_toucher_au_test_pendant_la_recherche(
         tmp_path, dataset_synthetique):
     cache = tmp_path / "cache"
-    construire_cache(dataset_synthetique, cache, taille_chunk=200, encodeur=faux_encodeur)
+    construire_cache(dataset_synthetique, cache, taille_chunk=200, encodeur=faux_encodeur, calculateur_ppl=faux_ppl)
 
     # Le jeu de test est mis hors de portée : la recherche génétique ne doit pas en avoir besoin.
     cache_test = tmp_path / "test_cache_cache"; cache_test.mkdir()
@@ -134,11 +135,11 @@ def test_pipeline_complet_sans_toucher_au_test_pendant_la_recherche(
     ia, humain = dataset_synthetique[dataset_synthetique.split == "test"] \
         .sort_values("label", ascending=False).texte.iloc[[0, -1]]
     res = predire_textes([ia, humain, "Une phrase."], chemin_modele=tmp_path / "m" / "modele.pkl",
-                         encodeur=faux_encodeur)
+                         encodeur=faux_encodeur, calculateur_ppl=faux_ppl)
     assert res[0]["prediction"] == "IA" and res[1]["prediction"] == "humain"
     assert res[0]["seuil"] == round(seuil, 4)                # seuil appris, sauvegardé dans le .pkl
     force = predire_textes([humain], chemin_modele=tmp_path / "m" / "modele.pkl",
-                           encodeur=faux_encodeur, seuil=0.0)
+                           encodeur=faux_encodeur, calculateur_ppl=faux_ppl, seuil=0.0)
     assert force[0]["prediction"] == "IA" and force[0]["seuil"] == 0.0
     assert len(res[0]["phrases"]) == 5 and set(res[0]["composants"]) == {
         "paragraphe", "interphrases", "phrases_moy"}
@@ -151,7 +152,7 @@ def test_modeles_par_langue_et_routage_automatique(tmp_path, dataset_synthetique
 
     cache_en = config.CheminsDetection("en").cache
     construire_cache(dataset_synthetique, cache_en, langue="en", taille_chunk=300,
-                     encodeur=faux_encodeur)
+                     encodeur=faux_encodeur, calculateur_ppl=faux_ppl)
     rapport = entrainer_final(None, cache_en, epochs_max=5)       # chemins déduits de la langue
     assert rapport["langue"] == "en"
     assert config.CheminsDetection("en").modele.exists()
@@ -164,14 +165,14 @@ def test_modeles_par_langue_et_routage_automatique(tmp_path, dataset_synthetique
                 "Il était là depuis longtemps et les autres ne sont pas venus. "
                 "Ce fut la fin de cette histoire pour eux.")
 
-    r = predire_textes([anglais], encodeur=faux_encodeur)[0]       # langue détectée -> modèle en
+    r = predire_textes([anglais], encodeur=faux_encodeur, calculateur_ppl=faux_ppl)[0]       # langue détectée -> modèle en
     assert r["langue"] == "en" and "avertissement" not in r
 
     with pytest.raises(FileNotFoundError, match="fr"):             # pas de modèle français
-        predire_textes([francais], encodeur=faux_encodeur)
+        predire_textes([francais], encodeur=faux_encodeur, calculateur_ppl=faux_ppl)
 
     shutil.copytree(config.CheminsDetection("en").dossier_modeles,
                     config.CheminsDetection("multi").dossier_modeles)   # modèle de repli
-    r = predire_textes([francais], encodeur=faux_encodeur)[0]
+    r = predire_textes([francais], encodeur=faux_encodeur, calculateur_ppl=faux_ppl)[0]
     assert "multilingue" in r["avertissement"]
-    assert predire_textes([anglais], langue="en", encodeur=faux_encodeur)[0]["langue"] == "en"
+    assert predire_textes([anglais], langue="en", encodeur=faux_encodeur, calculateur_ppl=faux_ppl)[0]["langue"] == "en"
