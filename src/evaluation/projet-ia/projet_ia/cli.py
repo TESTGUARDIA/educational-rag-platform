@@ -91,6 +91,9 @@ def _construire_parseur() -> argparse.ArgumentParser:
     p.add_argument("--epochs-individu", type=int, default=5)
     p.add_argument("--patience", type=int, default=5)
     p.add_argument("--generations", type=int, default=20)
+    p.add_argument("--poids-rapidite", type=float, default=0.005,
+                   help="Accuracy perdue par facteur 10 de temps d'entraînement : la vitesse "
+                        "ne départage que des modèles de précision proche (défaut : %(default)s)")
     p.add_argument("--sans-entrainement-final", action="store_true",
                    help="S'arrêter après la recherche des meilleurs génomes")
 
@@ -170,7 +173,8 @@ def _commande_detection(args) -> None:
                        cache, composant=c, taille_population=args.population,
                        taille_elite=args.elite, taille_lot_train=args.lot_train,
                        taille_val=args.taille_val, epochs_individu=args.epochs_individu,
-                       patience=args.patience, max_generations=args.generations)
+                       patience=args.patience, max_generations=args.generations,
+                       poids_rapidite=args.poids_rapidite)
                    for c in args.composants}
         if not args.sans_entrainement_final:
             entrainer_final(genomes, cache, fpr_cible=args.fpr_cible)

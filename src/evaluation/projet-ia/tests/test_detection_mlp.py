@@ -54,8 +54,38 @@ def test_fitness_favorise_le_plus_rapide_a_precision_egale():
     rapide, lent = GenomeMLP(), GenomeMLP()
     rapide.accuracy = lent.accuracy = 0.9
     rapide.temps_entrainement, lent.temps_entrainement = 1.0, 9.0
-    calculer_fitness([rapide, lent], poids_rapidite=0.1)
+    calculer_fitness([rapide, lent])
     assert rapide.fitness > lent.fitness
+
+
+def _individu(accuracy, temps):
+    g = GenomeMLP()
+    g.accuracy, g.temps_entrainement = accuracy, temps
+    return g
+
+
+def test_fitness_la_vitesse_ne_fait_que_departager():
+    # Cas réel du 1er entraînement : +1 point d'accuracy pour 7× plus de temps -> le précis gagne
+    precis, rapide = _individu(0.8978, 2.8), _individu(0.8882, 0.4)
+    calculer_fitness([precis, rapide])
+    assert precis.fitness > rapide.fitness
+    # +0,2 point pour 10× plus de temps : pas assez, le rapide gagne
+    lent, vif = _individu(0.902, 10.0), _individu(0.900, 1.0)
+    calculer_fitness([lent, vif])
+    assert vif.fitness > lent.fitness
+    # 10× plus lent = exactement poids_rapidite d'accuracy perdue
+    a, b = _individu(0.9, 1.0), _individu(0.9, 10.0)
+    calculer_fitness([a, b], poids_rapidite=0.005)
+    assert a.fitness - b.fitness == pytest.approx(0.005)
+
+
+def test_fitness_comparable_entre_generations():
+    # Avec un temps de référence fixe, la fitness d'un individu ne dépend pas des autres
+    g1 = [_individu(0.9, 2.0), _individu(0.8, 0.1)]
+    g2 = [_individu(0.9, 2.0), _individu(0.85, 50.0)]
+    ref = calculer_fitness(g1)
+    assert calculer_fitness(g2, temps_reference=ref) == ref
+    assert g1[0].fitness == g2[0].fitness
 
 
 def test_entrainement_mlp_courbe_et_arret_anticipe():

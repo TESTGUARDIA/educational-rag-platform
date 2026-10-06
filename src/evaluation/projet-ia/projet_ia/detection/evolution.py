@@ -13,8 +13,11 @@ Protocole (conçu pour que le jeu de test reste vierge) :
   * `train` : à chaque génération, un nouveau lot de textes (MemoireAntibiais)
     pour éviter de sur-optimiser sur un lot particulier.
 
-  fitness = accuracy_val × (1 − poids_rapidite) + rapidité × poids_rapidite
-  (rapidité = temps d'entraînement normalisé dans la population : 1 = le plus rapide)
+  fitness = accuracy_val − poids_rapidite × log10(temps / temps_reference)
+  (temps_reference = temps médian de la 1re génération) : un modèle 10 fois plus lent
+  perd `poids_rapidite` d'accuracy (0.005 = un demi-point). La vitesse ne départage
+  donc que des modèles de précision proche, et la fitness reste comparable d'une
+  génération à l'autre.
 """
 
 import json
@@ -108,13 +111,25 @@ class MemoireAntibiais:
         return np.sort(lot)
 
 
-def calculer_fitness(population: list, poids_rapidite: float = 0.1) -> None:
-    """Calcule genome.fitness pour toute la population (modifie en place)."""
-    temps = np.array([g.temps_entrainement for g in population], dtype=float)
-    ecart = temps.max() - temps.min()
+POIDS_RAPIDITE = 0.005      # accuracy perdue par facteur 10 de temps d'entraînement
+
+
+def calculer_fitness(population: list, poids_rapidite: float = POIDS_RAPIDITE,
+                     temps_reference: float | None = None) -> float:
+    """
+    Calcule genome.fitness pour toute la population (modifie en place) :
+        accuracy − poids_rapidite × log10(temps / temps_reference)
+
+    temps_reference : par défaut le temps médian de la population. Le passer
+    explicitement (même valeur à chaque génération) rend les fitness comparables
+    entre générations. Retourne le temps de référence utilisé.
+    """
+    temps = np.maximum(np.array([g.temps_entrainement for g in population], dtype=float), 1e-6)
+    if temps_reference is None:
+        temps_reference = float(np.median(temps))
     for g, t in zip(population, temps):
-        rapidite = 1.0 - (t - temps.min()) / ecart if ecart > 0 else 1.0
-        g.fitness = g.accuracy * (1 - poids_rapidite) + rapidite * poids_rapidite
+        g.fitness = g.accuracy - poids_rapidite * float(np.log10(t / temps_reference))
+    return temps_reference
 
 
 def _sel(tableau, idx):
@@ -135,7 +150,7 @@ def algorithme_genetique(
     taux_mutation_init: float = 0.3,
     taux_mutation_min: float = 0.05,
     fenetre_memoire: int = 3,
-    poids_rapidite: float = 0.1,
+    poids_rapidite: float = POIDS_RAPIDITE,
     max_exemples_charges: int | None = 500_000,
     chemin_sauvegarde=None,
     chemin_historique=None,
@@ -152,6 +167,7 @@ def algorithme_genetique(
         taille_val           : taille du sous-échantillon fixe de validation
         epochs_individu      : époques maximum par individu (court : on compare des génomes)
         patience             : générations sans amélioration avant arrêt
+        poids_rapidite       : accuracy perdue par facteur 10 de temps d'entraînement
         max_exemples_charges : composant "phrase" : nombre maximum de phrases chargées en mémoire
         chemin_sauvegarde / chemin_historique : par défaut dans models/<langue>/
         entraineur           : fonction d'entraînement (par défaut entrainer_mlp)
@@ -175,6 +191,7 @@ def algorithme_genetique(
     population = [GenomeMLP.aleatoire(blocs) for _ in range(taille_population)]
     meilleur, historique = None, []
     sans_amelioration, taux = 0, taux_mutation_init
+    temps_reference = None                    # fixé à la 1re génération, puis inchangé
 
     for generation in range(1, max_generations + 1):
         idx = memoire.tirer_lot(n_train, taille_lot_train)
@@ -195,7 +212,7 @@ def algorithme_genetique(
                              patience=3, seed=seed)
             g.accuracy, g.temps_entrainement = res["accuracy_val"], res["temps"]
 
-        calculer_fitness(population, poids_rapidite)
+        temps_reference = calculer_fitness(population, poids_rapidite, temps_reference)
         population.sort(key=lambda g: g.fitness, reverse=True)
         courant = population[0]
         print(f"[{composant}] Génération {generation:>3} | fitness {courant.fitness:.4f} | "
