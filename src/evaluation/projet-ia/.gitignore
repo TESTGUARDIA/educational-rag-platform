@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# Données et fichiers générés (lourds, spécifiques à chaque machine)
+data/*
+!data/.gitkeep
+models/*
+!models/.gitkeep
+!models/poids_calibres.json
+
+# IDE / système
+.vscode/
+.idea/
+.DS_Store
