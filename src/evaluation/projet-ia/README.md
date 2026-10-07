@@ -191,6 +191,21 @@ l'encodeur ou les génomes en regardant le score de test : il ne serait plus un 
 Un texte de moins de 3 phrases déclenche un avertissement de fiabilité (la comparaison entre
 phrases n'a alors presque rien à comparer).
 
+**Modèle anglais fourni** (`models/en/modele_detection.pkl`, versionné : `predire` fonctionne sans
+réentraîner). Entraîné sur 1,22 million de textes anglais (`dataset5.parquet` : RAID, MAGE, M4GT,
+HC3…), évalué une seule fois sur 67 903 textes de test :
+
+| Au seuil appris (0,80) | Valeur |
+|---|---|
+| Textes humains classés IA (faux positifs) | 0,99 % |
+| Textes IA détectés | 91,3 % |
+| Précision / accuracy / AUC | 98,9 % / 95,2 % / 0,994 |
+
+Textes courts : 91,8 % d'accuracy (96–97 % pour les moyens et longs). Générateurs les moins bien
+détectés : Dolly, FLAN-T5, davinci (67–76 %). **Anglais uniquement** : il ne doit pas servir sur du
+français. Détail complet (par domaine, longueur, générateur, poids de fusion) dans
+`models/en/rapport_entrainement.json`.
+
 ## Tests
 
 ```bash

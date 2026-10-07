@@ -12,6 +12,13 @@ data/*
 models/*
 !models/.gitkeep
 !models/poids_calibres.json
+# Modèle de détection anglais partagé avec l'équipe (journaux et variantes exclus)
+!models/en/
+models/en/*
+!models/en/modele_detection.pkl
+!models/en/rapport_entrainement.json
+!models/en/genome_*.json
+!models/en/historique_evolution_*.json
 
 # IDE / système
 .vscode/
