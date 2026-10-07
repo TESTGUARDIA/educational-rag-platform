@@ -154,8 +154,15 @@ def _commande_detection(args) -> None:
         cache = args.cache or str(cfg.CheminsDetection(args.langue).cache)
 
     if args.action == "preparer":
-        from .detection.cache import construire_cache
+        from .detection.cache import construire_cache, construire_cache_flux
         from .detection.donnees import charger_dataset
+        if args.dataset.lower().endswith(".parquet") and not (args.max_train or args.max_val
+                                                               or args.max_test):
+            # Dataset complet en Parquet : lecture en flux, mémoire indépendante de sa taille
+            construire_cache_flux(args.dataset, cache, langue=args.langue,
+                                  nom_encodeur=args.encodeur, taille_chunk=args.chunk,
+                                  n_jobs=args.n_jobs, phrases_par_texte_train=args.phrases_train)
+            return
         df = charger_dataset(args.dataset, langue=args.langue if args.langue != "multi" else None)
         print(f"{len(df):,} textes : "
               f"{(df['split'] == 'train').sum():,} train / {(df['split'] == 'val').sum():,} val / "

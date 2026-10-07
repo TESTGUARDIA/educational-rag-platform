@@ -35,7 +35,7 @@ import pandas as pd
 
 from .. import config
 from ..common.embeddings import encoder_textes
-from .donnees import echantillon_stratifie
+from .donnees import charger_dataset, echantillon_stratifie, iterer_textes
 from .perplexite import N_FEATURES_PPL, N_FEATURES_PPL_PHRASE, calculer_tokens, features_perplexite
 from .style import (N_FEATURES_COHERENCE, N_FEATURES_PHRASE, calculer_style,
                     coherence_depuis_embeddings, decouper_phrases, features_phrase)
@@ -99,12 +99,78 @@ def construire_cache(df: pd.DataFrame, dossier=None,
     Returns:
         dict info du cache
     """
+    max_par_split = max_par_split or {}
+    dossier, info, encodeur, calculateur_ppl = _initialiser(
+        dossier, langue, nom_encodeur, max_par_split, max_tokens, pooling, max_phrases,
+        phrases_par_texte_train, nom_modele_ppl, max_tokens_ppl, encodeur, calculateur_ppl, seed)
+
+    for num_split, split in enumerate(SPLITS):
+        sous = df[df["split"] == split]
+        if len(sous) == 0:
+            print(f"[{split}] aucun exemple — ignoré")
+            continue
+        sous = echantillon_stratifie(sous, max_par_split.get(split), seed)
+        sous[COLONNES_META].to_csv(dossier / f"meta_{split}.csv", index=False)
+
+        n_chunks = (len(sous) + taille_chunk - 1) // taille_chunk
+        for k in range(n_chunks):
+            tranche = slice(k * taille_chunk, (k + 1) * taille_chunk)
+            _ecrire_chunk(dossier, split, num_split, k, n_chunks, taille_chunk,
+                          lambda t=tranche: sous["texte"].iloc[t].tolist(), encodeur,
+                          calculateur_ppl, n_jobs, max_phrases, phrases_par_texte_train, seed)
+    return info
+
+
+def construire_cache_flux(chemin_dataset, dossier=None,
+                          langue: str = config.LANGUE_PAR_DEFAUT, nom_encodeur: str | None = None,
+                          taille_chunk: int = 10_000, n_jobs: int = 1,
+                          max_tokens: int = config.MAX_TOKENS_DETECTION,
+                          pooling: str = config.POOLING_DETECTION,
+                          max_phrases: int = config.MAX_PHRASES,
+                          phrases_par_texte_train: int | None = config.PHRASES_PAR_TEXTE_TRAIN,
+                          nom_modele_ppl: str | None = None,
+                          max_tokens_ppl: int = config.MAX_TOKENS_PERPLEXITE,
+                          encodeur=None, calculateur_ppl=None, seed: int = 42) -> dict:
+    """
+    Comme construire_cache, mais lit un fichier PARQUET en flux : seules les
+    métadonnées sont chargées en entier, les textes sont lus bloc par bloc. La
+    mémoire ne dépend donc pas de la taille du dataset. Tout le dataset est
+    traité (pour un sous-échantillon, utiliser construire_cache).
+    """
+    dossier, info, encodeur, calculateur_ppl = _initialiser(
+        dossier, langue, nom_encodeur, {}, max_tokens, pooling, max_phrases,
+        phrases_par_texte_train, nom_modele_ppl, max_tokens_ppl, encodeur, calculateur_ppl, seed)
+    filtre = langue if langue in ("en", "fr") else None
+    meta = charger_dataset(chemin_dataset, langue=filtre, avec_texte=False)
+
+    for num_split, split in enumerate(SPLITS):
+        sous = meta[meta["split"] == split]
+        if len(sous) == 0:
+            print(f"[{split}] aucun exemple — ignoré")
+            continue
+        sous[COLONNES_META].to_csv(dossier / f"meta_{split}.csv", index=False)
+
+        n_chunks = (len(sous) + taille_chunk - 1) // taille_chunk
+        n_lus = 0
+        for k, textes in enumerate(iterer_textes(chemin_dataset, split, filtre, taille_chunk)):
+            n_lus += len(textes)
+            _ecrire_chunk(dossier, split, num_split, k, n_chunks, taille_chunk,
+                          lambda t=textes: t, encodeur, calculateur_ppl, n_jobs, max_phrases,
+                          phrases_par_texte_train, seed)
+        if n_lus != len(sous):                  # textes et métadonnées doivent correspondre
+            raise ValueError(f"[{split}] {n_lus} textes lus pour {len(sous)} lignes de métadonnées.")
+    return info
+
+
+def _initialiser(dossier, langue, nom_encodeur, max_par_split, max_tokens, pooling, max_phrases,
+                 phrases_par_texte_train, nom_modele_ppl, max_tokens_ppl, encodeur,
+                 calculateur_ppl, seed) -> tuple:
+    """Crée le dossier, vérifie / écrit cache_info.json et prépare les deux modèles."""
     config.verifier_langue(langue)
     dossier = Path(dossier or config.CheminsDetection(langue).cache)
     dossier.mkdir(parents=True, exist_ok=True)
     nom_encodeur = nom_encodeur or config.LANGUES[langue]["encodeur"]
     nom_modele_ppl = nom_modele_ppl or config.LANGUES[langue]["perplexite"]
-    max_par_split = max_par_split or {}
 
     info = {"version": VERSION_CACHE, "langue": langue, "encodeur": nom_encodeur,
             "max_tokens": max_tokens, "pooling": pooling, "max_phrases": max_phrases,
@@ -121,34 +187,24 @@ def construire_cache(df: pd.DataFrame, dossier=None,
                 f"Supprimez le dossier ou choisissez-en un autre (--cache).")
     chemin_info.write_text(json.dumps(info, indent=2), encoding="utf-8")
 
-    if encodeur is None:
-        encodeur = encodeur_depuis_info(info)
-    if calculateur_ppl is None:
-        calculateur_ppl = calculateur_ppl_depuis_info(info)
+    return (dossier, info, encodeur or encodeur_depuis_info(info),
+            calculateur_ppl or calculateur_ppl_depuis_info(info))
 
-    for num_split, split in enumerate(SPLITS):
-        sous = df[df["split"] == split]
-        if len(sous) == 0:
-            print(f"[{split}] aucun exemple — ignoré")
-            continue
-        sous = echantillon_stratifie(sous, max_par_split.get(split), seed)
-        sous[COLONNES_META].to_csv(dossier / f"meta_{split}.csv", index=False)
 
-        n_chunks = (len(sous) + taille_chunk - 1) // taille_chunk
-        for k in range(n_chunks):
-            fichier = dossier / f"{split}_{k:05d}.npz"
-            if fichier.exists():
-                continue                                    # reprise : déjà calculé
-            textes = sous["texte"].iloc[k * taille_chunk:(k + 1) * taille_chunk].tolist()
-            rng = np.random.default_rng([seed, num_split, k])
-            contenu = _calculer_chunk(
-                textes, k * taille_chunk, encodeur, calculateur_ppl, n_jobs, max_phrases,
-                phrases_par_texte_train if split == "train" else None, rng)
-            tmp = dossier / f"{split}_{k:05d}.tmp.npz"
-            np.savez(tmp, **contenu)
-            tmp.rename(fichier)                             # écriture atomique
-            print(f"[{split}] bloc {k + 1}/{n_chunks} enregistré")
-    return info
+def _ecrire_chunk(dossier, split, num_split, k, n_chunks, taille_chunk, lire_textes, encodeur,
+                  calculateur_ppl, n_jobs, max_phrases, phrases_par_texte_train, seed) -> None:
+    """Calcule et enregistre le bloc k d'un split, sauf s'il existe déjà (reprise)."""
+    fichier = dossier / f"{split}_{k:05d}.npz"
+    if fichier.exists():
+        return
+    rng = np.random.default_rng([seed, num_split, k])
+    contenu = _calculer_chunk(
+        lire_textes(), k * taille_chunk, encodeur, calculateur_ppl, n_jobs, max_phrases,
+        phrases_par_texte_train if split == "train" else None, rng)
+    tmp = dossier / f"{split}_{k:05d}.tmp.npz"
+    np.savez(tmp, **contenu)
+    tmp.rename(fichier)                             # écriture atomique
+    print(f"[{split}] bloc {k + 1}/{n_chunks} enregistré", flush=True)
 
 
 def _calculer_chunk(textes, decalage, encodeur, calculateur_ppl, n_jobs, max_phrases,

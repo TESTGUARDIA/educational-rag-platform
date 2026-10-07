@@ -70,3 +70,39 @@ def test_limite_par_split(tmp_path, dataset_synthetique):
                      encodeur=faux_encodeur, calculateur_ppl=faux_ppl)
     assert 80 <= len(charger_split(tmp_path, "train")["y"]) <= 120
     assert len(charger_split(tmp_path, "val")["y"]) == 100
+
+
+def _parquet_mixte(dataset_synthetique, chemin):
+    """Le dataset synthétique en Parquet, avec 1 texte sur 7 en français (à filtrer)."""
+    df = dataset_synthetique.copy()
+    df["lang"] = ["fr" if i % 7 == 3 else "en" for i in range(len(df))]
+    df.to_parquet(chemin)
+    return df[df["lang"] == "en"]
+
+
+def test_iterer_textes_par_lots(tmp_path, dataset_synthetique):
+    from projet_ia.detection.donnees import iterer_textes
+    attendu = _parquet_mixte(dataset_synthetique, tmp_path / "d.parquet")
+    lots = list(iterer_textes(tmp_path / "d.parquet", "train", "en", taille_lot=50,
+                              lignes_par_lecture=37))        # lots et lectures décalés
+    assert all(len(l) == 50 for l in lots[:-1]) and 0 < len(lots[-1]) <= 50
+    assert sum(lots, []) == attendu[attendu.split == "train"]["texte"].tolist()
+
+
+def test_cache_en_flux_identique_au_cache_en_memoire(tmp_path, dataset_synthetique):
+    import numpy as np
+    from projet_ia.detection.cache import construire_cache_flux
+    from projet_ia.detection.donnees import charger_dataset
+    _parquet_mixte(dataset_synthetique, tmp_path / "d.parquet")
+    construire_cache(charger_dataset(tmp_path / "d.parquet", langue="en"), tmp_path / "memoire",
+                     taille_chunk=70, encodeur=faux_encodeur, calculateur_ppl=faux_ppl)
+    construire_cache_flux(tmp_path / "d.parquet", tmp_path / "flux", taille_chunk=70,
+                          encodeur=faux_encodeur, calculateur_ppl=faux_ppl)
+    for split in ("train", "val", "test"):
+        a, b = charger_split(tmp_path / "memoire", split), charger_split(tmp_path / "flux", split)
+        assert len(a["y"]) < {"train": 400, "val": 100, "test": 100}[split]   # français filtré
+        for cle in ("emb", "style", "coh", "ppl", "y"):
+            assert np.array_equal(a[cle], b[cle])
+        assert a["meta"].equals(b["meta"])
+        pa, pb = charger_phrases(tmp_path / "memoire", split), charger_phrases(tmp_path / "flux", split)
+        assert np.array_equal(pa["emb"], pb["emb"]) and np.array_equal(pa["idx_texte"], pb["idx_texte"])
