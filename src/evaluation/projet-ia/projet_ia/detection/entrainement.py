@@ -104,17 +104,20 @@ def entrainer_final(genomes: dict | None = None, dossier_cache=None,
         print(f"\n[{c}] Entraînement sur le split train...")
         train = charger_donnees(dossier_cache, c, "train",
                                 max_phrases_train if c == "phrase" else None, seed)
+        X_train, y_train = _features(train, genomes[c]), train["y"]
+        del train                           # les features brutes (float16) ne servent plus
         val = charger_donnees(dossier_cache, c, "val", None, seed)
-        res = entraineur(genomes[c], _features(train, genomes[c]), train["y"],
-                         _features(val, genomes[c]), val["y"],
+        X_val, y_val = _features(val, genomes[c]), val["y"]
+        del val
+        res = entraineur(genomes[c], X_train, y_train, X_val, y_val,
                          epochs_max=epochs_max, patience=patience, seed=seed)
         modeles[c] = res
         details[c] = {"genome": genomes[c].to_dict(), "architecture": list(genomes[c].couches()),
-                      "n_exemples_train": int(len(train["y"])),
+                      "n_exemples_train": int(len(y_train)),
                       "epoch_optimal": res["epoch_optimal"],
                       "temps_secondes": round(res["temps"], 1), "historique": res["historique"]}
         print(f"[{c}] accuracy val {res['accuracy_val']:.4f} (époque {res['epoch_optimal']})")
-        del train, val
+        del X_train, X_val
 
     # ── 2. Fusion : poids appris sur la validation ──
     sortie_val = _sorties_split(modeles, genomes, dossier_cache, "val")

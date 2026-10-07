@@ -138,13 +138,16 @@ def entrainer_mlp(genome: GenomeMLP, X_train, y_train, X_val, y_val,
     époque on mesure l'accuracy sur (X_val, y_val) ; on garde les meilleurs
     poids et on s'arrête après `patience` époques sans amélioration.
 
+    Pour économiser la mémoire sur les gros datasets, X_train et X_val (tableaux
+    float) sont standardisés SUR PLACE : l'appelant ne doit plus s'en servir bruts.
+
     Returns:
         dict : modele, scaler, accuracy_val, epoch_optimal, historique
                (perte d'entraînement et accuracy de validation par époque), temps
     """
     debut = time.perf_counter()
     scaler = StandardScaler().fit(X_train)
-    Xt, Xv = scaler.transform(X_train), scaler.transform(X_val)
+    Xt, Xv = scaler.transform(X_train, copy=False), scaler.transform(X_val, copy=False)
 
     clf = MLPClassifier(
         hidden_layer_sizes=genome.couches(), activation=genome.activation,
@@ -173,9 +176,11 @@ def entrainer_mlp(genome: GenomeMLP, X_train, y_train, X_val, y_val,
             "temps": time.perf_counter() - debut}
 
 
-def predire_proba(entraine: dict, X) -> np.ndarray:
-    """Probabilité « IA » (classe 1) pour chaque ligne de X."""
-    return entraine["modele"].predict_proba(entraine["scaler"].transform(X))[:, 1]
+def predire_proba(entraine: dict, X, taille_lot: int = 100_000) -> np.ndarray:
+    """Probabilité « IA » (classe 1) pour chaque ligne de X, par lots (mémoire bornée)."""
+    morceaux = [entraine["modele"].predict_proba(entraine["scaler"].transform(X[i:i + taille_lot]))[:, 1]
+                for i in range(0, len(X), taille_lot)]
+    return np.concatenate(morceaux) if morceaux else np.zeros(0)
 
 
 def seuil_pour_fpr(y, proba, fpr_cible: float) -> float:

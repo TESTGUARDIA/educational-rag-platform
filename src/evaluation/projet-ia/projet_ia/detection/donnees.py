@@ -31,7 +31,11 @@ _SPLITS = {"train": "train", "training": "train",
 def _lire(chemin: Path) -> pd.DataFrame:
     ext = chemin.suffix.lower()
     if ext == ".parquet":
-        return pd.read_parquet(chemin)
+        import pyarrow.parquet as pq
+        # Seules les colonnes utiles sont lues (économie de mémoire sur les gros fichiers)
+        utiles = {nom for noms in config.COLONNES_DATASET.values() for nom in noms}
+        colonnes = [c for c in pq.read_schema(chemin).names if c in utiles]
+        return pd.read_parquet(chemin, columns=colonnes)
     if ext in (".jsonl", ".json"):
         return pd.read_json(chemin, lines=True)
     if ext == ".csv":
