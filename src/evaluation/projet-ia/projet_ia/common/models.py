@@ -55,16 +55,28 @@ def get_nli(modeles: tuple = config.MODELES_NLI_DETECTION):
     raise RuntimeError("Aucun modèle NLI n'a pu être chargé.")
 
 
+def _appareil(appareil: str | None):
+    """GPU s'il y en a un (mémoire plafonnée, voir config.FRACTION_MEMOIRE_GPU), sinon CPU."""
+    import torch
+
+    appareil = torch.device(appareil or ("cuda" if torch.cuda.is_available() else "cpu"))
+    if appareil.type == "cuda":
+        # Sans plafond, le cache de PyTorch peut réserver presque toute la carte ; sous
+        # Windows, le pilote réserve alors autant de mémoire système en secours.
+        index = appareil.index if appareil.index is not None else torch.cuda.current_device()
+        torch.cuda.set_per_process_memory_fraction(config.FRACTION_MEMOIRE_GPU, index)
+    return appareil
+
+
 @lru_cache(maxsize=None)
 def get_encodeur(nom: str, appareil: str | None = None):
     """
     Charge (une seule fois) un encodeur Transformers pour la détection IA,
     placé sur GPU s'il y en a un. Retourne (tokenizer, modele, appareil_torch).
     """
-    import torch
     from transformers import AutoTokenizer, AutoModel
 
-    appareil = torch.device(appareil or ("cuda" if torch.cuda.is_available() else "cpu"))
+    appareil = _appareil(appareil)
     print(f"Chargement de l'encodeur {nom} sur {appareil}...")
     tokenizer = AutoTokenizer.from_pretrained(nom)
     modele = AutoModel.from_pretrained(nom).to(appareil)
@@ -79,10 +91,9 @@ def get_modele_causal(nom: str, appareil: str | None = None):
     features de perplexité, placé sur GPU s'il y en a un. Il n'est jamais entraîné.
     Retourne (tokenizer, modele, appareil_torch).
     """
-    import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
-    appareil = torch.device(appareil or ("cuda" if torch.cuda.is_available() else "cpu"))
+    appareil = _appareil(appareil)
     print(f"Chargement du modèle de langue {nom} sur {appareil}...")
     tokenizer = AutoTokenizer.from_pretrained(nom)
     modele = AutoModelForCausalLM.from_pretrained(nom).to(appareil)

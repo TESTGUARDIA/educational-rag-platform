@@ -56,6 +56,7 @@ LANGUES = {
 LANGUE_PAR_DEFAUT = "en"          # le dataset d'entraînement actuel est en anglais
 MAX_TOKENS_DETECTION = 128        # troncature PAR PHRASE (les phrases sont courtes)
 MAX_TOKENS_PERPLEXITE = 256       # troncature du PARAGRAPHE pour la perplexité
+FRACTION_MEMOIRE_GPU = 0.5        # part maximale de la mémoire du GPU utilisée par PyTorch
 POOLING_DETECTION    = "mean"     # "mean" (moyenne des tokens) ou "cls"
 MAX_PHRASES = 30                  # phrases analysées au maximum par paragraphe
 PHRASES_PAR_TEXTE_TRAIN = 3       # phrases conservées par paragraphe pour entraîner le modèle-phrase

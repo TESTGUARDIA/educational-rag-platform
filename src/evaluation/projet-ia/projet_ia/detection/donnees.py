@@ -132,7 +132,7 @@ def iterer_textes(chemin, split: str, langue: str | None = None,
     """
     import pyarrow.parquet as pq
 
-    fichier = pq.ParquetFile(chemin)
+    fichier = pq.ParquetFile(chemin, buffer_size=8 * 2**20)   # lecture par tampons de 8 Mo
     noms = fichier.schema_arrow.names
     col_texte, col_split = _colonne(noms, "texte"), _colonne(noms, "split")
     col_langue = _colonne(noms, "langue")

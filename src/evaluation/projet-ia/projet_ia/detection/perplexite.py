@@ -96,7 +96,7 @@ def features_perplexite(texte: str, phrases: list[str], tokens: dict) -> tuple:
 
 
 def calculer_tokens(textes, nom_modele: str, max_length: int = 256,
-                    tokens_par_lot: int = 8192, appareil: str | None = None) -> list[dict]:
+                    tokens_par_lot: int = 4096, appareil: str | None = None) -> list[dict]:
     """
     Passe chaque texte dans le modèle de langue causal et retourne, pour chaque
     texte, les statistiques de chacun de ses tokens (voir features_perplexite).
@@ -152,4 +152,6 @@ def calculer_tokens(textes, nom_modele: str, max_length: int = 256,
                 }
             del logits
             i += len(lot)
+    if dev.type == "cuda":
+        torch.cuda.empty_cache()                            # rend la mémoire au pilote
     return sortie
