@@ -1,0 +1,48 @@
+services:
+
+  # ── Backend FastAPI ──────────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: testguardai_api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DB_PATH: /app/data/testguard.db
+      UPLOADS_DIR: /app/uploads
+      # ALLOWED_ORIGINS est lu depuis .env
+    volumes:
+      - db_data:/app/data        # Base SQLite persistante
+      - uploads_data:/app/uploads  # PDFs uploadés persistants
+    expose:
+      - "8000"                   # Uniquement accessible depuis Nginx, pas depuis l'extérieur
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # ── Frontend Nginx ───────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: testguardai_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"                  # Accès public sur le port 80
+    depends_on:
+      api:
+        condition: service_healthy
+    environment:
+      - NGINX_ENTRYPOINT_QUIET_LOGS=1
+
+# ── Volumes persistants ──────────────────────────────────────────────────────
+volumes:
+  db_data:
+    name: testguardai_db
+  uploads_data:
+    name: testguardai_uploads
