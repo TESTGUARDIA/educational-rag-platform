@@ -1,0 +1,22 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Dépendances système minimales
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Dépendances Python
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Code source
+COPY src/web/back/main.py ./main.py
+
+# Dossier uploads persistant
+RUN mkdir -p /app/uploads
+
+# Démarrage — init_db() est appelé dans le __main__ du fichier
+CMD ["sh", "-c", "python -c 'import main; main.init_db()' && uvicorn main:app --host 0.0.0.0 --port 8000"]
