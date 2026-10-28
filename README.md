@@ -1,1 +1,0 @@
-# educational-rag-platform
