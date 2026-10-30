@@ -1,0 +1,9 @@
+/src/web/              @eloise @thomas @virna
+/docker-compose.yml    @eloise @thomas
+/Dockerfile.*          @eloise @thomas
+/nginx.conf            @eloise @thomas
+/src/api/              @anisse @alexis @virna
+/src/evaluation/       @raphael @nina
+/src/ui/               @nina
+/src/data/             @arsene @juliette
+/docs/                 @eloise
