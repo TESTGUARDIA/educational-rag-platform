@@ -216,9 +216,17 @@ data/
 *.parquet
 *.csv
 
-# Ignorer la base de données vectorielle locale (ChromaDB)
-chroma_db/
-chroma_data/
-
 # Ignorer les fichiers de configuration IDE perso
 .vscode/
+
+# --- TestGuardAI ---
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Base SQLite et PDF déposés en local
+*.db
+uploads/
+
+# Frontend React
+node_modules/
