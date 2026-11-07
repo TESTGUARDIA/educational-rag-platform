@@ -222,7 +222,8 @@ def ingest_and_generate_questions(file_bytes: bytes, filename: str,
         if section_questions is None:
             logger.error("[GEN] Échec json.loads() pour %s", filename)
             continue
-        all_questions.extend(_fix_model_questions(section_questions))
+        # Le modèle dépasse parfois le nombre demandé : on respecte la répartition
+        all_questions.extend(_fix_model_questions(section_questions[:n_questions]))
 
     logger.error("[GEN] Liste finale de questions pour %s : %r", filename, all_questions)
 

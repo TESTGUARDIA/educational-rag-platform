@@ -37,3 +37,23 @@ def test_json_invalide():
 def test_latex_non_echappe():
     r = _parse_model_response(r'{"questions": [{"question": "Q ?", "reponse": "$\frac{1}{2}$"}]}')
     assert r[0]["reponse"] == r"$\frac{1}{2}$"
+
+
+def test_nb_questions_respecte(monkeypatch):
+    """Le modèle renvoie 3 questions pour une section qui n'en demande qu'une."""
+    import json
+    from types import SimpleNamespace
+
+    from src.api import rag
+
+    pages = [SimpleNamespace(page_content="Texte du cours. " * 100, metadata={})]
+    monkeypatch.setattr(rag, "PyPDFLoader", lambda path: SimpleNamespace(load=lambda: pages))
+    reponse = json.dumps({"questions": [{"question": f"Q{i} ?", "reponse": "R"} for i in range(3)]})
+
+    class FauxLLM:
+        def __init__(self, **kw): pass
+        def invoke(self, messages): return SimpleNamespace(content=reponse)
+
+    monkeypatch.setattr(rag, "ChatOllama", FauxLLM)
+    for nb in (1, 2, 5):
+        assert len(rag.ingest_and_generate_questions(b"%PDF", "cours.pdf", nb_questions=nb)) <= nb
