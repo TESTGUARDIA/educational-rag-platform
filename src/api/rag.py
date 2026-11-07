@@ -112,6 +112,34 @@ def _fix_model_questions(questions: list[dict]) -> list[dict]:
     return questions
 
 
+def _parse_model_response(content: str) -> list[dict] | None:
+    """Extrait les questions de la réponse JSON du modèle (None si JSON invalide).
+
+    Accepte {"questions": [...]}, un autre objet dont la première valeur est la liste,
+    directement [...], ou une question seule. Les petits modèles produisent parfois
+    une liste mêlant objets et chaînes ({"questions": [{...}, "source"]}) : on ne
+    garde que les objets qui ont une question.
+    """
+    try:
+        data = json.loads(_escape_stray_backslashes(content))
+    except json.JSONDecodeError:
+        return None
+    if isinstance(data, dict):
+        if "questions" in data:
+            items = data["questions"]
+        elif "question" in data:
+            items = [data]
+        else:
+            items = next(iter(data.values()), [])
+    else:
+        items = data
+    if isinstance(items, dict):
+        items = [items]
+    if not isinstance(items, list):
+        return []
+    return [q for q in items if isinstance(q, dict) and str(q.get("question") or "").strip()]
+
+
 def _build_prompt(filename: str, n_questions: int, text: str) -> str:
     return f"""Tu es un expert pédagogique. À partir du texte suivant extrait du document "{filename}", génère exactement {n_questions} couples question-réponse pertinents pour un examen.
 
@@ -190,16 +218,10 @@ def ingest_and_generate_questions(file_bytes: bytes, filename: str,
         logger.error("[GEN] Appel modèle pour %s : %.1fs", filename, elapsed)
         logger.error("[GEN] Réponse brute du modèle pour %s : %r", filename, response.content)
 
-        try:
-            data = json.loads(_escape_stray_backslashes(response.content))
-        except json.JSONDecodeError as e:
-            logger.error("[GEN] Échec json.loads() pour %s : %r", filename, e)
+        section_questions = _parse_model_response(response.content)
+        if section_questions is None:
+            logger.error("[GEN] Échec json.loads() pour %s", filename)
             continue
-        # Accepter {"questions": [...]} ou directement [...]
-        section_questions = (
-            data.get("questions", list(data.values())[0] if data else [])
-            if isinstance(data, dict) else data
-        )
         all_questions.extend(_fix_model_questions(section_questions))
 
     logger.error("[GEN] Liste finale de questions pour %s : %r", filename, all_questions)
