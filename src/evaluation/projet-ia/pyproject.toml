@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "projet-ia"
+version = "0.1.0"
+description = "Vérification automatique de réponses d'élèves et détection de textes écrits par une IA (français)."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pandas",
+    "pyarrow",
+    "scikit-learn",
+    "sympy",
+    "spacy>=3.5",
+    "torch",
+    "transformers",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+projet-ia = "projet_ia.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["projet_ia*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "modeles: tests lents qui utilisent les vrais modèles (spaCy, CamemBERT, DeBERTa)",
+]

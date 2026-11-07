@@ -1,0 +1,16 @@
+{
+  "n_couches": 2,
+  "largeur": 512,
+  "forme": "pyramide",
+  "activation": "relu",
+  "alpha": 0.0008563119244486318,
+  "lr": 0.0011348170019600597,
+  "batch_size": 2048,
+  "use_embedding": true,
+  "use_style": true,
+  "use_coherence": false,
+  "use_ppl": true,
+  "accuracy": 0.7899,
+  "temps_entrainement": 2.6439597999997204,
+  "fitness": 0.792165203518153
+}

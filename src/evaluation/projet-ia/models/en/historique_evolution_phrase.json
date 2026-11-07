@@ -1,0 +1,134 @@
+[
+  {
+    "generation": 1,
+    "fitness": 0.78237,
+    "accuracy_val": 0.7806,
+    "taux_mutation": 0.3,
+    "genome": {
+      "n_couches": 2,
+      "largeur": 512,
+      "forme": "pyramide",
+      "activation": "relu",
+      "alpha": 0.0008563119244486318,
+      "lr": 0.000618391913919547,
+      "batch_size": 1024,
+      "use_embedding": true,
+      "use_style": true,
+      "use_coherence": false,
+      "use_ppl": true,
+      "accuracy": 0.7806,
+      "temps_entrainement": 3.3260169999994105,
+      "fitness": 0.782366855433075
+    }
+  },
+  {
+    "generation": 2,
+    "fitness": 0.78046,
+    "accuracy_val": 0.7787,
+    "taux_mutation": 0.27,
+    "genome": {
+      "n_couches": 2,
+      "largeur": 512,
+      "forme": "pyramide",
+      "activation": "relu",
+      "alpha": 0.0008563119244486318,
+      "lr": 0.000618391913919547,
+      "batch_size": 1024,
+      "use_embedding": true,
+      "use_style": true,
+      "use_coherence": false,
+      "use_ppl": true,
+      "accuracy": 0.7787,
+      "temps_entrainement": 3.331576500000665,
+      "fitness": 0.7804632288062257
+    }
+  },
+  {
+    "generation": 3,
+    "fitness": 0.79217,
+    "accuracy_val": 0.7899,
+    "taux_mutation": 0.243,
+    "genome": {
+      "n_couches": 2,
+      "largeur": 512,
+      "forme": "pyramide",
+      "activation": "relu",
+      "alpha": 0.0008563119244486318,
+      "lr": 0.0011348170019600597,
+      "batch_size": 2048,
+      "use_embedding": true,
+      "use_style": true,
+      "use_coherence": false,
+      "use_ppl": true,
+      "accuracy": 0.7899,
+      "temps_entrainement": 2.6439597999997204,
+      "fitness": 0.792165203518153
+    }
+  },
+  {
+    "generation": 4,
+    "fitness": 0.78436,
+    "accuracy_val": 0.7821,
+    "taux_mutation": 0.2187,
+    "genome": {
+      "n_couches": 2,
+      "largeur": 512,
+      "forme": "pyramide",
+      "activation": "relu",
+      "alpha": 0.0008563119244486318,
+      "lr": 0.0011348170019600597,
+      "batch_size": 2048,
+      "use_embedding": true,
+      "use_style": true,
+      "use_coherence": false,
+      "use_ppl": true,
+      "accuracy": 0.7821,
+      "temps_entrainement": 2.6506949000031454,
+      "fitness": 0.7843596790439238
+    }
+  },
+  {
+    "generation": 5,
+    "fitness": 0.78576,
+    "accuracy_val": 0.7852,
+    "taux_mutation": 0.1968,
+    "genome": {
+      "n_couches": 2,
+      "largeur": 1024,
+      "forme": "pyramide",
+      "activation": "relu",
+      "alpha": 0.000425161670099362,
+      "lr": 0.000618391913919547,
+      "batch_size": 2048,
+      "use_embedding": true,
+      "use_style": true,
+      "use_coherence": false,
+      "use_ppl": true,
+      "accuracy": 0.7852,
+      "temps_entrainement": 5.809674799995264,
+      "fitness": 0.7857557186404979
+    }
+  },
+  {
+    "generation": 6,
+    "fitness": 0.7899,
+    "accuracy_val": 0.7876,
+    "taux_mutation": 0.1771,
+    "genome": {
+      "n_couches": 2,
+      "largeur": 512,
+      "forme": "pyramide",
+      "activation": "relu",
+      "alpha": 0.0008563119244486318,
+      "lr": 0.0011348170019600597,
+      "batch_size": 2048,
+      "use_embedding": true,
+      "use_style": true,
+      "use_coherence": false,
+      "use_ppl": true,
+      "accuracy": 0.7876,
+      "temps_entrainement": 2.59730419999687,
+      "fitness": 0.7899038636673833
+    }
+  }
+]
