@@ -23,8 +23,10 @@ RUN pip install torch --index-url https://download.pytorch.org/whl/cpu
 
 # 2) Pôle Évaluation (projet-ia) + modèles spaCy
 #    sentencepiece / protobuf / tiktoken : tokenizers de DeBERTa-v3 et CamemBERT
+#    scikit-learn figé sur la version qui a entraîné modele_detection.pkl (1.8.0) :
+#    une autre version charge le modèle avec un avertissement « résultats invalides ».
 COPY src/evaluation/projet-ia/requirements.txt /tmp/requirements-evaluation.txt
-RUN pip install -r /tmp/requirements-evaluation.txt sentencepiece protobuf tiktoken \
+RUN pip install -r /tmp/requirements-evaluation.txt "scikit-learn==1.8.0" sentencepiece protobuf tiktoken \
     && python -m spacy download fr_core_news_md \
     && python -m spacy download en_core_web_sm
 
