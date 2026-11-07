@@ -12,10 +12,15 @@ services:
     environment:
       DB_PATH: /app/data/testguard.db
       UPLOADS_DIR: /app/uploads
-      # ALLOWED_ORIGINS est lu depuis .env
+      # ALLOWED_ORIGINS, OLLAMA_* et PRECHARGER_MODELES sont lus depuis .env
+    # Ollama tourne sur la machine hôte (GPU) : host.docker.internal pointe vers elle,
+    # y compris sous Linux grâce à host-gateway.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - db_data:/app/data        # Base SQLite persistante
       - uploads_data:/app/uploads  # PDFs uploadés persistants
+      - hf_cache:/app/cache/huggingface  # Modèles Hugging Face (≈ 3 Go, téléchargés une fois)
     expose:
       - "8000"                   # Uniquement accessible depuis Nginx, pas depuis l'extérieur
     healthcheck:
@@ -46,3 +51,5 @@ volumes:
     name: testguardai_db
   uploads_data:
     name: testguardai_uploads
+  hf_cache:
+    name: testguardai_hf_cache

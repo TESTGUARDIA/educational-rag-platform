@@ -1,0 +1,8 @@
+[
+  {
+    "fichier": "src/evaluation/projet-ia/models/en/modele_detection.pkl",
+    "url": "https://github.com/TESTGUARDIA/educational-rag-platform/releases/download/modele-detection-en-v1/modele_detection_en.pkl",
+    "sha256": "e166de4299f68d25d315ab04d2cd18957b5e6750e5484cd6d7fff841fa12d938",
+    "description": "Détection IA, anglais (pôle Évaluation, entraîné sur 1,22 M de textes, seuil 0,798)"
+  }
+]

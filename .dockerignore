@@ -1,0 +1,16 @@
+.git
+.github
+.venv
+venv
+**/__pycache__
+**/.pytest_cache
+.env
+*.db
+uploads/
+data/
+node_modules/
+*.pdf
+!src/data/**/*.pdf
+# Poids des modèles : téléchargés depuis la Release GitHub (scripts/telecharger_modeles.py)
+**/*.pkl
+src/evaluation/projet-ia/data/
