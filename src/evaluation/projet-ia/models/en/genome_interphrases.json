@@ -1,0 +1,16 @@
+{
+  "n_couches": 2,
+  "largeur": 512,
+  "forme": "constante",
+  "activation": "relu",
+  "alpha": 0.0008563119244486318,
+  "lr": 0.0011969014485266722,
+  "batch_size": 512,
+  "use_embedding": false,
+  "use_style": true,
+  "use_coherence": true,
+  "use_ppl": true,
+  "accuracy": 0.8718,
+  "temps_entrainement": 3.2133999000070617,
+  "fitness": 0.8724168849982877
+}

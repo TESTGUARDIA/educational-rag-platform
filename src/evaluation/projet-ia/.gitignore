@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# Données et fichiers générés (lourds, spécifiques à chaque machine)
+data/*
+!data/.gitkeep
+models/*
+!models/.gitkeep
+!models/poids_calibres.json
+# Modèle de détection anglais : seuls les résultats lisibles sont versionnés.
+# Les poids (.pkl) sont publiés en Release GitHub (CDC §8) : voir scripts/telecharger_modeles.py
+!models/en/
+models/en/*
+!models/en/rapport_entrainement.json
+!models/en/genome_*.json
+!models/en/historique_evolution_*.json
+
+# IDE / système
+.vscode/
+.idea/
+.DS_Store

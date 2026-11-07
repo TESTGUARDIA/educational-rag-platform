@@ -1,10 +1,15 @@
-from fastapi import FastAPI, Depends, HTTPException, status, UploadFile, File
+from fastapi import FastAPI, Depends, HTTPException, status, UploadFile, File, Form, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-import sqlite3, json, random, datetime, os, shutil, uuid
+import sqlite3, json, datetime, logging, os, shutil, uuid
+from contextlib import asynccontextmanager
+
+from src.web.back import services
+
+log = logging.getLogger("testguardai.api")
 
 # ─── CONFIG ────────────────────────────────────────────────────────────────────
 SECRET = os.environ.get("JWT_SECRET")
@@ -18,7 +23,18 @@ UPLOADS_DIR  = os.environ.get("UPLOADS_DIR", "./uploads")
 MAX_PDF_SIZE = 20 * 1024 * 1024  # 20 Mo (ING-01)
 os.makedirs(UPLOADS_DIR, exist_ok=True)
 
-app = FastAPI(title="TestGuardAI API")
+NB_QUESTIONS_DEFAUT = int(os.environ.get("NUM_QUESTIONS", "5"))
+NB_QUESTIONS_MAX    = 30
+SEUIL_PAR_DEFAUT    = 0.5   # rapports enregistrés avant J1, sans seuil de modèle
+
+@asynccontextmanager
+async def cycle_de_vie(_app):
+    """Au démarrage : crée/migre la base, puis précharge les modèles (si demandé)."""
+    init_db()
+    services.demarrer_prechargement()
+    yield
+
+app = FastAPI(title="TestGuardAI API", lifespan=cycle_de_vie)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
@@ -30,7 +46,10 @@ oauth2 = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 # ─── DB ────────────────────────────────────────────────────────────────────────
 def get_db():
-    con = sqlite3.connect(DB)
+    # check_same_thread=False : FastAPI ouvre la connexion dans un thread du pool
+    # mais l'utilise dans la boucle événementielle pour les routes async
+    # (ex. POST /documents). Une connexion par requête, jamais partagée.
+    con = sqlite3.connect(DB, check_same_thread=False)
     con.row_factory = sqlite3.Row
     try: yield con
     finally: con.close()
@@ -82,14 +101,18 @@ def init_db():
         soumission_id INTEGER REFERENCES Soumission(id),
         note_ia_suggeree REAL,
         statut_correction TEXT DEFAULT 'en_attente',
-        commentaires_ia TEXT
+        commentaires_ia TEXT,
+        details TEXT
     );
     CREATE TABLE IF NOT EXISTS RapportDetectionIA (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         soumission_id INTEGER REFERENCES Soumission(id),
         score_ia_global REAL,
-        statut_analyse TEXT DEFAULT 'non_analyse',
-        details_phrases_suspectes TEXT
+        statut_analyse TEXT DEFAULT 'non_analysé',
+        details_phrases_suspectes TEXT,
+        seuil REAL,
+        langue TEXT,
+        message TEXT
     );
     CREATE TABLE IF NOT EXISTS Document (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -100,6 +123,14 @@ def init_db():
         date_upload TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
     """)
+    # Migrations : colonnes ajoutées à J1 sur des bases créées avant
+    for table, colonne, type_ in (("RapportDetectionIA", "seuil", "REAL"),
+                                  ("RapportDetectionIA", "langue", "TEXT"),
+                                  ("RapportDetectionIA", "message", "TEXT"),
+                                  ("CorrectionAutomatique", "details", "TEXT")):
+        colonnes = [r[1] for r in c.execute(f"PRAGMA table_info({table})")]
+        if colonne not in colonnes:
+            c.execute(f"ALTER TABLE {table} ADD COLUMN {colonne} {type_}")
     # Seed utilisateurs
     c.execute("SELECT COUNT(*) FROM Utilisateur")
     if c.fetchone()[0] == 0:
@@ -251,6 +282,78 @@ def get_questions(did: int, db=Depends(get_db), u=Depends(current_user)):
     return [dict(r) for r in db.execute(
         "SELECT * FROM Question WHERE devoir_id=? ORDER BY numero_ordre", (did,)).fetchall()]
 
+def _enregistrer_pdf(db, nom: str, contenu: bytes, uid: int) -> int:
+    """Écrit le PDF dans UPLOADS_DIR et l'enregistre dans Document. Retourne son id."""
+    chemin = os.path.join(UPLOADS_DIR, f"{uuid.uuid4().hex}.pdf")
+    with open(chemin, "wb") as out:
+        out.write(contenu)
+    c = db.execute(
+        "INSERT INTO Document(nom_original, chemin_stockage, taille_octets, uploade_par_id) VALUES(?,?,?,?)",
+        (nom, chemin, len(contenu), uid))
+    return c.lastrowid
+
+@app.post("/devoirs/{did}/generer")
+def generer_devoir(
+    did: int,
+    fichier: UploadFile | None = File(None),
+    document_id: int | None = Form(None),
+    nb_questions: int = Form(NB_QUESTIONS_DEFAUT),
+    u=Depends(current_user),
+    db=Depends(get_db),
+):
+    """
+    Génère les questions d'un devoir à partir d'un cours PDF (pôle Génération).
+    Le PDF est soit envoyé (`fichier`), soit déjà déposé (`document_id`).
+    Les questions sont ajoutées à la suite de celles du devoir.
+    Route synchrone : la génération (Ollama) prend de quelques secondes à quelques minutes.
+    """
+    if u["role"] != "teacher":
+        raise HTTPException(403, "Réservé aux enseignants")
+    devoir = db.execute("SELECT * FROM Devoir WHERE id=?", (did,)).fetchone()
+    if not devoir or devoir["cree_par_id"] != u["id"]:
+        raise HTTPException(404, "Devoir introuvable ou accès refusé")
+    if not 1 <= nb_questions <= NB_QUESTIONS_MAX:
+        raise HTTPException(400, f"nb_questions doit être entre 1 et {NB_QUESTIONS_MAX}")
+
+    if fichier is not None:
+        contenu = fichier.file.read(MAX_PDF_SIZE + 1)
+        if contenu[:4] != b"%PDF":
+            raise HTTPException(400, "Format invalide — ce fichier n'est pas un PDF")
+        if len(contenu) > MAX_PDF_SIZE:
+            raise HTTPException(400, "Fichier trop volumineux — maximum 20 Mo")
+        nom = fichier.filename or "cours.pdf"
+        document_id = _enregistrer_pdf(db, nom, contenu, u["id"])
+    elif document_id is not None:
+        doc = db.execute("SELECT * FROM Document WHERE id=? AND uploade_par_id=?",
+                         (document_id, u["id"])).fetchone()
+        if not doc or not os.path.exists(doc["chemin_stockage"]):
+            raise HTTPException(404, "Document introuvable ou accès refusé")
+        with open(doc["chemin_stockage"], "rb") as f:
+            contenu = f.read()
+        nom = doc["nom_original"]
+    else:
+        raise HTTPException(400, "Envoyez un PDF (fichier) ou l'id d'un document déposé (document_id)")
+
+    try:
+        generees = services.generer_questions(contenu, nom, nb_questions)
+    except Exception as e:
+        log.exception("Génération impossible pour le devoir %s", did)
+        raise HTTPException(502, f"Génération impossible : {type(e).__name__} : {e}")
+    if not generees:
+        raise HTTPException(502, "Le modèle n'a produit aucune question exploitable — réessayez.")
+
+    dernier = db.execute("SELECT COALESCE(MAX(numero_ordre), 0) FROM Question WHERE devoir_id=?",
+                         (did,)).fetchone()[0]
+    for i, q in enumerate(generees, dernier + 1):
+        db.execute("INSERT INTO Question(devoir_id,numero_ordre,enonce,reponse_attendue,points_attribues) VALUES(?,?,?,?,1.0)",
+                   (did, i, q["question"], q["reponse"]))
+    db.execute("UPDATE Devoir SET document_pdf_source=? WHERE id=?", (str(document_id), did))
+    db.commit()
+    questions = [dict(r) for r in db.execute(
+        "SELECT * FROM Question WHERE devoir_id=? ORDER BY numero_ordre", (did,)).fetchall()]
+    return {"devoir_id": did, "document_id": document_id,
+            "nb_generees": len(generees), "questions": questions}
+
 # ─── SOUMISSIONS ────────────────────────────────────────────────────────────────
 @app.get("/soumissions")
 def list_soumissions(devoir_id: int = None, u=Depends(current_user), db=Depends(get_db)):
@@ -271,10 +374,44 @@ def list_soumissions(devoir_id: int = None, u=Depends(current_user), db=Depends(
         r["correction"] = dict(corr) if corr else None
     return rows
 
+def _textes_soumission(db, sid: int) -> list[str]:
+    return [r["texte_etudiant"] or "" for r in db.execute(
+        "SELECT texte_etudiant FROM ReponseEtudiant WHERE soumission_id=? ORDER BY id", (sid,))]
+
+def _enregistrer_detection(db, sid: int, res: dict) -> None:
+    """Crée ou met à jour le rapport de détection d'une soumission."""
+    valeurs = (res.get("score"), res["statut"],
+               json.dumps(res.get("phrases", []), ensure_ascii=False),
+               res.get("seuil"), res.get("langue"),
+               res.get("raison") or " ".join(res.get("avertissements", [])) or None)
+    if db.execute("SELECT id FROM RapportDetectionIA WHERE soumission_id=?", (sid,)).fetchone():
+        db.execute("""UPDATE RapportDetectionIA SET score_ia_global=?, statut_analyse=?,
+                      details_phrases_suspectes=?, seuil=?, langue=?, message=?
+                      WHERE soumission_id=?""", (*valeurs, sid))
+    else:
+        db.execute("""INSERT INTO RapportDetectionIA(score_ia_global, statut_analyse,
+                      details_phrases_suspectes, seuil, langue, message, soumission_id)
+                      VALUES(?,?,?,?,?,?,?)""", (*valeurs, sid))
+    db.commit()
+
+def _analyser_en_arriere_plan(sid: int) -> None:
+    """Détection IA lancée après le dépôt d'une copie (connexion SQLite propre au thread)."""
+    con = sqlite3.connect(DB)
+    con.row_factory = sqlite3.Row
+    try:
+        _enregistrer_detection(con, sid, services.detecter_ia(_textes_soumission(con, sid)))
+    except Exception:
+        log.exception("Détection IA en arrière-plan impossible (soumission %s)", sid)
+    finally:
+        con.close()
+
 @app.post("/soumissions")
-def submit(body: SoumissionIn, u=Depends(current_user), db=Depends(get_db)):
+def submit(body: SoumissionIn, taches: BackgroundTasks,
+           u=Depends(current_user), db=Depends(get_db)):
     if u["role"] != "student":
         raise HTTPException(403, "Réservé aux étudiants")
+    if not db.execute("SELECT id FROM Devoir WHERE id=?", (body.devoir_id,)).fetchone():
+        raise HTTPException(404, "Devoir introuvable")
     c = db.cursor()
     c.execute("INSERT INTO Soumission(devoir_id,etudiant_id,statut_global) VALUES(?,?,?)",
               (body.devoir_id, u["id"], "soumis"))
@@ -282,12 +419,65 @@ def submit(body: SoumissionIn, u=Depends(current_user), db=Depends(get_db)):
     for r in body.reponses:
         c.execute("INSERT INTO ReponseEtudiant(soumission_id,question_id,texte_etudiant) VALUES(?,?,?)",
                   (s_id, r.question_id, r.texte))
-    # TODO J3 — remplacer par le vrai modèle de détection (pôle Évaluation)
-    ia_score = round(random.uniform(0.02, 0.95), 2)
-    c.execute("INSERT INTO RapportDetectionIA(soumission_id,score_ia_global,statut_analyse,details_phrases_suspectes) VALUES(?,?,?,?)",
-              (s_id, ia_score, "analysé", json.dumps([])))
+    # Détection IA (pôle Évaluation) après la réponse : l'étudiant n'attend pas le modèle
+    c.execute("INSERT INTO RapportDetectionIA(soumission_id,statut_analyse) VALUES(?,?)",
+              (s_id, "en_cours"))
     db.commit()
-    return {"id": s_id, "ia_score": ia_score}
+    taches.add_task(_analyser_en_arriere_plan, s_id)
+    return {"id": s_id, "statut_analyse": "en_cours"}
+
+@app.post("/soumissions/{sid}/corriger-auto")
+def corriger_auto(sid: int, u=Depends(current_user), db=Depends(get_db)):
+    """
+    Note suggérée par le pôle Évaluation : chaque réponse reçoit un score [0, 1]
+    pondéré par les points de la question, ramené sur 20. L'enseignant valide
+    ensuite avec /soumissions/{sid}/noter.
+    """
+    if u["role"] != "teacher":
+        raise HTTPException(403, "Réservé aux enseignants")
+    if not db.execute("SELECT id FROM Soumission WHERE id=?", (sid,)).fetchone():
+        raise HTTPException(404, "Soumission introuvable")
+    lignes = db.execute("""
+        SELECT re.question_id, re.texte_etudiant, q.enonce, q.reponse_attendue,
+               q.points_attribues, q.numero_ordre
+        FROM ReponseEtudiant re JOIN Question q ON re.question_id = q.id
+        WHERE re.soumission_id = ? ORDER BY q.numero_ordre""", (sid,)).fetchall()
+
+    details, obtenus, total = [], 0.0, 0.0
+    try:
+        for l in lignes:
+            if not (l["reponse_attendue"] or "").strip():
+                details.append({"question_id": l["question_id"], "numero": l["numero_ordre"],
+                                "statut": "non_corrigée", "raison": "Pas de réponse attendue"})
+                continue
+            pts = float(l["points_attribues"] or 1.0)
+            r = services.corriger_reponse(l["enonce"], l["texte_etudiant"] or "", l["reponse_attendue"])
+            obtenus += r["score"] * pts
+            total += pts
+            details.append({"question_id": l["question_id"], "numero": l["numero_ordre"],
+                            "score": round(r["score"], 4), "correct": r["correct"],
+                            "verdict": r["verdict"], "points": pts,
+                            "points_obtenus": round(r["score"] * pts, 2)})
+    except Exception as e:
+        log.exception("Correction automatique impossible (soumission %s)", sid)
+        raise HTTPException(502, f"Correction impossible : {type(e).__name__} : {e}")
+    if total == 0:
+        raise HTTPException(400, "Aucune question corrigeable (réponses attendues manquantes)")
+
+    note = round(obtenus / total * 20 * 2) / 2          # au demi-point, comme la saisie
+    n_ok = sum(1 for d in details if d.get("correct"))
+    n_corr = sum(1 for d in details if "score" in d)
+    commentaire = f"{n_ok}/{n_corr} réponse(s) jugée(s) correcte(s) par la correction automatique."
+    valeurs = (note, "en_attente", commentaire, json.dumps(details, ensure_ascii=False))
+    if db.execute("SELECT id FROM CorrectionAutomatique WHERE soumission_id=?", (sid,)).fetchone():
+        db.execute("""UPDATE CorrectionAutomatique SET note_ia_suggeree=?, statut_correction=?,
+                      commentaires_ia=?, details=? WHERE soumission_id=?""", (*valeurs, sid))
+    else:
+        db.execute("""INSERT INTO CorrectionAutomatique(note_ia_suggeree, statut_correction,
+                      commentaires_ia, details, soumission_id) VALUES(?,?,?,?,?)""", (*valeurs, sid))
+    db.commit()
+    return {"soumission_id": sid, "note_ia_suggeree": note, "commentaires_ia": commentaire,
+            "details": details}
 
 @app.post("/soumissions/{sid}/noter")
 def noter(sid: int, body: GradeIn, u=Depends(current_user), db=Depends(get_db)):
@@ -303,20 +493,14 @@ def noter(sid: int, body: GradeIn, u=Depends(current_user), db=Depends(get_db)):
 def analyser_ia(sid: int, u=Depends(current_user), db=Depends(get_db)):
     if u["role"] != "teacher":
         raise HTTPException(403, "Réservé aux enseignants")
-    # TODO J3 — remplacer par le vrai modèle de détection (pôle Évaluation)
-    score   = round(random.uniform(0.01, 0.99), 2)
-    phrases = ["L'intégrale est définie comme la limite..."] if score > 0.5 else []
-    existing = db.execute("SELECT id FROM RapportDetectionIA WHERE soumission_id=?", (sid,)).fetchone()
-    if existing:
-        db.execute(
-            "UPDATE RapportDetectionIA SET score_ia_global=?,statut_analyse='analysé',details_phrases_suspectes=? WHERE soumission_id=?",
-            (score, json.dumps(phrases), sid))
-    else:
-        db.execute(
-            "INSERT INTO RapportDetectionIA(soumission_id,score_ia_global,statut_analyse,details_phrases_suspectes) VALUES(?,?,?,?)",
-            (sid, score, "analysé", json.dumps(phrases)))
-    db.commit()
-    return {"score_ia_global": score, "phrases": phrases}
+    if not db.execute("SELECT id FROM Soumission WHERE id=?", (sid,)).fetchone():
+        raise HTTPException(404, "Soumission introuvable")
+    res = services.detecter_ia(_textes_soumission(db, sid))
+    _enregistrer_detection(db, sid, res)
+    return {"statut_analyse": res["statut"], "score_ia_global": res.get("score"),
+            "seuil": res.get("seuil"), "langue": res.get("langue"),
+            "phrases": res.get("phrases", []), "message": res.get("raison")
+            or " ".join(res.get("avertissements", [])) or None}
 
 @app.get("/soumissions/{sid}/reponses")
 def get_reponses(sid: int, u=Depends(current_user), db=Depends(get_db)):
@@ -425,13 +609,17 @@ def stats(u=Depends(current_user), db=Depends(get_db)):
     if u["role"] != "teacher":
         raise HTTPException(403, "Réservé aux enseignants")
     total    = db.execute("SELECT COUNT(*) FROM Soumission").fetchone()[0]
-    detected = db.execute("SELECT COUNT(*) FROM RapportDetectionIA WHERE score_ia_global > 0.5").fetchone()[0]
+    # Seuil appris par le modèle de détection (faux positifs bornés), pas 0.5
+    detected = db.execute(
+        "SELECT COUNT(*) FROM RapportDetectionIA WHERE statut_analyse='analysé' "
+        "AND score_ia_global >= COALESCE(seuil, ?)", (SEUIL_PAR_DEFAUT,)).fetchone()[0]
     avg_row  = db.execute("SELECT AVG(note_finale_humaine) FROM Soumission WHERE note_finale_humaine IS NOT NULL").fetchone()[0]
     pending  = db.execute("SELECT COUNT(*) FROM Soumission WHERE statut_global='soumis'").fetchone()[0]
     return {"total": total, "detected": detected, "moyenne": round(avg_row or 0, 1), "pending": pending}
 
 # ─── ENTRYPOINT ─────────────────────────────────────────────────────────────────
+# Depuis la racine du dépôt :  uvicorn src.web.back.main:app --port 8000
+#                         ou   python -m src.web.back.main
 if __name__ == "__main__":
     import uvicorn
-    init_db()
     uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -2,21 +2,46 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Dépendances système minimales
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    curl \
+# PROJET_IA_RACINE : projet-ia cherche ses modèles (models/) à partir de ce dossier.
+# HF_HOME : modèles Hugging Face (CamemBERT, DeBERTa, RoBERTa, GPT-2) téléchargés au
+# premier lancement dans un volume, pour ne pas alourdir l'image (≈ 3 Go).
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PYTHONPATH=/app:/app/src/evaluation/projet-ia \
+    PROJET_IA_RACINE=/app/src/evaluation/projet-ia \
+    HF_HOME=/app/cache/huggingface
+
+# curl : healthcheck de docker-compose
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Dépendances Python
+# 1) PyTorch en version CPU : image identique sur toute machine (ENF-10), sans les
+#    ~2 Go de bibliothèques CUDA. L'inférence de détection/correction tient sur CPU.
+RUN pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+# 2) Pôle Évaluation (projet-ia) + modèles spaCy
+#    sentencepiece / protobuf / tiktoken : tokenizers de DeBERTa-v3 et CamemBERT
+#    scikit-learn figé sur la version qui a entraîné modele_detection.pkl (1.8.0) :
+#    une autre version charge le modèle avec un avertissement « résultats invalides ».
+COPY src/evaluation/projet-ia/requirements.txt /tmp/requirements-evaluation.txt
+RUN pip install -r /tmp/requirements-evaluation.txt "scikit-learn==1.8.0" sentencepiece protobuf tiktoken \
+    && python -m spacy download fr_core_news_md \
+    && python -m spacy download en_core_web_sm
+
+# 3) Backend web + pôle Génération
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
-# Code source
-COPY src/web/back/main.py ./main.py
+# 4) Poids des modèles de détection (Release GitHub, empreinte SHA-256 vérifiée)
+COPY scripts/ ./scripts/
+RUN python scripts/telecharger_modeles.py
 
-# Dossier uploads persistant
-RUN mkdir -p /app/uploads
+# 5) Code source (les .pkl locaux sont exclus par .dockerignore)
+COPY src/ ./src/
 
-# Démarrage — init_db() est appelé dans le __main__ du fichier
-CMD ["sh", "-c", "python -c 'import main; main.init_db()' && uvicorn main:app --host 0.0.0.0 --port 8000"]
+RUN mkdir -p /app/uploads /app/data /app/cache/huggingface
+
+EXPOSE 8000
+CMD ["uvicorn", "src.web.back.main:app", "--host", "0.0.0.0", "--port", "8000"]

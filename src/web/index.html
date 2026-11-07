@@ -230,7 +230,8 @@ tbody tr:hover td{background:var(--bg)}
             <div class="fg" style="margin:0"><label for="selMatiere">Matière</label><select id="selMatiere"><option>Mathématiques</option><option>Sciences</option><option>Histoire-Géographie</option></select></div>
             <div class="fg" style="margin:0"><label for="selClasse">Classe cible</label><select id="selClasse"><option>Terminale A</option><option>Terminale B</option><option>Première A</option></select></div>
           </div>
-          <div style="margin-top:16px;display:flex;gap:9px"><button class="btn bp" onclick="genEval()">✨ Générer une évaluation</button><button class="btn bs">💾 Sauvegarder</button></div>
+          <div style="margin-top:16px;display:flex;gap:9px"><div class="fg" style="margin:0;width:110px"><label for="genNb">Questions</label><input type="number" id="genNb" min="1" max="30" value="5"></div><button class="btn bp" style="align-self:flex-end" onclick="genEval()">✨ Générer une évaluation</button><button class="btn bs" style="align-self:flex-end">💾 Sauvegarder</button></div>
+          <div id="genResult" style="margin-top:16px"></div>
         </div>
         <div class="card">
           <div class="ct">Cours récents</div><div class="cs" style="margin-bottom:0">3 cours disponibles</div>
@@ -617,9 +618,11 @@ Maxime,Roy,maxime.roy@lycee.fr,Première A</div>
 var API=window.location.hostname==='localhost'&&window.location.port==='5500'?'http://localhost:8000':'/api', apiToken=null, apiRefreshToken=null, apiMe=null;
 
 async function apiFetch(method, path, body, isRetry) {
-  var opts = {method: method, headers: {'Content-Type': 'application/json'}};
+  var isForm = (typeof FormData !== 'undefined') && body instanceof FormData;
+  // FormData : le navigateur fixe lui-même le Content-Type multipart (avec la frontière)
+  var opts = {method: method, headers: isForm ? {} : {'Content-Type': 'application/json'}};
   if (apiToken) opts.headers['Authorization'] = 'Bearer ' + apiToken;
-  if (body) opts.body = JSON.stringify(body);
+  if (body) opts.body = isForm ? body : JSON.stringify(body);
   var r = await fetch(API + path, opts);
 
   // Si 401 et qu'on a un refresh token, on tente le renouvellement une fois
@@ -744,35 +747,82 @@ function changeAv(input,w){
   };r.readAsDataURL(f);
 }
 
+var selectedFiles=[];
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function showFiles(input){
-  document.getElementById('flist').innerHTML=Array.from(input.files).map(function(f){
-    return '<div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:var(--grl);border:1px solid var(--gr);border-radius:8px;margin-bottom:6px"><span>📄</span><span style="flex:1;font-size:12px;font-weight:500">'+f.name+'</span><span style="font-family:DM Mono,monospace;font-size:11px;color:var(--mu)">'+(f.size/1024/1024).toFixed(1)+' Mo</span><span class="badge bg">Prêt</span></div>';
+  selectedFiles=Array.from(input.files);
+  document.getElementById('flist').innerHTML=selectedFiles.map(function(f){
+    return '<div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:var(--grl);border:1px solid var(--gr);border-radius:8px;margin-bottom:6px"><span>📄</span><span style="flex:1;font-size:12px;font-weight:500">'+esc(f.name)+'</span><span style="font-family:DM Mono,monospace;font-size:11px;color:var(--mu)">'+(f.size/1024/1024).toFixed(1)+' Mo</span><span class="badge bg">Prêt</span></div>';
   }).join('');
 }
 function dropF(e){e.preventDefault();e.currentTarget.classList.remove('dv');showFiles({files:e.dataTransfer.files})}
-function genEval(){toast('✨ Génération en cours…');setTimeout(function(){toast('✅ Évaluation générée !')},2000)}
+
+/* Génération réelle (pôle Génération) : crée le devoir puis génère ses questions depuis le PDF */
+var genRunning=false;
+async function genEval(){
+  if(genRunning)return;
+  var pdf=selectedFiles.find(function(f){return /\.pdf$/i.test(f.name);});
+  if(!pdf){toast('⚠️ Choisissez un cours au format PDF');return;}
+  var out=document.getElementById('genResult');
+  var matiere=document.getElementById('selMatiere').value, classe=document.getElementById('selClasse').value;
+  var nb=parseInt(document.getElementById('genNb').value,10)||5;
+  genRunning=true;
+  out.innerHTML='<div style="color:var(--mu);font-size:13px">✨ Génération en cours… (de quelques secondes à quelques minutes selon le cours)</div>';
+  try{
+    var titre=matiere+' — '+pdf.name.replace(/\.pdf$/i,'');
+    var dv=await apiFetch('POST','/devoirs',{titre:titre,description:'Classe cible : '+classe+' · généré depuis '+pdf.name});
+    var fd=new FormData();fd.append('fichier',pdf);fd.append('nb_questions',String(nb));
+    var res=await apiFetch('POST','/devoirs/'+dv.id+'/generer',fd);
+    out.innerHTML='<div class="ct" style="margin-bottom:8px">✅ '+res.nb_generees+' question(s) générée(s) — devoir « '+esc(titre)+' »</div>'
+      +res.questions.map(function(q){
+        return '<div style="border:1px solid var(--bd);border-radius:8px;padding:11px;margin-bottom:8px;background:var(--bg)">'
+          +'<div style="font-size:13px;font-weight:600;margin-bottom:4px">Q'+q.numero_ordre+'. '+esc(q.enonce)+'</div>'
+          +'<div style="font-size:12px;color:var(--mu)">Réponse attendue : '+esc(q.reponse_attendue)+'</div></div>';
+      }).join('');
+    toast('✅ Évaluation générée !');
+  }catch(e){
+    out.innerHTML='<div style="color:#EF4444;font-size:13px">❌ '+esc((e&&e.detail)||'Erreur lors de la génération')+'</div>';
+  }finally{genRunning=false;}
+}
+
+/* Badge de détection IA : couleur selon le seuil appris par le modèle, pas un seuil fixe */
+function iaBadge(ia,prefix){
+  prefix=prefix||'';
+  if(!ia)return '<span style="color:var(--mu)">—</span>';
+  var st=ia.statut_analyse;
+  if(st==='en_cours')return '<span class="badge bgr">⏳ analyse…</span>';
+  if(st==='non_analysé'||st==='non_analyse')return '<span class="badge bgr" title="'+esc(ia.message||'')+'">non analysé</span>';
+  if(st==='erreur')return '<span class="badge bgr" title="'+esc(ia.message||'')+'">⚠ erreur</span>';
+  if(ia.score_ia_global==null)return '<span style="color:var(--mu)">—</span>';
+  var seuil=ia.seuil!=null?ia.seuil:0.5, pct=Math.round(ia.score_ia_global*100);
+  var cls=ia.score_ia_global>=seuil?'bor':'bg';
+  return '<span class="badge '+cls+'" title="Seuil du modèle : '+Math.round(seuil*100)+'%'+(ia.message?' — '+esc(ia.message):'')+'">'+prefix+pct+'%</span>';
+}
 
 /* ── TEACHER: COPIES (API) ───────────────────────────────────────────── */
-var currentSub=null;
+var currentSub=null,subsById={};
 async function renderSubs(){
   var tb=document.getElementById('subtable');
   tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Chargement…</td></tr>';
   try{
     var subs=await apiFetch('GET','/soumissions');
+    subsById={};subs.forEach(function(s){subsById[s.id]=s;});
     if(!subs.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Aucune copie.</td></tr>';return;}
     tb.innerHTML=subs.map(function(s){
-      var ia=s.ia&&s.ia.score_ia_global!=null?Math.round(s.ia.score_ia_global*100):null;
-      var ibCls=ia==null?'bgr':ia>60?'bor':ia>30?'by':'bg';
       var noted=s.statut_global==='noté';
+      var sugg=s.correction&&s.correction.note_ia_suggeree!=null&&s.correction.statut_correction!=='validé'?s.correction.note_ia_suggeree:null;
+      var noteCell=s.note_finale_humaine!=null?s.note_finale_humaine+'/20'
+        :(sugg!=null?'<span style="color:var(--mu);font-weight:400" title="Note suggérée par la correction automatique">~'+sugg+'/20</span>':'—');
       return '<tr>'
-        +'<td><strong>'+s.etudiant_nom+'</strong></td>'
+        +'<td><strong>'+esc(s.etudiant_nom)+'</strong></td>'
         +'<td style="font-family:DM Mono,monospace;font-size:12px">'+(s.date_depot?s.date_depot.slice(0,10):'—')+'</td>'
         +'<td>'+(noted?'<span class="badge bg">✓ Notée</span>':'<span class="badge by">⏳ À noter</span>')+'</td>'
-        +'<td style="font-family:DM Mono,monospace;font-weight:600">'+(s.note_finale_humaine!=null?s.note_finale_humaine+'/20':'—')+'</td>'
-        +'<td>'+(ia!=null?'<span class="badge '+ibCls+'">'+ia+'%</span>':'<span style="color:var(--mu)">—</span>')+'</td>'
+        +'<td style="font-family:DM Mono,monospace;font-weight:600">'+noteCell+'</td>'
+        +'<td>'+iaBadge(s.ia)+'</td>'
         +'<td><div style="display:flex;gap:5px;flex-wrap:wrap">'
-        +'<button class="btn bs bsm" onclick="openCopie('+JSON.stringify(s).replace(/"/g,"'")+')" title="Consulter la copie">👁 Voir</button>'
-        +(s.st==='à noter'||!noted?'<button class="btn bs bsm" onclick="openGrade('+s.id+',\''+s.etudiant_nom+'\')">📝 Noter</button>':'')
+        +'<button class="btn bs bsm" onclick="openCopie(subsById['+s.id+'])" title="Consulter la copie">👁 Voir</button>'
+        +(!noted?'<button class="btn bs bsm" onclick="runCorrection('+s.id+',this)" title="Correction automatique (note suggérée)">✅ Corriger</button>':'')
+        +(!noted?'<button class="btn bs bsm" onclick="openGrade('+s.id+')">📝 Noter</button>':'')
         +'<button class="btn bw bsm" onclick="runIA('+s.id+',this)">🤖 IA</button>'
         +'</div></td>'
         +'</tr>';
@@ -789,43 +839,64 @@ async function runIA(sid,btn){
   var orig=btn.innerHTML;btn.innerHTML='⏳';btn.disabled=true;
   try{
     var res=await apiFetch('POST','/soumissions/'+sid+'/analyser-ia');
-    toast('🤖 Score IA : '+Math.round(res.score_ia_global*100)+'%');
+    if(res.statut_analyse==='analysé')toast('🤖 Score IA : '+Math.round(res.score_ia_global*100)+'% (seuil '+Math.round(res.seuil*100)+'%)');
+    else toast('🤖 Non analysé : '+(res.message||res.statut_analyse));
     renderSubs();
   }catch(e){toast('❌ Erreur IA');btn.innerHTML=orig;btn.disabled=false;}
+}
+async function runCorrection(sid,btn){
+  var orig=btn.innerHTML;btn.innerHTML='⏳';btn.disabled=true;
+  try{
+    var res=await apiFetch('POST','/soumissions/'+sid+'/corriger-auto');
+    toast('✅ Note suggérée : '+res.note_ia_suggeree+'/20 — '+res.commentaires_ia);
+    renderSubs();
+  }catch(e){toast('❌ '+((e&&e.detail)||'Erreur de correction'));btn.innerHTML=orig;btn.disabled=false;}
 }
 
 /* ── MODAL CONSULTER COPIE ───────────────────────────────────────────── */
 async function openCopie(s){
   currentSub=s;
-  var ia=s.ia&&s.ia.score_ia_global!=null?Math.round(s.ia.score_ia_global*100):null;
-  var ibCls=ia==null?'bgr':ia>60?'bor':ia>30?'by':'bg';
   document.getElementById('copie-title').textContent=s.etudiant_nom;
   document.getElementById('copie-meta').textContent=(s.date_depot?'Rendu le '+s.date_depot.slice(0,10):'')
     +(s.note_finale_humaine!=null?' · Note : '+s.note_finale_humaine+'/20':'');
-  var iaBadge=ia!=null?'<span class="badge '+ibCls+'">🤖 IA '+ia+'%</span>':'';
-  document.getElementById('copie-ia').innerHTML=iaBadge;
+  document.getElementById('copie-ia').innerHTML=s.ia?iaBadge(s.ia,'🤖 IA '):'';
   var body=document.getElementById('copie-body');
   body.innerHTML='<div style="color:var(--mu);font-size:12px">Chargement des réponses…</div>';
   openM('m-copie');
+  var suspectes=[];
+  try{suspectes=JSON.parse((s.ia&&s.ia.details_phrases_suspectes)||'[]');}catch(_){}
   try{
     var reponses=await apiFetch('GET','/soumissions/'+s.id+'/reponses');
     if(!reponses.length){body.innerHTML='<div style="color:var(--mu);font-size:13px;padding:8px">Aucune réponse enregistrée.</div>';return;}
     body.innerHTML=reponses.map(function(r,i){
       return '<div style="border:1px solid var(--bd);border-radius:8px;padding:13px;margin-bottom:10px;background:var(--bg)">'
-        +'<div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;font-family:DM Mono,monospace;margin-bottom:5px">Q'+r.numero_ordre+' — '+r.enonce+' <span style="opacity:.6">('+r.points_attribues+' pts)</span></div>'
-        +'<div style="font-size:13px;line-height:1.7;color:var(--tx)">'+(r.texte_etudiant||'<em style="color:var(--mu)">Pas de réponse</em>')+'</div>'
+        +'<div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;font-family:DM Mono,monospace;margin-bottom:5px">Q'+r.numero_ordre+' — '+esc(r.enonce)+' <span style="opacity:.6">('+r.points_attribues+' pts)</span></div>'
+        +'<div style="font-size:13px;line-height:1.7;color:var(--tx)">'+(r.texte_etudiant?surligner(r.texte_etudiant,suspectes):'<em style="color:var(--mu)">Pas de réponse</em>')+'</div>'
         +'</div>';
     }).join('');
   }catch(e){body.innerHTML='<div style="color:#EF4444;font-size:13px">Erreur lors du chargement.</div>';}
 }
-function openCopieGrade(){closeM('m-copie');if(currentSub)openGrade(currentSub.id,currentSub.etudiant_nom);}
+/* Surligne les phrases jugées IA (au-dessus du seuil du modèle) dans une réponse */
+function surligner(texte,suspectes){
+  var html=esc(texte);
+  (suspectes||[]).forEach(function(p){
+    var t=esc(p&&p.texte||'').trim();
+    if(t.length<8||html.indexOf(t)<0)return;
+    html=html.split(t).join('<mark title="Probabilité IA : '+Math.round((p.probabilite_ia||0)*100)+'%" style="background:#FDE68A;border-radius:3px;padding:0 2px">'+t+'</mark>');
+  });
+  return html;
+}
+function openCopieGrade(){closeM('m-copie');if(currentSub)openGrade(currentSub.id);}
 
 /* ── NOTER ───────────────────────────────────────────────────────────── */
 var gradeSid=null;
-function openGrade(sid,nom){
+function openGrade(sid){
   gradeSid=sid;
-  document.getElementById('mgname').textContent=nom+' — Devoir';
-  document.getElementById('gval').value='';
+  var s=subsById[sid]||{};
+  document.getElementById('mgname').textContent=(s.etudiant_nom||'')+' — Devoir';
+  // Pré-remplit avec la note suggérée par la correction automatique, si elle existe
+  var sugg=s.correction&&s.correction.note_ia_suggeree!=null?s.correction.note_ia_suggeree:'';
+  document.getElementById('gval').value=sugg;
   openM('m-grade');
 }
 async function subGrade(){
@@ -884,7 +955,7 @@ async function startExam(devoirId){
     document.getElementById('evalBody').innerHTML=qs.map(function(q,i){
       return '<div style="background:#EEF2FF;border:1px solid #c7d2fe;border-radius:8px;padding:13px;margin-bottom:13px">'
         +'<div style="font-size:12px;font-weight:600;margin-bottom:5px;color:#4F6EF7">Question '+(i+1)+' <span style="font-weight:400;opacity:.7">('+q.points_attribues+' pts)</span></div>'
-        +'<div style="font-size:13px;line-height:1.7;margin-bottom:9px">'+q.enonce+'</div>'
+        +'<div style="font-size:13px;line-height:1.7;margin-bottom:9px">'+esc(q.enonce)+'</div>'
         +'<textarea id="rep-'+q.id+'" placeholder="Rédigez votre réponse…" style="min-height:80px"></textarea></div>';
     }).join('');
   }catch(e){document.getElementById('evalBody').innerHTML='<div style="color:#EF4444">Erreur de chargement.</div>';}
@@ -894,7 +965,7 @@ async function submitExam(){
   document.getElementById('evalErr').textContent='';
   try{
     var res=await apiFetch('POST','/soumissions',{devoir_id:examDevoirId,reponses:reponses});
-    toast('✅ Copie rendue ! Score IA : '+Math.round(res.ia_score*100)+'%');
+    toast('✅ Copie rendue !');
     closeM('m-eval');loadStudentEvals();loadStudentResults();
   }catch(e){document.getElementById('evalErr').textContent=e.detail||'Erreur lors de la soumission.';}
 }
