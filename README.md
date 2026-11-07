@@ -55,7 +55,8 @@ testguardai/
 │   ├── web/
 │   │   ├── index.html          # Frontend complet (HTML/JS vanilla)
 │   │   └── back/
-│   │       └── main.py         # Backend FastAPI
+│   │       ├── main.py         # Backend FastAPI
+│   │       └── services.py     # Branchements vers les pôles Génération et Évaluation
 │   ├── data/                   # Datasets (voir pôle Données)
 │   └── evaluation/             # Modules de correction/détection (voir pôle Évaluation)
 ├── Dockerfile.api              # Image Docker backend
@@ -76,21 +77,36 @@ testguardai/
 | J4 — Interface complète | 15 jan. 2027 | WEB-03→05, ENF-05 |
 | J5 — Recette et soutenance | 31 jan. 2027 | Section 11 CDC |
 
-## Branchements inter-pôles à faire (J3)
+## Branchements inter-pôles (J1)
 
-Les fonctions suivantes sont des stubs dans `main.py` — voir les `TODO J3` :
+Le backend web (`src/web/back/main.py`) appelle les pôles uniquement via
+[`src/web/back/services.py`](src/web/back/services.py) :
 
-```python
-# Pôle Génération (Anisse & Alexis)
-# src/generation/generate.py
-generer_questions(pdf_path: str, nb_questions: int, matiere: str) -> list[dict]
+| Fonction (`services.py`) | Pôle | Code appelé | Routes |
+|---|---|---|---|
+| `generer_questions(pdf, nom, nb_questions)` | Génération | `src/api/rag.py` → `ingest_and_generate_questions` (Ollama) | `POST /devoirs/{id}/generer` |
+| `corriger_reponse(question, reponse, correction)` | Évaluation | `projet_ia.verification.evaluer_reponse` | `POST /soumissions/{sid}/corriger-auto` |
+| `detecter_ia(textes)` | Évaluation | `projet_ia.detection.predire_textes` | `POST /soumissions` (arrière-plan), `POST /soumissions/{sid}/analyser-ia` |
 
-# Pôle Évaluation (Raphaël & Nina)
-# src/evaluation/correct.py
-corriger_reponse(reponse_etudiant: str, reponse_attendue: str) -> dict
+- La détection utilise le **seuil appris par le modèle** (faux positifs bornés à 1 %),
+  repris par `/stats` et les badges. Sans modèle pour la langue de la copie (le français
+  pour l'instant, DET-04 à J3), le rapport est `non_analysé`.
+- La note de la correction automatique est une **suggestion** : l'enseignant la valide
+  avec `POST /soumissions/{sid}/noter`.
 
-# src/evaluation/detect.py
-detecter_ia(texte: str) -> dict
+### Prérequis du premier lancement
+
+- **Ollama sur la machine hôte**, avec le modèle de `.env` (`OLLAMA_MODEL`) :
+  `ollama pull qwen2.5:7b`. Sans GPU NVIDIA, un modèle 7B demande plusieurs minutes
+  par question : préférer un modèle plus petit pour une démonstration.
+- **≈ 3 Go de modèles Hugging Face** (CamemBERT, DeBERTa, RoBERTa, GPT-2) téléchargés
+  au premier démarrage dans le volume `testguardai_hf_cache` (`PRECHARGER_MODELES=1`).
+
+### Tests
+
+```bash
+pip install -r requirements.txt pytest
+pytest -q                     # backend web + branchements (modèles simulés)
 ```
 
 ## Équipe
