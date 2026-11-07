@@ -1,9 +1,12 @@
-/src/web/              @eloise @thomas @virna
-/docker-compose.yml    @eloise @thomas
-/Dockerfile.*          @eloise @thomas
-/nginx.conf            @eloise @thomas
-/src/api/              @anisse @alexis @virna
-/src/evaluation/       @raphael @nina
-/src/ui/               @nina
-/src/data/             @arsene @juliette
-/docs/                 @eloise
+# Propriétaires du code, par pôle (identifiants GitHub réels).
+# Sert à demander automatiquement une relecture ; la règle du CDC §9 (relecture
+# par un membre d'un AUTRE pôle) reste vérifiée dans le modèle de PR.
+# Virna Martinez : à ajouter sur /src/web/ et /src/api/ une fois invitée sur le dépôt.
+/src/web/              @eloiseguimbellot-max @Thomas93504
+/docker-compose.yml    @eloiseguimbellot-max @Thomas93504
+/Dockerfile.*          @eloiseguimbellot-max @Thomas93504
+/nginx.conf            @eloiseguimbellot-max @Thomas93504
+/src/api/              @Ninissea @alexisdoretdeplatine
+/src/evaluation/       @rjohnsonmacleod-cell @ninaschlienger
+/src/data/             @arsnnnn05 @j-brs
+/docs/                 @eloiseguimbellot-max

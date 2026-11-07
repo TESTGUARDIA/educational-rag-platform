@@ -22,8 +22,8 @@ et la détection de l'usage d'une IA dans les copies étudiantes.
 
 ```bash
 # 1. Cloner le dépôt
-git clone https://github.com/votre-org/testguardai.git
-cd testguardai
+git clone https://github.com/TESTGUARDIA/educational-rag-platform.git
+cd educational-rag-platform
 
 # 2. Créer le fichier d'environnement
 cp .env.example .env
@@ -71,11 +71,23 @@ testguardai/
 
 | Jalon | Date | État |
 |---|---|---|
-| J1 — Intégration | ✅ Fait | WEB-01, COR-01, DET-05 |
-| J2 — Sécurité et données | 1er nov. 2026 | WEB-02 ✅, DET-02 en cours |
-| J3 — Modèles | 1er déc. 2026 | GEN-07, GEN-08, DET-04, COR-05 |
-| J4 — Interface complète | 15 jan. 2027 | WEB-03→05, ENF-05 |
-| J5 — Recette et soutenance | 31 jan. 2027 | Section 11 CDC |
+| J1 — Intégration | 13 nov. 2026 (rattrapage) | Atteint avec réserve : reliquat COR-01, DET-05 |
+| J2 — Sécurité et données | 30 nov. 2026 | WEB-02, DET-02, ENF-02, ENF-03 |
+| J3 — Modèles | 18 déc. 2026 | GEN-07, GEN-08, DET-04, DET-06, DET-07, COR-05 |
+| J4 — Interface complète | 8 janv. 2027 | GEN-04, WEB-03 à 05, ENF-05 à 07, DET-05 |
+| J5 — Recette et soutenance | fin janv. 2027 | Recette §11, livrables §12 |
+
+Détail et état de chaque exigence : [docs/avancement.md](docs/avancement.md).
+
+## Organisation du dépôt
+
+- `main` ne reçoit `develop` qu'à chaque jalon, avec un tag (`J1-integration`, …).
+- `develop` est la branche d'intégration : on y entre par Pull Request, relue par
+  un membre d'un autre pôle (CDC §9).
+- Chaque pôle travaille sur `feature/...` (`feature/web-vanilla`, `feature/generation`,
+  `feature/evaluation`, …).
+- Les poids des modèles ne sont pas dans Git (CDC §8) : ils sont publiés en Release
+  GitHub et téléchargés à l'installation.
 
 ## Branchements inter-pôles (J1)
 
@@ -119,3 +131,4 @@ pytest -q                     # backend web + branchements (modèles simulés)
 - **Alexis Doussaud-Pelletier** — Pôle Génération
 - **Arsène Brégeon** — Pôle Données
 - **Juliette Bros** — Pôle Données
+- **Virna Martinez** — Intégration (Web, Génération)
