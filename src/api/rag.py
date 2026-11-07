@@ -137,7 +137,13 @@ Texte :
 """
 
 
-def ingest_and_generate_questions(file_bytes: bytes, filename: str) -> list[dict]:
+def ingest_and_generate_questions(file_bytes: bytes, filename: str,
+                                  nb_questions: int | None = None) -> list[dict]:
+    """Génère des couples question-réponse à partir d'un PDF.
+
+    nb_questions : nombre de questions voulu (défaut : variable NUM_QUESTIONS).
+    """
+    total = nb_questions if nb_questions and nb_questions > 0 else NUM_QUESTIONS
     with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
         tmp.write(file_bytes)
         tmp_path = tmp.name
@@ -164,7 +170,7 @@ def ingest_and_generate_questions(file_bytes: bytes, filename: str) -> list[dict
         num_ctx=OLLAMA_NUM_CTX,
     )
 
-    question_counts = _distribute_questions(sections, NUM_QUESTIONS)
+    question_counts = _distribute_questions(sections, total)
 
     all_questions = []
     for section, n_questions in zip(sections, question_counts):
