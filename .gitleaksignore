@@ -1,0 +1,5 @@
+# Clés Google (Gemini) commitées dans .env.example en mars et avril 2026, avant le
+# passage à Ollama. Elles DOIVENT être révoquées (Google AI Studio / Cloud Console) :
+# l'historique est public, les ignorer ici ne les rend pas inoffensives.
+b044f160b566e8c6b1de2b79c02c8f17d222aa21:.env.example:gcp-api-key:1
+694629f1becc3a92c1e0c18a10f95b0c5fca7aea:.env.example:gcp-api-key:1
