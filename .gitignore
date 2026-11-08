@@ -230,3 +230,5 @@ uploads/
 
 # Frontend React
 node_modules/
+# Prototype génération de problèmes : cours (souvent protégés) et sorties
+sortie_problemes/
