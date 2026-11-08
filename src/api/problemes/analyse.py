@@ -46,7 +46,7 @@ Extrais les notions de cette partie sous forme de fiches :
   (historique, culture générale, détails de calculatrice).
 - mots_cles : 2 à 5 mots-clés.
 
-N'invente aucune notion absente du texte. Les blocs suivants ont été repérés dans la partie :
+N'invente aucune notion absente du texte. Dans les chaînes JSON, écris chaque barre oblique LaTeX doublée : \\\\int, \\\\frac, \\\\text. Les blocs suivants ont été repérés dans la partie :
 chacun doit apparaître dans tes fiches.
 {blocs}
 

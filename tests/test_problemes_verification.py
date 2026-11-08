@@ -95,7 +95,11 @@ from src.api.problemes.ollama import reparer_latex  # noqa: E402
     (r'{"e": "$\frac{1}{2}$"}', r"$\frac{1}{2}$"),                           # \f de \frac
     (r'{"e": "$a \neq b$, $\beta$, $\rho$"}', r"$a \neq b$, $\beta$, $\rho$"),
     (r'{"e": "$\\frac{1}{2}$ déjà correct"}', r"$\frac{1}{2}$ déjà correct"),
+    # Sorties réelles de llama3.2:3b : lettre forcée par la grammaire devant \int
+    (r'{"e": "$m=\\frac{1}{b-a}\tint_a^bf(x)\text{d}x$"}', r"$m=\frac{1}{b-a}\int_a^bf(x)\text{d}x$"),
+    (r'{"e": "$I_n=\tint_1^e x\tsqrt{x}$"}', r"$I_n=\int_1^e x\sqrt{x}$"),
     (r'{"e": "ligne 1\nligne 2"}', "ligne 1\nligne 2"),                      # vrai saut de ligne
+    (r'{"e": "Soit f.\nle cours dit"}', "Soit f.\nle cours dit"),            # « le » ≠ \le
     (r'{"e": "a\tb"}', "a\tb"),                                               # vraie tabulation
 ])
 def test_reparer_latex(brut, attendu):

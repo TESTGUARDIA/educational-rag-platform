@@ -99,7 +99,9 @@ SCHEMA_QUESTIONS_COURS = {
 }
 
 # ─── Consignes ─────────────────────────────────────────────────────────────────
-SYNTAXE = """Syntaxe des champs integrande, borne_inf, borne_sup, gauche, droite, reponse_finale_calcul :
+SYNTAXE = """Dans les chaînes JSON, écris chaque barre oblique LaTeX doublée : \\\\int, \\\\frac, \\\\text.
+
+Syntaxe des champs integrande, borne_inf, borne_sup, gauche, droite, reponse_finale_calcul :
 expressions SymPy en texte brut (PAS de LaTeX) : ^ pour la puissance, pi, e, sqrt(), ln(), exp(),
 sin(), cos(), factorial(), binomial(), la variable entière n, et les familles d'intégrales déclarées
 dans "definitions", appelées par leur nom : W(n), W(n+2), W(2*n).
@@ -187,6 +189,7 @@ de cours portant sur les notions importantes ci-dessous (une notion par question
 les plus centrales). Varie les types : definition, enonce (énoncer un théorème), justification
 (démontrer ou expliquer une propriété du cours), application (utiliser une méthode sur un cas simple).
 Réponses complètes et exactes, conformes au cours, formules en LaTeX ($...$).
+Dans les chaînes JSON, écris chaque barre oblique LaTeX doublée : \\\\int, \\\\frac, \\\\text.
 
 Notions :
 {fiches}"""

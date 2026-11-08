@@ -27,20 +27,43 @@ class ErreurModele(RuntimeError):
     pass
 
 
-# Commandes LaTeX qui commencent par b, f, n, r, t : avec une seule barre oblique,
-# le modèle écrit un échappement JSON VALIDE (\t, \f, \n, \r, \b) et le décodage
-# transforme « \text » en tabulation + « ext », « \frac » en saut de page + « rac ».
-# Les autres commandes (\int, \sqrt…) ne sont pas touchées : la grammaire du schéma
-# interdit les échappements invalides et force le modèle à écrire « \\int ».
-_LATEX_AMBIGU = re.compile(
-    r"(?<!\\)\\(?=(?:text|textbf|textrm|textit|times|theta|tan|tanh|tau|to|top|tfrac|"
-    r"frac|forall|right|rightarrow|rho|nabla|neq|ne|nu|not|newline|nolimits|"
-    r"beta|bar|binom|big|bigl|bigr|begin|boxed|bullet|bmod)(?![A-Za-z]))")
+# Le schéma JSON n'autorise après « \ » que les échappements \" \\ \/ \b \f \n \r \t \u.
+# Deux façons pour le LaTeX d'un modèle d'être abîmé au décodage :
+#  1. commande commençant par b, f, n, r, t écrite avec UNE barre : « \text » est lu
+#     comme tabulation + « ext », « \frac » comme saut de page + « rac » ;
+#  2. commande interdite (« \int ») : la grammaire FORCE une lettre autorisée après la
+#     barre, et le modèle écrit « \tint » (tabulation + « int »).
+# On double la barre dans le cas 1, et on retire la lettre forcée dans le cas 2, sans
+# toucher aux vrais sauts de ligne (« \nLa suite… »).
+_COMMANDES_BFNRT = {
+    "text", "textbf", "textrm", "textit", "times", "theta", "tan", "tanh", "tau", "to", "top",
+    "tfrac", "frac", "forall", "right", "rightarrow", "rho", "nabla", "neq", "ne", "nu", "not",
+    "newline", "nolimits", "beta", "bar", "binom", "big", "bigl", "bigr", "begin", "boxed",
+    "bullet", "bmod"}
+# Cas 2 : commandes mathématiques usuelles. Exclues : mots français courts (le, in, pi…)
+# qui suivent souvent un vrai saut de ligne.
+_COMMANDES_FORCEES = {
+    "int", "iint", "sum", "prod", "lim", "sqrt", "infty", "cdot", "cdots", "ldots", "dots",
+    "alpha", "gamma", "delta", "Delta", "epsilon", "varepsilon", "lambda", "sigma", "omega",
+    "phi", "varphi", "partial", "leq", "geq", "subset", "cup", "cap", "mathbb", "mathrm",
+    "ln", "log", "exp", "sin", "cos", "arctan", "dfrac", "left", "quad", "displaystyle",
+    "approx", "equiv", "sim", "mapsto", "Rightarrow", "iff", "implies", "vec", "overline",
+    "limits", "pm", "mid", "lfloor", "rfloor", "langle", "rangle", "emptyset", "mathcal"}
+_ECHAPPEMENT_LETTRES = re.compile(r"(?<!\\)\\([bfnrt])([A-Za-z]*)")
+
+
+def _reparer(m: re.Match) -> str:
+    lettre, suite = m.group(1), m.group(2)
+    if lettre + suite in _COMMANDES_BFNRT:
+        return "\\\\" + lettre + suite          # cas 1 : « \text » -> « \\text »
+    if suite in _COMMANDES_FORCEES:
+        return "\\\\" + suite                   # cas 2 : « \tint » -> « \\int »
+    return m.group(0)                           # vrai échappement (saut de ligne…)
 
 
 def reparer_latex(contenu: str) -> str:
-    """Double la barre oblique des commandes LaTeX qui seraient lues comme échappements JSON."""
-    return _LATEX_AMBIGU.sub(r"\\\\", contenu)
+    """Répare les commandes LaTeX abîmées par l'échappement JSON (voir ci-dessus)."""
+    return _ECHAPPEMENT_LETTRES.sub(_reparer, contenu)
 
 
 def discuter(modele: str, messages: list[dict], *, schema: dict | None = None,
