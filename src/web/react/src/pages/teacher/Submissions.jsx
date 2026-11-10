@@ -2,12 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { apiFetch } from '../../utils/api';
 import { toast } from '../../utils/toast';
 import Modal from '../../components/Modal';
-import { niveauIA } from '../../utils/matieres';
-
-function IaBadge({ score }) {
-  const { cls, label } = niveauIA(score);
-  return <span className={`badge ${cls}`}>{label}</span>;
-}
+import IaBadge from '../../components/IaBadge';
 
 export default function Submissions() {
   const [subs, setSubs]           = useState([]);
@@ -40,7 +35,9 @@ export default function Submissions() {
     btn.disabled = true; btn.textContent = 'Analyse…';
     try {
       const res = await apiFetch('POST', `/soumissions/${sid}/analyser-ia`);
-      toast(`Score IA : ${Math.round(res.score_ia_global * 100)}%`);
+      if (res.statut_analyse === 'analysé')
+        toast(`Score IA : ${Math.round(res.score_ia_global * 100)} % (seuil ${Math.round(res.seuil * 100)} %)`);
+      else toast(`Non analysé : ${res.message || res.statut_analyse}`);
       load();
     } catch { toast('Erreur analyse'); }
     finally { btn.disabled = false; btn.textContent = 'Analyser'; }
@@ -83,7 +80,7 @@ export default function Submissions() {
           {[
             { label:'Total copies', value:stats.total, sub:'soumissions' },
             { label:'Corrigées',    value:stats.total - stats.pending, sub:`sur ${stats.total}` },
-            { label:'Alertes IA',   value:stats.detected, sub:'> 60 %' },
+            { label:'Alertes IA',   value:stats.detected, sub:'au-dessus du seuil du modèle' },
             { label:'Moyenne',      value:stats.moyenne || '—', sub:'/ 20' },
           ].map(s => (
             <div className="stat-card" key={s.label}>
@@ -126,7 +123,7 @@ export default function Submissions() {
                       ? <span className="badge badge-blue">{s.note_finale_humaine}/20</span>
                       : <span className="badge badge-gray">—</span>}
                   </td>
-                  <td><IaBadge score={s.ia?.score_ia_global} /></td>
+                  <td><IaBadge ia={s.ia} /></td>
                   <td onClick={e => e.stopPropagation()}>
                     <div style={{ display:'flex', gap:5 }}>
                       <button className="btn btn-secondary btn-sm"

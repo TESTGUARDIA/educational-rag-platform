@@ -22,12 +22,3 @@ export function initialesMatiere(nom = '') {
   const n = nom.trim();
   return n ? n.charAt(0).toUpperCase() + n.slice(1, 2).toLowerCase() : '?';
 }
-
-// Niveau d'alerte IA, aligné sur le seuil appris par le modèle (0,80).
-export function niveauIA(score) {
-  if (score == null) return { cls: 'badge-gray', label: 'Non analysé' };
-  const pct = Math.round(score * 100);
-  if (pct >= 80) return { cls: 'badge-alert', label: `Alerte · ${pct} %` };
-  if (pct >= 50) return { cls: 'badge-check', label: `À vérifier · ${pct} %` };
-  return { cls: 'badge-low', label: `Faible · ${pct} %` };
-}
