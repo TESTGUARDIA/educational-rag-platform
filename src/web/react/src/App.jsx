@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from './hooks/useAuth';
 import Login from './pages/Login';
 import Header from './components/Header';
@@ -19,13 +19,12 @@ import StudentAccount from './pages/student/Account';
 export default function App() {
   const { me, login, logout, loading, error } = useAuth();
   const [page, setPage] = useState(me?.role === 'teacher' ? 'upload' : 'evals');
+  const role = me?.role;
 
-  // Après connexion, initialiser la page par défaut selon le rôle
-  function handleLogin(email, password) {
-    login(email, password).then(() => {
-      // Le rôle est mis à jour dans me — on initialise la page via useEffect côté composant
-    });
-  }
+  // Après connexion, page par défaut selon le rôle
+  useEffect(() => {
+    if (role) setPage(role === 'teacher' ? 'upload' : 'evals');
+  }, [role]);
 
   if (!me) {
     return (

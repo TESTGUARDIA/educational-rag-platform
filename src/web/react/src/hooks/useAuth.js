@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { setTokens, clearTokens, apiFetch } from '../utils/api';
+import { setTokens, clearTokens } from '../utils/api';
 
 export function useAuth() {
   const [me, setMe]       = useState(null);   // { id, nom, role }
