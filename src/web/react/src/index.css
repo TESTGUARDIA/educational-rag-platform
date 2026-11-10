@@ -1,0 +1,192 @@
+/* ── TestGuardAI — charte graphique ───────────────────────────────────────
+   Violet IA : actions, liens, champ actif · Rouge correcteur : logo et
+   corrections uniquement · Montserrat pour le site, Bricolage Grotesque pour
+   le logo · aucune ombre, aucun dégradé, aucun emoji                        */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* base */
+  --bg:  #FAF7F1;   /* ivoire : fond de page        */
+  --sf:  #FFFDF8;   /* page : panneaux, tableaux     */
+  --sf2: #F1ECE3;   /* fond secondaire               */
+  --bd:  #E3DDD1;   /* bordures 1 px                 */
+  --tx:  #1C1B22;   /* noir : tout le texte          */
+  --mu:  #55535E;   /* gris : texte secondaire       */
+  /* marque */
+  --gr:  #6D4AE0;   /* violet IA : actions           */
+  --grh: #5638C4;   /* violet au survol, texte       */
+  --grl: #ECE6FC;   /* teinte violette               */
+  --red:  #D83A2E;  /* rouge correcteur (graphique)  */
+  --redt: #B92E24;  /* rouge correcteur (texte)      */
+  --redl: #FAE6E0;  /* teinte rouge                  */
+  /* alias conservés pour le code existant */
+  --or: #1C1B22; --orl: #F1ECE3;
+  --tg-accent: #6D4AE0; --tg-accentl: #ECE6FC;
+  --tg-dark: #1C1B22; --tg-danger: #1C1B22; --tg-dangerl: #F1ECE3;
+  --r: 8px;
+}
+
+body {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  background: var(--bg);
+  color: var(--tx);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; }
+
+:focus-visible { outline: 3px solid #B9A6F2; outline-offset: 2px; }
+
+/* ── Logo ──────────────────────────────────────────────────────────────── */
+.tgl {
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
+  letter-spacing: -0.03em; color: var(--tx); line-height: 1;
+  white-space: nowrap; display: inline-block;
+}
+.tgl svg { height: .7em; vertical-align: baseline; margin-right: .02em; }
+.tgl svg.t { width: .778em; }
+.tgl svg.g { width: .7em; }
+.tgl-ai {
+  display: inline-block; font-size: .5em; line-height: 1;
+  padding: .12em .28em .16em; margin-left: .18em; border-radius: .22em;
+  background: var(--gr); color: var(--sf); vertical-align: .35em;
+}
+.tgl.st { line-height: .98; white-space: normal; }
+.tgl.st .tgl-ai { font-size: .36em; margin-left: .12em; border-radius: .2em; transform: rotate(-8deg); vertical-align: 1.1em; }
+.tgl.dark { color: var(--sf); }
+
+/* ── Champs ────────────────────────────────────────────────────────────── */
+input, select, textarea {
+  width: 100%; padding: 10px 13px; border: 1px solid var(--bd);
+  border-radius: 6px; font-family: inherit; font-size: 14px;
+  background: var(--sf); color: var(--tx); outline: none;
+  transition: border-color .15s;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--gr); box-shadow: 0 0 0 3px var(--grl); }
+textarea { resize: vertical; min-height: 100px; }
+
+/* ── Boutons ───────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 40px; padding: 0 16px; border-radius: 6px;
+  font-family: inherit; font-size: 14px; font-weight: 600;
+  cursor: pointer; border: none; transition: background .15s;
+}
+.btn:disabled { opacity: .6; cursor: default; }
+.btn-primary   { background: var(--gr); color: var(--sf); }
+.btn-primary:hover { background: var(--grh); }
+.btn-secondary { background: transparent; border: 1px solid var(--tx); color: var(--tx); }
+.btn-secondary:hover { background: var(--sf2); }
+.btn-dark      { background: var(--tx); color: var(--sf); }
+.btn-dark:hover { background: #2B2A33; }
+.btn-danger    { background: transparent; color: var(--tx); border: 1px solid var(--tx); }
+.btn-danger:hover { background: var(--sf2); }
+.btn-sm        { min-height: 32px; padding: 0 10px; font-size: 12px; }
+.btn-full      { width: 100%; min-height: 46px; font-size: 15px; }
+
+/* ── Cartes ────────────────────────────────────────────────────────────── */
+.card { background: var(--sf); border: 1px solid var(--bd); border-radius: var(--r); padding: 20px; margin-bottom: 14px; }
+.card-title    { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.card-subtitle { font-size: 13px; color: var(--mu); margin-bottom: 14px; }
+
+/* ── Badges : le score IA monte en poids visuel, jamais en couleur ───────── */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px; border-radius: 6px; font-size: 12px; font-weight: 600;
+}
+.badge-low    { background: #ECE8E0; color: #4A4658; }               /* faible       */
+.badge-check  { background: transparent; color: var(--tx); box-shadow: inset 0 0 0 1.5px var(--tx); } /* à vérifier */
+.badge-alert  { background: var(--tx); color: var(--bg); }           /* alerte        */
+.badge-ai     { background: var(--grl); color: var(--grh); }         /* analyse IA    */
+.badge-gray   { background: var(--sf2); color: var(--mu); }
+/* anciens noms conservés */
+.badge-green  { background: #ECE8E0; color: #4A4658; }
+.badge-blue   { background: var(--grl); color: var(--grh); }
+.badge-yellow { background: transparent; color: var(--tx); box-shadow: inset 0 0 0 1.5px var(--tx); }
+.badge-orange { background: var(--tx); color: var(--bg); }
+
+/* ── Statistiques ──────────────────────────────────────────────────────── */
+.stats-row  { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 18px; }
+.stat-card  { background: var(--sf); border: 1px solid var(--bd); border-radius: var(--r); padding: 16px 20px; }
+.stat-label { font-size: 13px; color: var(--mu); font-weight: 600; margin-bottom: 6px; }
+.stat-value { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+.stat-sub   { font-size: 12px; color: var(--mu); margin-top: 2px; }
+
+/* ── Note corrigée : le seul usage du rouge dans l'interface ─────────────── */
+.grade-mark {
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 56px; height: 56px; border-radius: 50%; border: 2px solid var(--red);
+  color: var(--redt); font-weight: 700; transform: rotate(-6deg); flex-shrink: 0;
+}
+.grade-mark span { font-size: 18px; line-height: 1; }
+.grade-mark small { font-size: 10px; font-weight: 600; }
+.correction-note { color: var(--redt); font-style: italic; font-weight: 500; }
+
+/* ── Fenêtre modale ────────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(28,27,34,.45);
+  z-index: 200; display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.modal {
+  background: var(--sf); border: 1px solid var(--bd); border-radius: 10px; padding: 26px;
+  width: 100%; max-width: 520px; position: relative; max-height: 92vh; overflow-y: auto;
+}
+.modal-title    { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+.modal-subtitle { font-size: 13px; color: var(--mu); margin-bottom: 18px; }
+.modal-close {
+  position: absolute; top: 12px; right: 12px; background: transparent; border: 1px solid var(--bd);
+  border-radius: 6px; width: 32px; height: 32px; cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center; color: var(--tx);
+}
+.modal-close:hover { background: var(--sf2); }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; }
+
+/* ── Tableaux ──────────────────────────────────────────────────────────── */
+.table-wrap { overflow-x: auto; border-radius: var(--r); border: 1px solid var(--bd); }
+table { width: 100%; border-collapse: collapse; }
+thead { background: var(--bg); }
+th { padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 600; color: var(--mu); border-bottom: 1px solid var(--bd); }
+td { padding: 12px 14px; font-size: 14px; border-bottom: 1px solid var(--bd); background: var(--sf); }
+tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--bg); }
+
+/* ── Dépôt de fichiers ─────────────────────────────────────────────────── */
+.upload-zone {
+  border: 2px dashed var(--bd); border-radius: var(--r);
+  padding: 36px 24px; text-align: center; cursor: pointer;
+  transition: border-color .15s, background .15s; background: var(--bg);
+}
+.upload-zone:hover, .upload-zone.drag-over { border-color: var(--gr); background: var(--grl); }
+
+/* ── Formulaires ───────────────────────────────────────────────────────── */
+.fg { margin-bottom: 14px; }
+.fg label { display: block; font-size: 13px; font-weight: 600; color: var(--tx); margin-bottom: 6px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* ── Interrupteur ──────────────────────────────────────────────────────── */
+.toggle { position: relative; display: inline-block; width: 40px; height: 22px; flex-shrink: 0; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; cursor: pointer; inset: 0; background: var(--bd); border-radius: 22px; transition: .2s; }
+.toggle-slider::before { content: ''; position: absolute; height: 16px; width: 16px; left: 3px; bottom: 3px; background: var(--sf); border-radius: 50%; transition: .2s; }
+.toggle input:checked + .toggle-slider { background: var(--gr); }
+.toggle input:checked + .toggle-slider::before { transform: translateX(18px); }
+
+/* ── Notification ──────────────────────────────────────────────────────── */
+.toast {
+  position: fixed; bottom: 20px; right: 20px;
+  background: var(--tx); color: var(--bg);
+  padding: 11px 16px; border-radius: 8px; font-size: 14px;
+  z-index: 999; transform: translateY(70px); opacity: 0;
+  transition: all .25s ease; pointer-events: none;
+}
+.toast.show { transform: none; opacity: 1; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.page-enter { animation: fadeIn .2s ease; }
+@media (prefers-reduced-motion: reduce) { .page-enter, .toast, .toggle-slider, .toggle-slider::before { animation: none; transition: none; } }
+
+@media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
