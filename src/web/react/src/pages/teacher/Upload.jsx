@@ -1,15 +1,20 @@
 import { useState, useRef } from 'react';
 import { apiFetch, apiUpload } from '../../utils/api';
 import { toast } from '../../utils/toast';
-import Modal from '../../components/Modal';
+
+const NB_QUESTIONS_MAX = 30;   // même borne que l'API (main.py)
 
 export default function Upload() {
   const [dragging, setDragging]   = useState(false);
   const [files, setFiles]         = useState([]);
   const [uploading, setUploading] = useState(false);
-  const [showGenModal, setShowGenModal] = useState(false);
+  const [genIdx, setGenIdx]       = useState(0);     // PDF utilisé pour la génération
   const [nbQ, setNbQ]             = useState(5);
   const [matiere, setMatiere]     = useState('');
+  const [classe, setClasse]       = useState('');
+  const [generating, setGenerating] = useState(false);
+  const [genResult, setGenResult] = useState(null);  // { titre, nb_generees, questions }
+  const [genError, setGenError]   = useState('');
   const fileRef                   = useRef();
 
   function handleFiles(fileList) {
@@ -18,6 +23,12 @@ export default function Upload() {
     );
     if (pdfs.length !== fileList.length) toast('Seuls les fichiers PDF sont acceptés');
     setFiles(pdfs.slice(0, 10));
+    setGenIdx(0);
+  }
+
+  function removeFile(i) {
+    setFiles(files.filter((_, j) => j !== i));
+    setGenIdx(0);
   }
 
   async function uploadFiles() {
@@ -29,7 +40,7 @@ export default function Upload() {
       const res = await apiUpload('/documents', fd);
       toast(`${res.sauvegardes.length} fichier(s) uploadé(s)`);
       if (res.erreurs?.length) toast(`${res.erreurs.length} erreur(s)`);
-      setFiles([]);
+      // La liste est conservée : on peut générer une évaluation depuis ces cours
     } catch (e) {
       toast('' + (e.detail || 'Erreur upload'));
     } finally {
@@ -37,16 +48,29 @@ export default function Upload() {
     }
   }
 
+  // Génération réelle (pôle Génération) : crée le devoir puis génère ses questions depuis le PDF
   async function generer() {
-    setShowGenModal(false);
-    toast('Génération en cours…');
+    if (generating) return;
+    const pdf = files[genIdx];
+    if (!pdf) { toast('Choisissez un cours au format PDF'); return; }
+    const nb = Math.min(Math.max(parseInt(nbQ, 10) || 5, 1), NB_QUESTIONS_MAX);
+    const titre = `${matiere.trim() || 'Évaluation'} — ${pdf.name.replace(/\.pdf$/i, '')}`;
+    setGenerating(true); setGenResult(null); setGenError('');
     try {
-      await apiFetch('POST', '/devoirs/1/generer', {
-        document_id: 1, nb_questions: nbQ, matiere,
+      const dv = await apiFetch('POST', '/devoirs', {
+        titre,
+        description: `${classe.trim() ? `Classe cible : ${classe.trim()} · ` : ''}généré depuis ${pdf.name}`,
       });
+      const fd = new FormData();
+      fd.append('fichier', pdf);
+      fd.append('nb_questions', String(nb));
+      const res = await apiFetch('POST', `/devoirs/${dv.id}/generer`, fd);
+      setGenResult({ titre, ...res });
       toast('Évaluation générée !');
     } catch (e) {
-      toast('' + (e.detail || 'Erreur génération'));
+      setGenError(e?.detail || 'Erreur lors de la génération');
+    } finally {
+      setGenerating(false);
     }
   }
 
@@ -120,7 +144,7 @@ export default function Upload() {
                 </span>
                 <button
                   className="btn btn-danger btn-sm"
-                  onClick={() => setFiles(files.filter((_, j) => j !== i))}
+                  onClick={() => removeFile(i)}
                   aria-label={`Supprimer ${f.name}`}
                 >✕</button>
               </div>
@@ -141,38 +165,64 @@ export default function Upload() {
       <div className="card">
         <div className="card-title">Générer une évaluation</div>
         <div className="card-subtitle">
-          À partir d'un cours uploadé, générez des questions automatiquement.
+          Choisissez un cours déposé ci-dessus : un devoir est créé et ses questions sont générées.
         </div>
-        <button className="btn btn-primary" onClick={() => setShowGenModal(true)}>
-          Générer une évaluation
-        </button>
-      </div>
 
-      {/* Modal génération */}
-      <Modal
-        open={showGenModal}
-        onClose={() => setShowGenModal(false)}
-        title="Générer une évaluation"
-        subtitle="Paramétrez la génération automatique de questions"
-        actions={<>
-          <button className="btn btn-secondary" onClick={() => setShowGenModal(false)}>Annuler</button>
-          <button className="btn btn-primary" onClick={generer}>Générer</button>
-        </>}
-      >
-        <div className="fg">
-          <label htmlFor="genNbQ">Nombre de questions</label>
-          <input id="genNbQ" type="number" min={1} max={20} value={nbQ}
-            onChange={e => setNbQ(+e.target.value)} />
+        {files.length > 1 && (
+          <div className="fg">
+            <label htmlFor="genFile">Cours utilisé</label>
+            <select id="genFile" value={genIdx} onChange={e => setGenIdx(+e.target.value)}>
+              {files.map((f, i) => <option key={i} value={i}>{f.name}</option>)}
+            </select>
+          </div>
+        )}
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(160px, 1fr))', gap:13 }}>
+          <div className="fg">
+            <label htmlFor="genMat">Matière</label>
+            <input id="genMat" type="text" value={matiere}
+              onChange={e => setMatiere(e.target.value)} placeholder="Mathématiques…" />
+          </div>
+          <div className="fg">
+            <label htmlFor="genClasse">Classe cible</label>
+            <input id="genClasse" type="text" value={classe}
+              onChange={e => setClasse(e.target.value)} placeholder="Terminale A…" />
+          </div>
+          <div className="fg">
+            <label htmlFor="genNbQ">Questions</label>
+            <input id="genNbQ" type="number" min={1} max={NB_QUESTIONS_MAX} value={nbQ}
+              onChange={e => setNbQ(e.target.value)} />
+          </div>
         </div>
-        <div className="fg">
-          <label htmlFor="genMat">Matière (optionnel)</label>
-          <input id="genMat" type="text" value={matiere}
-            onChange={e => setMatiere(e.target.value)} placeholder="Mathématiques…" />
+        <button className="btn btn-primary" onClick={generer} disabled={generating || !files.length}>
+          {generating ? 'Génération…' : 'Générer une évaluation'}
+        </button>
+        {!files.length && (
+          <p style={{ fontSize:12, color:'var(--mu)', marginTop:8 }}>Déposez d'abord un cours au format PDF.</p>
+        )}
+
+        <div aria-live="polite" style={{ marginTop:16 }}>
+          {generating && (
+            <p style={{ color:'var(--mu)', fontSize:13 }}>
+              Génération en cours… (de quelques secondes à quelques minutes selon le cours)
+            </p>
+          )}
+          {genError && <p style={{ fontSize:13, fontWeight:600 }}>{genError}</p>}
+          {genResult && <>
+            <div className="card-title" style={{ fontSize:14, marginBottom:8 }}>
+              {genResult.nb_generees} question(s) générée(s) — devoir « {genResult.titre} »
+            </div>
+            {genResult.questions.map(q => (
+              <div key={q.id} style={{
+                border:'1px solid var(--bd)', borderRadius:8, padding:11,
+                marginBottom:8, background:'var(--bg)',
+              }}>
+                <div style={{ fontSize:13, fontWeight:600, marginBottom:4 }}>Q{q.numero_ordre}. {q.enonce}</div>
+                <div style={{ fontSize:12, color:'var(--mu)' }}>Réponse attendue : {q.reponse_attendue}</div>
+              </div>
+            ))}
+          </>}
         </div>
-        <p style={{ fontSize:11, color:'var(--mu)', fontStyle:'italic' }}>
-          Branchement pôle Génération en cours (J3).
-        </p>
-      </Modal>
+      </div>
     </div>
   );
 }
