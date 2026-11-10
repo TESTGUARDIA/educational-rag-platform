@@ -4,28 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TestGuardAI — Intégrité académique</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 72'%3E%3Crect x='33' y='16' width='14' height='55' rx='5' fill='%231C1B22'/%3E%3Cpolygon points='40,0 79,13 40,26 1,13' fill='%231C1B22'/%3E%3Crect x='66' y='16' width='8' height='26' rx='4' fill='%23D83A2E'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F7F6F3;--sf:#FFFFFF;--sf2:#F0EEE8;--bd:#E0DDD5;
-  --tx:#1C1E26;--mu:#6B7280;
-  --gr:#4F6EF7;--grl:#EEF2FF;
-  --or:#F59E0B;--orl:#FFF7ED;
-  --bl:#4F6EF7;--bll:#EEF2FF;
-  --yw:#B45309;--ywl:#FFF7ED;
-  --tg-accent:#00D9A3;--tg-accentl:#ECFDF5;
-  --tg-dark:#0F1117;--tg-danger:#EF4444;--tg-dangerl:#FEF2F2;
-  --r:8px;--sh:0 1px 3px rgba(15,17,23,.06);--shm:0 2px 12px rgba(15,17,23,.10)
+  --bg:#FAF7F1;--sf:#FFFDF8;--sf2:#F1ECE3;--bd:#E3DDD1;
+  --tx:#1C1B22;--mu:#55535E;
+  --gr:#6D4AE0;--grl:#ECE6FC;--grh:#5638C4;
+  --red:#D83A2E;--redt:#B92E24;--redl:#FAE6E0;
+  --or:#1C1B22;--orl:#F1ECE3;--bl:#6D4AE0;--bll:#ECE6FC;--yw:#1C1B22;--ywl:#F1ECE3;
+  --tg-accent:#6D4AE0;--tg-accentl:#ECE6FC;--tg-dark:#1C1B22;--tg-danger:#1C1B22;--tg-dangerl:#F1ECE3;
+  --r:8px;--sh:none;--shm:none
 }
-body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
 #ls{min-height:100vh;display:flex;align-items:center;justify-content:center}
 #ls::before{display:none}
 .lc{background:var(--bg);border:1.5px solid var(--bd);border-radius:10px;box-shadow:0 1px 4px rgba(15,17,23,.08);padding:48px 40px;width:100%;max-width:450px;position:relative;z-index:1}
 .ll{display:flex;align-items:baseline;gap:8px;margin-bottom:34px}
 .ll .wm{font-size:25px}
-.ll .tg{font-family:'DM Mono',monospace;font-size:11px;color:var(--mu);letter-spacing:.08em}
-.lh{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:5px;letter-spacing:-.01em}
+.ll .tg{font-family:'Montserrat',sans-serif;font-size:11px;color:var(--mu);letter-spacing:.08em}
+.lh{font-family:'Montserrat',sans-serif;font-size:22px;margin-bottom:5px;letter-spacing:-.01em}
 .ls2{font-size:13px;color:var(--mu);margin-bottom:30px}
 .pg{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:26px}
 .pb{border:2px solid var(--bd);border-radius:var(--r);padding:21px 13px;cursor:pointer;background:var(--sf);text-align:center;transition:all .2s}
@@ -37,29 +36,29 @@ body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--tx);min-h
 .fg{margin-bottom:13px}
 .fg label{display:block;font-size:12px;font-weight:500;color:var(--mu);margin-bottom:5px;letter-spacing:.04em;text-transform:uppercase}
 input[type=text],input[type=email],input[type=password],input[type=number],input[type=tel],select,textarea{width:100%;padding:9px 13px;border:1px solid var(--bd);border-radius:8px;font-family:inherit;font-size:13px;background:var(--bg);color:var(--tx);outline:none;transition:border-color .2s}
-input:focus,select:focus,textarea:focus{border-color:var(--gr);box-shadow:0 0 0 3px rgba(79,110,247,.1)}
+input:focus,select:focus,textarea:focus{border-color:var(--gr);box-shadow:0 0 0 3px rgba(109,74,224,.1)}
 select{cursor:pointer}
 textarea{resize:vertical;min-height:100px}
-.bln{width:100%;padding:12px;border:none;border-radius:8px;font-family:'Figtree',sans-serif;font-size:14px;font-weight:600;cursor:pointer;background:#4F6EF7;color:#fff;margin-top:5px;transition:all .2s}
-.bln:hover{background:#3a56e0}
-.bln.sm{background:var(--tg-accent);color:#065f46}.bln.sm:hover{background:#00c49a}
+.bln{width:100%;padding:12px;border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:600;cursor:pointer;background:#6D4AE0;color:#fff;margin-top:5px;transition:all .2s}
+.bln:hover{background:#5638C4}
+.bln.sm{background:var(--tg-accent);color:#FFFDF8}.bln.sm:hover{background:#5638C4}
 #app{display:none;min-height:100vh}
-header{background:var(--tg-dark);border-bottom:1.5px solid #252836;padding:0 26px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+header{background:var(--tg-dark);border-bottom:1.5px solid #E3DDD1;padding:0 26px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .hl{display:flex;align-items:center;gap:14px}
-.logo{font-family:'Figtree',sans-serif;font-size:16px;font-weight:700;letter-spacing:-.02em;color:#F1F1F3}
-.rb{font-family:'DM Mono',monospace;font-size:11px;padding:3px 9px;border-radius:12px;letter-spacing:.06em;font-weight:500}
-.rb.t{background:#1e2a5e;color:#818cf8}.rb.s{background:#1a3a5c;color:#60a5fa}
+.logo{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;letter-spacing:-.02em;color:#1C1B22}
+.rb{font-family:'Montserrat',sans-serif;font-size:11px;padding:3px 9px;border-radius:12px;letter-spacing:.06em;font-weight:500}
+.rb.t{background:#ECE6FC;color:#5638C4}.rb.s{background:#ECE6FC;color:#5638C4}
 .hr2{display:flex;align-items:center;gap:12px}
 .ui{text-align:right}
-.un{font-size:13px;font-weight:600;color:#F1F1F3}.ur{font-size:12px;color:#9ca3af}
+.un{font-size:13px;font-weight:600;color:#1C1B22}.ur{font-size:12px;color:#55535E}
 .av{width:33px;height:33px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;overflow:hidden;flex-shrink:0}
 .av img{width:100%;height:100%;object-fit:cover}
-.av.t{background:#4F6EF7}.av.s{background:#4F6EF7}
-.bo{background:none;border:1px solid #2a2d3a;border-radius:7px;padding:5px 11px;font-family:inherit;font-size:12px;color:#9ca3af;cursor:pointer;transition:all .15s}
-.bo:hover{border-color:#4F6EF7;color:#F1F1F3}
+.av.t{background:#6D4AE0}.av.s{background:#6D4AE0}
+.bo{background:none;border:1px solid #E3DDD1;border-radius:7px;padding:5px 11px;font-family:inherit;font-size:12px;color:#55535E;cursor:pointer;transition:all .15s}
+.bo:hover{border-color:#6D4AE0;color:#1C1B22}
 .lay{display:flex;min-height:calc(100vh - 56px)}
-nav{width:210px;background:#FAFAF8;border-right:1px solid var(--bd);padding:18px 9px;flex-shrink:0;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto}
-.ns{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);padding:0 9px;margin-bottom:6px;opacity:.7}
+nav{width:210px;background:#FFFDF8;border-right:1px solid var(--bd);padding:18px 9px;flex-shrink:0;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto}
+.ns{font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);padding:0 9px;margin-bottom:6px;opacity:.7}
 .ni{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;color:var(--mu);transition:all .15s;margin-bottom:2px;border:none;background:none;width:100%;text-align:left}
 .ni:hover{background:var(--sf2);color:var(--tx)}
 .ni.at{background:var(--grl);color:var(--gr);font-weight:600}.ni.as{background:var(--grl);color:var(--gr);font-weight:600}
@@ -68,45 +67,45 @@ main{flex:1;padding:26px;overflow-y:auto}
 .pg2{display:none;animation:fi .22s ease}.pg2.active{display:block}
 @keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 .ph{margin-bottom:22px}
-.pt{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:3px;letter-spacing:-.01em;color:var(--tx)}
+.pt{font-family:'Montserrat',sans-serif;font-size:22px;margin-bottom:3px;letter-spacing:-.01em;color:var(--tx)}
 .ps{font-size:13px;color:var(--mu);font-weight:400}
 .card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:20px;margin-bottom:13px}
 .ct{font-size:14px;font-weight:600;margin-bottom:3px;color:var(--tx);letter-spacing:-.01em}
 .cs{font-size:12px;color:var(--mu);margin-bottom:13px}
 .upz{border:2px dashed var(--bd);border-radius:var(--r);padding:36px 24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg)}
-.upz:hover,.upz.dv{border-color:var(--gr);background:rgba(79,110,247,.05)}
+.upz:hover,.upz.dv{border-color:var(--gr);background:rgba(109,74,224,.05)}
 .upz.dv{}
 .upi2{font-size:34px;margin-bottom:9px}
 .upt{font-size:14px;font-weight:500;margin-bottom:4px}
 .uph{font-size:12px;color:var(--mu)}
 .upin{display:none}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-family:'Figtree',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;border:none}
-.bp{background:var(--gr);color:#fff;border-radius:8px}.bp:hover{background:#3a56e0}
-.bp.s{background:var(--gr)}.bp.s:hover{background:#3a56e0}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;border:none}
+.bp{background:var(--gr);color:#fff;border-radius:8px}.bp:hover{background:#5638C4}
+.bp.s{background:var(--gr)}.bp.s:hover{background:#5638C4}
 .bs{background:var(--sf);border:1px solid var(--bd);color:var(--tx)}.bs:hover{border-color:var(--mu);background:var(--sf2)}
-.bw{background:var(--tg-dark);color:var(--tg-accent);border:1px solid #2a2d3a}.bw:hover{background:#1a1d26}
-.bo2{background:var(--orl);color:var(--or);border:1px solid #e8a070}.bo2:hover{background:#fde8d8}
-.bd2{background:var(--tg-dangerl);color:var(--tg-danger);border:1px solid #FECACA}.bd2:hover{background:#FECACA}
+.bw{background:var(--tg-dark);color:var(--tg-accent);border:1px solid #E3DDD1}.bw:hover{background:#2B2A33}
+.bo2{background:var(--orl);color:var(--or);border:1px solid #E3DDD1}.bo2:hover{background:#E3DDD1}
+.bd2{background:var(--tg-dangerl);color:var(--tg-danger);border:1px solid #E3DDD1}.bd2:hover{background:#E3DDD1}
 .bsm{padding:5px 10px;font-size:11px}
 .tw{overflow-x:auto;border-radius:var(--r);border:1px solid var(--bd)}
 table{width:100%;border-collapse:collapse}
-thead{background:#F7F6F3}
-th{padding:10px 13px;text-align:left;font-size:10px;font-weight:600;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;font-family:'DM Mono',monospace;border-bottom:0.5px solid var(--bd)}
+thead{background:#FAF7F1}
+th{padding:10px 13px;text-align:left;font-size:10px;font-weight:600;color:#55535E;letter-spacing:.07em;text-transform:uppercase;font-family:'Montserrat',sans-serif;border-bottom:0.5px solid var(--bd)}
 td{padding:12px 13px;font-size:13px;border-bottom:0.5px solid var(--bd);background:var(--sf)}
 tr:last-child td{border-bottom:none}
 tbody tr:hover td{background:var(--bg)}
-.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:500;font-family:'DM Mono',monospace}
-.bg{background:var(--tg-accentl);color:#059669}.bb{background:var(--grl);color:var(--gr)}
-.bor{background:#FFF7ED;color:#B45309}.by{background:#FFFBEB;color:#92400E}
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:500;font-family:'Montserrat',sans-serif}
+.bg{background:var(--tg-accentl);color:#4A4658}.bb{background:var(--grl);color:var(--gr)}
+.bor{background:#F1ECE3;color:#1C1B22}.by{background:#F1ECE3;color:#1C1B22}
 .bgr{background:var(--sf2);color:var(--mu)}
 .sr{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:13px;margin-bottom:18px}
 .sc{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:17px 20px}
-.sl{font-size:11px;color:var(--mu);font-weight:500;margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em;font-family:'DM Mono',monospace}
-.sv{font-family:'DM Serif Display',serif;font-size:25px;color:var(--tx);letter-spacing:-.01em}
+.sl{font-size:11px;color:var(--mu);font-weight:500;margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em;font-family:'Montserrat',sans-serif}
+.sv{font-family:'Montserrat',sans-serif;font-size:25px;color:var(--tx);letter-spacing:-.01em}
 .sd{font-size:11px;color:var(--mu);margin-top:2px}
 .pbw{background:var(--sf2);border-radius:8px;height:7px;overflow:hidden}
 .pb{height:100%;border-radius:8px;transition:width .6s ease}
-.pb.g{background:#4F6EF7}.pb.b{background:#00D9A3}.pb.o{background:#F59E0B}
+.pb.g{background:#6D4AE0}.pb.b{background:#6D4AE0}.pb.o{background:#55535E}
 .ci{display:flex;align-items:center;gap:13px;padding:13px;border-radius:var(--r);border:1px solid var(--bd);background:var(--sf);margin-bottom:9px;transition:box-shadow .15s}
 .ci:hover{box-shadow:var(--sh)}
 .cico{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
@@ -116,7 +115,7 @@ tbody tr:hover td{background:var(--bg)}
 .mo.open{display:flex;animation:fi .18s ease}
 .modal{background:var(--sf);border-radius:10px;padding:26px;width:100%;max-width:500px;box-shadow:0 2px 16px rgba(15,17,23,.12);position:relative;max-height:92vh;overflow-y:auto}
 .modal.w{max-width:610px}
-.mt2{font-family:'DM Serif Display',serif;font-size:18px;margin-bottom:5px}
+.mt2{font-family:'Montserrat',sans-serif;font-size:18px;margin-bottom:5px}
 .ms2{font-size:12px;color:var(--mu);margin-bottom:18px}
 .mc{position:absolute;top:13px;right:13px;background:var(--sf2);border:none;border-radius:6px;width:25px;height:25px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--mu)}
 .mc:hover{background:var(--bd);color:var(--tx)}
@@ -128,18 +127,18 @@ tbody tr:hover td{background:var(--bg)}
 .eh{padding:13px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd)}
 .eb{padding:13px 16px}
 .gc{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;background:var(--grl);border:2.5px solid var(--gr);flex-shrink:0}
-.gn{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--gr);line-height:1}
+.gn{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:500;color:var(--gr);line-height:1}
 .gd{font-size:10px;color:var(--gr)}
 .tog{position:relative;display:inline-block;width:39px;height:22px;flex-shrink:0}
 .tog input{opacity:0;width:0;height:0}
 .tsl{position:absolute;cursor:pointer;inset:0;background:var(--bd);border-radius:12px;transition:.2s}
 .tsl::before{content:'';position:absolute;height:16px;width:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.2s}
-.tog input:checked+.tsl{background:var(--gr);box-shadow:0 0 0 2px rgba(79,110,247,.15)}
+.tog input:checked+.tsl{background:var(--gr);box-shadow:0 0 0 2px rgba(109,74,224,.15)}
 .tog input:checked+.tsl::before{transform:translateX(17px)}
 .avw{position:relative;width:88px;height:88px;margin:0 auto 13px;cursor:pointer}
-.avb{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:28px;color:#fff;overflow:hidden}
+.avb{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:28px;color:#fff;overflow:hidden}
 .avb img{width:100%;height:100%;object-fit:cover}
-.avb.tg{background:#4F6EF7}.avb.sg{background:#4F6EF7}
+.avb.tg{background:#6D4AE0}.avb.sg{background:#6D4AE0}
 .avo{position:absolute;inset:0;background:rgba(0,0,0,.45);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;font-size:19px}
 .avw:hover .avo{opacity:1}
 .atab-row{display:flex;gap:3px;background:var(--sf2);border-radius:10px;padding:4px;width:fit-content;margin-bottom:22px;flex-wrap:wrap;border:0.5px solid var(--bd)}
@@ -152,45 +151,88 @@ tbody tr:hover td{background:var(--bg)}
 .egr{display:grid;grid-template-columns:repeat(9,1fr);gap:5px;margin-top:6px}
 .eop{width:32px;height:32px;border-radius:7px;border:2px solid transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;background:var(--bg);transition:all .15s}
 .eop:hover{background:var(--sf2)}.eop.sel{border-color:var(--gr);background:var(--grl)}
-.csco{background:#0F1117;border:1px solid #2a2d3a;border-radius:8px;padding:10px 13px;font-family:'DM Mono',monospace;font-size:11px;max-height:108px;overflow-y:auto;color:#00D9A3;white-space:pre;line-height:1.6}
+.csco{background:#1C1B22;border:1px solid #E3DDD1;border-radius:8px;padding:10px 13px;font-family:'Montserrat',sans-serif;font-size:11px;max-height:108px;overflow-y:auto;color:#6D4AE0;white-space:pre;line-height:1.6}
 .mprev{padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);display:flex;align-items:center;gap:9px;margin-top:3px}
 @media(max-width:768px){nav{display:none}main{padding:14px}.sr{grid-template-columns:1fr 1fr}.fr{grid-template-columns:1fr}}
+
+/* ── Charte graphique TestGuardAI ──────────────────────────────────────
+   Violet IA : actions · Rouge correcteur : logo et corrections uniquement
+   Montserrat pour le site, Bricolage Grotesque pour le logo · aucune ombre */
+body{font-variant-numeric:tabular-nums}
+.tgl{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-.03em;color:var(--tx);line-height:1;white-space:nowrap;display:inline-block;font-size:22px}
+.tgl svg{height:.7em;vertical-align:baseline;margin-right:.02em}
+.tgl svg.t{width:.778em}.tgl svg.g{width:.7em}
+.tgl-ai{display:inline-block;font-size:.5em;line-height:1;padding:.12em .28em .16em;margin-left:.18em;border-radius:.22em;background:var(--gr);color:#FFFDF8;vertical-align:.35em}
+.tgl.st{font-size:58px;line-height:.98;white-space:normal}
+.tgl.st .tgl-ai{font-size:.36em;margin-left:.12em;border-radius:.2em;transform:rotate(-8deg);vertical-align:1.1em}
+.ll{margin-bottom:30px}
+header{background:var(--sf);border-bottom:1px solid var(--bd)}
+.hl{gap:16px}
+.un{color:var(--tx)}.ur{color:var(--mu)}
+.rb{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;border-radius:6px;letter-spacing:0}
+.rb.t,.rb.s{background:var(--grl);color:var(--grh)}
+.bo{border-color:var(--bd);color:var(--tx);border-radius:6px}.bo:hover{border-color:var(--gr);color:var(--gr)}
+nav{background:var(--sf)}
+.ns,.sl{text-transform:none;letter-spacing:0;font-weight:600;font-size:12px}
+th{text-transform:none;letter-spacing:0;font-size:12px;color:var(--mu)}
+.fg label,.flbl{display:block;text-transform:none;letter-spacing:0;font-weight:600;font-size:13px;color:var(--tx);margin-bottom:5px}
+.lh,.ph .pt,.sv,.mt2,.avb{font-weight:700;letter-spacing:-.02em}
+.lh{font-size:24px}.sv{font-size:26px}.mt2{font-size:20px}
+.btn,.bln,input,select,textarea{border-radius:6px}
+.btn,.bln{min-height:40px}
+.bln{background:var(--gr)}.bln:hover{background:var(--grh)}
+.bp:hover,.bp.s:hover{background:var(--grh)}
+.bw{background:var(--tx);color:var(--sf);border:none}.bw:hover{background:#2B2A33}
+.bo2,.bd2{background:transparent;color:var(--tx);border:1px solid var(--tx)}.bo2:hover,.bd2:hover{background:var(--sf2)}
+.badge{border-radius:6px;font-weight:600;font-size:12px;padding:3px 9px}
+.bg{background:#ECE8E0;color:#4A4658}
+.bb{background:var(--grl);color:var(--grh)}
+.by{background:transparent;color:var(--tx);box-shadow:inset 0 0 0 1.5px var(--tx)}
+.bor{background:var(--tx);color:var(--bg)}
+.bgr{background:var(--sf2);color:var(--mu)}
+.lc{background:var(--sf);box-shadow:none}
+.modal{border:1px solid var(--bd);box-shadow:none}
+.card,.sc,.ec,.ci,.ci:hover,.atab.active{box-shadow:none}
+.ci:hover{border-color:var(--mu)}
+.gc{background:transparent;border:2px solid var(--red)}.gn,.gd{color:var(--redt)}
+.csco{background:var(--sf2);color:var(--tx);border-color:var(--bd)}
+.pb.b{background:var(--tx)}.pb.o{background:var(--mu)}
+.csw{width:30px;height:30px;padding:0;border:none}
+.csw.sel{transform:none;outline:3px solid var(--tx);outline-offset:2px}
+.pi:empty,.upi2:empty,.nico:empty,.cico:empty{display:none}
+input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px var(--grl)}
+:focus-visible{outline:3px solid #B9A6F2;outline-offset:2px}
+.toast{background:var(--tx);color:var(--bg);border-radius:8px}
+#lerr{color:var(--tx)!important;font-weight:600}
+@media(max-width:768px){.tgl.st{font-size:46px}}
+.tgl{font-size:24px}
+.ph .pt{font-size:26px}
+.pb.pt,.pb.ps{font-size:13px;font-weight:400;color:var(--tx);letter-spacing:0;margin:0;font-family:'Montserrat',sans-serif}
+.pb .pl{font-size:15px;font-weight:700;margin-bottom:4px}
+.pb .pd{font-size:12px;font-weight:400;color:var(--mu)}
 </style>
 </head>
 <body>
 <div id="ls">
   <div class="lc">
-    <div class="ll" style="align-items:center">
-  <svg width="28" height="32" viewBox="0 0 34 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17 2L4 7.5V19.5C4 27 17 36 17 36C17 36 30 27 30 19.5V7.5L17 2Z" fill="#4F6EF7" opacity="0.15" stroke="#4F6EF7" stroke-width="1.5" stroke-linejoin="round"/>
-    <path d="M11.5 19L15.5 23L22.5 15" stroke="#4F6EF7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-  <span class="wm" style="font-family:Figtree,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em;color:#1C1E26">TestGuard<span style="color:#4F6EF7">AI</span></span>
-  <span class="tg" style="font-size:10px;margin-left:2px">v2.1</span>
-</div>
+    <div class="ll"><div class="tgl st" role="img" aria-label="TestGuardAI"><div><svg class="t" viewBox="0 0 80 72" aria-hidden="true"><path d="M40 13C52 13 64 14 70 16V33" stroke="#D83A2E" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="66.4" y="31" width="7.2" height="15" rx="3.6" fill="#D83A2E"/><rect x="34" y="16" width="12" height="55" rx="5" fill="currentColor"/><polygon points="40,1 78,13 40,25 2,13" fill="currentColor"/><path d="M40 7 64 14.5" stroke="#FFFDF8" stroke-width="1.8" stroke-linecap="round"/><circle cx="40" cy="13" r="3.2" fill="#D83A2E"/></svg>est</div><div><svg class="g" viewBox="0 0 72 72" aria-hidden="true"><circle cx="34" cy="36" r="19" fill="#ECE6FC"/><path d="M24 28A13 13 0 0 1 33 22.5" stroke="#D83A2E" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M53.9 19.3A26 26 0 1 0 53.9 52.7" stroke="#6D4AE0" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M53.9 52.7 66 66" stroke="#6D4AE0" stroke-width="12" stroke-linecap="round"/><path d="M37 36H58" stroke="#6D4AE0" stroke-width="10" stroke-linecap="round"/></svg>uard<span class="tgl-ai">AI</span></div></div></div>
     <h1 class="lh">Bienvenue</h1>
     <p class="ls2">Sélectionnez votre profil pour accéder à la plateforme.</p>
     <div class="pg">
-      <button class="pb pt" onclick="selP('teacher',this)"><div class="pi">🎓</div><span class="pl">Professeur</span><span class="pd">Gérez cours et évaluations</span></button>
-      <button class="pb ps" onclick="selP('student',this)"><div class="pi">📚</div><span class="pl">Étudiant</span><span class="pd">Consultez vos évaluations</span></button>
+      <button class="pb pt" onclick="selP('teacher',this)"><div class="pi"></div><span class="pl">Professeur</span><span class="pd">Gérez cours et évaluations</span></button>
+      <button class="pb ps" onclick="selP('student',this)"><div class="pi"></div><span class="pl">Étudiant</span><span class="pd">Consultez vos évaluations</span></button>
     </div>
     <div class="fg"><label for="linput">Email</label><input type="text" id="linput" placeholder="votre@email.fr" autocomplete="email"></div>
     <div class="fg"><label for="pinput">Mot de passe</label><input type="password" id="pinput" placeholder="••••••••" autocomplete="current-password"></div>
     <button class="bln" id="lbtn" onclick="doLogin()">Se connecter</button>
-    <div id="lerr" style="color:#EF4444;font-size:12px;margin-top:8px;min-height:16px;text-align:center"></div>
+    <div id="lerr" style="color:#1C1B22;font-size:12px;margin-top:8px;min-height:16px;text-align:center"></div>
     <div style="margin-top:12px;font-size:11px;color:var(--mu);text-align:center">Demo · mot de passe : <code>password</code></div>
   </div>
 </div>
 
 <div id="app">
   <header>
-    <div class="hl"><div style="display:flex;align-items:center;gap:9px">
-  <svg width="24" height="27" viewBox="0 0 34 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17 2L4 7.5V19.5C4 27 17 36 17 36C17 36 30 27 30 19.5V7.5L17 2Z" fill="#4F6EF7" opacity="0.25" stroke="#4F6EF7" stroke-width="1.5" stroke-linejoin="round"/>
-    <path d="M11.5 19L15.5 23L22.5 15" stroke="#00D9A3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-  <div class="logo" style="color:#F1F1F3">TestGuard<span style="color:#4F6EF7">AI</span></div>
-</div><span class="rb" id="hbadge"></span></div>
+    <div class="hl"><span class="tgl" role="img" aria-label="TestGuardAI"><svg class="t" viewBox="0 0 80 72" aria-hidden="true"><path d="M40 13C52 13 64 14 70 16V33" stroke="#D83A2E" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="66.4" y="31" width="7.2" height="15" rx="3.6" fill="#D83A2E"/><rect x="34" y="16" width="12" height="55" rx="5" fill="currentColor"/><polygon points="40,1 78,13 40,25 2,13" fill="currentColor"/><path d="M40 7 64 14.5" stroke="#FFFDF8" stroke-width="1.8" stroke-linecap="round"/><circle cx="40" cy="13" r="3.2" fill="#D83A2E"/></svg>est<svg class="g" viewBox="0 0 72 72" aria-hidden="true"><circle cx="34" cy="36" r="19" fill="#ECE6FC"/><path d="M24 28A13 13 0 0 1 33 22.5" stroke="#D83A2E" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M53.9 19.3A26 26 0 1 0 53.9 52.7" stroke="#6D4AE0" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M53.9 52.7 66 66" stroke="#6D4AE0" stroke-width="12" stroke-linecap="round"/><path d="M37 36H58" stroke="#6D4AE0" stroke-width="10" stroke-linecap="round"/></svg>uard<span class="tgl-ai">AI</span></span><span class="rb" id="hbadge"></span></div>
     <div class="hr2">
       <div class="ui"><div class="un" id="hname"></div><div class="ur" id="hrole"></div></div>
       <div class="av" id="hav"></div>
@@ -200,19 +242,19 @@ tbody tr:hover td{background:var(--bg)}
   <div class="lay">
     <nav id="nav-t" style="display:none">
       <div class="ns" style="margin-bottom:13px">Enseignement</div>
-      <button class="ni at" onclick="go('t-upload',this)"><span class="nico">⬆️</span>Déposer un cours</button>
-      <button class="ni" onclick="go('t-sub',this)"><span class="nico">📋</span>Copies rendues</button>
-      <button class="ni" onclick="go('t-res',this)"><span class="nico">📊</span>Résultats finaux</button>
+      <button class="ni at" onclick="go('t-upload',this)"><span class="nico"></span>Déposer un cours</button>
+      <button class="ni" onclick="go('t-sub',this)"><span class="nico"></span>Copies rendues</button>
+      <button class="ni" onclick="go('t-res',this)"><span class="nico"></span>Résultats finaux</button>
       <div class="ns" style="margin-top:18px;margin-bottom:5px">Paramètres</div>
-      <button class="ni" onclick="go('t-account',this)"><span class="nico">⚙️</span>Mon compte</button>
+      <button class="ni" onclick="go('t-account',this)"><span class="nico"></span>Mon compte</button>
     </nav>
     <nav id="nav-s" style="display:none">
       <div class="ns" style="margin-bottom:13px">Mon espace</div>
-      <button class="ni as" onclick="go('s-evals',this)"><span class="nico">📝</span>Mes évaluations</button>
-      <button class="ni" onclick="go('s-results',this)"><span class="nico">🏆</span>Mes résultats</button>
-      <button class="ni" onclick="go('s-courses',this)"><span class="nico">📖</span>Mes cours</button>
+      <button class="ni as" onclick="go('s-evals',this)"><span class="nico"></span>Mes évaluations</button>
+      <button class="ni" onclick="go('s-results',this)"><span class="nico"></span>Mes résultats</button>
+      <button class="ni" onclick="go('s-courses',this)"><span class="nico"></span>Mes cours</button>
       <div class="ns" style="margin-top:18px;margin-bottom:5px">Paramètres</div>
-      <button class="ni" onclick="go('s-account',this)"><span class="nico">⚙️</span>Mon compte</button>
+      <button class="ni" onclick="go('s-account',this)"><span class="nico"></span>Mon compte</button>
     </nav>
     <main>
 
@@ -222,7 +264,7 @@ tbody tr:hover td{background:var(--bg)}
         <div class="card">
           <div class="ct">Nouveau cours</div><div class="cs">PDF, Word, PowerPoint — 50 Mo max</div>
           <div class="upz" onclick="document.getElementById('fi').click()" ondragover="event.preventDefault();this.classList.add('dv')" ondragleave="this.classList.remove('dv')" ondrop="dropF(event)">
-            <div class="upi2">📄</div><div class="upt">Glissez vos fichiers ou cliquez</div><div class="uph">PDF, DOCX, PPTX · Max 50 Mo</div>
+            <div class="upi2"></div><div class="upt">Glissez vos fichiers ou cliquez</div><div class="uph">PDF, DOCX, PPTX · Max 50 Mo</div>
             <input type="file" id="fi" class="upin" multiple accept=".pdf,.docx,.pptx" onchange="showFiles(this)">
           </div>
           <div id="flist" style="margin-top:13px"></div>
@@ -230,15 +272,15 @@ tbody tr:hover td{background:var(--bg)}
             <div class="fg" style="margin:0"><label for="selMatiere">Matière</label><select id="selMatiere"><option>Mathématiques</option><option>Sciences</option><option>Histoire-Géographie</option></select></div>
             <div class="fg" style="margin:0"><label for="selClasse">Classe cible</label><select id="selClasse"><option>Terminale A</option><option>Terminale B</option><option>Première A</option></select></div>
           </div>
-          <div style="margin-top:16px;display:flex;gap:9px"><div class="fg" style="margin:0;width:110px"><label for="genNb">Questions</label><input type="number" id="genNb" min="1" max="30" value="5"></div><button class="btn bp" style="align-self:flex-end" onclick="genEval()">✨ Générer une évaluation</button><button class="btn bs" style="align-self:flex-end">💾 Sauvegarder</button></div>
+          <div style="margin-top:16px;display:flex;gap:9px"><div class="fg" style="margin:0;width:110px"><label for="genNb">Questions</label><input type="number" id="genNb" min="1" max="30" value="5"></div><button class="btn bp" style="align-self:flex-end" onclick="genEval()">Générer une évaluation</button><button class="btn bs" style="align-self:flex-end">Sauvegarder</button></div>
           <div id="genResult" style="margin-top:16px"></div>
         </div>
         <div class="card">
           <div class="ct">Cours récents</div><div class="cs" style="margin-bottom:0">3 cours disponibles</div>
           <div style="margin-top:13px">
-            <div class="ci"><div class="cico g">📐</div><div class="cinf"><div class="cn">Intégrales et primitives — Chap. 4</div><div class="cm">Mathématiques · Terminale A · 24 mars 2026</div></div><span class="badge bg">Éval. générée</span></div>
-            <div class="ci"><div class="cico b">🧬</div><div class="cinf"><div class="cn">La mitose et la méiose</div><div class="cm">Sciences · Terminale B · 20 mars 2026</div></div><span class="badge bg">Éval. générée</span></div>
-            <div class="ci"><div class="cico o">🗺️</div><div class="cinf"><div class="cn">La mondialisation — Introduction</div><div class="cm">Histoire-Géo · Première A · 15 mars 2026</div></div><span class="badge by">En cours…</span></div>
+            <div class="ci"><div class="cico g"></div><div class="cinf"><div class="cn">Intégrales et primitives — Chap. 4</div><div class="cm">Mathématiques · Terminale A · 24 mars 2026</div></div><span class="badge bg">Éval. générée</span></div>
+            <div class="ci"><div class="cico b"></div><div class="cinf"><div class="cn">La mitose et la méiose</div><div class="cm">Sciences · Terminale B · 20 mars 2026</div></div><span class="badge bg">Éval. générée</span></div>
+            <div class="ci"><div class="cico o"></div><div class="cinf"><div class="cn">La mondialisation — Introduction</div><div class="cm">Histoire-Géo · Première A · 15 mars 2026</div></div><span class="badge by">En cours…</span></div>
           </div>
         </div>
       </div>
@@ -269,9 +311,9 @@ tbody tr:hover td{background:var(--bg)}
         </div>
         <div class="card"><div class="ct">Par matière</div>
           <div style="margin-top:16px;display:flex;flex-direction:column;gap:13px">
-            <div><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:13px;font-weight:500">Mathématiques</span><span style="font-size:13px;font-weight:600;font-family:'DM Mono',monospace">14.2 / 20</span></div><div class="pbw"><div class="pb g" style="width:71%"></div></div></div>
-            <div><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:13px;font-weight:500">Sciences</span><span style="font-size:13px;font-weight:600;font-family:'DM Mono',monospace">12.8 / 20</span></div><div class="pbw"><div class="pb b" style="width:64%"></div></div></div>
-            <div><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:13px;font-weight:500">Histoire-Géographie</span><span style="font-size:13px;font-weight:600;font-family:'DM Mono',monospace">13.5 / 20</span></div><div class="pbw"><div class="pb o" style="width:67.5%"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:13px;font-weight:500">Mathématiques</span><span style="font-size:13px;font-weight:600;font-family:'Montserrat',sans-serif">14.2 / 20</span></div><div class="pbw"><div class="pb g" style="width:71%"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:13px;font-weight:500">Sciences</span><span style="font-size:13px;font-weight:600;font-family:'Montserrat',sans-serif">12.8 / 20</span></div><div class="pbw"><div class="pb b" style="width:64%"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:13px;font-weight:500">Histoire-Géographie</span><span style="font-size:13px;font-weight:600;font-family:'Montserrat',sans-serif">13.5 / 20</span></div><div class="pbw"><div class="pb o" style="width:67.5%"></div></div></div>
           </div>
         </div>
         <div class="card" style="padding:0;overflow:hidden"><div style="padding:13px 17px;border-bottom:1px solid var(--bd)"><div class="ct" style="margin:0">Récapitulatif par élève</div></div>
@@ -288,22 +330,22 @@ tbody tr:hover td{background:var(--bg)}
       <div class="pg2" id="page-t-account">
         <div class="ph"><h1 class="pt">Mon compte</h1><p class="ps">Gérez votre profil, matières, classes et élèves.</p></div>
         <div class="atab-row" id="ttabs">
-          <button class="atab active" onclick="stab('t','profil',this)">👤 Profil</button>
-          <button class="atab" onclick="stab('t','mat',this)">📚 Matières & Classes</button>
-          <button class="atab" onclick="stab('t','eleves',this)">👥 Élèves</button>
-          <button class="atab" onclick="stab('t','secu',this)">🔒 Sécurité</button>
+          <button class="atab active" onclick="stab('t','profil',this)">Profil</button>
+          <button class="atab" onclick="stab('t','mat',this)">Matières & Classes</button>
+          <button class="atab" onclick="stab('t','eleves',this)">Élèves</button>
+          <button class="atab" onclick="stab('t','secu',this)">Sécurité</button>
         </div>
 
         <div class="apanel active" id="tp-profil">
           <div style="display:grid;grid-template-columns:185px 1fr;gap:18px;align-items:start">
             <div class="card" style="text-align:center;padding:22px 16px">
               <div class="avw" onclick="document.getElementById('avt').click()">
-                <div class="avb tg" id="avbt">MD</div><div class="avo">📷</div>
+                <div class="avb tg" id="avbt">MD</div><div class="avo"></div>
               </div>
               <input type="file" id="avt" class="upin" accept="image/*" onchange="changeAv(this,'t')">
               <div style="font-size:13px;font-weight:600;margin-bottom:3px" id="tDN">Marie Dupont</div>
               <div style="font-size:11px;color:var(--mu);margin-bottom:13px">Professeur · Mathématiques</div>
-              <button class="btn bs bsm" style="width:100%" onclick="document.getElementById('avt').click()">📷 Changer la photo</button>
+              <button class="btn bs bsm" style="width:100%" onclick="document.getElementById('avt').click()">Changer la photo</button>
               <div style="margin-top:6px;font-size:11px;color:var(--mu)">JPG, PNG · Max 5 Mo</div>
             </div>
             <div class="card">
@@ -312,7 +354,7 @@ tbody tr:hover td{background:var(--bg)}
               <div class="fg" style="margin-top:13px"><label for="tEmail">E-mail</label><input type="email" id="tEmail" value="marie.dupont@lycee-victor-hugo.fr"></div>
               <div class="fr" style="margin-top:13px"><div class="fg" style="margin:0"><label for="tEtab">Établissement</label><input type="text" id="tEtab" value="Lycée Victor Hugo"></div><div class="fg" style="margin:0"><label for="tTel">Téléphone</label><input type="tel" id="tTel" placeholder="+33 6 00 00 00 00"></div></div>
               <div class="fg" style="margin-top:13px"><label for="tBio">Biographie</label><textarea id="tBio" style="min-height:70px">Professeure de mathématiques depuis 12 ans.</textarea></div>
-              <div style="margin-top:16px;display:flex;gap:9px"><button class="btn bp" onclick="savTP()">💾 Sauvegarder</button><button class="btn bs" onclick="toast('Modifications annulées')">Annuler</button></div>
+              <div style="margin-top:16px;display:flex;gap:9px"><button class="btn bp" onclick="savTP()">Sauvegarder</button><button class="btn bs" onclick="toast('Modifications annulées')">Annuler</button></div>
             </div>
           </div>
         </div>
@@ -331,7 +373,7 @@ tbody tr:hover td{background:var(--bg)}
           <div class="card">
             <div class="ct" style="margin-bottom:16px">Paramètres d'évaluation par défaut</div>
             <div class="fr"><div class="fg" style="margin:0"><label for="selBareme">Barème</label><select id="selBareme"><option>Sur 20 points</option><option>Sur 100 points</option><option>Lettre A–F</option></select></div><div class="fg" style="margin:0"><label for="selDelai">Délai de rendu</label><select id="selDelai"><option>7 jours</option><option>14 jours</option><option>21 jours</option><option>1 mois</option></select></div></div>
-            <div style="margin-top:14px"><button class="btn bp" onclick="toast('✅ Paramètres sauvegardés')">💾 Sauvegarder</button></div>
+            <div style="margin-top:14px"><button class="btn bp" onclick="toast('Paramètres sauvegardés')">Sauvegarder</button></div>
           </div>
         </div>
 
@@ -340,11 +382,11 @@ tbody tr:hover td{background:var(--bg)}
             <div style="padding:13px 17px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px">
               <div><div class="ct" style="margin:0">Liste des élèves</div><div style="font-size:11px;color:var(--mu);margin-top:2px" id="eleveCount"></div></div>
               <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
-                <input type="text" id="srchE" placeholder="🔍 Rechercher…" oninput="renderEleves()" style="padding:5px 10px;width:165px;font-size:12px">
+                <input type="text" id="srchE" placeholder="Rechercher…" oninput="renderEleves()" style="padding:5px 10px;width:165px;font-size:12px">
                 <select id="filtC" onchange="renderEleves()" style="width:auto;padding:5px 9px;font-size:12px"><option value="">Toutes les classes</option><option>Terminale A</option><option>Terminale B</option><option>Première A</option></select>
                 <button class="btn bp bsm" onclick="openM('m-add-eleve')">+ Ajouter</button>
-                <button class="btn bs bsm" onclick="openM('m-csv')">⬆ Importer CSV</button>
-                <button class="btn bs bsm" onclick="exportCSV()">⬇ Exporter</button>
+                <button class="btn bs bsm" onclick="openM('m-csv')">Importer CSV</button>
+                <button class="btn bs bsm" onclick="exportCSV()">Exporter</button>
               </div>
             </div>
             <div class="tw" style="border:none;border-radius:0;max-height:440px;overflow-y:auto">
@@ -357,10 +399,10 @@ tbody tr:hover td{background:var(--bg)}
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
             <div class="card">
               <div class="ct" style="margin-bottom:16px">Changer le mot de passe</div>
-              <div class="fg"><label for="sPwdCur">Actuel</label><input type="password" id="sPwdCur" placeholder="••••••••"></div>
-              <div class="fg"><label for="sPwdNew">Nouveau</label><input type="password" id="sPwdNew" placeholder="••••••••"></div>
-              <div class="fg"><label for="sPwdCfm">Confirmer</label><input type="password" id="sPwdCfm" placeholder="••••••••"></div>
-              <button class="btn bp" onclick="toast('✅ Mot de passe mis à jour')">🔒 Mettre à jour</button>
+              <div class="fg"><label for="tPwdCur">Actuel</label><input type="password" id="tPwdCur" placeholder="••••••••"></div>
+              <div class="fg"><label for="tPwdNew">Nouveau</label><input type="password" id="tPwdNew" placeholder="••••••••"></div>
+              <div class="fg"><label for="tPwdCfm">Confirmer</label><input type="password" id="tPwdCfm" placeholder="••••••••"></div>
+              <button class="btn bp" onclick="toast('Mot de passe mis à jour')">Mettre à jour</button>
             </div>
             <div class="card">
               <div class="ct" style="margin-bottom:16px">Notifications</div>
@@ -371,18 +413,18 @@ tbody tr:hover td{background:var(--bg)}
               </div>
             </div>
           </div>
-          <div class="card" style="border-color:#FECACA;background:#FFFAFA"><div class="ct" style="color:var(--or);margin-bottom:9px">⚠️ Zone de danger</div><div style="font-size:12px;color:var(--mu);margin-bottom:13px">Ces actions sont irréversibles.</div><div style="display:flex;gap:9px"><button class="btn bo2" onclick="toast('Export en préparation…')">📤 Exporter mes données</button><button class="btn bd2" onclick="toast('Contactez l\'administrateur')">🗑 Supprimer le compte</button></div></div>
+          <div class="card" style="border-color:#E3DDD1;background:#FFFDF8"><div class="ct" style="color:var(--or);margin-bottom:9px">Zone de danger</div><div style="font-size:12px;color:var(--mu);margin-bottom:13px">Ces actions sont irréversibles.</div><div style="display:flex;gap:9px"><button class="btn bo2" onclick="toast('Export en préparation…')">Exporter mes données</button><button class="btn bd2" onclick="toast('Contactez l\'administrateur')">Supprimer le compte</button></div></div>
         </div>
       </div>
 
       <!-- ÉLÈVE: ÉVALS -->
       <div class="pg2" id="page-s-evals">
         <div class="ph"><h1 class="pt">Mes évaluations</h1><p class="ps">Répondez aux évaluations générées par vos professeurs.</p></div>
-        <div style="margin-bottom:6px;font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.07em;font-family:'DM Mono',monospace">À rendre</div>
-        <div class="ec"><div class="eh"><div style="font-size:21px">📐</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Intégrales — Chapitre 4</div><div style="font-size:12px;color:var(--mu)">Mathématiques · Prof. Dupont</div></div><span class="badge bor">⏳ En attente</span></div><div class="eb"><div style="font-size:12px;color:var(--mu);margin-bottom:9px">Date limite : <strong style="color:var(--or)">31 mars 2026</strong> · 8 questions</div><button class="btn bp s" onclick="openM('m-eval')">✏️ Commencer</button></div></div>
-        <div class="ec"><div class="eh"><div style="font-size:21px">🧬</div><div style="flex:1"><div style="font-size:13px;font-weight:600">La mitose et la méiose</div><div style="font-size:12px;color:var(--mu)">Sciences · Prof. Lambert</div></div><span class="badge bor">⏳ En attente</span></div><div class="eb"><div style="font-size:12px;color:var(--mu);margin-bottom:9px">Date limite : <strong style="color:var(--or)">5 avril 2026</strong> · 10 questions</div><button class="btn bp s" onclick="openM('m-eval')">✏️ Commencer</button></div></div>
-        <div style="margin-top:18px;margin-bottom:6px;font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.07em;font-family:'DM Mono',monospace">Rendus</div>
-        <div class="ec"><div class="eh"><div style="font-size:21px">🗺️</div><div style="flex:1"><div style="font-size:13px;font-weight:600">La mondialisation — Introduction</div><div style="font-size:12px;color:var(--mu)">Histoire-Géo · Prof. Renard</div></div><span class="badge bg">✓ Rendu</span></div><div class="eb"><div style="font-size:12px;color:var(--mu)">Rendu le 22 mars 2026 · En attente de correction</div></div></div>
+        <div style="margin-bottom:6px;font-size:11px;font-weight:600;color:var(--mu);font-family:'Montserrat',sans-serif">À rendre</div>
+        <div class="ec"><div class="eh"><div style="font-size:21px"></div><div style="flex:1"><div style="font-size:13px;font-weight:600">Intégrales — Chapitre 4</div><div style="font-size:12px;color:var(--mu)">Mathématiques · Prof. Dupont</div></div><span class="badge bor">En attente</span></div><div class="eb"><div style="font-size:12px;color:var(--mu);margin-bottom:9px">Date limite : <strong style="color:var(--or)">31 mars 2026</strong> · 8 questions</div><button class="btn bp s" onclick="openM('m-eval')">Commencer</button></div></div>
+        <div class="ec"><div class="eh"><div style="font-size:21px"></div><div style="flex:1"><div style="font-size:13px;font-weight:600">La mitose et la méiose</div><div style="font-size:12px;color:var(--mu)">Sciences · Prof. Lambert</div></div><span class="badge bor">En attente</span></div><div class="eb"><div style="font-size:12px;color:var(--mu);margin-bottom:9px">Date limite : <strong style="color:var(--or)">5 avril 2026</strong> · 10 questions</div><button class="btn bp s" onclick="openM('m-eval')">Commencer</button></div></div>
+        <div style="margin-top:18px;margin-bottom:6px;font-size:11px;font-weight:600;color:var(--mu);font-family:'Montserrat',sans-serif">Rendus</div>
+        <div class="ec"><div class="eh"><div style="font-size:21px"></div><div style="flex:1"><div style="font-size:13px;font-weight:600">La mondialisation — Introduction</div><div style="font-size:12px;color:var(--mu)">Histoire-Géo · Prof. Renard</div></div><span class="badge bg">Rendu</span></div><div class="eb"><div style="font-size:12px;color:var(--mu)">Rendu le 22 mars 2026 · En attente de correction</div></div></div>
       </div>
 
       <!-- ÉLÈVE: RÉSULTATS -->
@@ -405,30 +447,30 @@ tbody tr:hover td{background:var(--bg)}
       <!-- ÉLÈVE: COURS -->
       <div class="pg2" id="page-s-courses">
         <div class="ph"><h1 class="pt">Mes cours</h1><p class="ps">Accédez aux supports déposés par vos professeurs.</p></div>
-        <div class="ci"><div class="cico g">📐</div><div class="cinf"><div class="cn">Intégrales et primitives — Chap. 4</div><div class="cm">Mathématiques · Prof. Dupont · PDF · 2.4 Mo</div></div><button class="btn bs bsm">⬇ Télécharger</button></div>
-        <div class="ci"><div class="cico b">🧬</div><div class="cinf"><div class="cn">La mitose et la méiose</div><div class="cm">Sciences · Prof. Lambert · PPTX · 5.1 Mo</div></div><button class="btn bs bsm">⬇ Télécharger</button></div>
-        <div class="ci"><div class="cico o">🗺️</div><div class="cinf"><div class="cn">La mondialisation — Introduction</div><div class="cm">Histoire-Géo · Prof. Renard · PDF · 1.8 Mo</div></div><button class="btn bs bsm">⬇ Télécharger</button></div>
+        <div class="ci"><div class="cico g"></div><div class="cinf"><div class="cn">Intégrales et primitives — Chap. 4</div><div class="cm">Mathématiques · Prof. Dupont · PDF · 2.4 Mo</div></div><button class="btn bs bsm">Télécharger</button></div>
+        <div class="ci"><div class="cico b"></div><div class="cinf"><div class="cn">La mitose et la méiose</div><div class="cm">Sciences · Prof. Lambert · PPTX · 5.1 Mo</div></div><button class="btn bs bsm">Télécharger</button></div>
+        <div class="ci"><div class="cico o"></div><div class="cinf"><div class="cn">La mondialisation — Introduction</div><div class="cm">Histoire-Géo · Prof. Renard · PDF · 1.8 Mo</div></div><button class="btn bs bsm">Télécharger</button></div>
       </div>
 
       <!-- ÉLÈVE: COMPTE -->
       <div class="pg2" id="page-s-account">
         <div class="ph"><h1 class="pt">Mon compte</h1><p class="ps">Gérez vos informations personnelles et vos préférences.</p></div>
         <div class="atab-row" id="stabs">
-          <button class="atab active" onclick="stab('s','profil',this)">👤 Profil</button>
-          <button class="atab" onclick="stab('s','scol',this)">🎓 Scolarité</button>
-          <button class="atab" onclick="stab('s','secu',this)">🔒 Sécurité</button>
+          <button class="atab active" onclick="stab('s','profil',this)">Profil</button>
+          <button class="atab" onclick="stab('s','scol',this)">Scolarité</button>
+          <button class="atab" onclick="stab('s','secu',this)">Sécurité</button>
         </div>
 
         <div class="apanel active" id="sp-profil">
           <div style="display:grid;grid-template-columns:185px 1fr;gap:18px;align-items:start">
             <div class="card" style="text-align:center;padding:22px 16px">
               <div class="avw" onclick="document.getElementById('avs').click()">
-                <div class="avb sg" id="avbs">LM</div><div class="avo">📷</div>
+                <div class="avb sg" id="avbs">LM</div><div class="avo"></div>
               </div>
               <input type="file" id="avs" class="upin" accept="image/*" onchange="changeAv(this,'s')">
               <div style="font-size:13px;font-weight:600;margin-bottom:3px" id="sDN">Lucas Moreau</div>
               <div style="font-size:11px;color:var(--mu);margin-bottom:13px">Étudiant · Terminale A</div>
-              <button class="btn bs bsm" style="width:100%" onclick="document.getElementById('avs').click()">📷 Changer la photo</button>
+              <button class="btn bs bsm" style="width:100%" onclick="document.getElementById('avs').click()">Changer la photo</button>
               <div style="margin-top:6px;font-size:11px;color:var(--mu)">JPG, PNG · Max 5 Mo</div>
             </div>
             <div class="card">
@@ -436,7 +478,7 @@ tbody tr:hover td{background:var(--bg)}
               <div class="fr"><div class="fg" style="margin:0"><label for="sPre">Prénom</label><input type="text" id="sPre" value="Lucas"></div><div class="fg" style="margin:0"><label for="sNo">Nom</label><input type="text" id="sNo" value="Moreau"></div></div>
               <div class="fg" style="margin-top:13px"><label for="sEmail">E-mail</label><input type="email" id="sEmail" value="lucas.moreau@lycee.fr"></div>
               <div class="fr" style="margin-top:13px"><div class="fg" style="margin:0"><label for="sDob">Date de naissance</label><input type="text" id="sDob" value="12/05/2007" placeholder="JJ/MM/AAAA"></div><div class="fg" style="margin:0"><label for="sTel">Téléphone</label><input type="tel" id="sTel" placeholder="+33 6 00 00 00 00"></div></div>
-              <div style="margin-top:16px;display:flex;gap:9px"><button class="btn bp s" onclick="savSP()">💾 Sauvegarder</button><button class="btn bs" onclick="toast('Modifications annulées')">Annuler</button></div>
+              <div style="margin-top:16px;display:flex;gap:9px"><button class="btn bp s" onclick="savSP()">Sauvegarder</button><button class="btn bs" onclick="toast('Modifications annulées')">Annuler</button></div>
             </div>
           </div>
         </div>
@@ -445,15 +487,15 @@ tbody tr:hover td{background:var(--bg)}
           <div class="card">
             <div class="ct" style="margin-bottom:16px">Informations scolaires</div>
             <div class="fr"><div class="fg" style="margin:0"><label for="sEtab">Établissement</label><input id="sEtab" value="Lycée Victor Hugo" readonly style="background:var(--sf2);color:var(--mu);cursor:not-allowed"></div><div class="fg" style="margin:0"><label for="sClasse">Classe</label><input id="sClasse" value="Terminale A" readonly style="background:var(--sf2);color:var(--mu);cursor:not-allowed"></div></div>
-            <div class="fr" style="margin-top:13px"><div class="fg" style="margin:0"><label for="sNum">N° étudiant</label><input id="sNum" value="2026-TER-A-017" readonly style="background:var(--sf2);font-family:'DM Mono',monospace;font-size:12px;color:var(--mu);cursor:not-allowed"></div><div class="fg" style="margin:0"><label for="sAnnee">Année scolaire</label><input id="sAnnee" value="2025 – 2026" readonly style="background:var(--sf2);color:var(--mu);cursor:not-allowed"></div></div>
-            <div style="margin-top:13px;padding:11px 13px;background:#EEF2FF;border:1px solid #c7d2fe;border-radius:8px;font-size:12px;color:#4338ca">ℹ️ Ces informations sont gérées par votre établissement. Contactez votre professeur référent pour toute modification.</div>
+            <div class="fr" style="margin-top:13px"><div class="fg" style="margin:0"><label for="sNum">N° étudiant</label><input id="sNum" value="2026-TER-A-017" readonly style="background:var(--sf2);font-family:'Montserrat',sans-serif;font-size:12px;color:var(--mu);cursor:not-allowed"></div><div class="fg" style="margin:0"><label for="sAnnee">Année scolaire</label><input id="sAnnee" value="2025 – 2026" readonly style="background:var(--sf2);color:var(--mu);cursor:not-allowed"></div></div>
+            <div style="margin-top:13px;padding:11px 13px;background:#ECE6FC;border:1px solid #D9CEF7;border-radius:8px;font-size:12px;color:#5638C4">ℹ️ Ces informations sont gérées par votre établissement. Contactez votre professeur référent pour toute modification.</div>
           </div>
           <div class="card">
             <div class="ct" style="margin-bottom:14px">Mes professeurs</div>
             <div style="display:flex;flex-direction:column;gap:8px">
-              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg)"><div style="width:32px;height:32px;border-radius:50%;background:#4F6EF7;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">MD</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Marie Dupont</div><div style="font-size:11px;color:var(--mu)">Mathématiques</div></div><span class="badge bg">Référent</span></div>
-              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg)"><div style="width:32px;height:32px;border-radius:50%;background:#00D9A3;color:#065f46;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">PL</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Pierre Lambert</div><div style="font-size:11px;color:var(--mu)">Sciences</div></div></div>
-              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg)"><div style="width:32px;height:32px;border-radius:50%;background:#F59E0B;color:#78350f;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">CR</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Claire Renard</div><div style="font-size:11px;color:var(--mu)">Histoire-Géographie</div></div></div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg)"><div style="width:32px;height:32px;border-radius:50%;background:#6D4AE0;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">MD</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Marie Dupont</div><div style="font-size:11px;color:var(--mu)">Mathématiques</div></div><span class="badge bg">Référent</span></div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg)"><div style="width:32px;height:32px;border-radius:50%;background:#6D4AE0;color:#FFFDF8;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">PL</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Pierre Lambert</div><div style="font-size:11px;color:var(--mu)">Sciences</div></div></div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg)"><div style="width:32px;height:32px;border-radius:50%;background:#55535E;color:#1C1B22;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">CR</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Claire Renard</div><div style="font-size:11px;color:var(--mu)">Histoire-Géographie</div></div></div>
             </div>
           </div>
           <div class="card">
@@ -463,7 +505,7 @@ tbody tr:hover td{background:var(--bg)}
               <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:500">Afficher mes moyennes</div><div style="font-size:11px;color:var(--mu)">Visible sur le tableau de bord</div></div><label class="tog"><input type="checkbox" checked onchange="toast('Préférence mise à jour')"><span class="tsl"></span></label></div>
               <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:500">E-mail à chaque nouvelle note</div><div style="font-size:11px;color:var(--mu)">Reçu dès qu'une copie est corrigée</div></div><label class="tog"><input type="checkbox" onchange="toast('Préférence mise à jour')"><span class="tsl"></span></label></div>
             </div>
-            <div style="margin-top:14px"><button class="btn bp s" onclick="toast('✅ Préférences sauvegardées')">💾 Sauvegarder</button></div>
+            <div style="margin-top:14px"><button class="btn bp s" onclick="toast('Préférences sauvegardées')">Sauvegarder</button></div>
           </div>
         </div>
 
@@ -474,18 +516,18 @@ tbody tr:hover td{background:var(--bg)}
               <div class="fg"><label for="sPwdCur">Actuel</label><input type="password" id="sPwdCur" placeholder="••••••••"></div>
               <div class="fg"><label for="sPwdNew">Nouveau</label><input type="password" id="sPwdNew" placeholder="••••••••"></div>
               <div class="fg"><label for="sPwdCfm">Confirmer</label><input type="password" id="sPwdCfm" placeholder="••••••••"></div>
-              <button class="btn bp s" onclick="toast('✅ Mot de passe mis à jour')">🔒 Mettre à jour</button>
+              <button class="btn bp s" onclick="toast('Mot de passe mis à jour')">Mettre à jour</button>
             </div>
             <div class="card">
               <div class="ct" style="margin-bottom:14px">Sessions actives</div>
               <div style="display:flex;flex-direction:column;gap:8px">
-                <div style="padding:10px 12px;border:1.5px solid #4F6EF7;border-radius:8px;background:#EEF2FF"><div style="font-size:12px;font-weight:600;color:#4F6EF7">Session actuelle</div><div style="font-size:11px;color:var(--mu);margin-top:2px">Chrome · Windows · Paris · il y a 2 min</div></div>
+                <div style="padding:10px 12px;border:1.5px solid #6D4AE0;border-radius:8px;background:#ECE6FC"><div style="font-size:12px;font-weight:600;color:#6D4AE0">Session actuelle</div><div style="font-size:11px;color:var(--mu);margin-top:2px">Chrome · Windows · Paris · il y a 2 min</div></div>
                 <div style="padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg)"><div style="font-size:12px;font-weight:600">Safari · iPhone</div><div style="font-size:11px;color:var(--mu);margin-top:2px">Paris · il y a 3 h</div></div>
               </div>
-              <button class="btn bd2 bsm" style="margin-top:11px" onclick="toast('Autres sessions déconnectées')">🚫 Déconnecter les autres</button>
+              <button class="btn bd2 bsm" style="margin-top:11px" onclick="toast('Autres sessions déconnectées')">Déconnecter les autres</button>
             </div>
           </div>
-          <div class="card" style="border-color:#FECACA;background:#FFFAFA"><div class="ct" style="color:var(--or);margin-bottom:9px">⚠️ Zone de danger</div><div style="font-size:12px;color:var(--mu);margin-bottom:12px">Ces actions sont irréversibles.</div><div style="display:flex;gap:9px"><button class="btn bo2" onclick="toast('Export en préparation…')">📤 Exporter mes données</button><button class="btn bd2" onclick="toast('Contactez votre établissement')">🗑 Supprimer le compte</button></div></div>
+          <div class="card" style="border-color:#E3DDD1;background:#FFFDF8"><div class="ct" style="color:var(--or);margin-bottom:9px">Zone de danger</div><div style="font-size:12px;color:var(--mu);margin-bottom:12px">Ces actions sont irréversibles.</div><div style="display:flex;gap:9px"><button class="btn bo2" onclick="toast('Export en préparation…')">Exporter mes données</button><button class="btn bd2" onclick="toast('Contactez votre établissement')">Supprimer le compte</button></div></div>
         </div>
       </div>
 
@@ -498,9 +540,9 @@ tbody tr:hover td{background:var(--bg)}
   <button class="mc" onclick="closeM('m-grade')">✕</button>
   <div class="mt2">Noter le devoir</div><div class="ms2" id="mgname">Lucas Moreau — Intégrales Chap. 4</div>
   <div style="background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:16px;font-size:12px;color:var(--mu);max-height:100px;overflow-y:auto;line-height:1.7"><strong style="color:var(--tx);display:block;margin-bottom:4px">Réponse :</strong>L'intégrale de f sur [a,b] représente l'aire algébrique. Pour ∫x² dx, on obtient x³/3 + C…</div>
-  <div class="fr"><div class="fg" style="margin:0"><label for="gval">Note (/ 20)</label><input type="number" min="0" max="20" step="0.5" value="15" id="gval" style="font-family:'DM Mono',monospace;font-size:16px;font-weight:600"></div><div class="fg" style="margin:0"><label for="selAppreciation">Appréciation</label><select id="selAppreciation"><option>Excellent travail</option><option>Bien</option><option>Assez bien</option><option>Insuffisant</option></select></div></div>
+  <div class="fr"><div class="fg" style="margin:0"><label for="gval">Note (/ 20)</label><input type="number" min="0" max="20" step="0.5" value="15" id="gval" style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:600"></div><div class="fg" style="margin:0"><label for="selAppreciation">Appréciation</label><select id="selAppreciation"><option>Excellent travail</option><option>Bien</option><option>Assez bien</option><option>Insuffisant</option></select></div></div>
   <div class="fg" style="margin-top:13px"><label for="gComment">Commentaire</label><textarea id="gComment" placeholder="Laissez un retour personnalisé…"></textarea></div>
-  <div class="ma"><button class="btn bs" onclick="closeM('m-grade')">Annuler</button><button class="btn bp" onclick="subGrade()">✔ Valider la note</button></div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-grade')">Annuler</button><button class="btn bp" onclick="subGrade()">Valider la note</button></div>
 </div></div>
 
 <div class="mo" id="m-eval"><div class="modal w">
@@ -509,9 +551,9 @@ tbody tr:hover td{background:var(--bg)}
   <div id="evalBody"></div>
   <div class="ma">
     <button class="btn bs" onclick="closeM('m-eval')">Fermer</button>
-    <button class="btn bp s" onclick="submitExam()">✔ Rendre ma copie</button>
+    <button class="btn bp s" onclick="submitExam()">Rendre ma copie</button>
   </div>
-  <div id="evalErr" style="color:#EF4444;font-size:12px;margin-top:8px;text-align:center"></div>
+  <div id="evalErr" style="color:#1C1B22;font-size:12px;margin-top:8px;text-align:center"></div>
 </div></div>
 
 <div class="mo" id="m-copie"><div class="modal w">
@@ -524,33 +566,35 @@ tbody tr:hover td{background:var(--bg)}
   <div id="copie-body" style="max-height:55vh;overflow-y:auto;margin-bottom:16px"></div>
   <div class="ma">
     <button class="btn bs" onclick="closeM('m-copie')">Fermer</button>
-    <button class="btn bp" onclick="openCopieGrade()">📝 Noter cette copie</button>
+    <button class="btn bp" onclick="openCopieGrade()">Noter cette copie</button>
   </div>
 </div></div>
 
 <div class="mo" id="m-add-mat"><div class="modal">
   <button class="mc" onclick="closeM('m-add-mat')">✕</button>
-  <div class="mt2">Ajouter une matière</div><div class="ms2">Configurez le nom, l'icône et la couleur.</div>
+  <div class="mt2">Ajouter une matière</div><div class="ms2">Choisissez le nom et la couleur de la matière.</div>
   <div class="fg"><label for="matN">Nom de la matière</label><input type="text" id="matN" placeholder="ex. Philosophie" oninput="pMat()"></div>
-  <div class="fr"><div class="fg" style="margin:0"><label for="matC">Coefficient</label><input type="number" id="matC" value="4" min="1" max="20" oninput="pMat()"></div><div class="fg" style="margin:0"><label for="matType">Type</label><select id="matType" id="matT" onchange="pMat()"><option value="principal">Principal</option><option value="secondaire">Secondaire</option><option value="option">Option</option></select></div></div>
-  <div class="fg" style="margin-top:13px"><label for="emojiPicker">Emoji</label><div class="egr" id="egr"></div></div>
-  <div class="fg"><label for="colorPicker">Couleur</label>
-    <div class="csws" id="csws">
-      <div class="csw sel" style="background:#2D5A3D" data-c="#2D5A3D" onclick="pickC(this)"></div>
-      <div class="csw" style="background:#2B4A7A" data-c="#2B4A7A" onclick="pickC(this)"></div>
-      <div class="csw" style="background:#C4622D" data-c="#C4622D" onclick="pickC(this)"></div>
-      <div class="csw" style="background:#7C3AED" data-c="#7C3AED" onclick="pickC(this)"></div>
-      <div class="csw" style="background:#DC2626" data-c="#DC2626" onclick="pickC(this)"></div>
-      <div class="csw" style="background:#0891B2" data-c="#0891B2" onclick="pickC(this)"></div>
-      <div class="csw" style="background:#D97706" data-c="#D97706" onclick="pickC(this)"></div>
-      <div class="csw" style="background:#059669" data-c="#059669" onclick="pickC(this)"></div>
+  <div class="fr"><div class="fg" style="margin:0"><label for="matC">Coefficient</label><input type="number" id="matC" value="4" min="1" max="20" oninput="pMat()"></div><div class="fg" style="margin:0"><label for="matT">Type</label><select id="matT" onchange="pMat()"><option value="principal">Principal</option><option value="secondaire">Secondaire</option><option value="option">Option</option></select></div></div>
+    <div class="fg" style="margin-top:13px"><span class="flbl" id="lblClr">Couleur</span>
+    <div class="csws" id="csws" role="group" aria-labelledby="lblClr">
+      <button type="button" class="csw" style="background:#F28C28" data-c="#F28C28" aria-label="Mandarine" onclick="pickC(this)"></button>
+      <button type="button" class="csw" style="background:#F5C02E" data-c="#F5C02E" aria-label="Soleil" onclick="pickC(this)"></button>
+      <button type="button" class="csw" style="background:#8CC63F" data-c="#8CC63F" aria-label="Pomme" onclick="pickC(this)"></button>
+      <button type="button" class="csw" style="background:#1FA463" data-c="#1FA463" aria-label="Émeraude" onclick="pickC(this)"></button>
+      <button type="button" class="csw" style="background:#0F766E" data-c="#0F766E" aria-label="Sarcelle" onclick="pickC(this)"></button>
+      <button type="button" class="csw" style="background:#12A4B6" data-c="#12A4B6" aria-label="Lagon" onclick="pickC(this)"></button>
+      <button type="button" class="csw sel" style="background:#2A6FDB" data-c="#2A6FDB" aria-label="Océan" onclick="pickC(this)"></button>
+      <button type="button" class="csw" style="background:#FF7A5C" data-c="#FF7A5C" aria-label="Corail" onclick="pickC(this)"></button>
+      <button type="button" class="csw" style="background:#9A5B34" data-c="#9A5B34" aria-label="Terre" onclick="pickC(this)"></button>
+      <button type="button" class="csw" style="background:#4F6375" data-c="#4F6375" aria-label="Ardoise" onclick="pickC(this)"></button>
     </div>
   </div>
+  </div>
   <div class="mprev" id="mprev">
-    <div id="mpico" style="width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;background:#2D5A3D22">📐</div>
+    <div id="mpico" style="width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;background:#2A6FDB;color:#FFFDF8">?</div>
     <div><div style="font-size:13px;font-weight:600" id="mpnom">Nom de la matière</div><div style="font-size:11px;color:var(--mu)" id="mpdet">Coef. 4 · Principal</div></div>
   </div>
-  <div class="ma"><button class="btn bs" onclick="closeM('m-add-mat')">Annuler</button><button class="btn bp" onclick="savMat()">✔ Ajouter</button></div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-add-mat')">Annuler</button><button class="btn bp" onclick="savMat()">Ajouter</button></div>
 </div></div>
 
 <div class="mo" id="m-edit-mat"><div class="modal">
@@ -558,16 +602,16 @@ tbody tr:hover td{background:var(--bg)}
   <div class="mt2">Modifier la matière</div><div class="ms2" id="emSub"></div>
   <div class="fg"><label for="emN">Nom</label><input type="text" id="emN"></div>
   <div class="fr"><div class="fg" style="margin:0"><label for="emC">Coefficient</label><input type="number" id="emC" min="1" max="20"></div><div class="fg" style="margin:0"><label for="emT">Type</label><select id="emT"><option value="principal">Principal</option><option value="secondaire">Secondaire</option><option value="option">Option</option></select></div></div>
-  <div class="ma"><button class="btn bs" onclick="closeM('m-edit-mat')">Annuler</button><button class="btn bp" onclick="updMat()">💾 Sauvegarder</button></div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-edit-mat')">Annuler</button><button class="btn bp" onclick="updMat()">Sauvegarder</button></div>
 </div></div>
 
 <div class="mo" id="m-add-cls"><div class="modal">
   <button class="mc" onclick="closeM('m-add-cls')">✕</button>
   <div class="mt2">Ajouter une classe</div><div class="ms2">Configurez le nom, le niveau et la matière.</div>
-  <div class="fr"><div class="fg" style="margin:0"><label for="clN">Nom de la classe</label><input type="text" id="clN" placeholder="ex. Terminale C"></div><div class="fg" style="margin:0"><label for="selNiveau">Niveau</label><select id="selNiveau" id="clNv"><option>Terminale</option><option>Première</option><option>Seconde</option><option>BTS 1</option><option>BTS 2</option></select></div></div>
-  <div class="fr" style="margin-top:13px"><div class="fg" style="margin:0"><label for="selMatPrinc">Matière principale</label><select id="selMatPrinc" id="clMt"><option>Mathématiques</option><option>Sciences</option><option>Histoire-Géographie</option></select></div><div class="fg" style="margin:0"><label for="clEf">Effectif estimé</label><input type="number" id="clEf" value="28" min="1" max="60"></div></div>
+  <div class="fr"><div class="fg" style="margin:0"><label for="clN">Nom de la classe</label><input type="text" id="clN" placeholder="ex. Terminale C"></div><div class="fg" style="margin:0"><label for="clNv">Niveau</label><select id="clNv"><option>Terminale</option><option>Première</option><option>Seconde</option><option>BTS 1</option><option>BTS 2</option></select></div></div>
+  <div class="fr" style="margin-top:13px"><div class="fg" style="margin:0"><label for="clMt">Matière principale</label><select id="clMt"><option>Mathématiques</option><option>Sciences</option><option>Histoire-Géographie</option></select></div><div class="fg" style="margin:0"><label for="clEf">Effectif estimé</label><input type="number" id="clEf" value="28" min="1" max="60"></div></div>
   <div class="fg" style="margin-top:13px"><label for="clSl">Salle (optionnel)</label><input type="text" id="clSl" placeholder="ex. B204"></div>
-  <div class="ma"><button class="btn bs" onclick="closeM('m-add-cls')">Annuler</button><button class="btn bp" onclick="savCls()">✔ Ajouter</button></div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-add-cls')">Annuler</button><button class="btn bp" onclick="savCls()">Ajouter</button></div>
 </div></div>
 
 <div class="mo" id="m-edit-cls"><div class="modal">
@@ -575,7 +619,7 @@ tbody tr:hover td{background:var(--bg)}
   <div class="mt2">Modifier la classe</div><div class="ms2" id="ecSub"></div>
   <div class="fr"><div class="fg" style="margin:0"><label for="ecN">Nom</label><input type="text" id="ecN"></div><div class="fg" style="margin:0"><label for="ecE">Effectif</label><input type="number" id="ecE" min="1" max="60"></div></div>
   <div class="fg" style="margin-top:13px"><label for="ecS">Salle</label><input type="text" id="ecS"></div>
-  <div class="ma"><button class="btn bs" onclick="closeM('m-edit-cls')">Annuler</button><button class="btn bp" onclick="updCls()">💾 Sauvegarder</button></div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-edit-cls')">Annuler</button><button class="btn bp" onclick="updCls()">Sauvegarder</button></div>
 </div></div>
 
 <div class="mo" id="m-add-eleve"><div class="modal">
@@ -583,30 +627,30 @@ tbody tr:hover td{background:var(--bg)}
   <div class="mt2">Ajouter un élève</div><div class="ms2">L'élève recevra un e-mail d'invitation.</div>
   <div class="fr"><div class="fg" style="margin:0"><label for="eP">Prénom</label><input type="text" id="eP" placeholder="ex. Thomas"></div><div class="fg" style="margin:0"><label for="eN">Nom</label><input type="text" id="eN" placeholder="ex. Leclerc"></div></div>
   <div class="fg" style="margin-top:13px"><label for="eE">E-mail</label><input type="email" id="eE" placeholder="thomas.leclerc@lycee.fr"></div>
-  <div class="fg" style="margin-top:13px"><label for="selClInput">Classe</label><select id="selClInput" id="eC"><option>Terminale A</option><option>Terminale B</option><option>Première A</option></select></div>
-  <div class="ma"><button class="btn bs" onclick="closeM('m-add-eleve')">Annuler</button><button class="btn bp" onclick="addE()">✔ Ajouter</button></div>
+  <div class="fg" style="margin-top:13px"><label for="eC">Classe</label><select id="eC"><option>Terminale A</option><option>Terminale B</option><option>Première A</option></select></div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-add-eleve')">Annuler</button><button class="btn bp" onclick="addE()">Ajouter</button></div>
 </div></div>
 
 <div class="mo" id="m-csv"><div class="modal w">
   <button class="mc" onclick="closeM('m-csv')">✕</button>
   <div class="mt2">Importer des élèves via CSV</div><div class="ms2">Ajoutez plusieurs élèves en important un fichier .csv.</div>
   <div style="background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:16px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><div style="font-size:13px;font-weight:600">Format : prenom, nom, email, classe</div><button class="btn bs bsm" onclick="dlTpl()">⬇ Modèle CSV</button></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><div style="font-size:13px;font-weight:600">Format : prenom, nom, email, classe</div><button class="btn bs bsm" onclick="dlTpl()">Modèle CSV</button></div>
     <div class="csco">prenom,nom,email,classe
 Thomas,Leclerc,thomas.leclerc@lycee.fr,Terminale A
 Sophie,Blanc,sophie.blanc@lycee.fr,Terminale B
 Maxime,Roy,maxime.roy@lycee.fr,Première A</div>
   </div>
   <div id="csvDrop" class="upz" style="padding:22px" onclick="document.getElementById('csvF').click()" ondragover="event.preventDefault();this.classList.add('dv')" ondragleave="this.classList.remove('dv')" ondrop="dropCSV(event)">
-    <div class="upi2">📊</div><div class="upt">Glissez votre fichier CSV</div><div class="uph">ou cliquez · UTF-8</div>
+    <div class="upi2"></div><div class="upt">Glissez votre fichier CSV</div><div class="uph">ou cliquez · UTF-8</div>
     <input type="file" id="csvF" class="upin" accept=".csv,text/csv" onchange="parseCSV(this)">
   </div>
   <div id="csvPrev" style="display:none;margin-top:13px">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px"><div style="font-size:13px;font-weight:600" id="csvTitle"></div><button class="btn bs bsm" onclick="clrCSV()">✕ Effacer</button></div>
     <div class="tw" style="max-height:180px;overflow-y:auto"><table><thead><tr><th>#</th><th>Prénom</th><th>Nom</th><th>E-mail</th><th>Classe</th><th>Statut</th></tr></thead><tbody id="csvTb"></tbody></table></div>
-    <div class="fg" style="margin-top:13px"><label for="selClDef">Classe par défaut (si non précisée)</label><select id="selClDef" id="csvDC"><option>Terminale A</option><option>Terminale B</option><option>Première A</option></select></div>
+    <div class="fg" style="margin-top:13px"><label for="csvDC">Classe par défaut (si non précisée)</label><select id="csvDC"><option>Terminale A</option><option>Terminale B</option><option>Première A</option></select></div>
   </div>
-  <div class="ma"><button class="btn bs" onclick="closeM('m-csv')">Annuler</button><button class="btn bp" id="csvBtn" onclick="impCSV()" style="display:none">⬆ Importer <span id="csvCnt"></span> élève(s)</button></div>
+  <div class="ma"><button class="btn bs" onclick="closeM('m-csv')">Annuler</button><button class="btn bp" id="csvBtn" onclick="impCSV()" style="display:none">Importer <span id="csvCnt"></span> élève(s)</button></div>
 </div></div>
 
 <div class="toast" id="toastEl"></div>
@@ -647,11 +691,13 @@ async function apiFetch(method, path, body, isRetry) {
   return r.json();
 }
 /* ── STATE ───────────────────────────────────────────────────────────── */
-var role='teacher',selR='teacher',eMat=-1,eCls=-1,curEmo='📐',curClr='#2D5A3D',csvR=[];
-var EMOJIS=['📐','📏','🔬','🧬','🗺️','📜','📖','✍️','🎨','🎵','🏛️','⚗️','💡','🌍','🧮','🔭','🌱','🧪'];
+var role='teacher',selR='teacher',eMat=-1,eCls=-1,curEmo='',curClr='#2A6FDB',csvR=[];
+var MATP=[{n:'Mandarine',c:'#F28C28',t:'#1C1B22'},{n:'Soleil',c:'#F5C02E',t:'#1C1B22'},{n:'Pomme',c:'#8CC63F',t:'#1C1B22'},{n:'Émeraude',c:'#1FA463',t:'#FFFDF8'},{n:'Sarcelle',c:'#0F766E',t:'#FFFDF8'},{n:'Lagon',c:'#12A4B6',t:'#1C1B22'},{n:'Océan',c:'#2A6FDB',t:'#FFFDF8'},{n:'Corail',c:'#FF7A5C',t:'#1C1B22'},{n:'Terre',c:'#9A5B34',t:'#FFFDF8'},{n:'Ardoise',c:'#4F6375',t:'#FFFDF8'}];
+function matTxt(c){var p=MATP.find(function(x){return x.c===c});return p?p.t:'#FFFDF8'}
+function matIni(n){n=(n||'').trim();return n?n.charAt(0).toUpperCase()+n.slice(1,2).toLowerCase():'?'}
 var TL={principal:'Principal',secondaire:'Secondaire',option:'Option'};
 var TB={principal:'bg',secondaire:'bb',option:'by'};
-var mats=[{n:'Mathématiques',e:'📐',c:6,t:'principal',cl:'#2D5A3D'},{n:'Informatique & IA',e:'💡',c:3,t:'secondaire',cl:'#2B4A7A'}];
+var mats=[{n:'Mathématiques',e:'',c:6,t:'principal',cl:'#2A6FDB'},{n:'Informatique & IA',e:'',c:3,t:'secondaire',cl:'#0F766E'}];
 var clss=[{n:'Terminale A',nv:'Terminale',m:'Mathématiques',ef:28,s:'B101'},{n:'Terminale B',nv:'Terminale',m:'Mathématiques',ef:26,s:'B102'},{n:'Première A',nv:'Première',m:'Informatique & IA',ef:30,s:'C204'}];
 var eleves=[
   {p:'Lucas',n:'Moreau',e:'lucas.moreau@lycee.fr',c:'Terminale A',ev:3,my:'17.0'},
@@ -669,10 +715,10 @@ var subs=[
   {nm:'Lucas Moreau',dt:'28 mars',st:'notée',no:'17/20',ia:'2%',ib:'bg'},
   {nm:'Chloé Martin',dt:'27 mars',st:'notée',no:'16/20',ia:'5%',ib:'bg'},
   {nm:'Hugo Bernard',dt:'28 mars',st:'à noter',no:'—',ia:'—',ib:'bgr'},
-  {nm:'Emma Lefebvre',dt:'29 mars',st:'à noter',no:'—',ia:'72%',ib:'bor'},
+  {nm:'Emma Lefebvre',dt:'29 mars',st:'à noter',no:'—',ia:'72%',ib:'by'},
   {nm:'Jade Dumont',dt:'26 mars',st:'notée',no:'14/20',ia:'8%',ib:'bg'},
   {nm:'Tom Girard',dt:'29 mars',st:'à noter',no:'—',ia:'—',ib:'bgr'},
-  {nm:'Léa Rousseau',dt:'27 mars',st:'à noter',no:'—',ia:'61%',ib:'bor'}
+  {nm:'Léa Rousseau',dt:'27 mars',st:'à noter',no:'—',ia:'61%',ib:'by'}
 ];
 
 function selP(r,btn){
@@ -734,7 +780,7 @@ document.addEventListener('click',function(e){if(e.target.classList.contains('mo
 
 function changeAv(input,w){
   var f=input.files[0];if(!f)return;
-  if(f.size>5*1024*1024){toast('⚠️ Fichier trop lourd (max 5 Mo)');return}
+  if(f.size>5*1024*1024){toast('Fichier trop lourd (max 5 Mo)');return}
   var r=new FileReader();
   r.onload=function(e){
     var src=e.target.result;
@@ -743,7 +789,7 @@ function changeAv(input,w){
       var av=document.getElementById('hav');
       av.innerHTML='<img src="'+src+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';
     }
-    toast('✅ Photo de profil mise à jour');
+    toast('Photo de profil mise à jour');
   };r.readAsDataURL(f);
 }
 
@@ -752,7 +798,7 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){retur
 function showFiles(input){
   selectedFiles=Array.from(input.files);
   document.getElementById('flist').innerHTML=selectedFiles.map(function(f){
-    return '<div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:var(--grl);border:1px solid var(--gr);border-radius:8px;margin-bottom:6px"><span>📄</span><span style="flex:1;font-size:12px;font-weight:500">'+esc(f.name)+'</span><span style="font-family:DM Mono,monospace;font-size:11px;color:var(--mu)">'+(f.size/1024/1024).toFixed(1)+' Mo</span><span class="badge bg">Prêt</span></div>';
+    return '<div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:var(--grl);border:1px solid var(--gr);border-radius:8px;margin-bottom:6px"><span></span><span style="flex:1;font-size:12px;font-weight:500">'+esc(f.name)+'</span><span style="font-family:Montserrat,sans-serif;font-size:11px;color:var(--mu)">'+(f.size/1024/1024).toFixed(1)+' Mo</span><span class="badge bg">Prêt</span></div>';
   }).join('');
 }
 function dropF(e){e.preventDefault();e.currentTarget.classList.remove('dv');showFiles({files:e.dataTransfer.files})}
@@ -762,26 +808,26 @@ var genRunning=false;
 async function genEval(){
   if(genRunning)return;
   var pdf=selectedFiles.find(function(f){return /\.pdf$/i.test(f.name);});
-  if(!pdf){toast('⚠️ Choisissez un cours au format PDF');return;}
+  if(!pdf){toast('Choisissez un cours au format PDF');return;}
   var out=document.getElementById('genResult');
   var matiere=document.getElementById('selMatiere').value, classe=document.getElementById('selClasse').value;
   var nb=parseInt(document.getElementById('genNb').value,10)||5;
   genRunning=true;
-  out.innerHTML='<div style="color:var(--mu);font-size:13px">✨ Génération en cours… (de quelques secondes à quelques minutes selon le cours)</div>';
+  out.innerHTML='<div style="color:var(--mu);font-size:13px">Génération en cours… (de quelques secondes à quelques minutes selon le cours)</div>';
   try{
     var titre=matiere+' — '+pdf.name.replace(/\.pdf$/i,'');
     var dv=await apiFetch('POST','/devoirs',{titre:titre,description:'Classe cible : '+classe+' · généré depuis '+pdf.name});
     var fd=new FormData();fd.append('fichier',pdf);fd.append('nb_questions',String(nb));
     var res=await apiFetch('POST','/devoirs/'+dv.id+'/generer',fd);
-    out.innerHTML='<div class="ct" style="margin-bottom:8px">✅ '+res.nb_generees+' question(s) générée(s) — devoir « '+esc(titre)+' »</div>'
+    out.innerHTML='<div class="ct" style="margin-bottom:8px">'+res.nb_generees+' question(s) générée(s) — devoir « '+esc(titre)+' »</div>'
       +res.questions.map(function(q){
         return '<div style="border:1px solid var(--bd);border-radius:8px;padding:11px;margin-bottom:8px;background:var(--bg)">'
           +'<div style="font-size:13px;font-weight:600;margin-bottom:4px">Q'+q.numero_ordre+'. '+esc(q.enonce)+'</div>'
           +'<div style="font-size:12px;color:var(--mu)">Réponse attendue : '+esc(q.reponse_attendue)+'</div></div>';
       }).join('');
-    toast('✅ Évaluation générée !');
+    toast('Évaluation générée !');
   }catch(e){
-    out.innerHTML='<div style="color:#EF4444;font-size:13px">❌ '+esc((e&&e.detail)||'Erreur lors de la génération')+'</div>';
+    out.innerHTML='<div style="color:#1C1B22;font-size:13px">'+esc((e&&e.detail)||'Erreur lors de la génération')+'</div>';
   }finally{genRunning=false;}
 }
 
@@ -790,13 +836,14 @@ function iaBadge(ia,prefix){
   prefix=prefix||'';
   if(!ia)return '<span style="color:var(--mu)">—</span>';
   var st=ia.statut_analyse;
-  if(st==='en_cours')return '<span class="badge bgr">⏳ analyse…</span>';
+  if(st==='en_cours')return '<span class="badge bgr">analyse…</span>';
   if(st==='non_analysé'||st==='non_analyse')return '<span class="badge bgr" title="'+esc(ia.message||'')+'">non analysé</span>';
-  if(st==='erreur')return '<span class="badge bgr" title="'+esc(ia.message||'')+'">⚠ erreur</span>';
+  if(st==='erreur')return '<span class="badge bgr" title="'+esc(ia.message||'')+'">erreur</span>';
   if(ia.score_ia_global==null)return '<span style="color:var(--mu)">—</span>';
   var seuil=ia.seuil!=null?ia.seuil:0.5, pct=Math.round(ia.score_ia_global*100);
-  var cls=ia.score_ia_global>=seuil?'bor':'bg';
-  return '<span class="badge '+cls+'" title="Seuil du modèle : '+Math.round(seuil*100)+'%'+(ia.message?' — '+esc(ia.message):'')+'">'+prefix+pct+'%</span>';
+  var cls=ia.score_ia_global>=seuil?'bor':ia.score_ia_global>=Math.min(0.5,seuil)?'by':'bg';
+  var niv=cls==='bor'?'Alerte · ':cls==='by'?'À vérifier · ':'Faible · ';
+  return '<span class="badge '+cls+'" title="Seuil du modèle : '+Math.round(seuil*100)+'%'+(ia.message?' — '+esc(ia.message):'')+'">'+prefix+niv+pct+' %</span>';
 }
 
 /* ── TEACHER: COPIES (API) ───────────────────────────────────────────── */
@@ -815,15 +862,15 @@ async function renderSubs(){
         :(sugg!=null?'<span style="color:var(--mu);font-weight:400" title="Note suggérée par la correction automatique">~'+sugg+'/20</span>':'—');
       return '<tr>'
         +'<td><strong>'+esc(s.etudiant_nom)+'</strong></td>'
-        +'<td style="font-family:DM Mono,monospace;font-size:12px">'+(s.date_depot?s.date_depot.slice(0,10):'—')+'</td>'
-        +'<td>'+(noted?'<span class="badge bg">✓ Notée</span>':'<span class="badge by">⏳ À noter</span>')+'</td>'
-        +'<td style="font-family:DM Mono,monospace;font-weight:600">'+noteCell+'</td>'
+        +'<td style="font-family:Montserrat,sans-serif;font-size:12px">'+(s.date_depot?s.date_depot.slice(0,10):'—')+'</td>'
+        +'<td>'+(noted?'<span class="badge bg">Notée</span>':'<span class="badge by">À noter</span>')+'</td>'
+        +'<td style="font-family:Montserrat,sans-serif;font-weight:600">'+noteCell+'</td>'
         +'<td>'+iaBadge(s.ia)+'</td>'
         +'<td><div style="display:flex;gap:5px;flex-wrap:wrap">'
-        +'<button class="btn bs bsm" onclick="openCopie(subsById['+s.id+'])" title="Consulter la copie">👁 Voir</button>'
-        +(!noted?'<button class="btn bs bsm" onclick="runCorrection('+s.id+',this)" title="Correction automatique (note suggérée)">✅ Corriger</button>':'')
-        +(!noted?'<button class="btn bs bsm" onclick="openGrade('+s.id+')">📝 Noter</button>':'')
-        +'<button class="btn bw bsm" onclick="runIA('+s.id+',this)">🤖 IA</button>'
+        +'<button class="btn bs bsm" onclick="openCopie(subsById['+s.id+'])" title="Consulter la copie">Voir</button>'
+        +(!noted?'<button class="btn bs bsm" onclick="runCorrection('+s.id+',this)" title="Correction automatique (note suggérée)">Corriger</button>':'')
+        +(!noted?'<button class="btn bs bsm" onclick="openGrade('+s.id+')">Noter</button>':'')
+        +'<button class="btn bw bsm" onclick="runIA('+s.id+',this)">IA</button>'
         +'</div></td>'
         +'</tr>';
     }).join('');
@@ -833,24 +880,24 @@ async function renderSubs(){
       var vals=[stats.total,stats.total-stats.pending,stats.detected,stats.moyenne||'—'];
       if(vals[i]!==undefined)el.textContent=vals[i];
     });
-  }catch(e){tb.innerHTML='<tr><td colspan="6" style="color:#EF4444;padding:16px">Erreur de chargement.</td></tr>';}
+  }catch(e){tb.innerHTML='<tr><td colspan="6" style="color:#1C1B22;padding:16px">Erreur de chargement.</td></tr>';}
 }
 async function runIA(sid,btn){
-  var orig=btn.innerHTML;btn.innerHTML='⏳';btn.disabled=true;
+  var orig=btn.innerHTML;btn.innerHTML='Analyse…';btn.disabled=true;
   try{
     var res=await apiFetch('POST','/soumissions/'+sid+'/analyser-ia');
-    if(res.statut_analyse==='analysé')toast('🤖 Score IA : '+Math.round(res.score_ia_global*100)+'% (seuil '+Math.round(res.seuil*100)+'%)');
-    else toast('🤖 Non analysé : '+(res.message||res.statut_analyse));
+    if(res.statut_analyse==='analysé')toast('Score IA : '+Math.round(res.score_ia_global*100)+'% (seuil '+Math.round(res.seuil*100)+'%)');
+    else toast('Non analysé : '+(res.message||res.statut_analyse));
     renderSubs();
-  }catch(e){toast('❌ Erreur IA');btn.innerHTML=orig;btn.disabled=false;}
+  }catch(e){toast('Erreur IA');btn.innerHTML=orig;btn.disabled=false;}
 }
 async function runCorrection(sid,btn){
-  var orig=btn.innerHTML;btn.innerHTML='⏳';btn.disabled=true;
+  var orig=btn.innerHTML;btn.innerHTML='Analyse…';btn.disabled=true;
   try{
     var res=await apiFetch('POST','/soumissions/'+sid+'/corriger-auto');
-    toast('✅ Note suggérée : '+res.note_ia_suggeree+'/20 — '+res.commentaires_ia);
+    toast('Note suggérée : '+res.note_ia_suggeree+'/20 — '+res.commentaires_ia);
     renderSubs();
-  }catch(e){toast('❌ '+((e&&e.detail)||'Erreur de correction'));btn.innerHTML=orig;btn.disabled=false;}
+  }catch(e){toast(''+((e&&e.detail)||'Erreur de correction'));btn.innerHTML=orig;btn.disabled=false;}
 }
 
 /* ── MODAL CONSULTER COPIE ───────────────────────────────────────────── */
@@ -859,7 +906,7 @@ async function openCopie(s){
   document.getElementById('copie-title').textContent=s.etudiant_nom;
   document.getElementById('copie-meta').textContent=(s.date_depot?'Rendu le '+s.date_depot.slice(0,10):'')
     +(s.note_finale_humaine!=null?' · Note : '+s.note_finale_humaine+'/20':'');
-  document.getElementById('copie-ia').innerHTML=s.ia?iaBadge(s.ia,'🤖 IA '):'';
+  document.getElementById('copie-ia').innerHTML=s.ia?iaBadge(s.ia,'IA '):'';
   var body=document.getElementById('copie-body');
   body.innerHTML='<div style="color:var(--mu);font-size:12px">Chargement des réponses…</div>';
   openM('m-copie');
@@ -870,11 +917,11 @@ async function openCopie(s){
     if(!reponses.length){body.innerHTML='<div style="color:var(--mu);font-size:13px;padding:8px">Aucune réponse enregistrée.</div>';return;}
     body.innerHTML=reponses.map(function(r,i){
       return '<div style="border:1px solid var(--bd);border-radius:8px;padding:13px;margin-bottom:10px;background:var(--bg)">'
-        +'<div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;font-family:DM Mono,monospace;margin-bottom:5px">Q'+r.numero_ordre+' — '+esc(r.enonce)+' <span style="opacity:.6">('+r.points_attribues+' pts)</span></div>'
+        +'<div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;font-family:Montserrat,sans-serif;margin-bottom:5px">Q'+r.numero_ordre+' — '+esc(r.enonce)+' <span style="opacity:.6">('+r.points_attribues+' pts)</span></div>'
         +'<div style="font-size:13px;line-height:1.7;color:var(--tx)">'+(r.texte_etudiant?surligner(r.texte_etudiant,suspectes):'<em style="color:var(--mu)">Pas de réponse</em>')+'</div>'
         +'</div>';
     }).join('');
-  }catch(e){body.innerHTML='<div style="color:#EF4444;font-size:13px">Erreur lors du chargement.</div>';}
+  }catch(e){body.innerHTML='<div style="color:#1C1B22;font-size:13px">Erreur lors du chargement.</div>';}
 }
 /* Surligne les phrases jugées IA (au-dessus du seuil du modèle) dans une réponse */
 function surligner(texte,suspectes){
@@ -901,11 +948,11 @@ function openGrade(sid){
 }
 async function subGrade(){
   var note=parseFloat(document.getElementById('gval').value);
-  if(isNaN(note)||note<0||note>20){toast('⚠️ Note invalide (0–20)');return;}
+  if(isNaN(note)||note<0||note>20){toast('Note invalide (0–20)');return;}
   try{
     await apiFetch('POST','/soumissions/'+gradeSid+'/noter',{note:note});
-    closeM('m-grade');toast('✔ Note '+note+'/20 enregistrée');renderSubs();
-  }catch(e){toast('❌ Erreur lors de la notation');}
+    closeM('m-grade');toast('Note '+note+'/20 enregistrée');renderSubs();
+  }catch(e){toast('Erreur lors de la notation');}
 }
 
 /* ── STUDENT: ÉVALS (API) ────────────────────────────────────────────── */
@@ -919,21 +966,21 @@ async function loadStudentEvals(){
     var pending=devoirs.filter(function(d){return !doneIds.has(d.id);});
     var done=devoirs.filter(function(d){return doneIds.has(d.id);});
     var html='<div class="ph"><h1 class="pt">Mes évaluations</h1><p class="ps">Répondez aux évaluations générées par vos professeurs.</p></div>';
-    html+='<div style="margin-bottom:6px;font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.07em;font-family:\'DM Mono\',monospace">À rendre</div>';
+    html+='<div style="margin-bottom:6px;font-size:11px;font-weight:600;color:var(--mu);font-family:\'Montserrat\',sans-serif">À rendre</div>';
     if(pending.length){
       html+=pending.map(function(d){
         var dl=d.date_limite?'<strong style="color:var(--or)">'+d.date_limite.slice(0,10)+'</strong>':'—';
         var nq=d.questions?d.questions.length:0;
-        return '<div class="ec"><div class="eh"><div style="font-size:21px">📐</div><div style="flex:1"><div style="font-size:13px;font-weight:600">'+d.titre+'</div><div style="font-size:12px;color:var(--mu)">'+( d.description||'')+'</div></div><span class="badge bor">⏳ En attente</span></div>'
+        return '<div class="ec"><div class="eh"><div style="font-size:21px"></div><div style="flex:1"><div style="font-size:13px;font-weight:600">'+d.titre+'</div><div style="font-size:12px;color:var(--mu)">'+( d.description||'')+'</div></div><span class="badge bor">En attente</span></div>'
           +'<div class="eb"><div style="font-size:12px;color:var(--mu);margin-bottom:9px">Date limite : '+dl+' · '+nq+' question'+(nq>1?'s':'')+'</div>'
-          +'<button class="btn bp s" onclick="startExam('+d.id+')">✏️ Commencer</button></div></div>';
+          +'<button class="btn bp s" onclick="startExam('+d.id+')">Commencer</button></div></div>';
       }).join('');
     }else{html+='<div style="font-size:13px;color:var(--mu);padding:10px 0">Aucune évaluation en attente.</div>';}
-    html+='<div style="margin-top:18px;margin-bottom:6px;font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.07em;font-family:\'DM Mono\',monospace">Rendus</div>';
+    html+='<div style="margin-top:18px;margin-bottom:6px;font-size:11px;font-weight:600;color:var(--mu);font-family:\'Montserrat\',sans-serif">Rendus</div>';
     if(done.length){
       html+=done.map(function(d){
         var sub=soumissions.find(function(s){return s.devoir_id===d.id;});
-        return '<div class="ec"><div class="eh"><div style="font-size:21px">✅</div><div style="flex:1"><div style="font-size:13px;font-weight:600">'+d.titre+'</div><div style="font-size:12px;color:var(--mu)">'+( d.description||'')+'</div></div><span class="badge bg">✓ Rendu</span></div>'
+        return '<div class="ec"><div class="eh"><div style="font-size:21px"></div><div style="flex:1"><div style="font-size:13px;font-weight:600">'+d.titre+'</div><div style="font-size:12px;color:var(--mu)">'+( d.description||'')+'</div></div><span class="badge bg">Rendu</span></div>'
           +'<div class="eb"><div style="font-size:12px;color:var(--mu)">Rendu le '+(sub&&sub.date_depot?sub.date_depot.slice(0,10):'—')+' · '+(sub&&sub.note_finale_humaine!=null?'<strong>'+sub.note_finale_humaine+'/20</strong>':'En attente de correction')+'</div></div></div>';
       }).join('');
     }else{html+='<div style="font-size:13px;color:var(--mu);padding:10px 0">Aucun devoir rendu.</div>';}
@@ -953,19 +1000,19 @@ async function startExam(devoirId){
     var qs=await apiFetch('GET','/devoirs/'+devoirId+'/questions');
     examQuestions=qs;
     document.getElementById('evalBody').innerHTML=qs.map(function(q,i){
-      return '<div style="background:#EEF2FF;border:1px solid #c7d2fe;border-radius:8px;padding:13px;margin-bottom:13px">'
-        +'<div style="font-size:12px;font-weight:600;margin-bottom:5px;color:#4F6EF7">Question '+(i+1)+' <span style="font-weight:400;opacity:.7">('+q.points_attribues+' pts)</span></div>'
+      return '<div style="background:#ECE6FC;border:1px solid #D9CEF7;border-radius:8px;padding:13px;margin-bottom:13px">'
+        +'<div style="font-size:12px;font-weight:600;margin-bottom:5px;color:#6D4AE0">Question '+(i+1)+' <span style="font-weight:400;opacity:.7">('+q.points_attribues+' pts)</span></div>'
         +'<div style="font-size:13px;line-height:1.7;margin-bottom:9px">'+esc(q.enonce)+'</div>'
         +'<textarea id="rep-'+q.id+'" placeholder="Rédigez votre réponse…" style="min-height:80px"></textarea></div>';
     }).join('');
-  }catch(e){document.getElementById('evalBody').innerHTML='<div style="color:#EF4444">Erreur de chargement.</div>';}
+  }catch(e){document.getElementById('evalBody').innerHTML='<div style="color:#1C1B22">Erreur de chargement.</div>';}
 }
 async function submitExam(){
   var reponses=examQuestions.map(function(q){return{question_id:q.id,texte:(document.getElementById('rep-'+q.id)||{}).value||''};});
   document.getElementById('evalErr').textContent='';
   try{
     var res=await apiFetch('POST','/soumissions',{devoir_id:examDevoirId,reponses:reponses});
-    toast('✅ Copie rendue !');
+    toast('Copie rendue !');
     closeM('m-eval');loadStudentEvals();loadStudentResults();
   }catch(e){document.getElementById('evalErr').textContent=e.detail||'Erreur lors de la soumission.';}
 }
@@ -1010,60 +1057,58 @@ function savTP(){
   var p=document.getElementById('tPre').value.trim(),n=document.getElementById('tNo').value.trim();
   document.getElementById('tDN').textContent=p+' '+n;
   if(role==='teacher'){document.getElementById('hname').textContent=p+' '+n;var av=document.getElementById('hav');if(!av.querySelector('img'))av.textContent=(p[0]||'')+(n[0]||'')}
-  toast('✅ Profil mis à jour');
+  toast('Profil mis à jour');
 }
 function savSP(){
   var p=document.getElementById('sPre').value.trim(),n=document.getElementById('sNo').value.trim();
   document.getElementById('sDN').textContent=p+' '+n;
   if(role==='student'){document.getElementById('hname').textContent=p+' '+n;var av=document.getElementById('hav');if(!av.querySelector('img'))av.textContent=(p[0]||'')+(n[0]||'')}
-  toast('✅ Profil mis à jour');
+  toast('Profil mis à jour');
 }
 
-function buildEmojis(){
-  document.getElementById('egr').innerHTML=EMOJIS.map(function(e){return '<div class="eop'+(e===curEmo?' sel':'')+'" onclick="pickE(this,\''+e+'\')">'+e+'</div>'}).join('');
-}
+function buildEmojis(){}
 function pickE(el,e){document.querySelectorAll('.eop').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');curEmo=e;pMat()}
 function pickC(el){document.querySelectorAll('.csw').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');curClr=el.dataset.c;pMat()}
 function pMat(){
   var n=document.getElementById('matN').value||'Nom de la matière';
   var c=document.getElementById('matC').value||'4';
   var t=document.getElementById('matT').value;
-  document.getElementById('mpico').style.background=curClr+'22';
-  document.getElementById('mpico').textContent=curEmo;
+  var ico=document.getElementById('mpico');ico.style.background=curClr;ico.style.color=matTxt(curClr);ico.textContent=matIni(document.getElementById('matN').value);
   document.getElementById('mpnom').textContent=n;
   document.getElementById('mpdet').textContent='Coef. '+c+' · '+TL[t];
 }
 function renderMats(){
   document.getElementById('matList').innerHTML=mats.length?mats.map(function(m,i){
-    return '<div style="display:flex;align-items:center;gap:9px;padding:10px;border:1px solid var(--bd);border-radius:8px;margin-bottom:6px;background:var(--bg)"><div style="width:32px;height:32px;border-radius:8px;background:'+m.cl+'22;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">'+m.e+'</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">'+m.n+'</div><div style="font-size:11px;color:var(--mu)">Coef. '+m.c+'</div></div><span class="badge '+TB[m.t]+'">'+TL[m.t]+'</span><button class="btn bs bsm" onclick="editMat('+i+')">✏️</button><button class="btn bs bsm" style="color:var(--or)" onclick="delMat('+i+')">🗑</button></div>';
+    return '<div style="display:flex;align-items:center;gap:9px;padding:10px;border:1px solid var(--bd);border-radius:8px;margin-bottom:6px;background:var(--bg)"><div style="width:32px;height:32px;border-radius:8px;background:'+m.cl+';color:'+matTxt(m.cl)+';display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0">'+matIni(m.n)+'</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">'+m.n+'</div><div style="font-size:11px;color:var(--mu)">Coef. '+m.c+'</div></div><span class="badge '+TB[m.t]+'">'+TL[m.t]+'</span><button class="btn bs bsm" onclick="editMat('+i+')"></button><button class="btn bs bsm" style="color:var(--or)" onclick="delMat('+i+')"></button></div>';
   }).join(''):'<div style="font-size:12px;color:var(--mu);padding:13px;text-align:center">Aucune matière</div>';
 }
 function savMat(){
-  var n=document.getElementById('matN').value.trim();if(!n){toast('⚠️ Entrez un nom');return}
+  var n=document.getElementById('matN').value.trim();if(!n){toast('Entrez un nom de matière');return}
+  if(mats.some(function(m){return m.cl===curClr})){toast('Cette couleur est déjà utilisée par une autre matière');return}
   mats.push({n:n,e:curEmo,c:parseInt(document.getElementById('matC').value)||4,t:document.getElementById('matT').value,cl:curClr});
-  renderMats();closeM('m-add-mat');document.getElementById('matN').value='';toast('✅ '+n+' ajoutée');
+  renderMats();closeM('m-add-mat');document.getElementById('matN').value='';toast(''+n+' ajoutée');
 }
 function editMat(i){
   eMat=i;var m=mats[i];
-  document.getElementById('emSub').textContent=m.e+' '+m.n;
+  document.getElementById('emSub').textContent=m.n;
   document.getElementById('emN').value=m.n;document.getElementById('emC').value=m.c;document.getElementById('emT').value=m.t;
   openM('m-edit-mat');
 }
 function updMat(){
   var m=mats[eMat];m.n=document.getElementById('emN').value.trim()||m.n;m.c=parseInt(document.getElementById('emC').value)||m.c;m.t=document.getElementById('emT').value;
-  renderMats();closeM('m-edit-mat');toast('✅ Matière mise à jour');
+  renderMats();closeM('m-edit-mat');toast('Matière mise à jour');
 }
-function delMat(i){var n=mats[i].n;mats.splice(i,1);renderMats();toast('🗑 '+n+' supprimée')}
+function delMat(i){var n=mats[i].n;mats.splice(i,1);renderMats();toast(''+n+' supprimée')}
 
 function renderCls(){
   document.getElementById('clsList').innerHTML=clss.length?clss.map(function(c,i){
-    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;margin-bottom:6px;background:var(--bg)"><div><div style="font-size:13px;font-weight:600">'+c.n+'</div><div style="font-size:11px;color:var(--mu)">'+c.ef+' élèves · '+c.m+(c.s?' · '+c.s:'')+'</div></div><div style="display:flex;gap:5px"><button class="btn bs bsm" onclick="editCls('+i+')">✏️</button><button class="btn bs bsm" style="color:var(--or)" onclick="delCls('+i+')">🗑</button></div></div>';
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;margin-bottom:6px;background:var(--bg)"><div><div style="font-size:13px;font-weight:600">'+c.n+'</div><div style="font-size:11px;color:var(--mu)">'+c.ef+' élèves · '+c.m+(c.s?' · '+c.s:'')+'</div></div><div style="display:flex;gap:5px"><button class="btn bs bsm" onclick="editCls('+i+')"></button><button class="btn bs bsm" style="color:var(--or)" onclick="delCls('+i+')"></button></div></div>';
   }).join(''):'<div style="font-size:12px;color:var(--mu);padding:13px;text-align:center">Aucune classe</div>';
 }
 function savCls(){
-  var n=document.getElementById('clN').value.trim();if(!n){toast('⚠️ Entrez un nom');return}
+  var n=document.getElementById('clN').value.trim();if(!n){toast('Entrez un nom');return}
   clss.push({n:n,nv:document.getElementById('clNv').value,m:document.getElementById('clMt').value,ef:parseInt(document.getElementById('clEf').value)||28,s:document.getElementById('clSl').value.trim()});
-  renderCls();closeM('m-add-cls');document.getElementById('clN').value='';document.getElementById('clSl').value='';toast('✅ '+n+' ajoutée');
+  renderCls();closeM('m-add-cls');document.getElementById('clN').value='';document.getElementById('clSl').value='';toast(''+n+' ajoutée');
 }
 function editCls(i){
   eCls=i;var c=clss[i];
@@ -1073,9 +1118,9 @@ function editCls(i){
 }
 function updCls(){
   var c=clss[eCls];c.n=document.getElementById('ecN').value.trim()||c.n;c.ef=parseInt(document.getElementById('ecE').value)||c.ef;c.s=document.getElementById('ecS').value.trim();
-  renderCls();closeM('m-edit-cls');toast('✅ Classe mise à jour');
+  renderCls();closeM('m-edit-cls');toast('Classe mise à jour');
 }
-function delCls(i){var n=clss[i].n;clss.splice(i,1);renderCls();toast('🗑 '+n+' supprimée')}
+function delCls(i){var n=clss[i].n;clss.splice(i,1);renderCls();toast(''+n+' supprimée')}
 
 function renderEleves(){
   var q=(document.getElementById('srchE')&&document.getElementById('srchE').value||'').toLowerCase();
@@ -1085,29 +1130,29 @@ function renderEleves(){
   var tb=document.getElementById('eleveTable');if(!tb)return;
   tb.innerHTML=f.length?f.map(function(e){
     var idx=eleves.indexOf(e);
-    return '<tr><td><strong>'+e.p+' '+e.n+'</strong></td><td style="font-size:12px;color:var(--mu);font-family:DM Mono,monospace">'+e.e+'</td><td><span class="badge bgr">'+e.c+'</span></td><td style="text-align:center;font-family:DM Mono,monospace">'+e.ev+'</td><td style="font-family:DM Mono,monospace;font-weight:600">'+(e.my!=='—'?e.my+'/20':'—')+'</td><td><div style="display:flex;gap:5px"><button class="btn bs bsm" onclick="toast(\'Profil de '+e.p+' ouvert\')">👁</button><button class="btn bd2 bsm" onclick="delE('+idx+')">🗑</button></div></td></tr>';
+    return '<tr><td><strong>'+e.p+' '+e.n+'</strong></td><td style="font-size:12px;color:var(--mu);font-family:Montserrat,sans-serif">'+e.e+'</td><td><span class="badge bgr">'+e.c+'</span></td><td style="text-align:center;font-family:Montserrat,sans-serif">'+e.ev+'</td><td style="font-family:Montserrat,sans-serif;font-weight:600">'+(e.my!=='—'?e.my+'/20':'—')+'</td><td><div style="display:flex;gap:5px"><button class="btn bs bsm" onclick="toast(\'Profil de '+e.p+' ouvert\')"></button><button class="btn bd2 bsm" onclick="delE('+idx+')"></button></div></td></tr>';
   }).join(''):'<tr><td colspan="6" style="text-align:center;padding:26px;color:var(--mu)">Aucun élève trouvé</td></tr>';
 }
 function addE(){
   var p=document.getElementById('eP').value.trim(),n=document.getElementById('eN').value.trim();
   var em=document.getElementById('eE').value.trim(),c=document.getElementById('eC').value;
-  if(!p||!n||!em){toast('⚠️ Remplissez tous les champs');return}
+  if(!p||!n||!em){toast('Remplissez tous les champs');return}
   eleves.push({p:p,n:n,e:em,c:c,ev:0,my:'—'});renderEleves();closeM('m-add-eleve');
   document.getElementById('eP').value='';document.getElementById('eN').value='';document.getElementById('eE').value='';
-  toast('✅ '+p+' '+n+' ajouté(e)');
+  toast(''+p+' '+n+' ajouté(e)');
 }
-function delE(i){var e=eleves[i];eleves.splice(i,1);renderEleves();toast('🗑 '+e.p+' '+e.n+' supprimé(e)')}
+function delE(i){var e=eleves[i];eleves.splice(i,1);renderEleves();toast(''+e.p+' '+e.n+' supprimé(e)')}
 
 function dropCSV(ev){ev.preventDefault();document.getElementById('csvDrop').classList.remove('dv');parseCSV({files:ev.dataTransfer.files})}
 function parseCSV(input){
   var f=input.files[0];if(!f)return;
-  if(!f.name.toLowerCase().endsWith('.csv')){toast('⚠️ Fichier .csv uniquement');return}
+  if(!f.name.toLowerCase().endsWith('.csv')){toast('Fichier .csv uniquement');return}
   var r=new FileReader();
   r.onload=function(ev){
     var lines=ev.target.result.trim().split('\n');
     var hdr=lines[0].toLowerCase().replace(/\r/g,'').split(',').map(function(h){return h.trim()});
     var iP=hdr.indexOf('prenom'),iN=hdr.indexOf('nom'),iE=hdr.indexOf('email'),iC=hdr.indexOf('classe');
-    if(iP<0||iN<0||iE<0){toast('⚠️ Colonnes requises : prenom, nom, email');return}
+    if(iP<0||iN<0||iE<0){toast('Colonnes requises : prenom, nom, email');return}
     csvR=[];
     var rows=lines.slice(1).filter(function(l){return l.trim()});
     document.getElementById('csvTb').innerHTML=rows.map(function(line,i){
@@ -1115,7 +1160,7 @@ function parseCSV(input){
       var p=c[iP]||'',n=c[iN]||'',em=c[iE]||'',cl=iC>=0?c[iC]||'':'';
       var ok=p&&n&&em&&em.includes('@');
       if(ok)csvR.push({p:p,n:n,e:em,c:cl});
-      return '<tr><td style="font-family:DM Mono,monospace;font-size:11px;color:var(--mu)">'+(i+1)+'</td><td>'+p+'</td><td>'+n+'</td><td style="font-family:DM Mono,monospace;font-size:11px">'+em+'</td><td>'+(cl||'<span style="color:var(--mu)">—</span>')+'</td><td>'+(ok?'<span class="badge bg">✓ OK</span>':'<span class="badge bor">⚠ Incomplet</span>')+'</td></tr>';
+      return '<tr><td style="font-family:Montserrat,sans-serif;font-size:11px;color:var(--mu)">'+(i+1)+'</td><td>'+p+'</td><td>'+n+'</td><td style="font-family:Montserrat,sans-serif;font-size:11px">'+em+'</td><td>'+(cl||'<span style="color:var(--mu)">—</span>')+'</td><td>'+(ok?'<span class="badge bg">OK</span>':'<span class="badge bor">Incomplet</span>')+'</td></tr>';
     }).join('');
     document.getElementById('csvPrev').style.display='block';
     document.getElementById('csvTitle').textContent=f.name+' · '+rows.length+' ligne'+(rows.length>1?'s':'')+' · '+csvR.length+' valides';
@@ -1126,16 +1171,16 @@ function parseCSV(input){
 function impCSV(){
   var def=document.getElementById('csvDC').value,added=0;
   csvR.forEach(function(r){if(!eleves.find(function(e){return e.e===r.e})){eleves.push({p:r.p,n:r.n,e:r.e,c:r.c||def,ev:0,my:'—'});added++}});
-  renderEleves();closeM('m-csv');clrCSV();toast('✅ '+added+' élève'+(added>1?'s':'')+' importé'+(added>1?'s':''));
+  renderEleves();closeM('m-csv');clrCSV();toast(''+added+' élève'+(added>1?'s':'')+' importé'+(added>1?'s':''));
 }
 function clrCSV(){document.getElementById('csvPrev').style.display='none';document.getElementById('csvBtn').style.display='none';document.getElementById('csvTb').innerHTML='';document.getElementById('csvF').value='';csvR=[]}
 function dlTpl(){
   var c='prenom,nom,email,classe\nThomas,Leclerc,thomas.leclerc@lycee.fr,Terminale A\nSophie,Blanc,sophie.blanc@lycee.fr,Terminale B\n';
-  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:'text/csv'}));a.download='modele_eleves.csv';a.click();toast('⬇ Modèle CSV téléchargé');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:'text/csv'}));a.download='modele_eleves.csv';a.click();toast('Modèle CSV téléchargé');
 }
 function exportCSV(){
   var rows=['prenom,nom,email,classe,evals,moyenne'].concat(eleves.map(function(e){return e.p+','+e.n+','+e.e+','+e.c+','+e.ev+','+e.my}));
-  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'}));a.download='eleves_export.csv';a.click();toast('⬇ Export CSV téléchargé');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'}));a.download='eleves_export.csv';a.click();toast('Export CSV téléchargé');
 }
 
 var toastT;
