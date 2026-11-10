@@ -21,9 +21,11 @@ export function hasToken() {
 }
 
 export async function apiFetch(method, path, body, isRetry = false) {
-  const opts = { method, headers: { 'Content-Type': 'application/json' } };
+  const isForm = body instanceof FormData;
+  // FormData : le navigateur fixe lui-même le Content-Type multipart (avec la frontière)
+  const opts = { method, headers: isForm ? {} : { 'Content-Type': 'application/json' } };
   if (accessToken) opts.headers['Authorization'] = 'Bearer ' + accessToken;
-  if (body) opts.body = JSON.stringify(body);
+  if (body) opts.body = isForm ? body : JSON.stringify(body);
 
   const r = await fetch(API + path, opts);
 
