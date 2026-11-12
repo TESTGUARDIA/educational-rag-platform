@@ -333,9 +333,10 @@ def generer_questions_cours(fiches: list[dict], nb: int, modele: str, *,
                             niveau: str = "Terminale, spécialité mathématiques",
                             matiere: str = "mathématiques",
                             num_ctx: int = 12288) -> dict:
+    # On en demande quelques-unes de plus : certaines seront écartées (question = réponse)
     importantes = sorted(fiches, key=lambda f: -f.get("importance", 1))
     r = discuter(modele, [{"role": "user", "content": CONSIGNE_QUESTIONS_COURS.format(matiere=matiere, formules=regle_formules(matiere),
-        niveau=niveau, nb=nb, fiches=_fiches_texte(importantes))}],
+        niveau=niveau, nb=nb + max(2, nb // 2), fiches=_fiches_texte(importantes))}],
         schema=SCHEMA_QUESTIONS_COURS, temperature=0.2, num_ctx=num_ctx)
     titres = {f["titre"].lower() for f in fiches}
     questions, ecartees = [], []
