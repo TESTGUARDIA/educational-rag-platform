@@ -71,8 +71,8 @@ testguardai/
 
 | Jalon | Date | État |
 |---|---|---|
-| J1 — Intégration | 13 nov. 2026 (rattrapage) | Atteint avec réserve : reliquat COR-01, DET-05 |
-| J2 — Sécurité et données | 30 nov. 2026 | WEB-02, DET-02, ENF-02, ENF-03 |
+| J1 — Intégration | juin 2026, rattrapage 13 nov. 2026 | Atteint dans `develop` : génération, correction, détection appelables par l'API (WEB-01, COR-01, DET-05) |
+| J2 — Sécurité et données | 30 nov. 2026 | WEB-02 fait (JWT, rôles) ; restent le rôle administrateur, DET-02, ENF-02, ENF-03 |
 | J3 — Modèles | 18 déc. 2026 | GEN-07, GEN-08, DET-04, DET-06, DET-07, COR-05 |
 | J4 — Interface complète | 8 janv. 2027 | GEN-04, WEB-03 à 05, ENF-05 à 07, DET-05 |
 | J5 — Recette et soutenance | fin janv. 2027 | Recette §11, livrables §12 |
@@ -84,8 +84,9 @@ Détail et état de chaque exigence : [docs/avancement.md](docs/avancement.md).
 - `main` ne reçoit `develop` qu'à chaque jalon, avec un tag (`J1-integration`, …).
 - `develop` est la branche d'intégration : on y entre par Pull Request, relue par
   un membre d'un autre pôle (CDC §9).
-- Chaque pôle travaille sur `feature/...` (`feature/web-vanilla`, `feature/generation`,
-  `feature/evaluation`, …).
+- Chaque pôle travaille sur une branche `feature/...` créée depuis `develop`
+  (`feature/charte-graphique`, `feature/generation-problemes`, …). Les anciennes branches
+  sont conservées en tags `archive/...`.
 - Les poids des modèles ne sont pas dans Git (CDC §8) : ils sont publiés en Release
   GitHub et téléchargés à l'installation.
 
