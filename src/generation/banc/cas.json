@@ -1,0 +1,36 @@
+[
+  {"id": "maths_integrales_wallis", "pdf": "cours_test/maths/exo7_cours_integrales.pdf",
+   "matiere": "mathématiques", "niveau": "Terminale spécialité mathématiques / L1",
+   "mode": "probleme", "theme": "intégrales de Wallis",
+   "reference_humaine": "cours_test/maths/exo7_exercices_calculs_integrales.pdf, exercice 10"},
+
+  {"id": "maths_integrales_questions", "pdf": "cours_test/maths/exo7_cours_integrales.pdf",
+   "matiere": "mathématiques", "niveau": "Terminale spécialité mathématiques / L1",
+   "mode": "questions", "nb": 6},
+
+  {"id": "maths_suites_probleme", "pdf": "cours_test/maths/exo7_cours_suites.pdf",
+   "matiere": "mathématiques", "niveau": "Terminale spécialité mathématiques / L1",
+   "mode": "probleme",
+   "theme": "suite récurrente u(n+1) = f(u(n)) : monotonie, convergence et calcul de la limite"},
+
+  {"id": "maths_equadiff_questions", "pdf": "cours_test/maths/exo7_cours_equations_differentielles.pdf",
+   "matiere": "mathématiques", "niveau": "Terminale spécialité mathématiques / L1",
+   "mode": "questions", "nb": 5},
+
+  {"id": "svt_photosynthese_questions", "pdf": "cours_test/svt/wikipedia_photosynthese.pdf",
+   "matiere": "SVT", "niveau": "lycée", "mode": "questions", "nb": 5,
+   "pages": "1-6", "extraction": "texte"},
+
+  {"id": "histoire_revolution_questions", "pdf": "cours_test/histoire/wikipedia_revolution_francaise.pdf",
+   "matiere": "histoire", "niveau": "lycée", "mode": "questions", "nb": 5,
+   "pages": "1-8", "extraction": "texte"},
+
+  {"id": "physique_newton_questions", "pdf": "cours_test/physique/wikipedia_lois_du_mouvement_de_newton.pdf",
+   "matiere": "physique-chimie", "niveau": "lycée", "mode": "questions", "nb": 5,
+   "pages": "1-6", "extraction": "texte"},
+
+  {"id": "maths_monka_wallis", "pdf_env": "TESTGUARDAI_COURS_MONKA",
+   "matiere": "mathématiques", "niveau": "Terminale spécialité mathématiques",
+   "mode": "probleme", "theme": "intégrales de Wallis", "parties": "4,5,6",
+   "note": "Cours d'Yvan Monka, droits réservés : chemin local donné par la variable d'environnement TESTGUARDAI_COURS_MONKA, jamais commité. Cas ignoré si la variable est absente."}
+]

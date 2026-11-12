@@ -83,3 +83,31 @@ def test_questions_de_cours_tracabilite(monkeypatch):
     fiches = [{"titre": "Intégration par parties", "type": "theoreme", "enonce": "...", "importance": 3}]
     qs = generation.generer_questions_cours(fiches, 2, "faux")["questions"]
     assert [q["notion_trouvee_dans_le_cours"] for q in qs] == [True, False]
+
+
+def test_questions_qui_recopient_leur_reponse_ecartees(monkeypatch):
+    # Sortie réelle de llama3.2:3b sur la photosynthèse : la « question » recopie la réponse
+    def faux(modele, messages, **kw):
+        return {"json": {"questions": [
+            {"notion": "Stroma", "type_question": "definition",
+             "question": "$\text{Le stroma est le fluide aqueux du chloroplaste.}$",
+             "reponse": "\text{Le stroma est le fluide aqueux du chloroplaste.}"},
+            {"notion": "Stroma", "type_question": "definition", "question": "Définir le stroma.",
+             "reponse": "Le stroma est le fluide aqueux situé à l'intérieur du chloroplaste."}]},
+            "duree_s": 0.0}
+    monkeypatch.setattr(generation, "discuter", faux)
+    res = generation.generer_questions_cours(
+        [{"titre": "Stroma", "type": "definition", "enonce": "...", "importance": 3}], 5, "faux",
+        matiere="SVT")
+    assert [q["question"] for q in res["questions"]] == ["Définir le stroma."]
+    assert res["ecartees_question_egale_reponse"] == 1
+
+
+def test_regle_formules_selon_la_matiere():
+    from src.generation.problemes.analyse import CONSIGNE, regle_formules
+    assert "LaTeX" in regle_formules("mathématiques") and "LaTeX" in regle_formules("physique-chimie")
+    assert "pas de LaTeX" in regle_formules("SVT") and "pas de LaTeX" in regle_formules("histoire")
+    assert "Intégration par parties" not in CONSIGNE          # plus d'exemple propre aux maths
+    consigne_svt = generation.CONSIGNE_QUESTIONS_COURS.format(
+        matiere="SVT", niveau="lycée", nb=3, fiches="", formules=regle_formules("SVT"))
+    assert "\int" not in consigne_svt and "ne contient JAMAIS" in consigne_svt

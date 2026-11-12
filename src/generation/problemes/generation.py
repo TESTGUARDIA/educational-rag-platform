@@ -13,8 +13,11 @@ Mode B — problème : sujet en plusieurs questions progressives sur un thème
 
 import json
 import logging
+import re
 import time
+from difflib import SequenceMatcher
 
+from .analyse import regle_formules
 from .ollama import discuter
 from .verification import construire_famille, comparer_valeurs, verifier_probleme, ExpressionRefusee
 
@@ -184,12 +187,18 @@ Critères : faisable (chaque question est résoluble avec ce qui précède), con
 (n'exige pas de notion hors programme ou absente du cours), progressif (difficulté croissante).
 Liste les problèmes précis question par question. Note de 1 à 5."""
 
-CONSIGNE_QUESTIONS_COURS = """Tu es professeur de mathématiques ({niveau}). Rédige {nb} questions
+CONSIGNE_QUESTIONS_COURS = """Tu es professeur (matière : {matiere}, niveau : {niveau}). Rédige {nb} questions
 de cours portant sur les notions importantes ci-dessous (une notion par question, en privilégiant
-les plus centrales). Varie les types : definition, enonce (énoncer un théorème), justification
-(démontrer ou expliquer une propriété du cours), application (utiliser une méthode sur un cas simple).
-Réponses complètes et exactes, conformes au cours, formules en LaTeX ($...$).
-Dans les chaînes JSON, écris chaque barre oblique LaTeX doublée : \\\\int, \\\\frac, \\\\text.
+les plus centrales). Varie les types : definition (faire définir une notion), enonce (faire énoncer
+une propriété ou un résultat), justification (faire expliquer ou démontrer), application (faire
+utiliser une notion sur un cas simple).
+
+Règles :
+- "question" est une vraie question ou une consigne adressée à l'élève (« Définir… »,
+  « Expliquer pourquoi… », « Citer… », « Que se passe-t-il si… ? »). Elle ne contient JAMAIS
+  sa réponse : ne recopie pas l'énoncé de la notion.
+- "reponse" est la réponse attendue, complète, exacte et conforme au cours.
+{formules}
 
 Notions :
 {fiches}"""
@@ -322,16 +331,29 @@ def generer_probleme(fiches: list[dict], theme: str, modele: str, *, raisonnemen
 # ─── Mode A : questions de cours ───────────────────────────────────────────────
 def generer_questions_cours(fiches: list[dict], nb: int, modele: str, *,
                             niveau: str = "Terminale, spécialité mathématiques",
+                            matiere: str = "mathématiques",
                             num_ctx: int = 12288) -> dict:
     importantes = sorted(fiches, key=lambda f: -f.get("importance", 1))
-    r = discuter(modele, [{"role": "user", "content": CONSIGNE_QUESTIONS_COURS.format(
+    r = discuter(modele, [{"role": "user", "content": CONSIGNE_QUESTIONS_COURS.format(matiere=matiere, formules=regle_formules(matiere),
         niveau=niveau, nb=nb, fiches=_fiches_texte(importantes))}],
         schema=SCHEMA_QUESTIONS_COURS, temperature=0.2, num_ctx=num_ctx)
     titres = {f["titre"].lower() for f in fiches}
-    questions = r["json"]["questions"][:nb]
-    for q in questions:   # traçabilité : la notion citée existe-t-elle dans le cours ?
-        q["notion_trouvee_dans_le_cours"] = q["notion"].lower() in titres
-    return {"questions": questions, "duree_s": r["duree_s"], "modele": modele}
+    questions, ecartees = [], []
+    for q in r["json"]["questions"]:
+        # Une « question » qui recopie sa réponse n'évalue rien : on l'écarte et on la compte
+        if _similarite(q["question"], q["reponse"]) >= 0.8:
+            ecartees.append(q)
+            continue
+        q["notion_trouvee_dans_le_cours"] = q["notion"].lower() in titres   # traçabilité
+        questions.append(q)
+    return {"questions": questions[:nb], "ecartees_question_egale_reponse": len(ecartees),
+            "duree_s": r["duree_s"], "modele": modele}
+
+
+def _similarite(a: str, b: str) -> float:
+    """Similarité de deux textes, sans LaTeX ni ponctuation (« $\\text{Le stroma}$ » = « le stroma »)."""
+    norm = [re.sub(r"\\text|[^\w\s]", " ", x.lower()).split() for x in (a, b)]
+    return SequenceMatcher(None, " ".join(norm[0]), " ".join(norm[1])).ratio()
 
 
 # ─── Rendu ─────────────────────────────────────────────────────────────────────

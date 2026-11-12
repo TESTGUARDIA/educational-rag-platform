@@ -1,0 +1,17 @@
+[
+  {"nom": "qwen3-8b-raisonnement", "par_defaut": true,
+   "modele": "qwen3:8b", "raisonnement": "oui", "extraction": "vision", "modele_vision": "qwen2.5vl:7b"},
+
+  {"nom": "qwen3-8b-sans-raisonnement", "par_defaut": true,
+   "modele": "qwen3:8b", "raisonnement": "non", "extraction": "vision", "modele_vision": "qwen2.5vl:7b"},
+
+  {"nom": "gpt-oss-20b", "par_defaut": true,
+   "modele": "gpt-oss:20b", "raisonnement": "medium", "extraction": "vision", "modele_vision": "qwen2.5vl:7b"},
+
+  {"nom": "qwen3-8b-texte-brut", "par_defaut": true,
+   "modele": "qwen3:8b", "raisonnement": "oui", "extraction": "texte"},
+
+  {"nom": "llama3.2-3b-essai", "par_defaut": false,
+   "modele": "llama3.2:3b", "raisonnement": "non", "extraction": "texte",
+   "note": "Petit modèle pour vérifier que le banc tourne sur un PC sans GPU (qualité non représentative)."}
+]

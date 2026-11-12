@@ -234,3 +234,5 @@ node_modules/
 sortie_problemes/
 # Jeu de cours de test (licences CC BY-NC-SA etc. : ne pas redistribuer)
 cours_test/
+# Banc de mesure du pôle Génération : sorties et caches (peuvent contenir des cours protégés)
+sortie_banc/

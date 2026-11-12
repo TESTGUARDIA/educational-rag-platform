@@ -45,11 +45,13 @@ def rendre_pages(pdf: Path, dpi: int = 120, pages: list[int] | None = None) -> l
     return [(n, doc[n - 1].get_pixmap(dpi=dpi).tobytes("png")) for n in numeros if 1 <= n <= len(doc)]
 
 
-def texte_brut(pdf: Path) -> str:
+def texte_brut(pdf: Path, pages: list[int] | None = None) -> str:
     """Couche texte du PDF (rapide, mais formules souvent illisibles) : repli et comparaison."""
     import pymupdf
 
-    return "\n\n".join(p.get_text() for p in pymupdf.open(pdf))
+    doc = pymupdf.open(pdf)
+    numeros = pages or range(1, len(doc) + 1)
+    return "\n\n".join(doc[n - 1].get_text() for n in numeros if 1 <= n <= len(doc))
 
 
 def extraire_cours(pdf: Path, modele_vision: str, dossier_cache: Path, dpi: int = 120,
