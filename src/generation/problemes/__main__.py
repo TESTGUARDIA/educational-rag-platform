@@ -1,11 +1,11 @@
 """
 Prototype de génération de sujets de mathématiques (pôle Génération).
 
-    python -m src.api.problemes extraire  cours.pdf --modele-vision qwen2.5vl:7b
-    python -m src.api.problemes analyser  sortie_problemes/cours.md --modele qwen3:8b
-    python -m src.api.problemes probleme  sortie_problemes/analyse.json --theme "intégrales de Wallis" --parties 5,6
-    python -m src.api.problemes questions sortie_problemes/analyse.json --nb 5
-    python -m src.api.problemes tout      cours.pdf --theme "intégrales de Wallis" --parties 5,6
+    python -m src.generation.problemes extraire  cours.pdf --modele-vision qwen2.5vl:7b
+    python -m src.generation.problemes analyser  sortie_problemes/cours.md --modele qwen3:8b
+    python -m src.generation.problemes probleme  sortie_problemes/analyse.json --theme "intégrales de Wallis" --parties 5,6
+    python -m src.generation.problemes questions sortie_problemes/analyse.json --nb 5
+    python -m src.generation.problemes tout      cours.pdf --theme "intégrales de Wallis" --parties 5,6
 
 Les résultats vont dans sortie_problemes/ (ignoré par Git : les cours peuvent être protégés).
 """
@@ -96,7 +96,7 @@ def cmd_questions(a) -> Path:
 def main(argv=None):
     logging.basicConfig(level=logging.WARNING, format="%(message)s")
     sys.stdout.reconfigure(encoding="utf-8")
-    ap = argparse.ArgumentParser(prog="python -m src.api.problemes", description=__doc__,
+    ap = argparse.ArgumentParser(prog="python -m src.generation.problemes", description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     sous = ap.add_subparsers(dest="commande", required=True)
 

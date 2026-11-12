@@ -15,7 +15,7 @@ langchain-ollama
 langchain-text-splitters
 pypdf
 python-dotenv
-# Prototype de génération de problèmes (src/api/problemes)
+# Prototype de génération de problèmes (src/generation/problemes)
 sympy>=1.12            # vérification numérique des corrigés (avec mpmath)
 pymupdf>=1.24          # rendu des pages PDF en images pour l'extraction par vision
 

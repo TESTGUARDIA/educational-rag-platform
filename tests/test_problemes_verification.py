@@ -1,8 +1,8 @@
-"""Vérificateur numérique des corrigés (src/api/problemes/verification.py)."""
+"""Vérificateur numérique des corrigés (src/generation/problemes/verification.py)."""
 
 import pytest
 
-from src.api.problemes.verification import (ExpressionRefusee, comparer_valeurs, lire_expression,
+from src.generation.problemes.verification import (ExpressionRefusee, comparer_valeurs, lire_expression,
                                             verifier_probleme)
 
 WALLIS = {"nom": "W", "parametre": "n", "variable": "x",
@@ -85,7 +85,7 @@ def test_comparer_valeurs():
 # ─── Réparation du LaTeX dans le JSON du modèle (ollama.py) ───────────────────
 import json  # noqa: E402
 
-from src.api.problemes.ollama import reparer_latex  # noqa: E402
+from src.generation.problemes.ollama import reparer_latex  # noqa: E402
 
 
 @pytest.mark.parametrize("brut, attendu", [

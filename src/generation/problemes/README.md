@@ -49,13 +49,13 @@ setx OLLAMA_KV_CACHE_TYPE q8_0
 pip install -r requirements.txt
 
 # 3. Circuit complet sur un cours
-python -m src.api.problemes tout "C:\chemin\integrales.pdf" --theme "intégrales de Wallis" --parties 4,5,6
+python -m src.generation.problemes tout "C:\chemin\integrales.pdf" --theme "intégrales de Wallis" --parties 4,5,6
 
 # ou étape par étape
-python -m src.api.problemes extraire "C:\chemin\integrales.pdf"
-python -m src.api.problemes analyser sortie_problemes/cours.md
-python -m src.api.problemes probleme sortie_problemes/analyse.json --theme "intégrales de Wallis" --parties 4,5,6
-python -m src.api.problemes questions sortie_problemes/analyse.json --nb 5
+python -m src.generation.problemes extraire "C:\chemin\integrales.pdf"
+python -m src.generation.problemes analyser sortie_problemes/cours.md
+python -m src.generation.problemes probleme sortie_problemes/analyse.json --theme "intégrales de Wallis" --parties 4,5,6
+python -m src.generation.problemes questions sortie_problemes/analyse.json --nb 5
 ```
 
 Vérifier pendant une génération que tout tient sur la carte : `ollama ps` doit afficher

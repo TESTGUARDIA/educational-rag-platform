@@ -1,6 +1,6 @@
-"""Circuit de génération de problèmes (src/api/problemes/generation.py), modèle simulé."""
+"""Circuit de génération de problèmes (src/generation/problemes/generation.py), modèle simulé."""
 
-from src.api.problemes import generation
+from src.generation.problemes import generation
 
 DEF_W = {"nom": "W", "parametre": "n", "variable": "x", "integrande": "sin(x)^n",
          "borne_inf": "0", "borne_sup": "pi/2"}
