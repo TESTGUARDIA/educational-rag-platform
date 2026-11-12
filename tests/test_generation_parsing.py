@@ -1,8 +1,8 @@
-"""Analyse des réponses JSON du modèle de génération (src/api/rag.py)."""
+"""Analyse des réponses JSON du modèle de génération (src/generation/rag.py)."""
 
 import pytest
 
-from src.api.rag import _parse_model_response
+from src.generation.rag import _parse_model_response
 
 
 def test_format_attendu():
@@ -44,7 +44,7 @@ def test_nb_questions_respecte(monkeypatch):
     import json
     from types import SimpleNamespace
 
-    from src.api import rag
+    from src.generation import rag
 
     pages = [SimpleNamespace(page_content="Texte du cours. " * 100, metadata={})]
     monkeypatch.setattr(rag, "PyPDFLoader", lambda path: SimpleNamespace(load=lambda: pages))

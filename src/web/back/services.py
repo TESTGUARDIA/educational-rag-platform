@@ -1,7 +1,7 @@
 """
 Branchements du backend web vers les pôles Génération et Évaluation.
 
-    generer_questions()  -> src/api/rag.py            (pôle Génération)
+    generer_questions()  -> src/generation/rag.py     (pôle Génération)
     corriger_reponse()   -> projet_ia.verification    (pôle Évaluation)
     detecter_ia()        -> projet_ia.detection       (pôle Évaluation)
 
@@ -39,7 +39,7 @@ _verrou_evaluation = threading.Lock()
 # ─── GÉNÉRATION ────────────────────────────────────────────────────────────────
 def generer_questions(pdf: bytes, nom_fichier: str, nb_questions: int) -> list[dict]:
     """Retourne [{"question": ..., "reponse": ...}] générés depuis le PDF (via Ollama)."""
-    from src.api.rag import ingest_and_generate_questions
+    from src.generation.rag import ingest_and_generate_questions
 
     with _verrou_generation:
         brutes = ingest_and_generate_questions(pdf, nom_fichier, nb_questions=nb_questions)

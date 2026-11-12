@@ -97,7 +97,7 @@ Le backend web (`src/web/back/main.py`) appelle les pôles uniquement via
 
 | Fonction (`services.py`) | Pôle | Code appelé | Routes |
 |---|---|---|---|
-| `generer_questions(pdf, nom, nb_questions)` | Génération | `src/api/rag.py` → `ingest_and_generate_questions` (Ollama) | `POST /devoirs/{id}/generer` |
+| `generer_questions(pdf, nom, nb_questions)` | Génération | `src/generation/rag.py` → `ingest_and_generate_questions` (Ollama) | `POST /devoirs/{id}/generer` |
 | `corriger_reponse(question, reponse, correction)` | Évaluation | `projet_ia.verification.evaluer_reponse` | `POST /soumissions/{sid}/corriger-auto` |
 | `detecter_ia(textes)` | Évaluation | `projet_ia.detection.predire_textes` | `POST /soumissions` (arrière-plan), `POST /soumissions/{sid}/analyser-ia` |
 
