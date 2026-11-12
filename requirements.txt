@@ -8,7 +8,7 @@ bcrypt>=4.0,<5
 python-multipart>=0.0.9
 httpx>=0.27            # TestClient des tests pytest
 
-# ── Pôle Génération (src/api/rag.py) ──────────────────────────────────────────
+# ── Pôle Génération (src/generation/rag.py) ──────────────────────────────────────────
 langchain-core
 langchain-community
 langchain-ollama

@@ -20,18 +20,21 @@ Statuts : ⬜ à faire · 🟨 en cours · ✅ fait · ⛔ bloqué
 | Demander les copies antérieures au 30/11/2022, réserver le GPU CRIStAL | ⬜ | |
 | Trancher le versionnement des modèles (§8) | ✅ | Voir « Décisions » ci-dessous |
 
-## J1 — Rattrapage (avant le 13 novembre)
+## J1 — Rattrapage (avant le 13 novembre) — ✅ atteint dans `develop`
 
 Preuve attendue : un parcours complet upload, génération, réponse, puis note et score IA.
 
+Génération via `src/generation/rag.py`, correction et détection via `src/evaluation/projet-ia`,
+branchées dans `src/web/back/services.py` (WEB-01, COR-01, DET-05).
+
 | Tâche | Statut | Remarque |
 |---|---|---|
-| Fusionner `projet-ia` et le code de génération dans `develop` | 🟨 | PR `feature/j1-integration` |
-| `POST /devoirs/{id}/generer` et `POST /soumissions/{sid}/corriger-auto` | 🟨 | idem |
-| Brancher `predire_depuis_fichier` dans `/soumissions` et `/analyser-ia` (seuil du modèle, `non_analysé`) | 🟨 | idem |
-| Brancher `evaluer_reponse` et `ingest_and_generate_questions` (+ `nb_questions`) | 🟨 | idem |
-| Aligner `/stats` et les badges sur le seuil du modèle | 🟨 | idem |
-| `Dockerfile.api`, `requirements.txt`, `.env.example`, retirer `random` | 🟨 | idem |
+| Fusionner `projet-ia` et le code de génération dans `develop` | ✅ | `feature/j1-integration` fusionnée puis supprimée |
+| `POST /devoirs/{id}/generer` et `POST /soumissions/{sid}/corriger-auto` | ✅ | |
+| Brancher `predire_depuis_fichier` dans `/soumissions` et `/analyser-ia` (seuil du modèle, `non_analysé`) | ✅ | |
+| Brancher `evaluer_reponse` et `ingest_and_generate_questions` (+ `nb_questions`) | ✅ | |
+| Aligner `/stats` et les badges sur le seuil du modèle | ✅ | |
+| `Dockerfile.api`, `requirements.txt`, `.env.example`, retirer `random` | ✅ | |
 | `docker compose up` sur une machine vierge (ENF-10) | ⬜ | |
 
 ## J2 — Sécurité et données (30 novembre)
@@ -51,6 +54,7 @@ Preuve attendue : un parcours complet upload, génération, réponse, puis note 
 
 | Tâche | Statut |
 |---|---|
+| GEN-07, GEN-08 : prototype de génération de problèmes sur `feature/generation-problemes`, intégration prévue en J3 | 🟨 |
 | GEN-07 : dataset Q/R, taux de rejet, ≥ 5 % relus à la main | ⬜ |
 | GEN-08 : LoRA / QLoRA sur le GPU CRIStAL, acceptation vs modèle de base | ⬜ |
 | DET-04, DET-06, DET-07 : modèle français, AUROC hors distribution, FP ≤ 1 %, branché dans l'API | ⬜ |
