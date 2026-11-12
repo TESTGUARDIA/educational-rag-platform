@@ -232,3 +232,5 @@ uploads/
 node_modules/
 # Prototype génération de problèmes : cours (souvent protégés) et sorties
 sortie_problemes/
+# Jeu de cours de test (licences CC BY-NC-SA etc. : ne pas redistribuer)
+cours_test/

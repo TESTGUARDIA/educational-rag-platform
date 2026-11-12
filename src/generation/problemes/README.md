@@ -69,6 +69,30 @@ Les résultats arrivent dans `sortie_problemes/` (ignoré par Git : les cours pe
 protégés par le droit d'auteur, ne les commitez pas). Pour chaque problème :
 `probleme_<thème>_<modèle>.md` (sujet, corrigé, rapport de vérification et durées) et `.json`.
 
+## Jeu de cours de test
+
+```powershell
+python scripts/telecharger_cours_test.py     # → cours_test/ (ignoré par Git)
+```
+
+10 documents sous licence libre, listés avec leur source et leur licence dans
+`scripts/cours_test.json` :
+- **maths** (Exo7, CC BY-NC-SA) : cours sur les intégrales, les suites, la dérivée et les
+  équations différentielles, plus **deux feuilles d'exercices corrigés qui contiennent les
+  intégrales de Wallis** (exercice 10 de `exo7_exercices_calculs_integrales.pdf`) : c'est la
+  référence humaine à comparer avec un problème généré ;
+- **le programme officiel de Terminale spécialité maths** (Eduscol), pour juger si un sujet
+  reste dans le programme ;
+- **SVT, histoire, physique** (articles Wikipédia, CC BY-SA), en substitut de cours, pour
+  tester les questions de cours hors mathématiques.
+
+Les PDF d'Exo7 sont produits par LaTeX : leur couche texte garde les symboles, mais éclate
+les fractions et les bornes d'intégrales. Comparer `extraire --texte` et l'extraction par vision.
+
+```powershell
+python -m src.generation.problemes tout cours_test/maths/exo7_cours_integrales.pdf --theme "intégrales de Wallis"
+```
+
 ## Comparer des modèles
 
 Lancer `probleme` avec plusieurs `--modele` sur la même `analyse.json`, puis comparer dans
