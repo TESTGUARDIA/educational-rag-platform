@@ -24,7 +24,7 @@ Statuts : ⬜ à faire · 🟨 en cours · ✅ fait · ⛔ bloqué
 
 Preuve attendue : un parcours complet upload, génération, réponse, puis note et score IA.
 
-Génération via `src/api/rag.py`, correction et détection via `src/evaluation/projet-ia`,
+Génération via `src/generation/rag.py`, correction et détection via `src/evaluation/projet-ia`,
 branchées dans `src/web/back/services.py` (WEB-01, COR-01, DET-05).
 
 | Tâche | Statut | Remarque |
